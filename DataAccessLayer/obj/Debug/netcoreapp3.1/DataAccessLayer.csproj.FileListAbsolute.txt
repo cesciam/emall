@@ -1,0 +1,4 @@
+C:\Users\paosa\source\repos\PROYECTO\DataAccessLayer\bin\Debug\netcoreapp3.1\Entities.dll
+C:\Users\paosa\source\repos\PROYECTO\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\paosa\source\repos\PROYECTO\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\paosa\source\repos\PROYECTO\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.AssemblyInfo.cs

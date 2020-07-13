@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5qUXd6+VszblbWRd6YM1smGFLCZjy11VTrWcFBVs41BUtf/06AYmarLd1KkmE9GTTVdZ6He0S/tpXE6pW0SsJg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Web_API\\Web_API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\paosa\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\3.1.3\\microsoft.visualstudio.web.codegeneration.contracts.3.1.3.nupkg.sha512",
+    "C:\\Users\\paosa\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
