@@ -82,11 +82,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Web_API\\Web_API.csproj",
+      "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Web_API\\Web_API.csproj",
       "projectName": "Web_API",
-      "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Web_API\\Web_API.csproj",
+      "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Web_API\\Web_API.csproj",
       "packagesPath": "C:\\Users\\paosa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Web_API\\obj\\",
+      "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Web_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\paosa\\AppData\\Roaming\\NuGet\\NuGet.Config",

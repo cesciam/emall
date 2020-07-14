@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\AppCore.csproj": {}
+    "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\AppCore.csproj": {
+    "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\AppCore.csproj",
+        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj",
         "projectName": "AppCore",
-        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\AppCore.csproj",
+        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj",
         "packagesPath": "C:\\Users\\paosa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\obj\\",
+        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paosa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -60,14 +60,14 @@
         }
       }
     },
-    "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\paosa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\obj\\",
+        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paosa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +83,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj"
+              "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj"
               }
             }
           }
@@ -111,58 +111,6 @@
               "version": "[4.8.1, )"
             }
           },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj",
-        "projectName": "Entities",
-        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\paosa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\paosa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
           "imports": [
             "net461",
             "net462",

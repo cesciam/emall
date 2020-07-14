@@ -268,7 +268,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Entities": "1.0.0",
+          "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj": "1.0.0",
           "Microsoft.Extensions.Configuration": "3.1.5",
           "System.Configuration.ConfigurationManager": "4.7.0",
           "System.Data.SqlClient": "4.8.1"
@@ -278,16 +278,6 @@
         },
         "runtime": {
           "bin/placeholder/DataAccessLayer.dll": {}
-        }
-      },
-      "Entities/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/Entities.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Entities.dll": {}
         }
       }
     }
@@ -842,11 +832,6 @@
       "type": "project",
       "path": "../DataAccessLayer/DataAccessLayer.csproj",
       "msbuildProject": "../DataAccessLayer/DataAccessLayer.csproj"
-    },
-    "Entities/1.0.0": {
-      "type": "project",
-      "path": "../Entities/Entities.csproj",
-      "msbuildProject": "../Entities/Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -860,11 +845,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\AppCore.csproj",
+      "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj",
       "projectName": "AppCore",
-      "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\AppCore.csproj",
+      "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj",
       "packagesPath": "C:\\Users\\paosa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\AppCore\\obj\\",
+      "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\paosa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -880,8 +865,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\DataAccessLayer\\DataAccessLayer.csproj"
+            "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }
@@ -912,5 +897,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for 'C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "libraryId": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
