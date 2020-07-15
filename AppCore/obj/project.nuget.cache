@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "M45JbAomSjTQFR1QXtvDtweRB+lBZza7dcEm9j3QXMlLu6zNALLXH6M4SCbYRJMWNf8kcM7ucEQlOPu30HRRsw==",
-  "success": false,
+  "dgSpecHash": "ji1E215B2cc/9TDy9s1ZnE0JrEKNvpvIe7cgFC+CJRh5T/S8X8lO+I574OmmOutbfT+ozvFZCNBHDPJDLQ/+cA==",
+  "success": true,
   "projectFilePath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\AppCore\\AppCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\paosa\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.5\\microsoft.extensions.configuration.3.1.5.nupkg.sha512",
@@ -23,15 +23,5 @@
     "C:\\Users\\paosa\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\paosa\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1105",
-      "level": "Error",
-      "message": "Unable to find project information for 'C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
-      "libraryId": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }

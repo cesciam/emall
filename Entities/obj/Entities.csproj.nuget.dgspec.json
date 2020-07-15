@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj": {}
+    "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj": {
+    "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\Entities.csproj",
+        "projectPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\paosa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO\\Entities\\obj\\",
+        "outputPath": "C:\\Users\\paosa\\source\\repos\\PROYECTO_EMALL\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paosa\\AppData\\Roaming\\NuGet\\NuGet.Config",
