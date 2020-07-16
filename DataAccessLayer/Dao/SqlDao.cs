@@ -13,14 +13,22 @@ namespace DataAccessLayer.Dao
 {
     public class SqlDao
     {
+
         private string CONNECTION_STRING = "";
+
         private static SqlDao instance;
 
         private SqlDao()
         {
+
+
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             CONNECTION_STRING = builder.Build().GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
+
+
+
         }
+
 
         public static SqlDao GetInstance()
         {
@@ -29,6 +37,7 @@ namespace DataAccessLayer.Dao
 
             return instance;
         }
+
 
         public void ExecuteProcedure(SqlOperation sqlOperation)
         {
