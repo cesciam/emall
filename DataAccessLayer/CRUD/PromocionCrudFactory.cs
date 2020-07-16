@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccessLayer.CRUD
 {
-    class PromocionCrudFactory : CrudFactory
+    public class PromocionCrudFactory : CrudFactory
     {
         PromocionMapper mapper;
 
