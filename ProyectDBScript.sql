@@ -384,23 +384,3 @@ CREATE TABLE BITACORA(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
