@@ -82,6 +82,9 @@ ipch/
 *.vsp
 *.vspx
 *.sap
+.vs/
+**/obj/
+
 
 # TFS 2012 Local Workspace
 $tf/
@@ -229,3 +232,9 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# Custom
+AppCore/obj/*
+DataAccessLayer/obj/*
+Entities/obj/*
+Web_API/obj/*
