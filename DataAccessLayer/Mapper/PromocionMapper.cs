@@ -56,7 +56,6 @@ namespace DataAccessLayer.Mapper
             operacion.AddDoubleParam(DB_COL_PORCENTAJE, p.porcentaje);
             operacion.AddVarcharParam(DB_COL_CODIGO, p.codigo);
             operacion.AddIntParam(DB_COL_CANTIDAD, p.cantidad);
-            operacion.AddIntParam(DB_COL_ID_COMERCIO, -1);
             if (p.id_comercio > 0)
             {
                 operacion.AddIntParam(DB_COL_ID_COMERCIO, p.id_comercio);
@@ -65,6 +64,7 @@ namespace DataAccessLayer.Mapper
             {
                 operacion.AddIntParam(DB_COL_ID_COMERCIO, -1);
             }
+
             if (p.id_sucursal > 0)
             {
                 operacion.AddIntParam(DB_COL_ID_SUCURSAL, p.id_sucursal);
@@ -78,22 +78,90 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operacion = new SqlOperation { ProcedureName = "ELIMINAR_PROMOCION" };
+
+            var p = (Promocion)entity;
+            operacion.AddIntParam(DB_COL_ID, p.id);
+            return operacion;
         }
 
         public SqlOperation GetRetriveAllStatement()
         {
-            throw new NotImplementedException();
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_TODO_PROMOCION" };
+
+            return operacion;
+        }
+
+        public SqlOperation GetRetriveAllByComercioStament(BaseEntity entity) 
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTER_TODO_PROMOCION_COMERCIO" };
+            var p = (Promocion)entity;
+
+            operacion.AddIntParam(DB_COL_ID_COMERCIO, p.id_comercio);
+
+            return operacion;
+
+        }
+
+        public SqlOperation GetRetriveAllBySucursalStament(BaseEntity entity) 
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTER_TODO_PROMOCION_SUCURSAL" };
+            var p = (Promocion)entity;
+
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, p.id_sucursal);
+
+            return operacion;
+        }
+
+        public SqlOperation GetRetriveAllByAppStament() 
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTER_TODO_PROMOCION_APP" };            
+
+            return operacion;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_PROMOCION"};
+
+            var p = (Promocion)entity;
+            operacion.AddIntParam(DB_COL_ID, p.id);
+
+            return operacion;
         }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operacion = new SqlOperation { ProcedureName = "MODIFICAR_PROMOCION" };
+
+            var p = (Promocion)entity;
+
+            operacion.AddIntParam(DB_COL_ID, p.id);
+            operacion.AddVarcharParam(DB_COL_NOMBRE, p.nombre);
+            operacion.AddDoubleParam(DB_COL_PORCENTAJE, p.porcentaje);
+            operacion.AddVarcharParam(DB_COL_CODIGO, p.codigo);
+            operacion.AddIntParam(DB_COL_CANTIDAD, p.cantidad);
+            if (p.id_comercio > 0)
+            {
+                operacion.AddIntParam(DB_COL_ID_COMERCIO, p.id_comercio);
+            }
+            else
+            {
+                operacion.AddIntParam(DB_COL_ID_COMERCIO, -1);
+            }
+
+            if (p.id_sucursal > 0)
+            {
+                operacion.AddIntParam(DB_COL_ID_SUCURSAL, p.id_sucursal);
+            }
+            else
+            {
+                operacion.AddIntParam(DB_COL_ID_SUCURSAL, -1);
+            }
+
+            return operacion;
         }
+
+
     }
 }
