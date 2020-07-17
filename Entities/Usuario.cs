@@ -7,7 +7,7 @@ namespace Entities {
         public int Id { get; set; }
         public string Cedula { get; set; }
         public string Nombre { get; set; }
-        public string Apellidos { get; set; }
+        public string Apellido { get; set; }
         public string Correo { get; set; }
         public int Foto { get; set; }
         public string Telefono { get; set; }
@@ -16,6 +16,8 @@ namespace Entities {
         public string CodigoCorreo { get; set; }
         public string CodigoTelefono { get; set; }
         public int Estado { get; set; }
+        public int Tipo { get; set; }
+        public int IdComercio { get; set; }
 
         public Usuario() {
         }
