@@ -18,7 +18,7 @@ namespace Entities
 
         public Empleado(string[] infoArray)
         {
-            if (infoArray != null && infoArray.Length >= 8)
+            if (infoArray != null && infoArray.Length >= 4)
             {
                 var inputId = 0;
                 if (Int32.TryParse(infoArray[0], out inputId))
@@ -35,14 +35,14 @@ namespace Entities
                     throw new Exception("La id del usuario no es válida");
                 }
                 var inputId_rol = 0;
-                if (Int32.TryParse(infoArray[0], out inputId_rol))
+                if (Int32.TryParse(infoArray[2], out inputId_rol))
                     inputId_rol = id_rol;
                 else
                 {
                     throw new Exception("La id del rol no es válida");
                 }
                 var inputId_sucursal = 0;
-                if (Int32.TryParse(infoArray[0], out inputId_sucursal))
+                if (Int32.TryParse(infoArray[3], out inputId_sucursal))
                     inputId_sucursal = id_sucursal;
                 else
                 {

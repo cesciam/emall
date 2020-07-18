@@ -10,7 +10,7 @@ namespace DataAccessLayer.CRUD
     public class EmpleadoCrudFactory : CrudFactory
     {
         EmpleadoMapper mapper;
-        public EmpleadoCrudFactory()
+        public EmpleadoCrudFactory(): base()
         {
             mapper = new EmpleadoMapper();
             dao = SqlDao.GetInstance();
