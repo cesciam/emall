@@ -10,14 +10,14 @@ namespace DataAccessLayer.Mapper
     {
         private const string DB_COL_ID = "ID";
         private const string DB_COL_NOMBRE = "NOMBRE";
-        private const string DB_COL_MONTO = "MONTO";
+        private const string DB_COL_PORCENTAJE = "PORCENTAJE";
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var impuesto = new Impuesto() { 
                 Id = GetIntValue(row,DB_COL_ID), 
                 Nombre = GetStringValue(row,DB_COL_NOMBRE), 
-                Monto = GetDoubleValue(row, DB_COL_MONTO)
+                Porcentaje = GetDoubleValue(row, DB_COL_PORCENTAJE)
             };
 
             return impuesto;
@@ -39,18 +39,18 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_IMPUESTO_PR" };
+            var operation = new SqlOperation { ProcedureName = "CREAR_IMPUESTO" };
 
             var i = (Impuesto)entity;
             operation.AddVarcharParam(DB_COL_NOMBRE, i.Nombre);
-            operation.AddDoubleParam(DB_COL_MONTO, i.Monto);
+            operation.AddDoubleParam(DB_COL_PORCENTAJE, i.Porcentaje);
 
             return operation; 
         }
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_IMPUESTO_PR" };
+            var operation = new SqlOperation { ProcedureName = "ELIMINAR_IMPUESTO" };
 
             var i = (Impuesto)entity;
             operation.AddVarcharParam(DB_COL_NOMBRE, i.Nombre);
@@ -59,14 +59,14 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_IMPUESTO_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_IMPUESTO" };
 
             return operation;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_IMPUESTO_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_IMPUESTO" };
 
             var i = (Impuesto)entity;
             operation.AddVarcharParam(DB_COL_NOMBRE, i.Nombre);
@@ -75,11 +75,11 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_IMPUESTO_PR" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_IMPUESTO" };
 
             var i = (Impuesto)entity;
             operation.AddVarcharParam(DB_COL_NOMBRE, i.Nombre);
-            operation.AddDoubleParam(DB_COL_MONTO, i.Monto);
+            operation.AddDoubleParam(DB_COL_PORCENTAJE, i.Porcentaje);
 
             return operation;
         }

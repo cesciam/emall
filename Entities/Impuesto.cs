@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Entities
 {
     public class Impuesto :BaseEntity
     {
+        [JsonPropertyName("Id")]
         public int Id { get; set; }
+
+        [JsonPropertyName("Nombre")]
 
         public string Nombre { get; set;  }
 
-        public Double Monto { get; set; }
+        [JsonPropertyName("Porcentaje")]
+        public Double Porcentaje { get; set; }
 
         public Impuesto()
         {
@@ -25,9 +30,9 @@ namespace Entities
                 Nombre = infoArray[0];
                 if (Double.TryParse(infoArray[1], out montoImp))
 
-                    Monto = montoImp;
+                    Porcentaje = montoImp;
                 else
-                    throw new Exception("El monto debe ser un numero ");
+                    throw new Exception("El porcentaje debe ser un numero ");
             }
            
 

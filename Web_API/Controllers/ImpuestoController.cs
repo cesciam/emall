@@ -14,7 +14,7 @@ namespace Web_API.Controllers
     public class ImpuestoController : ControllerBase
     {
         [HttpGet]
-        public List<Impuesto> Get()
+        public List<Impuesto> ObtenerTodoImpuesto()
         {
             var im = new ImpuestoManagement();
 
@@ -23,7 +23,7 @@ namespace Web_API.Controllers
 
         [HttpGet]
 
-        public Impuesto RetrieveById(string nombre)
+        public Impuesto ObtenerImpuesto(string nombre)
         {
             var im = new ImpuestoManagement();
 
@@ -36,7 +36,7 @@ namespace Web_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Impuesto impuesto)
+        public IActionResult CrearImpuesto(Impuesto impuesto)
         {
             var im = new ImpuestoManagement();
 
@@ -52,7 +52,7 @@ namespace Web_API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(Impuesto impuesto)
+        public IActionResult ModificarImpuesto(Impuesto impuesto)
         {
             var im = new ImpuestoManagement();
 
@@ -68,7 +68,7 @@ namespace Web_API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(Impuesto impuesto)
+        public IActionResult EliminarImpuesto(Impuesto impuesto)
         {
             var im = new ImpuestoManagement();
 
