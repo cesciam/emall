@@ -17,8 +17,11 @@ namespace Web_API.Controllers {
 
         [HttpGet]
         [Route("api/[controller]")]
-        public List<Usuario> Index() {
-            return this.usuarioManagement.RetrieveAll();
+        public List<Usuario> Index([FromQuery] Dictionary<string, string> filters) {
+            if (filters.Count == 0)
+                return this.usuarioManagement.RetrieveAll();
+
+            return this.usuarioManagement.RetrieveSome(filters);
         }
 
         [HttpGet]

@@ -18,7 +18,6 @@ namespace DataAccessLayer.Mapper {
         private const string DB_COL_CODIGO_CORREO = "CODIGO_CORREO";
         private const string DB_COL_ESTADO = "ESTADO";
         private const string DB_COL_TIPO = "TIPO";
-        private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
 
         public SqlOperation GetCreateStatement(BaseEntity entity) {
             var operation = new SqlOperation { ProcedureName = "CREAR_USUARIO" };
@@ -37,7 +36,6 @@ namespace DataAccessLayer.Mapper {
             operation.AddVarcharParam(DB_COL_CODIGO_CORREO, u.CodigoCorreo);
             operation.AddIntParam(DB_COL_ESTADO, u.Estado);
             operation.AddIntParam(DB_COL_TIPO, u.Tipo);
-            operation.AddIntParam(DB_COL_ID_COMERCIO, u.IdComercio);
 
             return operation;
         }
@@ -53,6 +51,78 @@ namespace DataAccessLayer.Mapper {
 
         public SqlOperation GetRetriveAllStatement() {
             var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_USUARIO" };
+            return operation;
+        }
+
+        public SqlOperation GetRetriveSomeStatement(BaseEntity entity) {
+            var operation = new SqlOperation { ProcedureName = "BUSCAR_USUARIO" };
+            var u = (Usuario)entity;
+            
+            if (u.Id == 0)
+                operation.AddNullParam(DB_COL_ID);
+            else
+                operation.AddIntParam(DB_COL_ID, u.Id);
+
+            if (u.Cedula == null)
+                operation.AddNullParam(DB_COL_CEDULA);
+            else
+                operation.AddVarcharParam(DB_COL_CEDULA, u.Cedula);
+
+            if (u.Nombre == null)
+                operation.AddNullParam(DB_COL_NOMBRE);
+            else
+                operation.AddVarcharParam(DB_COL_NOMBRE, u.Nombre);
+
+            if (u.Apellido == null)
+                operation.AddNullParam(DB_COL_APELLIDO);
+            else
+                operation.AddVarcharParam(DB_COL_APELLIDO, u.Apellido);
+
+            if (u.Correo == null)
+                operation.AddNullParam(DB_COL_CORREO);
+            else
+                operation.AddVarcharParam(DB_COL_CORREO, u.Correo);
+
+            if (u.Telefono == null)
+                operation.AddNullParam(DB_COL_TELEFONO);
+            else
+                operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
+
+            if (u.Foto == 0)
+                operation.AddNullParam(DB_COL_ID_FOTO);
+            else
+                operation.AddIntParam(DB_COL_ID_FOTO, u.Foto);
+
+            if (u.TelefonoConfirmado == 0)
+                operation.AddNullParam(DB_COL_TELEFONO_CONFIRMADO);
+            else
+                operation.AddIntParam(DB_COL_TELEFONO_CONFIRMADO, u.TelefonoConfirmado);
+
+            if (u.CorreoConfirmado == 0)
+                operation.AddNullParam(DB_COL_CORREO_CONFIRMADO);
+            else
+                operation.AddIntParam(DB_COL_CORREO_CONFIRMADO, u.CorreoConfirmado);
+
+            if (u.CodigoTelefono == null)
+                operation.AddNullParam(DB_COL_CODIGO_TELEFONO);
+            else
+                operation.AddVarcharParam(DB_COL_CODIGO_TELEFONO, u.CodigoTelefono);
+
+            if (u.CodigoCorreo == null)
+                operation.AddNullParam(DB_COL_CODIGO_CORREO);
+            else
+                operation.AddVarcharParam(DB_COL_CODIGO_CORREO, u.CodigoCorreo);
+
+            if (u.Estado == 0)
+                operation.AddNullParam(DB_COL_ESTADO);
+            else
+                operation.AddIntParam(DB_COL_ESTADO, u.Estado);
+
+            if (u.Tipo == 0)
+                operation.AddNullParam(DB_COL_TIPO);
+            else
+                operation.AddIntParam(DB_COL_TIPO, u.Tipo);
+
             return operation;
         }
 
@@ -73,7 +143,6 @@ namespace DataAccessLayer.Mapper {
             operation.AddVarcharParam(DB_COL_CODIGO_CORREO, u.CodigoCorreo);
             operation.AddIntParam(DB_COL_ESTADO, u.Estado);
             operation.AddIntParam(DB_COL_TIPO, u.Tipo);
-            operation.AddIntParam(DB_COL_ID_COMERCIO, u.IdComercio);
 
             return operation;
         }
@@ -112,8 +181,7 @@ namespace DataAccessLayer.Mapper {
                 CodigoTelefono = GetStringValue(row, DB_COL_CODIGO_TELEFONO),
                 CodigoCorreo = GetStringValue(row, DB_COL_CODIGO_CORREO),
                 Estado = GetIntValue(row, DB_COL_ESTADO),
-                Tipo = GetIntValue(row, DB_COL_TIPO),
-                IdComercio = GetIntValue(row, DB_COL_ID_COMERCIO),
+                Tipo = GetIntValue(row, DB_COL_TIPO)
             };
 
             return usuario;

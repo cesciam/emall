@@ -17,7 +17,6 @@ namespace Entities {
         public string CodigoTelefono { get; set; }
         public int Estado { get; set; }
         public int Tipo { get; set; }
-        public int IdComercio { get; set; }
 
         public Usuario() {
         }

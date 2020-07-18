@@ -50,5 +50,10 @@ namespace DataAccessLayer.Dao
             };
             Parameters.Add(param);
         }
+
+        public void AddNullParam(string paramName) {
+            var param = new SqlParameter("@P_" + paramName, DBNull.Value);
+            Parameters.Add(param);
+        }
     }
 }

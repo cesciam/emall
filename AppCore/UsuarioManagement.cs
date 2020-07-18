@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AppCore {
     public class UsuarioManagement {
@@ -17,6 +18,22 @@ namespace AppCore {
 
         public List<Usuario> RetrieveAll() {
             List<Usuario> usuarios = crudUsuario.RetrieveAll<Usuario>();
+
+            return usuarios;
+        }
+
+        public List<Usuario> RetrieveSome(Dictionary<string, string> filters) {
+            Usuario usuario = new Usuario();
+
+            foreach (KeyValuePair<string, string> filter in filters) {
+                PropertyInfo userProperty = usuario.GetType().GetProperty(filter.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+                if (userProperty != null) {
+                    userProperty.SetValue(usuario, filter.Value);
+                }
+            }
+
+            List<Usuario> usuarios = crudUsuario.RetrieveSome<Usuario>(usuario);
 
             return usuarios;
         }

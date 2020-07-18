@@ -52,6 +52,23 @@ namespace DataAccessLayer.Crud {
             return lstUsuarios;
         }
 
+        public List<T> RetrieveSome<T>(BaseEntity entity) {
+            var lstUsuarios = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveSomeStatement(entity));
+            var dic = new Dictionary<string, object>();
+
+            if (lstResult.Count > 0) {
+                var objs = mapper.BuildObjects(lstResult);
+
+                foreach (var c in objs) {
+                    lstUsuarios.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstUsuarios;
+        }
+
         public override void Update(BaseEntity entity) {
             var usuario = (Usuario)entity;
             dao.ExecuteProcedure(mapper.GetUpdateStatement(usuario));
