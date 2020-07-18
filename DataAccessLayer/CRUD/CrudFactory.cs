@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DataAccessLayer.Dao;
 using Entities;
-using DataAccessLayer.Dao;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace DataAccessLayer.Crud
+namespace DataAccessLayer.CRUD
 {
     public abstract class CrudFactory
     {
@@ -13,6 +15,5 @@ namespace DataAccessLayer.Crud
         public abstract List<T> RetrieveAll<T>();
         public abstract void Update(BaseEntity entity);
         public abstract void Delete(BaseEntity entity);
-
     }
 }
