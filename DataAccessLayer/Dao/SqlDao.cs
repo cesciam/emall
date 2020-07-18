@@ -20,13 +20,8 @@ namespace DataAccessLayer.Dao
 
         private SqlDao()
         {
-
-
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             CONNECTION_STRING = builder.Build().GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
-
-
-
         }
 
 

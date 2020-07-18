@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer.Mapper
 {
-    class VistaXRolMapper : EntityMapper, ISqlStaments, IObjectMapper
+    public class VistaXRolMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         private const string DB_COL_ID = "id";
         private const string DB_COL_ID_VISTA = "id_vista";
