@@ -49,6 +49,14 @@ namespace DataAccessLayer.Mapper {
             return operation;
         }
 
+        public SqlOperation Login(string correo) {
+            var operation = new SqlOperation { ProcedureName = "LOGIN" };
+
+            operation.AddVarcharParam(DB_COL_CORREO, correo.Trim());
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement() {
             var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_USUARIO" };
             return operation;

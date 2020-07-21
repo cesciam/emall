@@ -4,7 +4,7 @@ using DataAccessLayer.CRUD;
 using DataAccessLayer.Dao;
 using DataAccessLayer.Mapper;
 using Entities;
-
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace DataAccessLayer.Crud {
     public class UsuarioCrudFactory : CrudFactory {
@@ -67,6 +67,25 @@ namespace DataAccessLayer.Crud {
             }
 
             return lstUsuarios;
+        }
+
+        public Usuario Login(string correo, string contrasena) {
+            var result = dao.ExecuteQueryProcedure(mapper.Login(correo));
+            var dic = new Dictionary<string, object>();
+
+            if (result.Count > 0) {
+                dic = result[0];
+                string encryptedPass = Utils.Md5.generateMD5Hash(contrasena);
+                
+                if (encryptedPass.Equals(dic["CONTRASENA"])) {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = Int32.Parse(dic["ID"].ToString());
+
+                    return this.Retrieve<Usuario>(usuario);
+                }
+            }
+
+            return null;
         }
 
         public override void Update(BaseEntity entity) {
