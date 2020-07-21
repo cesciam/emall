@@ -41,6 +41,14 @@ namespace DataAccessLayer.Mapper
             return DateTime.Now;
         }
 
+        protected decimal GetDecimalValue(Dictionary<string, object> dic, string attName)
+        {
+            var val = dic[attName];
+            if (dic.ContainsKey(attName) && val is decimal)
+                return (decimal)dic[attName];
+
+            return -1;
+        }
 
     }
 }
