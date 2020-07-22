@@ -34,6 +34,10 @@ namespace AppCore {
             this.crudContrasena.Create(nuevaContrasena);
         }
 
+        public bool Activar(int id, string codigo) {
+            return this.crudUsuario.Activar(id, codigo);
+        }
+
         public List<Usuario> RetrieveAll() {
             List<Usuario> usuarios = crudUsuario.RetrieveAll<Usuario>();
 

@@ -50,9 +50,15 @@ namespace DataAccessLayer.Mapper {
         }
 
         public SqlOperation Login(string correo) {
-            var operation = new SqlOperation { ProcedureName = "LOGIN" };
-
+            var operation = new SqlOperation { ProcedureName = "LOGIN_USUARIO" };
             operation.AddVarcharParam(DB_COL_CORREO, correo.Trim());
+
+            return operation;
+        }
+
+        public SqlOperation Activar(int id) {
+            var operation = new SqlOperation { ProcedureName = "ACTIVAR_USUARIO" };
+            operation.AddIntParam(DB_COL_ID, id);
 
             return operation;
         }

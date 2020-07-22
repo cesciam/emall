@@ -9,7 +9,7 @@ namespace Utils {
             StringBuilder builder = new StringBuilder("");
             System.Random random = new System.Random();
 
-            for (int i = 0; i <= longitud; i++) {
+            for (int i = 1; i <= longitud; i++) {
                 builder.Append(caracteresDisponibles[random.Next(0, caracteresDisponibles.Length - 1)]);
             }
 

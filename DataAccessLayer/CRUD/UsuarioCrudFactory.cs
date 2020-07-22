@@ -94,6 +94,25 @@ namespace DataAccessLayer.Crud {
             return null;
         }
 
+        public bool Activar(int id, string codigo) {
+            Usuario usuario = new Usuario();
+            usuario.Id = id;
+
+            var result = dao.ExecuteQueryProcedure(mapper.GetRetriveStatement(usuario));
+            var dic = new Dictionary<string, object>();
+
+            if (result.Count > 0) {
+                dic = result[0];
+
+                if (codigo.Equals(dic["CODIGO_CORREO"])) {
+                    dao.ExecuteProcedure(mapper.Activar(id));
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public override void Update(BaseEntity entity) {
             var usuario = (Usuario)entity;
             dao.ExecuteProcedure(mapper.GetUpdateStatement(usuario));

@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AppCore;
 using Entities;
 using Entities.ViewModels;
 using Utils;
+using Utils.Email;
 
 namespace Web_API.Controllers {
 
     public class UsuarioController : Controller {
         private UsuarioManagement usuarioManagement;
+        private EmailService emailService;
 
-        public UsuarioController() {
+        public UsuarioController(EmailService emailService) {
             this.usuarioManagement = new UsuarioManagement();
+            this.emailService = emailService;
         }
 
         [HttpGet]
@@ -33,6 +34,16 @@ namespace Web_API.Controllers {
             usuario.Id = id;
 
             return this.usuarioManagement.RetrieveById(usuario);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/{id}/activar/{codigo}")]
+        public IActionResult Activar(int id, string codigo) {
+            if (this.usuarioManagement.Activar(id, codigo)) {
+                return Ok("Usuario activado correctamente");
+            } else {
+                return BadRequest(new { message = "Ha ocurrido un error al activar el usuario. Vuelva a intertarlo en unos minutos." });
+            }
         }
 
         [HttpPost]
@@ -61,6 +72,16 @@ namespace Web_API.Controllers {
 
             if (usuarioId != 0) {
                 this.usuarioManagement.CrearContrasena(registro.Contrasena, usuarioId);
+                var url = "http://" + HttpContext.Request.Host.Value;
+
+                //Envia email de activacion de cuenta
+                this.emailService.Send(new EmailModel {
+                    To = nuevoUsuario.Correo,
+                    Subject = "Activar cuenta",
+                    Message = "<p>Activar cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" +
+                              "<p><a href=\"" + url + "\">Activar cuenta</a></p>"
+                });
+
                 return Ok();
             } else {
                 return BadRequest(new { message = "Ha ocurrido un error al registrar el usuario. Vuelva a intertarlo en unos minutos." });
