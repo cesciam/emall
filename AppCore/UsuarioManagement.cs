@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Crud;
+using DataAccessLayer.CRUD;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,30 @@ using System.Reflection;
 namespace AppCore {
     public class UsuarioManagement {
         private UsuarioCrudFactory crudUsuario;
+        private ContrasenaCrudFactory crudContrasena;
 
         public UsuarioManagement() {
             this.crudUsuario = new UsuarioCrudFactory();
+            this.crudContrasena = new ContrasenaCrudFactory();
         }
 
-        public void Create(Usuario usuario) {
-            crudUsuario.Create(usuario);
+        public int Registrar(Usuario usuario) {
+            return this.crudUsuario.Insert(usuario);
+        }
+
+        public Usuario Login(string correo, string contrasena) {
+            return this.crudUsuario.Login(correo.Trim(), contrasena.Trim());
+        }
+
+        public void CrearContrasena(string contrasena, int usuarioId) {
+            Contrasena nuevaContrasena = new Contrasena {
+                Id = 0,
+                Clave = Utils.Md5.generateMD5Hash(contrasena),
+                Fecha = DateTime.Now,
+                IdUsuario = usuarioId
+            };
+
+            this.crudContrasena.Create(nuevaContrasena);
         }
 
         public List<Usuario> RetrieveAll() {

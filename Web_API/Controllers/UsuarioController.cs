@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AppCore;
 using Entities;
+using Entities.ViewModels;
+using Utils;
 
 namespace Web_API.Controllers {
 
@@ -34,14 +36,35 @@ namespace Web_API.Controllers {
         }
 
         [HttpPost]
-        [Route("api/[controller]")]
-        public IActionResult Post([FromBody] Usuario usuario) {
-            if (usuario == null)
-                return BadRequest("Usuario no es valido");
+        [Route("api/[controller]/registrar")]
+        public IActionResult Post([FromBody] RegistroViewModel registro) {
+            if (registro == null)
+                return BadRequest(new { message = "Datos de registro no son validos." });
 
-            this.usuarioManagement.Create(usuario);
+            Usuario nuevoUsuario = new Usuario {
+                Id = 0,
+                Cedula = registro.Cedula,
+                Nombre = registro.Nombre,
+                Apellido = registro.Apellido,
+                Correo =  registro.Correo,
+                Telefono = registro.Telefono,
+                Tipo = registro.Tipo,
+                Estado = 0,
+                Foto = 1,
+                CorreoConfirmado = 0,
+                TelefonoConfirmado = 0,
+                CodigoTelefono = TokenGenerator.Generar(8),
+                CodigoCorreo = TokenGenerator.Generar(8),
+            };
 
-            return Ok();
+            int usuarioId = this.usuarioManagement.Registrar(nuevoUsuario);
+
+            if (usuarioId != 0) {
+                this.usuarioManagement.CrearContrasena(registro.Contrasena, usuarioId);
+                return Ok();
+            } else {
+                return BadRequest(new { message = "Ha ocurrido un error al registrar el usuario. Vuelva a intertarlo en unos minutos." });
+            }
         }
 
         [HttpPut]
@@ -61,6 +84,17 @@ namespace Web_API.Controllers {
             this.usuarioManagement.Delete(id);
             
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/[controller]/login")]
+        public IActionResult Login([FromBody]LoginViewModel login) {
+            var usuario = this.usuarioManagement.Login(login.Correo, login.Contrasena);
+
+            if (usuario == null)
+                return BadRequest(new { message = "Email o Contraseña son incorrectos." });
+
+            return Ok(usuario);
         }
     }
 }

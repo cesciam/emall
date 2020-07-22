@@ -4,7 +4,6 @@ using DataAccessLayer.CRUD;
 using DataAccessLayer.Dao;
 using DataAccessLayer.Mapper;
 using Entities;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace DataAccessLayer.Crud {
     public class UsuarioCrudFactory : CrudFactory {
@@ -19,7 +18,14 @@ namespace DataAccessLayer.Crud {
             var usuario = (Usuario)entity;
             var sqlOperation = mapper.GetCreateStatement(usuario);
 
-            dao.ExecuteProcedure(sqlOperation);
+            dao.ExecuteProcedureAndReturnId(sqlOperation);
+        }
+
+        public int Insert(BaseEntity entity) {
+            var usuario = (Usuario)entity;
+            var sqlOperation = mapper.GetCreateStatement(usuario);
+
+            return (int)dao.ExecuteProcedureAndReturnId(sqlOperation);
         }
 
         public override T Retrieve<T>(BaseEntity entity) {
