@@ -4,6 +4,7 @@ using DataAccessLayer.Mapper;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccessLayer.CRUD
@@ -44,22 +45,16 @@ namespace DataAccessLayer.CRUD
 
         public override T Retrieve<T>(BaseEntity entity)
         {
-            var comercioList = dao.ExecuteQueryProcedure(comercioMapper.GetRetriveStatement(entity));
+            var comercioResult = dao.ExecuteQueryProcedure(comercioMapper.GetRetriveStatement(entity));
             var dictionaryList = new Dictionary<string, object>();
 
-            if (comercioList.Count > 0)
+            if (comercioResult.Count > 0)
             {
-                dictionaryList = comercioList[0];
-                var objs = comercioMapper.BuildObject(dictionaryList);
-                var comercio = (Comercio)Convert.ChangeType(objs, typeof(Comercio));
-                var categoriaxComercio = new CategoriaxComercio { IdComercio = comercio.Id };
+                dictionaryList = comercioResult[0];
+                var comercio = (Comercio)comercioMapper.BuildObject(dictionaryList);
+                comercio.Categorias = GenerarCategorias(comercio.Id);
+                comercio.Archivos = GenerarArchivos(comercio.Id);
 
-                var categoriasxComercioList = dao.ExecuteQueryProcedure(categoriaxComercioMapper.GetRetriveAllStatement(categoriaxComercio));
-                if (categoriasxComercioList.Count > 0)
-                {
-                    var categorias = categoriaxComercioMapper.BuildObjects(categoriasxComercioList);
-                    comercio.Categorias = categorias.ToArray();
-                }
                 return (T)Convert.ChangeType(comercio, typeof(T));
             }
             return default(T);
@@ -68,10 +63,10 @@ namespace DataAccessLayer.CRUD
         public override List<T> RetrieveAll<T>()
         {
             var comerciosList = new List<T>();
-            var result = dao.ExecuteQueryProcedure(comercioMapper.GetRetriveAllStatement());
-            if (result.Count > 0)
+            var comerciosResult = dao.ExecuteQueryProcedure(comercioMapper.GetRetriveAllStatement());
+            if (comerciosResult.Count > 0)
             {
-                var comercios = comercioMapper.BuildObjects(result);
+                var comercios = comercioMapper.BuildObjects(comerciosResult);
                 foreach (var c in comercios)
                 {
                     comerciosList.Add((T)Convert.ChangeType(c, typeof(T)));
@@ -81,18 +76,8 @@ namespace DataAccessLayer.CRUD
             foreach(var c in comerciosList)
             {
                 var comercio = (Comercio)Convert.ChangeType(c, typeof(Comercio));
-
-                var categoriaxComercio = new CategoriaxComercio
-                {
-                    IdComercio = comercio.Id
-                };
-
-                var categoriasxComercioList = dao.ExecuteQueryProcedure(categoriaxComercioMapper.GetRetriveAllStatement(categoriaxComercio));
-                if (categoriasxComercioList.Count > 0)
-                {
-                    var categorias = categoriaxComercioMapper.BuildObjects(categoriasxComercioList);
-                    comercio.Categorias = categorias.ToArray();
-                }
+                comercio.Categorias = GenerarCategorias(comercio.Id);
+                comercio.Archivos = GenerarArchivos(comercio.Id);
             }
 
             return comerciosList;
@@ -107,12 +92,42 @@ namespace DataAccessLayer.CRUD
             {
                 dao.ExecuteProcedure(archivoMapper.GetUpdateStatement(a));
             }
+        }
 
-            //TODO: Actualizar categorías del comercio
-            /*foreach (var ca in c.Categorias)
+        public void UpdateState(BaseEntity entity)
+        {
+            dao.ExecuteProcedure(comercioMapper.GetUpdateStateStatement(entity));
+        }
+
+        public Archivo[] GenerarArchivos(int IdComercio)
+        {
+            var archivo = new Archivo { Id_Comercio = IdComercio };
+            var archivosResult = dao.ExecuteQueryProcedure(archivoMapper.GetRetriveAllStatement(archivo));
+            var archivoList = new List<Archivo>();
+            if (archivosResult.Count > 0)
             {
-                dao.ExecuteProcedure(categoriaxComercioMapper.GetCreateStatement(ca, c.CedulaJuridica));
-            }*/
+                var archivos = archivoMapper.BuildObjects(archivosResult);
+                foreach (var a in archivos)
+                {
+                    archivoList.Add((Archivo)a);
+                }
+            }
+
+            return archivoList.ToArray();
+        }
+
+        public string[] GenerarCategorias(int IdComercio)
+        {
+            var categoriaList = new List<string>();
+            var categoriaxComercio = new CategoriaxComercio { IdComercio = IdComercio };
+
+            var categoriaResult = dao.ExecuteQueryProcedure(categoriaxComercioMapper.GetRetriveAllStatement(categoriaxComercio));
+            if (categoriaResult.Count > 0)
+            {
+                categoriaList = categoriaxComercioMapper.BuildObjects(categoriaResult);
+            }
+
+            return categoriaList.ToArray();
         }
     }
 }

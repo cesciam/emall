@@ -89,5 +89,15 @@ namespace DataAccessLayer.Mapper
 
             return operation;
         }
+
+        public SqlOperation GetUpdateStateStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "CAMBIAR_ESTADO_COMERCIO" };
+            var c = (Comercio)entity;
+            operation.AddIntParam(DB_COL_ID, c.Id);
+            operation.AddIntParam(DB_COL_ESTADO, c.Estado);
+
+            return operation;
+        }
     }
 }
