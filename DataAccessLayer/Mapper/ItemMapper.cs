@@ -28,7 +28,7 @@ namespace DataAccessLayer.Mapper
             operation.AddDoubleParam(DB_COL_PRECIO, c.precio);
             operation.AddVarcharParam(DB_COL_TIPO, c.tipo);
             operation.AddIntParam(DB_COL_INVENTARIO, c.inventario);
-            operation.AddTimeParam(DB_COL_DURACION, c.duracion);
+            operation.AddIntParam(DB_COL_DURACION, c.duracion);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
             operation.AddIntParam(DB_COL_ID_IMPUESTO, c.id_impuesto);
             operation.AddIntParam(DB_COL_ID_FOTO, c.id_foto);
@@ -62,7 +62,7 @@ namespace DataAccessLayer.Mapper
             operation.AddDoubleParam(DB_COL_PRECIO, c.precio);
             operation.AddVarcharParam(DB_COL_TIPO, c.tipo);
             operation.AddIntParam(DB_COL_INVENTARIO, c.inventario);
-            operation.AddTimeParam(DB_COL_DURACION, c.duracion);
+            operation.AddIntParam(DB_COL_DURACION, c.duracion);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
             operation.AddIntParam(DB_COL_ID_IMPUESTO, c.id_impuesto);
             operation.AddIntParam(DB_COL_ID_FOTO, c.id_foto);
@@ -102,7 +102,7 @@ namespace DataAccessLayer.Mapper
                 precio = GetDecimalValue(row, DB_COL_PRECIO),
                 tipo = GetStringValue(row, DB_COL_TIPO),
                 inventario = GetIntValue(row, DB_COL_INVENTARIO),
-                duracion = GetTimeValue(row, DB_COL_DURACION),
+                duracion = GetIntValue(row, DB_COL_DURACION),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL),
                 id_impuesto = GetIntValue(row, DB_COL_ID_IMPUESTO),
                 id_foto = GetIntValue(row, DB_COL_ID_FOTO),
