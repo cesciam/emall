@@ -6,19 +6,28 @@ using Entities;
 using Entities.ViewModels;
 using Utils;
 using Utils.Email;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Web_API.Controllers {
 
     public class UsuarioController : Controller {
         private UsuarioManagement usuarioManagement;
         private EmailService emailService;
+        private readonly IConfiguration configuration;
 
-        public UsuarioController(EmailService emailService) {
+        public UsuarioController(IConfiguration configuration, EmailService emailService) {
             this.usuarioManagement = new UsuarioManagement();
             this.emailService = emailService;
+            this.configuration = configuration;
         }
 
         [HttpGet]
+        [Authorize]
         [Route("api/[controller]")]
         public List<Usuario> Index([FromQuery] Dictionary<string, string> filters) {
             if (filters.Count == 0)
@@ -47,6 +56,7 @@ namespace Web_API.Controllers {
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("api/[controller]/registrar")]
         public IActionResult Post([FromBody] RegistroViewModel registro) {
             if (registro == null)
@@ -115,6 +125,7 @@ namespace Web_API.Controllers {
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("api/[controller]/login")]
         public IActionResult Login([FromBody]LoginViewModel login) {
             var usuario = this.usuarioManagement.Login(login.Correo, login.Contrasena);
@@ -122,7 +133,36 @@ namespace Web_API.Controllers {
             if (usuario == null)
                 return BadRequest(new { message = "Email o Contraseña son incorrectos." });
 
-            return Ok(usuario);
+            return Ok(new {
+                usuario,  
+                token = GenerarTokenJWT(usuario)
+            });
+        }
+
+        private string GenerarTokenJWT(Usuario usuario) {
+            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]));
+            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            var Header = new JwtHeader(signingCredentials);
+
+            var Claims = new[] {
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.NameId, usuario.Id.ToString()),
+                new Claim("nombre", usuario.Nombre),
+                new Claim("apellido", usuario.Apellido),
+                new Claim(JwtRegisteredClaimNames.Email, usuario.Correo)
+            };
+
+            var Payload = new JwtPayload(
+                    issuer: configuration["JWT:Issuer"],
+                    audience: configuration["JWT:Audience"],
+                    claims: Claims,
+                    notBefore: DateTime.UtcNow,
+                    expires: DateTime.UtcNow.AddHours(24)
+                );
+
+            var Token = new JwtSecurityToken(Header, Payload);
+
+            return new JwtSecurityTokenHandler().WriteToken(Token);
         }
     }
 }
