@@ -44,9 +44,8 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_HORARIO_PR" };
+            var operation = new SqlOperation { ProcedureName = "CREAR_HORARIO_PR" };
             var h = (Horario)entity;
-            operation.AddIntParam(DB_COL_ID, h.id);
             operation.AddDateParam(DB_COL_FECHA, h.fecha);
             operation.AddVarcharParam(DB_COL_TIPO_HORARIO, h.tipo_horario);
             operation.AddDateParam(DB_COL_HORA_INICIO, h.hora_inicio);
@@ -57,7 +56,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_HORARIO_PR" };
+            var operation = new SqlOperation { ProcedureName = "ELIMINAR_HORARIO_PR" };
             var h = (Horario)entity;
             operation.AddIntParam(DB_COL_ID, h.id);
             return operation;
@@ -65,13 +64,13 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_HORARIO_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_HORARIO_PR" };
             return operation;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_HORARIO_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_HORARIO_PR" };
             var h = (Horario)entity;
             operation.AddIntParam(DB_COL_ID, h.id);
             return operation;
@@ -79,7 +78,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_HORARIO_PR" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_HORARIO_PR" };
             var h = (Horario)entity;
             operation.AddIntParam(DB_COL_ID, h.id);
             operation.AddDateParam(DB_COL_FECHA, h.fecha);
