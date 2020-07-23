@@ -12,7 +12,7 @@ namespace Entities
         public double precio { get; set; }
         public string tipo { get; set; }
         public int inventario { get; set; }
-        public DateTime duracion { get; set; }
+        public TimeSpan duracion { get; set; }
         public int id_sucursal { get; set; }
         public int id_impuesto { get; set; }
         public int id_foto { get; set; }
