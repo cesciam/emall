@@ -24,10 +24,21 @@ namespace Web_API.Controllers
 
                 return Ok();
             }
-            catch(Exception ex)
+                catch(Exception ex)
             {
                 return StatusCode(500, ex);
             }
+        }
+
+        [HttpGet]
+        public Promocion Retrieve(int id)
+        {
+            var promocion = new Promocion
+            {
+                id = id
+            };
+
+            return mng.Retrieve(promocion);
         }
 
         [HttpGet]
