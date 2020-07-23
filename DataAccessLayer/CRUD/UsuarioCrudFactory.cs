@@ -5,7 +5,6 @@ using DataAccessLayer.Dao;
 using DataAccessLayer.Mapper;
 using Entities;
 
-
 namespace DataAccessLayer.Crud {
     public class UsuarioCrudFactory : CrudFactory {
         UsuarioMapper mapper;
@@ -19,7 +18,14 @@ namespace DataAccessLayer.Crud {
             var usuario = (Usuario)entity;
             var sqlOperation = mapper.GetCreateStatement(usuario);
 
-            dao.ExecuteProcedure(sqlOperation);
+            dao.ExecuteProcedureAndReturnId(sqlOperation);
+        }
+
+        public int Insert(BaseEntity entity) {
+            var usuario = (Usuario)entity;
+            var sqlOperation = mapper.GetCreateStatement(usuario);
+
+            return (int)dao.ExecuteProcedureAndReturnId(sqlOperation);
         }
 
         public override T Retrieve<T>(BaseEntity entity) {
@@ -67,6 +73,44 @@ namespace DataAccessLayer.Crud {
             }
 
             return lstUsuarios;
+        }
+
+        public Usuario Login(string correo, string contrasena) {
+            var result = dao.ExecuteQueryProcedure(mapper.Login(correo));
+            var dic = new Dictionary<string, object>();
+
+            if (result.Count > 0) {
+                dic = result[0];
+                string encryptedPass = Utils.Md5.generateMD5Hash(contrasena);
+                
+                if (encryptedPass.Equals(dic["CONTRASENA"])) {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = Int32.Parse(dic["ID"].ToString());
+
+                    return this.Retrieve<Usuario>(usuario);
+                }
+            }
+
+            return null;
+        }
+
+        public bool Activar(int id, string codigo) {
+            Usuario usuario = new Usuario();
+            usuario.Id = id;
+
+            var result = dao.ExecuteQueryProcedure(mapper.GetRetriveStatement(usuario));
+            var dic = new Dictionary<string, object>();
+
+            if (result.Count > 0) {
+                dic = result[0];
+
+                if (codigo.Equals(dic["CODIGO_CORREO"])) {
+                    dao.ExecuteProcedure(mapper.Activar(id));
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public override void Update(BaseEntity entity) {
