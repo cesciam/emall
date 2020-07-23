@@ -39,7 +39,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operacion = new SqlOperation { ProcedureName = "CREAR_CONGIFURACION" };
+            var operacion = new SqlOperation { ProcedureName = "CREAR_CONFIGURACION" };
             var c = (Configuracion)entity;
 
             operacion.AddVarcharParam(DB_COL_NOMBRE, c.nombre);
@@ -66,7 +66,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operacion = new SqlOperation { ProcedureName = "OBTENER_PROMOCION" };
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CONFIGURACION" };
 
             var c = (Configuracion)entity;
             operacion.AddVarcharParam(DB_COL_NOMBRE, c.nombre);

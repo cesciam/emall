@@ -54,7 +54,7 @@ namespace DataAccessLayer.Mapper
             var p = (Promocion) entity;
 
             operacion.AddVarcharParam(DB_COL_NOMBRE, p.nombre);
-            operacion.AddDoubleParam(DB_COL_PORCENTAJE, decimal.ToDouble(p.porcentaje));
+            operacion.AddDoubleParam(DB_COL_PORCENTAJE, p.porcentaje);
             operacion.AddVarcharParam(DB_COL_CODIGO, p.codigo);
             operacion.AddIntParam(DB_COL_CANTIDAD, p.cantidad);
             if (p.id_comercio > 0)
@@ -139,7 +139,7 @@ namespace DataAccessLayer.Mapper
 
             operacion.AddIntParam(DB_COL_ID, p.id);
             operacion.AddVarcharParam(DB_COL_NOMBRE, p.nombre);
-            operacion.AddDoubleParam(DB_COL_PORCENTAJE, decimal.ToDouble(p.porcentaje));
+            operacion.AddDoubleParam(DB_COL_PORCENTAJE, p.porcentaje);
             operacion.AddVarcharParam(DB_COL_CODIGO, p.codigo);
             operacion.AddIntParam(DB_COL_CANTIDAD, p.cantidad);
             if (p.id_comercio > 0)
