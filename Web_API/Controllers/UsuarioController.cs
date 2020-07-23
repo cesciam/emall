@@ -42,7 +42,7 @@ namespace Web_API.Controllers {
             if (this.usuarioManagement.Activar(id, codigo)) {
                 return Ok("Usuario activado correctamente");
             } else {
-                return BadRequest(new { message = "Ha ocurrido un error al activar el usuario. Vuelva a intertarlo en unos minutos." });
+                return BadRequest(new { message = "Ha ocurrido un error al activar el usuario." });
             }
         }
 
@@ -50,7 +50,14 @@ namespace Web_API.Controllers {
         [Route("api/[controller]/registrar")]
         public IActionResult Post([FromBody] RegistroViewModel registro) {
             if (registro == null)
-                return BadRequest(new { message = "Datos de registro no son validos." });
+                return BadRequest(new ErrorResultViewModel { 
+                    error = "El formato de registro no es valido."
+                });
+
+            var errores = this.usuarioManagement.TieneErrores(registro);
+
+            if (errores != null)
+                return BadRequest(errores);
 
             Usuario nuevoUsuario = new Usuario {
                 Id = 0,

@@ -1,9 +1,11 @@
 ﻿using DataAccessLayer.Crud;
 using DataAccessLayer.CRUD;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Utils;
 
 namespace AppCore {
     public class UsuarioManagement {
@@ -32,6 +34,28 @@ namespace AppCore {
             };
 
             this.crudContrasena.Create(nuevaContrasena);
+        }
+
+        public ErrorResultViewModel TieneErrores(RegistroViewModel registro) {
+            ErrorResultViewModel message = new ErrorResultViewModel();
+            message.detail = new List<string>();
+
+            if (!FormatValidation.IsValidEmail(registro.Correo))
+                message.detail.Add("El email no tiene un formato valido");
+
+            if (!FormatValidation.IsValidPassword(registro.Contrasena))
+                message.detail.Add("La contraseña no tiene un formato valido");
+
+            if (!FormatValidation.IsValidPhone(registro.Telefono))
+                message.detail.Add("El telefono no tiene un formato valido");
+
+            if (message.detail.Count == 0) {
+                return null;
+            } else {
+                message.error = "Ha ocurrido un error al registrar el usuario";
+                return message;
+            }
+                
         }
 
         public bool Activar(int id, string codigo) {
