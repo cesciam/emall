@@ -8,9 +8,9 @@ namespace DataAccessLayer.Mapper
 {
     public class VistaXRolMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
-        private const string DB_COL_ID = "id";
-        private const string DB_COL_ID_VISTA = "id_vista";
-        private const string DB_COL_ID_ROL = "id_rol";
+        private const string DB_COL_ID = "ID";
+        private const string DB_COL_ID_VISTA = "ID_VISTA";
+        private const string DB_COL_ID_ROL = "ID_ROL";
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var vr = new VistaXRol
