@@ -8,12 +8,12 @@ namespace DataAccessLayer.Mapper
 {
     public class HorarioMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
-        private const string DB_COL_ID = "id";
-        private const string DB_COL_FECHA = "fecha";
-        private const string DB_COL_TIPO_HORARIO = "tipo_horario";
-        private const string DB_COL_HORA_INICIO = "hora_inicio";
-        private const string DB_COL_HORA_FIN = "hora_fin";
-        private const string DB_COL_ID_USUARIO = "id_usuario";
+        private const string DB_COL_ID = "ID";
+        private const string DB_COL_FECHA = "FECHA";
+        private const string DB_COL_TIPO_HORARIO = "TIPO_HORARIO";
+        private const string DB_COL_HORA_INICIO = "HORA_INICIO";
+        private const string DB_COL_HORA_FIN = "HORA_FIN";
+        private const string DB_COL_ID_USUARIO = "ID_USUARIO";
         
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
