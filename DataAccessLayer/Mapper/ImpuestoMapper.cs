@@ -17,7 +17,9 @@ namespace DataAccessLayer.Mapper
             var impuesto = new Impuesto() { 
                 Id = GetIntValue(row,DB_COL_ID), 
                 Nombre = GetStringValue(row,DB_COL_NOMBRE), 
-                Porcentaje = GetDoubleValue(row, DB_COL_PORCENTAJE)
+
+                Porcentaje = GetDecimalValue(row, DB_COL_PORCENTAJE)
+
             };
 
             return impuesto;
@@ -53,7 +55,9 @@ namespace DataAccessLayer.Mapper
             var operation = new SqlOperation { ProcedureName = "ELIMINAR_IMPUESTO" };
 
             var i = (Impuesto)entity;
-            operation.AddVarcharParam(DB_COL_NOMBRE, i.Nombre);
+
+            operation.AddIntParam(DB_COL_ID, i.Id);
+
             return operation;
         }
 
@@ -78,8 +82,10 @@ namespace DataAccessLayer.Mapper
             var operation = new SqlOperation { ProcedureName = "MODIFICAR_IMPUESTO" };
 
             var i = (Impuesto)entity;
+
             operation.AddVarcharParam(DB_COL_NOMBRE, i.Nombre);
             operation.AddDoubleParam(DB_COL_PORCENTAJE, i.Porcentaje);
+            operation.AddIntParam(DB_COL_ID, i.Id);
 
             return operation;
         }

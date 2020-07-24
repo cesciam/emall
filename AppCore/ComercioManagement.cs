@@ -38,5 +38,10 @@ namespace AppCore
         {
             comercioFactory.Delete(comercio);
         }
+
+        public void ModificarEstadoComercio(Comercio comercio)
+        {
+            comercioFactory.UpdateState(comercio);
+        }
     }
 }
