@@ -8,8 +8,8 @@ namespace DataAccessLayer.Mapper
 {
     public class VistaMapper: EntityMapper, ISqlStaments, IObjectMapper
     {
-        private const string DB_COL_ID = "id";
-        private const string DB_COL_NOMBRE = "nombre";
+        private const string DB_COL_ID = "ID";
+        private const string DB_COL_NOMBRE = "NOMBRE";
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
