@@ -8,6 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comercio.component';
+import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
+import { ComercioService } from './services/comercio.service';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
 
 @NgModule({
   declarations: [
@@ -15,17 +21,23 @@ import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comer
     HomeComponent,
     NavMenuComponent,
     DashboardAdminComponent,
-    DashboardComercioComponent
+    DashboardComercioComponent,
+    RegistrarComercioComponent
   ],
   imports: [
+    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    FileUploadModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
     ])
   ],
-  providers: [],
+  providers: [
+    ComercioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
