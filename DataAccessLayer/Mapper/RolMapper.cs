@@ -35,7 +35,6 @@ namespace DataAccessLayer.Mapper
             }
 
             return lstResults;
-
         }
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
