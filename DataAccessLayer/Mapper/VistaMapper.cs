@@ -34,10 +34,9 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_VISTA_PR" };
+            var operation = new SqlOperation { ProcedureName = "CREAR_VISTA_PR" };
 
             var v = (Vista)entity;
-            operation.AddIntParam(DB_COL_ID, v.id);
             operation.AddVarcharParam(DB_COL_NOMBRE, v.nombre);
 
             return operation;
@@ -45,7 +44,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_VISTA_PR" };
+            var operation = new SqlOperation { ProcedureName = "ELIMINAR_VISTA_PR" };
 
             var v = (Vista)entity;
             operation.AddIntParam(DB_COL_ID, v.id);
@@ -55,14 +54,14 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_VISTA_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_VISTA_PR" };
 
             return operation;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_VISTA_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_VISTA_PR" };
 
             var v = (Vista)entity;
             operation.AddIntParam(DB_COL_ID, v.id);
@@ -72,7 +71,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_VISTA_PR" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_VISTA_PR" };
 
             var v = (Vista)entity;
             operation.AddIntParam(DB_COL_ID, v.id);
