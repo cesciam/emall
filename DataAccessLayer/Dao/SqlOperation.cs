@@ -55,5 +55,14 @@ namespace DataAccessLayer.Dao
             var param = new SqlParameter("@P_" + paramName, DBNull.Value);
             Parameters.Add(param);
         }
+
+        public void AddTimeParam(string paramName, TimeSpan paramValue)
+        {
+            var param = new SqlParameter("@P_" + paramName, SqlDbType.Time)
+            {
+                Value = paramValue
+            };
+            Parameters.Add(param);
+        }
     }
 }

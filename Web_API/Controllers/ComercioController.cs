@@ -70,5 +70,18 @@ namespace Web_API.Controllers
             }
 
         }
+
+        [HttpPut]
+        public IActionResult ModificarEstadoComercio(Comercio comercio)
+        {
+            try
+            {
+                new ComercioManagement().ModificarEstadoComercio(comercio);
+                return Ok();
+            } catch(Exception e)
+            {
+                return StatusCode(500, e);
+            }
+        }
     }
 }

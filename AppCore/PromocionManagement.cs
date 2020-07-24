@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.CRUD;
 using Entities;
+using System;
 using System.Collections.Generic;
 
 
@@ -17,6 +18,11 @@ namespace AppCore
         public void Create(BaseEntity entity)
         {
             crud.Create(entity);
+        }
+
+        public Promocion Retrieve(BaseEntity entity)
+        {
+            return crud.Retrieve<Promocion>(entity);
         }
 
         public List<Promocion> RetrieveAll()
@@ -37,11 +43,6 @@ namespace AppCore
         public List<Promocion> RetrieveAllByApp()
         {
             return crud.RetrieveAllByApp<Promocion>();
-        }
-
-        public Promocion Retrieve (BaseEntity entity)
-        {
-            return crud.Retrieve<Promocion>(entity);
         }
 
         public void Delete(BaseEntity entity)

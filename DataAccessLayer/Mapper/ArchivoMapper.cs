@@ -31,7 +31,15 @@ namespace DataAccessLayer.Mapper
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {
-            throw new NotImplementedException();
+            var lstResults = new List<BaseEntity>();
+
+            foreach (var row in lstRows)
+            {
+                var archivo = BuildObject(row);
+                lstResults.Add(archivo);
+            }
+
+            return lstResults;
         }
 
         public SqlOperation GetCreateStatement(BaseEntity entity, string CedulaJuridica)
@@ -55,6 +63,15 @@ namespace DataAccessLayer.Mapper
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             throw new NotImplementedException();
+        }
+
+        public SqlOperation GetRetriveAllStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_ARCHIVOS_COMERCIO" };
+            var a = (Archivo)entity;
+            operation.AddIntParam(DB_COL_ID_COMERCIO, a.Id_Comercio);
+
+            return operation;
         }
 
         public SqlOperation GetRetriveAllStatement()
