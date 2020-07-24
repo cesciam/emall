@@ -12,7 +12,6 @@ import { HeaderComponent } from './homePageComponents/header/header.component';
 import { FooterComponent } from './homePageComponents/footer/footer.component';
 import { HomePageComponent } from './homePageComponents/home-page/home-page.component';
 import { HeroComponent } from './homePageComponents/hero/hero.component';
-import { CategoriesComponent } from './homePageComponents/categories/categories.component';
 import { FeaturedSpadComponent } from './homePageComponents/featured-spad/featured-spad.component';
 import { BannerComponent } from './homePageComponents/banner/banner.component';
 import { LastetProductComponent } from './homePageComponents/lastet-product/lastet-product.component';
@@ -29,7 +28,6 @@ import { CommentariesComponent } from './homePageComponents/commentaries/comment
     FooterComponent,
     HomePageComponent,
     HeroComponent,
-    CategoriesComponent,
     FeaturedSpadComponent,
     BannerComponent,
     LastetProductComponent,
