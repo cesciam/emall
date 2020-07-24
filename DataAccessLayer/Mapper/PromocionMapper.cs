@@ -19,11 +19,13 @@ namespace DataAccessLayer.Mapper
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
+            double porcentaje = GetDoubleValue(row, DB_COL_PORCENTAJE);
+
             var promocion = new Promocion
             {
                 id = GetIntValue(row, DB_COL_ID),
                 nombre = GetStringValue(row, DB_COL_NOMBRE),
-                porcentaje = GetDoubleValue(row, DB_COL_PORCENTAJE),
+                porcentaje = GetDecimalValue(row, DB_COL_PORCENTAJE),
                 codigo = GetStringValue(row, DB_COL_CODIGO),
                 cantidad = GetIntValue(row, DB_COL_CANTIDAD),
                 id_comercio = GetIntValue(row, DB_COL_ID_COMERCIO),
@@ -51,7 +53,6 @@ namespace DataAccessLayer.Mapper
             var operacion = new SqlOperation { ProcedureName = "CREAR_PROMOCION" };
             var p = (Promocion) entity;
 
-            operacion.AddIntParam(DB_COL_ID, p.id);
             operacion.AddVarcharParam(DB_COL_NOMBRE, p.nombre);
             operacion.AddDoubleParam(DB_COL_PORCENTAJE, p.porcentaje);
             operacion.AddVarcharParam(DB_COL_CODIGO, p.codigo);
@@ -62,7 +63,7 @@ namespace DataAccessLayer.Mapper
             }
             else
             {
-                operacion.AddIntParam(DB_COL_ID_COMERCIO, -1);
+                operacion.AddNullParam(DB_COL_ID_COMERCIO);
             }
 
             if (p.id_sucursal > 0)
@@ -71,7 +72,7 @@ namespace DataAccessLayer.Mapper
             }
             else
             {
-                operacion.AddIntParam(DB_COL_ID_SUCURSAL, -1);
+                operacion.AddNullParam(DB_COL_ID_SUCURSAL);
             }
             return operacion;
         }
@@ -94,7 +95,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllByComercioStament(BaseEntity entity) 
         {
-            var operacion = new SqlOperation { ProcedureName = "OBTER_TODO_PROMOCION_COMERCIO" };
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_TODO_PROMOCION_COMERCIO" };
             var p = (Promocion)entity;
 
             operacion.AddIntParam(DB_COL_ID_COMERCIO, p.id_comercio);
@@ -105,7 +106,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllBySucursalStament(BaseEntity entity) 
         {
-            var operacion = new SqlOperation { ProcedureName = "OBTER_TODO_PROMOCION_SUCURSAL" };
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_TODO_PROMOCION_SUCURSAL" };
             var p = (Promocion)entity;
 
             operacion.AddIntParam(DB_COL_ID_SUCURSAL, p.id_sucursal);
@@ -115,7 +116,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllByAppStament() 
         {
-            var operacion = new SqlOperation { ProcedureName = "OBTER_TODO_PROMOCION_APP" };            
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_TODO_PROMOCION_APP" };            
 
             return operacion;
         }
@@ -147,7 +148,7 @@ namespace DataAccessLayer.Mapper
             }
             else
             {
-                operacion.AddIntParam(DB_COL_ID_COMERCIO, -1);
+                operacion.AddNullParam(DB_COL_ID_COMERCIO);
             }
 
             if (p.id_sucursal > 0)
@@ -156,7 +157,7 @@ namespace DataAccessLayer.Mapper
             }
             else
             {
-                operacion.AddIntParam(DB_COL_ID_SUCURSAL, -1);
+                operacion.AddNullParam(DB_COL_ID_SUCURSAL);
             }
 
             return operacion;

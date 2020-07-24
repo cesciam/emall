@@ -52,6 +52,20 @@ namespace DataAccessLayer.Dao
             }
         }
 
+        public object ExecuteProcedureAndReturnId(SqlOperation sqlOperation) {
+            using (var conn = new SqlConnection(CONNECTION_STRING))
+            using (var command = new SqlCommand(sqlOperation.ProcedureName, conn) {
+                CommandType = CommandType.StoredProcedure
+            }) {
+                foreach (var param in sqlOperation.Parameters) {
+                    command.Parameters.Add(param);
+                }
+
+                conn.Open();
+                return command.ExecuteScalar();
+            }
+        }
+
         public List<Dictionary<string, object>> ExecuteQueryProcedure(SqlOperation sqlOperation)
         {
             var lstResult = new List<Dictionary<string, object>>();
