@@ -8,6 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comercio.component';
+import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-empleado.component';
+import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
+import { EmpleadoService } from './servicios/empleado.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,9 @@ import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comer
     HomeComponent,
     NavMenuComponent,
     DashboardAdminComponent,
-    DashboardComercioComponent
+    DashboardComercioComponent,
+    AgregarEmpleadoComponent,
+    ListarEmpleadoComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -23,9 +28,13 @@ import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comer
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'agregar-empleado', component: AgregarEmpleadoComponent },
+      { path: 'listar-empleado', component: ListarEmpleadoComponent },
     ])
   ],
-  providers: [],
+  providers: [
+    EmpleadoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

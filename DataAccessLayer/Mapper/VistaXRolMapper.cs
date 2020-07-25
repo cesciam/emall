@@ -8,9 +8,9 @@ namespace DataAccessLayer.Mapper
 {
     public class VistaXRolMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
-        private const string DB_COL_ID = "id";
-        private const string DB_COL_ID_VISTA = "id_vista";
-        private const string DB_COL_ID_ROL = "id_rol";
+        private const string DB_COL_ID = "ID";
+        private const string DB_COL_ID_VISTA = "ID_VISTA";
+        private const string DB_COL_ID_ROL = "ID_ROL";
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var vr = new VistaXRol
@@ -37,31 +37,30 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_VISTAXROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "CREAR_VISTAXROL_PR" };
             var vr = (VistaXRol)entity;
-            operation.AddIntParam(DB_COL_ID, vr.id);
-            return operation;
-        }
-
-        public SqlOperation GetDeleteStatement(BaseEntity entity)
-        {
-            var operation = new SqlOperation { ProcedureName = "DEL_VISTAXROL_PR" };
-            var vr = (VistaXRol)entity;
-            operation.AddIntParam(DB_COL_ID, vr.id);
             operation.AddIntParam(DB_COL_ID_VISTA, vr.id_vista);
             operation.AddIntParam(DB_COL_ID_ROL, vr.id_rol);
             return operation;
         }
 
+        public SqlOperation GetDeleteStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "ELIMINAR_VISTAXROL_PR" };
+            var vr = (VistaXRol)entity;
+            operation.AddIntParam(DB_COL_ID, vr.id);
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_VISTAXROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_VISTAXROL_PR" };
             return operation;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_VISTAXROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_VISTAXROL_PR" };
             var vr = (VistaXRol)entity;
             operation.AddIntParam(DB_COL_ID, vr.id);
             return operation;
@@ -69,7 +68,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_VISTAXROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_VISTAXROL_PR" };
             var vr = (VistaXRol)entity;
             operation.AddIntParam(DB_COL_ID, vr.id);
             operation.AddIntParam(DB_COL_ID_VISTA, vr.id_vista);
