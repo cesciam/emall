@@ -17,6 +17,7 @@ namespace DataAccessLayer.Mapper
         {
             var empleado = new Empleado
             {
+                id = GetIntValue(row, DB_COL_ID),
                 id_usuario = GetIntValue(row, DB_COL_ID_USUARIO),
                 id_rol = GetIntValue(row, DB_COL_ID_ROL),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)

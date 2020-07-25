@@ -1,0 +1,22 @@
+<table class="tabla table-hover">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <!--<th>Nombre</th>
+          <th>Cédula</th>
+          <th>Apellido</th>
+          <th>Nacimiento</th>-->
+          <th>Id_usuario</th>
+          <th>Rol</th>
+          <th>Sucursal</th>
+          <th></th>
+        </tr>
+      </thead>
+    <tr *ngFor="let empleado of service.list">
+        <td>{{empleado.id}}</td>
+        <td>{{empleado.id_usuario}}</td>
+        <td>{{empleado.id_rol}}</td>
+        <td>{{empleado.id_sucursal}}</td>
+        <td><button (click)="onDelete(empleado.id)" class="btn btn-sm btn-outline-danger">X</button></td>
+    </tr>
+</table>
