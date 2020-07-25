@@ -6,7 +6,10 @@ import { Categoria } from '../models/Categoria';
 import { ComercioService } from '../services/comercio.service';
 import { async } from '@angular/core/testing';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Cloudinary } from '@cloudinary/angular-5.x';
+import cloudinaryConfig from '../config';
+import { Archivo } from '../models/Archivo';
 
 @Component({
   selector: 'app-registrar-comercio',
@@ -14,20 +17,27 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
   styleUrls: ['./registrar-comercio.component.css']
 })
 export class RegistrarComercioComponent implements OnInit {
-  @Input()
-  responses: Array<any>;
 
-  private hasBaseDropZoneOver: boolean = false;
-  private uploader: FileUploader;
+  private uploader: CloudinaryUploader;
 
   private categoriasList: Categoria[];
   private comercioService: ComercioService;
   @Input() comercio: Comercio;
+  private logo: string;
+  private imagenSalud: string;
+  private imagenHacienda: string;
+  private http: HttpClient;
 
-  constructor(comercioService: ComercioService, private cloudinary: Cloudinary, private zone: NgZone, private http: HttpClient) {
+  constructor(comercioService: ComercioService, private cloudinary: Cloudinary, private zone: NgZone,  http: HttpClient) {
+    this.http = http;
     this.comercioService = comercioService;
     this.comercio = new Comercio();
-    this.responses = [];
+    this.comercio.archivos = new Array();
+    this.comercio.categorias = new Array();
+    this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
+    this.logo = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
+    this.imagenHacienda = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
+    this.imagenSalud = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
   }
 
   async llenarCategorias() {
@@ -37,6 +47,7 @@ export class RegistrarComercioComponent implements OnInit {
   ngOnInit(): void {
     this.llenarCategorias();
 
+    /*
     // Create the file uploader, wire it to upload to your account
     const uploaderOptions: FileUploaderOptions = {
       url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
@@ -109,7 +120,49 @@ export class RegistrarComercioComponent implements OnInit {
           progress,
           data: {}
         }
-      );
+      );*/
   }
+
+  upload(nombre: string, tipo: string) {
+    this.uploader.uploadAll();
+
+    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
+      let res;
+      res = JSON.parse(response);
+      console.log(res);
+      var archivo = new Archivo();
+      archivo.nombre = nombre;
+      archivo.tipo = tipo;
+      archivo.enlace = res.url;
+
+      switch (nombre) {
+        case 'logo':
+          this.logo = res.url;
+          this.comercio.archivos[0] = archivo;
+          break;
+        case 'imagenHacienda':
+          this.imagenHacienda = res.url;
+          this.comercio.archivos[1] = archivo;
+          break;
+        case 'imagenSalud':
+          this.imagenSalud = res.url;
+          this.comercio.archivos[2] = archivo;
+          break;
+      }
+
+      console.log(this.comercio);
+      return res;
+    };
+  }
+
+
+  registrarComercio() {
+    let endpoint = getBaseUrl() + 'comercio/crearcomercio';
+
+    this.http.post(endpoint, this.comercio).subscribe(result => {
+      console.log(result);
+    }, error => console.error(error));
+  }
+
 
 }

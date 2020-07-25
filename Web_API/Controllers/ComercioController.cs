@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Entities;
 using AppCore;
+using Utils;
+using Utils.Email;
 
 namespace Web_API.Controllers
 {
@@ -13,12 +15,33 @@ namespace Web_API.Controllers
     [ApiController]
     public class ComercioController : ControllerBase
     {
+        private EmailService emailService;
+        public ComercioController(EmailService emailService)
+        {
+            this.emailService = emailService;
+        }
+
+
         [HttpPost]
         public IActionResult CrearComercio(Comercio comercio)
         {
             try
             {
                 new ComercioManagement().CrearComercio(comercio);
+
+                Usuario usuario = new Usuario { Id = comercio.IdAdmin };
+
+                usuario = new UsuarioManagement().RetrieveById(usuario);
+
+                this.emailService.Send(new EmailModel
+                {
+                    To = usuario.Correo,
+                    Subject = "Registro de comercio",
+                    Message = "<p>El comercio que ha registrado se encuentra en proceso de revisión por parte de los administradores de la aplicación.</p>" +
+                             "<p>Dentro de poco recibirá un correo con el resultado de la revisión de su comercio.</p>"
+                });
+
+
                 return Ok();
             } catch(Exception e)
             {

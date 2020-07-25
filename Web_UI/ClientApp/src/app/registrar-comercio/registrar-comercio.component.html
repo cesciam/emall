@@ -45,9 +45,19 @@
       <div *ngIf="categoriasList">
         <label for="categorias">Categoría del comercio</label>
         <select id="categorias" name="categorias" class="form-control"
-                [(ngModel)]="comercio.categorias" #categorias="ngModel" required>
+                [(ngModel)]="comercio.categorias[0]" #categorias="ngModel" required>
           <option *ngFor="let categoria of categoriasList">{{ categoria.Nombre }}</option>
         </select>
+
+        <div *ngIf="categorias.invalid && (categorias.dirty || categorias.touched)"
+             class="alert alert-danger">
+
+          <div *ngIf="categorias.errors.required">
+            La categoría es requerida.
+          </div>
+        </div>
+
+
       </div>
 
     </div>
@@ -55,12 +65,13 @@
     <div class="col">
       <label>Logo de comercio</label>
       <div class="z-depth-1-half mb-4">
-        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"
+        <img [src]="logo" class="img-fluid"
              alt="Logo de comercio">
       </div>
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
           <input type="file" ng2FileSelect [uploader]="uploader" />
+          <button class="btn btn-primary" [disabled]="loading" (click)="upload('logo','1')">Subir imagen</button>
         </div>
       </div>
     </div>
@@ -70,12 +81,13 @@
     <div class="col">
       <label>Comprobante de hacienda</label>
       <div class="z-depth-1-half mb-4">
-        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"
+        <img [src]="imagenHacienda" class="img-fluid"
              alt="Comprobante de hacienda">
       </div>
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
           <input type="file" ng2FileSelect [uploader]="uploader" />
+          <button class="btn btn-primary" [disabled]="loading" (click)="upload('imagenHacienda','2')">Subir imagen</button>
         </div>
       </div>
 
@@ -84,17 +96,18 @@
     <div class="col">
       <label>Permiso de salud</label>
       <div class="z-depth-1-half mb-4">
-        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"
+        <img [src]="imagenSalud" class="img-fluid"
              alt="Permiso de salud">
       </div>
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
           <input type="file" ng2FileSelect [uploader]="uploader" />
+          <button class="btn btn-primary" [disabled]="loading" (click)="upload('imagenSalud','2')">Subir imagen</button>
         </div>
       </div>
     </div>
   </div>
-
+  <button (click)="registrarComercio()">Registrar comercio</button>
   <hr>
 </form>
 
