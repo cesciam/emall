@@ -52,7 +52,7 @@ namespace AppCore {
             if (message.details.Count == 0) {
                 return null;
             } else {
-                message.message = "Ha ocurrido un error al registrar el usuario";
+                message.message = "Han ocurrido errores al registrar el usuario";
                 return message;
             }
                 

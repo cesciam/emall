@@ -1,13 +1,22 @@
-<h1>Registro de usuario</h1>
-<p>Ingrese los siguientes datos</p>
-
+<div class="row">
+  <div class="col-lg-10 col-md-10">
+    <h1>Registro de usuario</h1>
+    <p>Ingrese los siguientes datos</p>
+  </div>
+  <div class="col-lg-2 col-md-2">
+    <a [routerLink]="['../listar-usuario']">Volver atras</a>
+  </div>
+</div>
 
 <div *ngIf="submitted && usuarioForm.invalid" class="alert alert-danger col-lg-12" role="alert">
   * Existen algunos datos invalidos. Por favor corrija los datos de los controles marcados en rojo
 </div>
 
 <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
-  Oops! Hay errores!
+  <strong>{{error.message}}</strong>
+  <ul>
+    <li *ngFor="let detail of error.details">{{detail}}</li>
+  </ul>
 </div>
 
 <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">

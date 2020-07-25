@@ -27,7 +27,6 @@ namespace Web_API.Controllers {
         }
 
         [HttpGet]
-        [Authorize]
         [Route("api/[controller]")]
         public List<Usuario> Index([FromQuery] Dictionary<string, string> filters) {
             if (filters.Count == 0)

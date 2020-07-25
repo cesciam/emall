@@ -57,10 +57,10 @@ export class AgregarUsuarioComponent implements OnInit {
     this.usuarioService.registrarUsuario(this.usuarioForm.value)
       .subscribe(
         (response) => {
-          this.router.navigate(['listar-usuario']);
+          this.router.navigate(['dashboard-admin/usuario/listar-usuario']);
       },
         (error) => {
-          this.error = error;
+          this.error = error.error;
           window.scroll(0, 0);
       });
   }
