@@ -36,10 +36,8 @@ namespace Utils {
         }
 
         public static bool IsValidPassword(string password) {
-            // 1+ caracter, 1+ number , 1+ special char
-            // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$
-
-            return Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$");
+            // Minimo 8 caracteres, al menos una Mayuscula, al menos una minuscula, al menos un numero y almenos 1 caracter especial
+            return Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
         }
 
         public static bool IsValidPhone(string phone) {

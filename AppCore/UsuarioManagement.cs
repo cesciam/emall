@@ -36,23 +36,23 @@ namespace AppCore {
             this.crudContrasena.Create(nuevaContrasena);
         }
 
-        public ErrorResultViewModel TieneErrores(RegistroViewModel registro) {
+        public ErrorResultViewModel ComprobarErrores(RegistroViewModel registro) {
             ErrorResultViewModel message = new ErrorResultViewModel();
-            message.detail = new List<string>();
+            message.details = new List<string>();
 
             if (!FormatValidation.IsValidEmail(registro.Correo))
-                message.detail.Add("El email no tiene un formato valido");
+                message.details.Add("El email no tiene un formato valido");
 
             if (!FormatValidation.IsValidPassword(registro.Contrasena))
-                message.detail.Add("La contraseña no tiene un formato valido");
+                message.details.Add("La contraseña no tiene un formato valido");
 
             if (!FormatValidation.IsValidPhone(registro.Telefono))
-                message.detail.Add("El telefono no tiene un formato valido");
+                message.details.Add("El telefono no tiene un formato valido");
 
-            if (message.detail.Count == 0) {
+            if (message.details.Count == 0) {
                 return null;
             } else {
-                message.error = "Ha ocurrido un error al registrar el usuario";
+                message.message = "Ha ocurrido un error al registrar el usuario";
                 return message;
             }
                 

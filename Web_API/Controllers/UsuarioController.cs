@@ -60,11 +60,9 @@ namespace Web_API.Controllers {
         [Route("api/[controller]/registrar")]
         public IActionResult Post([FromBody] RegistroViewModel registro) {
             if (registro == null)
-                return BadRequest(new ErrorResultViewModel { 
-                    error = "El formato de registro no es valido."
-                });
+                return BadRequest(new ErrorResultViewModel { message = "El formato de registro no es valido." });
 
-            var errores = this.usuarioManagement.TieneErrores(registro);
+            var errores = this.usuarioManagement.ComprobarErrores(registro);
 
             if (errores != null)
                 return BadRequest(errores);
@@ -101,7 +99,7 @@ namespace Web_API.Controllers {
 
                 return Ok();
             } else {
-                return BadRequest(new { message = "Ha ocurrido un error al registrar el usuario. Vuelva a intertarlo en unos minutos." });
+                return BadRequest(new { message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos." });
             }
         }
 
