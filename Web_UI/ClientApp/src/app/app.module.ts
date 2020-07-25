@@ -14,8 +14,7 @@ import { HomePageComponent } from './homePageComponents/home-page/home-page.comp
 import { HeroComponent } from './homePageComponents/hero/hero.component';
 import { FeaturedSpadComponent } from './homePageComponents/featured-spad/featured-spad.component';
 import { BannerComponent } from './homePageComponents/banner/banner.component';
-import { LastetProductComponent } from './homePageComponents/lastet-product/lastet-product.component';
-import { CommentariesComponent } from './homePageComponents/commentaries/commentaries.component';
+import { BlogComponent } from './homePageComponents/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { CommentariesComponent } from './homePageComponents/commentaries/comment
     HeroComponent,
     FeaturedSpadComponent,
     BannerComponent,
-    LastetProductComponent,
-    CommentariesComponent
+    BlogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
