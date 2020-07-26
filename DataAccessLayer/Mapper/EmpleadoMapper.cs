@@ -17,7 +17,6 @@ namespace DataAccessLayer.Mapper
         {
             var empleado = new Empleado
             {
-                id = GetIntValue(row, DB_COL_ID),
                 id_usuario = GetIntValue(row, DB_COL_ID_USUARIO),
                 id_rol = GetIntValue(row, DB_COL_ID_ROL),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
@@ -38,9 +37,8 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_EMPLEADO_PR" };
+            var operation = new SqlOperation { ProcedureName = "CREAR_EMPLEADO_PR" };
             var e = (Empleado)entity;
-            operation.AddIntParam(DB_COL_ID, e.id);
             operation.AddIntParam(DB_COL_ID_USUARIO, e.id_usuario);
             operation.AddIntParam(DB_COL_ID_ROL, e.id_rol);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, e.id_sucursal);
@@ -49,7 +47,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_EMPLEADO_PR" };
+            var operation = new SqlOperation { ProcedureName = "ELIMINAR_EMPLEADO_PR" };
 
             var e = (Empleado)entity;
             operation.AddIntParam(DB_COL_ID, e.id);
@@ -59,14 +57,14 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_EMPLEADO_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_EMPLEADO_PR" };
 
             return operation;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_EMPLEADO_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_EMPLEADO_PR" };
 
             var e = (Empleado)entity;
             operation.AddIntParam(DB_COL_ID, e.id);
@@ -76,7 +74,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_EMPLEADO_PR" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_EMPLEADO_PR" };
             var e = (Empleado)entity;
             operation.AddIntParam(DB_COL_ID, e.id);
             operation.AddIntParam(DB_COL_ID_USUARIO, e.id_usuario);

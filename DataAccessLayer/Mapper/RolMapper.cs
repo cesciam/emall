@@ -39,9 +39,8 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_ROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "CREAR_ROL_PR" };
             var rol = (Rol)entity;
-            operation.AddIntParam(DB_COL_ID, rol.id);
             operation.AddVarcharParam(DB_COL_NOMBRE, rol.nombre);
             operation.AddVarcharParam(DB_COL_DESCRIPCION, rol.descripcion);
             operation.AddIntParam(DB_COL_ID_COMERCIO, rol.id_comercio);
@@ -51,7 +50,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_ROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "ELIMINAR_ROL_PR" };
             var rol = (Rol)entity;
             operation.AddIntParam(DB_COL_ID, rol.id);
             return operation;
@@ -59,13 +58,13 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_ROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_ROL_PR" };
             return operation;
         }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ROL_PR" };
             var rol = (Rol)entity;
             operation.AddIntParam(DB_COL_ID, rol.id);
             return operation;
@@ -73,7 +72,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_ROL_PR" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ROL_PR" };
             var rol = (Rol)entity;
             operation.AddIntParam(DB_COL_ID, rol.id);
             operation.AddVarcharParam(DB_COL_NOMBRE, rol.nombre);

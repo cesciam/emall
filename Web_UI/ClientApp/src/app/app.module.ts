@@ -9,8 +9,6 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comercio.component';
-import { AgregarUsuarioComponent } from './dashboard-admin/usuario/agregar-usuario/agregar-usuario.component';
-import { ListarUsuarioComponent } from './dashboard-admin/usuario/listar-usuario/listar-usuario.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -22,9 +20,7 @@ const maskConfig: Partial<IConfig> = {
     HomeComponent,
     NavMenuComponent,
     DashboardAdminComponent,
-    DashboardComercioComponent,
-    AgregarUsuarioComponent,
-    ListarUsuarioComponent
+    DashboardComercioComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -34,10 +30,6 @@ const maskConfig: Partial<IConfig> = {
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'dashboard-admin/usuario', component: ListarUsuarioComponent },
-      { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
-      { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
-      { path: 'dashboard-admin', component: DashboardAdminComponent },
     ])
   ],
   providers: [],
