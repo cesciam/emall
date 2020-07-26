@@ -182,7 +182,9 @@ ClientBin/
 *.publishsettings
 orleans.codegen.cs
 
+# Angular Client
 node_modules/
+dist/
 
 # RIA/Silverlight projects
 Generated_Code/

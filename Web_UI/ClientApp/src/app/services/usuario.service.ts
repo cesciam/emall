@@ -4,8 +4,10 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { getBaseUrl } from '../../main';
-import { Usuario } from '../models/Usuario';
-import { RegistroUsuario } from '../models/RegistroUsuario'; 
+import { Usuario } from '../models/usuario.model';
+import { RegistroUsuario } from '../models/registro-usuario.model';
+import { LoginUsuario } from '../models/login-usuario.model';
+import { SesionUsuario } from '../models/sesion-usuario.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -34,10 +36,19 @@ export class UsuarioService {
         catchError((err) => {
           return throwError(err);
         })
-      )
+      );
   }
 
   obtenerUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.baseUrl + '/usuario');
+  }
+
+  login(login: LoginUsuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.baseUrl + '/usuario/login', JSON.stringify(login), this.httpOptions)
+      .pipe(
+        catchError((err) => {
+          return throwError(err);
+        })
+      );
   }
 }

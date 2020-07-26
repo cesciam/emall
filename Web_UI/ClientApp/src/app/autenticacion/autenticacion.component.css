@@ -1,0 +1,23 @@
+form {
+    margin: 30px 0;
+}
+
+button {
+    margin-right: 40px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+label {
+  font-family: "Cairo", sans-serif;
+  color: #1c1c1c;
+}
+
+a {
+  font-family: "Cairo", sans-serif;
+  color: #1c1c1c;
+  font-size: 14px;
+  line-height: 32px;
+}

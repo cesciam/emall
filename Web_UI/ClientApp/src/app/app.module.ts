@@ -19,6 +19,7 @@ import { ListarUsuarioComponent } from './dashboard-admin/usuario/listar-usuario
 import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-empleado.component';
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
 import { EmpleadoService } from './servicios/empleado.service';
+import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -41,6 +42,7 @@ const maskConfig: Partial<IConfig> = {
     DashboardComercioComponent,
     AgregarEmpleadoComponent,
     ListarEmpleadoComponent,
+    AutenticacionComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -50,6 +52,7 @@ const maskConfig: Partial<IConfig> = {
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
+      { path: 'autenticacion', component: AutenticacionComponent },
       { path: 'agregar-empleado', component: AgregarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },

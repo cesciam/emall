@@ -130,9 +130,9 @@ namespace Web_API.Controllers {
             if (usuario == null)
                 return BadRequest(new { message = "Email o Contraseña son incorrectos." });
 
-            return Ok(new {
-                usuario,  
-                token = GenerarTokenJWT(usuario)
+            return Ok(new { 
+                usuario, 
+                token = GenerarTokenJWT(usuario) 
             });
         }
 
