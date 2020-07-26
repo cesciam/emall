@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { RegistroUsuario } from '../../../models/RegistroUsuario';
+import { RegistroUsuario } from '../../../models/registro-usuario.model';
 import { equalValueValidator } from '../../../helpers/equal-value.validator';
 
 @Component({
