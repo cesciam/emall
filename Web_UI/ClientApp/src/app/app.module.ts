@@ -5,10 +5,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { DashboardComercioComponent } from './dashboard-comercio/dashboard-comercio.component';
+import { AgregarUsuarioComponent } from './dashboard-admin/usuario/agregar-usuario/agregar-usuario.component';
+import { ListarUsuarioComponent } from './dashboard-admin/usuario/listar-usuario/listar-usuario.component';
+import { HeaderComponent } from './homePageComponents/header/header.component';
+import { FooterComponent } from './homePageComponents/footer/footer.component';
+import { HomePageComponent } from './homePageComponents/home-page/home-page.component';
+import { HeroComponent } from './homePageComponents/hero/hero.component';
+import { FeaturedSpadComponent } from './homePageComponents/featured-spad/featured-spad.component';
+import { BannerComponent } from './homePageComponents/banner/banner.component';
+import { BlogComponent } from './homePageComponents/blog/blog.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -17,10 +24,17 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavMenuComponent,
     DashboardAdminComponent,
-    DashboardComercioComponent
+    DashboardComercioComponent,
+    AgregarUsuarioComponent,
+    ListarUsuarioComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomePageComponent,
+    HeroComponent,
+    FeaturedSpadComponent,
+    BannerComponent,
+    BlogComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -29,7 +43,12 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomePageComponent, pathMatch: 'full' },
+      { path: 'dashboard-admin', component: DashboardAdminComponent },
+      { path: 'dashboard-admin/usuario', component: ListarUsuarioComponent },
+      { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
+      { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
+      { path: 'dashboard-comercio', component: DashboardComercioComponent },
     ])
   ],
   providers: [],
