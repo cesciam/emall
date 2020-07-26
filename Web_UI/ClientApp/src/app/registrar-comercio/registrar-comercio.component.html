@@ -1,6 +1,13 @@
 <h2 id="tableLabel">Registro de comercio</h2>
 <form class="text-left form-group border border-light p-5">
 
+  <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+    <strong>{{error.message}}</strong>
+    <!--<ul>
+     <li *ngFor="let detail of error.details">{{detail}}</li>
+   </ul>-->
+  </div>
+
   <div class="form-row mb-4">
     <div class="col">
       <label for="nombre">Nombre de su comercio</label>
@@ -42,19 +49,19 @@
         </div>
       </div>
 
-        <label for="categoria">Categoría del comercio</label>
-        <select id="categoria" name="categoria" class="form-control"
-                [(ngModel)]="txtCategoria" #categoria="ngModel" required>
-          <option *ngFor="let categoria of categoriasList">{{ categoria.Nombre }}</option>
-        </select>
+      <label for="categoria">Categoría del comercio</label>
+      <select id="categoria" name="categoria" class="form-control"
+              [(ngModel)]="txtCategoria" #categoria="ngModel" required>
+        <option *ngFor="let categoria of categoriasList">{{ categoria.Nombre }}</option>
+      </select>
 
-        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)"
-             class="alert alert-danger">
+      <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)"
+           class="alert alert-danger">
 
-          <div *ngIf="categoria.errors.required">
-            La categoría es requerida.
-          </div>
+        <div *ngIf="categoria.errors.required">
+          La categoría es requerida.
         </div>
+      </div>
 
     </div>
 
@@ -72,7 +79,7 @@
               Elegir archivo
             </label>
           </div>
-          
+
           <button class="btn btn-primary" [disabled]="loading" (click)="upload('logo','1')">Subir imagen</button>
         </div>
       </div>
@@ -130,7 +137,7 @@
     <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Registrar comercio</button>
   </ng-template>
 
-  
+
   <hr>
 </form>
 

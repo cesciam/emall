@@ -27,6 +27,7 @@ export class RegistrarComercioComponent implements OnInit {
   private imagenSalud: string;
   private imagenHacienda: string;
   @Input() txtCategoria: string;
+  private error: any;
 
   constructor(comercioService: ComercioService, private cloudinary: Cloudinary) {
     this.comercioService = comercioService;
@@ -37,6 +38,7 @@ export class RegistrarComercioComponent implements OnInit {
     this.logo = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
     this.imagenHacienda = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
     this.imagenSalud = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
+    this.error = null;
   }
 
   async llenarCategorias() {
@@ -82,12 +84,17 @@ export class RegistrarComercioComponent implements OnInit {
 
   registrarComercio() {
     this.comercio.categorias[0] = this.txtCategoria;
-    this.comercioService
-      .registrarComercio(this.comercio)
-      .subscribe(result => {
-        console.log(result);
-      });
 
+    this.comercioService.registrarComercio(this.comercio)
+      .subscribe(
+        (response) => {
+          //TODO: Envíar al usuario al perfil de administrador de comercio
+        },
+        (error) => {
+          console.log(error);
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
   }
 
 

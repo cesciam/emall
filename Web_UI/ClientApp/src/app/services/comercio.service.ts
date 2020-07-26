@@ -30,9 +30,30 @@ export class ComercioService {
   registrarComercio(comercio: Comercio) {
     let endpoint = this.BASE_URL + 'comercio/crearcomercio';
 
-    return this.http.post<any>(endpoint, comercio)
+    return this.http.post<Comercio>(endpoint, comercio)
       .pipe(
-        catchError(this.handleError)
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+  }
+
+  async obtenerTodoComercio() {
+    let endpointUrl = this.BASE_URL + 'comercio/ObtenerTodoComercio';
+    let comercios: Comercio[];
+
+    comercios = await this.http.get<Comercio[]>(endpointUrl).toPromise();
+
+    return comercios;
+  }
+
+  eliminarComercio(id: number) {
+    let endpoint = this.BASE_URL + 'comercio/EliminarComercio?id=' + id;
+    return this.http.delete(endpoint)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
       );
   }
 

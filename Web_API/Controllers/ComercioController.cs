@@ -48,9 +48,9 @@ namespace Web_API.Controllers
 
 
                 return Ok();
-            } catch(Exception e)
+            } catch(Exception)
             {
-                return StatusCode(500, e);
+                return BadRequest(new { message = "Ha ocurrido un error al registrar. Vuelva a intentarlo más tarde" });
             }
         }
 
@@ -92,9 +92,9 @@ namespace Web_API.Controllers
                 var comercio = new Comercio { Id = id };
                 new ComercioManagement().EliminarComercio(comercio);
                 return Ok();
-            } catch(Exception e)
+            } catch(Exception)
             {
-                return StatusCode(500, e);
+                return BadRequest(new { message = "Ha ocurrido un error al eliminar este comercio. Vuelva a intentarlo más tarde" });
             }
 
         }

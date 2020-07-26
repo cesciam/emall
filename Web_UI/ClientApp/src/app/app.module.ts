@@ -15,6 +15,7 @@ import { Cloudinary } from 'cloudinary-core';
 import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
     NavMenuComponent,
     DashboardAdminComponent,
     DashboardComercioComponent,
-    RegistrarComercioComponent
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -35,6 +37,7 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
     ])
   ],
   providers: [
