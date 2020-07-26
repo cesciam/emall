@@ -1,0 +1,6 @@
+/* Definir  background del header*/
+.image {
+    background-image: url('../../../assets/img/hero/banner.jpg');
+    width: 825px;
+    height: 431px;
+}

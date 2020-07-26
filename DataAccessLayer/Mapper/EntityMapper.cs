@@ -32,6 +32,16 @@ namespace DataAccessLayer.Mapper
             return -1;
         }
 
+        protected double GetDecimalValue(Dictionary<string, object> dic, string attName)
+        {
+            var val = dic[attName];
+            double val_decimal = Convert.ToDouble(val); 
+            if (dic.ContainsKey(attName))
+                return (double)val_decimal;
+
+            return -1;
+        }
+
         protected DateTime GetDateValue(Dictionary<string, object> dic, string attName)
         {
             var val = dic[attName];
@@ -41,6 +51,23 @@ namespace DataAccessLayer.Mapper
             return DateTime.Now;
         }
 
+        protected TimeSpan GetTimeValue(Dictionary<string, object> dic, string attName)
+        {
+            var val = dic[attName];
+            if (dic.ContainsKey(attName) && val is TimeSpan)
+                return (TimeSpan)dic[attName];
+
+            return TimeSpan.Zero;
+        }
+
+        //protected decimal GetDecimalValue(Dictionary<string, object> dic, string attName)
+        //{
+        //    var val = dic[attName];
+        //    if (dic.ContainsKey(attName) && val is decimal)
+        //        return (decimal)dic[attName];
+
+        //    return -1;
+        //}
 
     }
 }

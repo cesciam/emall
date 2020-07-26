@@ -20,14 +20,11 @@ namespace DataAccessLayer.Dao
 
         private SqlDao()
         {
-            
-
-            CONNECTION_STRING = @"CONEXION DE LA BASE DE DATOS";
-
-            
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            CONNECTION_STRING = builder.Build().GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
         }
 
-      
+
         public static SqlDao GetInstance()
         {
             if (instance == null)
@@ -52,6 +49,20 @@ namespace DataAccessLayer.Dao
 
                 conn.Open();
                 command.ExecuteNonQuery();
+            }
+        }
+
+        public object ExecuteProcedureAndReturnId(SqlOperation sqlOperation) {
+            using (var conn = new SqlConnection(CONNECTION_STRING))
+            using (var command = new SqlCommand(sqlOperation.ProcedureName, conn) {
+                CommandType = CommandType.StoredProcedure
+            }) {
+                foreach (var param in sqlOperation.Parameters) {
+                    command.Parameters.Add(param);
+                }
+
+                conn.Open();
+                return command.ExecuteScalar();
             }
         }
 
