@@ -26,10 +26,9 @@ export class RegistrarComercioComponent implements OnInit {
   private logo: string;
   private imagenSalud: string;
   private imagenHacienda: string;
-  private http: HttpClient;
+  @Input() txtCategoria: string;
 
-  constructor(comercioService: ComercioService, private cloudinary: Cloudinary, private zone: NgZone,  http: HttpClient) {
-    this.http = http;
+  constructor(comercioService: ComercioService, private cloudinary: Cloudinary) {
     this.comercioService = comercioService;
     this.comercio = new Comercio();
     this.comercio.archivos = new Array();
@@ -81,9 +80,14 @@ export class RegistrarComercioComponent implements OnInit {
   }
 
 
-  async registrarComercio() {
-    let res = await this.comercioService.registrarComercio(this.comercio);
-    console.log(res);
+  registrarComercio() {
+    this.comercio.categorias[0] = this.txtCategoria;
+    this.comercioService
+      .registrarComercio(this.comercio)
+      .subscribe(result => {
+        console.log(result);
+      });
+
   }
 
 

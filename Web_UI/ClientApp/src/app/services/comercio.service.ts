@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { getBaseUrl } from '../../main';
 import { Categoria } from '../models/Categoria';
+import { catchError, retry } from 'rxjs/operators';
 import { Comercio } from '../models/Comercio';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,16 +29,23 @@ export class ComercioService {
 
   registrarComercio(comercio: Comercio) {
     let endpoint = this.BASE_URL + 'comercio/crearcomercio';
-    let res: any;
 
-    this.http.post(endpoint, comercio).subscribe(result => {
-        res = result;
-      console.log(result);
-    }, error => {
-        res = error;
-      console.error(error);
-    });
-
-    return res;
+    return this.http.post<any>(endpoint, comercio)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
+
+ 
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(error.error);
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
+  } 
+
+
 }

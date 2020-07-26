@@ -25,6 +25,11 @@ namespace Web_API.Controllers
         [HttpPost]
         public IActionResult CrearComercio(Comercio comercio)
         {
+            if(comercio.IdAdmin == 0 || (comercio.Archivos.Length < 3))
+            {
+                return BadRequest(new { message = "Revise los campos del formulario." });
+            }
+
             try
             {
                 new ComercioManagement().CrearComercio(comercio);

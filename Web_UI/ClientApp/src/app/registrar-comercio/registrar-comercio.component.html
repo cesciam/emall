@@ -42,23 +42,19 @@
         </div>
       </div>
 
-      <div *ngIf="categoriasList">
-        <label for="categorias">Categoría del comercio</label>
-        <select id="categorias" name="categorias" class="form-control"
-                [(ngModel)]="comercio.categorias[0]" #categorias="ngModel" required>
+        <label for="categoria">Categoría del comercio</label>
+        <select id="categoria" name="categoria" class="form-control"
+                [(ngModel)]="txtCategoria" #categoria="ngModel" required>
           <option *ngFor="let categoria of categoriasList">{{ categoria.Nombre }}</option>
         </select>
 
-        <div *ngIf="categorias.invalid && (categorias.dirty || categorias.touched)"
+        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)"
              class="alert alert-danger">
 
-          <div *ngIf="categorias.errors.required">
+          <div *ngIf="categoria.errors.required">
             La categoría es requerida.
           </div>
         </div>
-
-
-      </div>
 
     </div>
 
@@ -70,7 +66,13 @@
       </div>
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
-          <input type="file" ng2FileSelect [uploader]="uploader" />
+          <div>
+            <label for="file-upload" style="cursor: pointer" class="btn btn-outline-secondary">
+              <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
+              Elegir archivo
+            </label>
+          </div>
+          
           <button class="btn btn-primary" [disabled]="loading" (click)="upload('logo','1')">Subir imagen</button>
         </div>
       </div>
@@ -86,7 +88,13 @@
       </div>
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
-          <input type="file" ng2FileSelect [uploader]="uploader" />
+          <div>
+            <label for="file-upload" style="cursor: pointer" class="btn btn-outline-secondary">
+              <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
+              Elegir archivo
+            </label>
+          </div>
+
           <button class="btn btn-primary" [disabled]="loading" (click)="upload('imagenHacienda','2')">Subir imagen</button>
         </div>
       </div>
@@ -101,13 +109,28 @@
       </div>
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
-          <input type="file" ng2FileSelect [uploader]="uploader" />
+          <div>
+            <label for="file-upload" style="cursor: pointer" class="btn btn-outline-secondary">
+              <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
+              Elegir archivo
+            </label>
+          </div>
+
           <button class="btn btn-primary" [disabled]="loading" (click)="upload('imagenSalud','2')">Subir imagen</button>
         </div>
       </div>
     </div>
   </div>
-  <button (click)="registrarComercio()">Registrar comercio</button>
+
+  <div *ngIf="(nombre.valid && nombreLegal.valid && cedula.valid && categoria.valid); else noValido">
+    <button class="btn btn-primary btn-lg btn-block" (click)="registrarComercio()">Registrar comercio</button>
+  </div>
+
+  <ng-template #noValido>
+    <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Registrar comercio</button>
+  </ng-template>
+
+  
   <hr>
 </form>
 
