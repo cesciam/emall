@@ -27,8 +27,9 @@ export class PerfilAdminComercioComponent implements OnInit {
     this.comercios = await  this.comercioService.obtenerTodoComercio();
   }
 
-  seleccionarComercio(id: number) {
-    this.router.navigate(['']);
+  seleccionarComercio(comercio: Comercio) {
+    localStorage.setItem('comercioSeleccionado', JSON.stringify(comercio));
+    //this.router.navigate(['']);
   }
 
   eliminarComercio(id: number) {

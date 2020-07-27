@@ -38,6 +38,7 @@ import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-adm
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'dashboard-comercio', component: DashboardComercioComponent },
     ])
   ],
   providers: [
