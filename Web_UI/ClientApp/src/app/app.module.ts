@@ -18,8 +18,9 @@ import { AgregarUsuarioComponent } from './dashboard-admin/usuario/agregar-usuar
 import { ListarUsuarioComponent } from './dashboard-admin/usuario/listar-usuario/listar-usuario.component';
 import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-empleado.component';
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
-import { EmpleadoService } from './servicios/empleado.service';
+import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
 import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
 import { ComercioService } from './services/comercio.service';
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
@@ -53,7 +54,8 @@ const maskConfig: Partial<IConfig> = {
     AutenticacionComponent,
     DashboardComercioComponent,
     RegistrarComercioComponent,
-    PerfilAdminComercioComponent
+    PerfilAdminComercioComponent,
+    LandingPulsarComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -78,6 +80,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'landing-pulsar', component: LandingPulsarComponent },
     ])
   ],
   providers: [
