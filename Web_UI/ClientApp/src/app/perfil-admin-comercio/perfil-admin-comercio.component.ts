@@ -29,13 +29,14 @@ export class PerfilAdminComercioComponent implements OnInit {
 
   seleccionarComercio(comercio: Comercio) {
     localStorage.setItem('comercioSeleccionado', JSON.stringify(comercio));
-    //this.router.navigate(['']);
+    this.router.navigate(['dashboard-comercio']);
   }
 
-  eliminarComercio(id: number) {
-    this.comercioService.eliminarComercio(id)
+  eliminarComercio(comercio: Comercio) {
+    this.comercioService.eliminarComercio(comercio.id)
       .subscribe(
         (response) => {
+          this.comercios = this.comercios.filter(c => c !== comercio);
         },
         (error) => {
           this.error = error.error;
