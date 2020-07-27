@@ -18,8 +18,9 @@ import { AgregarUsuarioComponent } from './dashboard-admin/usuario/agregar-usuar
 import { ListarUsuarioComponent } from './dashboard-admin/usuario/listar-usuario/listar-usuario.component';
 import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-empleado.component';
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
-import { EmpleadoService } from './servicios/empleado.service';
+import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -43,6 +44,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarEmpleadoComponent,
     ListarEmpleadoComponent,
     AutenticacionComponent,
+    LandingPulsarComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -61,6 +63,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'landing-pulsar', component: LandingPulsarComponent },
     ])
   ],
   providers: [
