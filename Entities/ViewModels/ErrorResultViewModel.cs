@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entities.ViewModels {
     public class ErrorResultViewModel {
-        public string error { get; set; }
-        public List<string> detail { get; set; }
+        public string message { get; set; }
+        public List<string> details { get; set; }
     }
 }

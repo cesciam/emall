@@ -8,10 +8,10 @@ namespace DataAccessLayer.Mapper
 {
     class RolMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
-        private const string DB_COL_ID = "id";
-        private const string DB_COL_NOMBRE = "nombre";
-        private const string DB_COL_DESCRIPCION = "descripcion";
-        private const string DB_COL_ID_COMERCIO = "id_comercio";
+        private const string DB_COL_ID = "ID";
+        private const string DB_COL_NOMBRE = "NOMBRE";
+        private const string DB_COL_DESCRIPCION = "DESCRIPCION";
+        private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var rol = new Rol

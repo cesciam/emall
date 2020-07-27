@@ -27,7 +27,6 @@ namespace Web_API.Controllers {
         }
 
         [HttpGet]
-        [Authorize]
         [Route("api/[controller]")]
         public List<Usuario> Index([FromQuery] Dictionary<string, string> filters) {
             if (filters.Count == 0)
@@ -60,11 +59,9 @@ namespace Web_API.Controllers {
         [Route("api/[controller]/registrar")]
         public IActionResult Post([FromBody] RegistroViewModel registro) {
             if (registro == null)
-                return BadRequest(new ErrorResultViewModel { 
-                    error = "El formato de registro no es valido."
-                });
+                return BadRequest(new ErrorResultViewModel { message = "El formato de registro no es valido." });
 
-            var errores = this.usuarioManagement.TieneErrores(registro);
+            var errores = this.usuarioManagement.ComprobarErrores(registro);
 
             if (errores != null)
                 return BadRequest(errores);
@@ -101,7 +98,7 @@ namespace Web_API.Controllers {
 
                 return Ok();
             } else {
-                return BadRequest(new { message = "Ha ocurrido un error al registrar el usuario. Vuelva a intertarlo en unos minutos." });
+                return BadRequest(new { message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos." });
             }
         }
 
@@ -133,9 +130,9 @@ namespace Web_API.Controllers {
             if (usuario == null)
                 return BadRequest(new { message = "Email o Contraseña son incorrectos." });
 
-            return Ok(new {
-                usuario,  
-                token = GenerarTokenJWT(usuario)
+            return Ok(new { 
+                usuario, 
+                token = GenerarTokenJWT(usuario) 
             });
         }
 

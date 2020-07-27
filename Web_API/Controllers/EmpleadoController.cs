@@ -62,11 +62,15 @@ namespace Web_API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Delete(Empleado c)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
             try
             {
+                var c = new Empleado
+                {
+                    id = id
+                };
                 var em = new EmpleadoManagement();
                 em.Delete(c);
                 return Ok();

@@ -29,6 +29,7 @@
     "cloudinary-core": "^2.10.3",
     "core-js": "^3.3.3",
     "jquery": "3.4.1",
+    "ngx-mask": "^9.1.2",
     "ng2-cloudinary": "^0.9.2",
     "ng2-file-upload": "^1.4.0",
     "oidc-client": "^1.9.1",

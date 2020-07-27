@@ -24,6 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\helpers\equal-value.validator.ts" />
+    <None Remove="ClientApp\src\app\models\login-usuario.model.ts" />
+    <None Remove="ClientApp\src\app\models\registro-usuario.model.ts" />
+    <None Remove="ClientApp\src\app\models\sesion-usuario.model.ts" />
+    <None Remove="ClientApp\src\app\models\usuario.model.ts" />
+    <None Remove="ClientApp\src\app\services\usuario.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\config.ts" />
     <None Remove="ClientApp\src\app\models\Archivo.ts" />
     <None Remove="ClientApp\src\app\models\Categoria.ts" />
@@ -33,6 +42,15 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\helpers\equal-value.validator.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\login-usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\registro-usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\sesion-usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\usuario.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
