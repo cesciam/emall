@@ -18,7 +18,7 @@ import { AgregarUsuarioComponent } from './dashboard-admin/usuario/agregar-usuar
 import { ListarUsuarioComponent } from './dashboard-admin/usuario/listar-usuario/listar-usuario.component';
 import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-empleado.component';
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
-import { EmpleadoService } from './servicios/empleado.service';
+import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 
 const maskConfig: Partial<IConfig> = {
