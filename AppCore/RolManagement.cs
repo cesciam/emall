@@ -34,5 +34,4 @@ namespace AppCore
             crud.Delete(rol);
         }
     }
-
 }
