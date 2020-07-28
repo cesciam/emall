@@ -32,12 +32,18 @@
             </div>
             <div class="form-group">
                 <label for="id_sucursal">Sucursal</label>
+                <select name="id_sucursal" id="id_sucursal" class="form-control" [(ngModel)]=service.formData.id_sucursal #id_sucursal="ngModel">
+                    <option *ngFor="let sucursal of sucursales" [ngValue]="sucursal.id" required>{{sucursal.id}}-{{sucursal.nombre}}</option >   
+                </select>
+            </div>
+            <!-- <div class="form-group">
+                <label for="id_sucursal">Sucursal</label>
                 <input type="number" name="id_sucursal" #id_sucursal="ngModel" [(ngModel)]=service.formData.id_sucursal
                     class="form-control" required>
                     <div class="alert alert-danger" *ngIf="id_sucursal.invalid && id_sucursal.touched">
                         La sucursal es requerida
                     </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <button type="submit" [disabled]="form.untouched" class="btn btn-lg btn-block">Registrar</button>
             </div>
