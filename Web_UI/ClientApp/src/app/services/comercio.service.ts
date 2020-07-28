@@ -19,7 +19,7 @@ export class ComercioService {
   }
 
   async ObtenerTodoCategorias() {
-    let endpointUrl = this.BASE_URL + 'api/categoria/ObtenerTodoCategoria';
+    let endpointUrl = this.BASE_URL + '/categoria/ObtenerTodoCategoria';
     let categorias: Categoria[];
 
     categorias = await this.http.get<Categoria[]>(endpointUrl).toPromise();
@@ -28,7 +28,7 @@ export class ComercioService {
   }
 
   registrarComercio(comercio: Comercio) {
-    let endpoint = this.BASE_URL + 'comercio/crearcomercio';
+    let endpoint = this.BASE_URL + '/comercio/crearcomercio';
 
     return this.http.post<Comercio>(endpoint, comercio)
       .pipe(
@@ -39,7 +39,7 @@ export class ComercioService {
   }
 
   async obtenerTodoComercio() {
-    let endpointUrl = this.BASE_URL + 'comercio/ObtenerTodoComercio';
+    let endpointUrl = this.BASE_URL + '/comercio/ObtenerTodoComercio';
     let comercios: Comercio[];
 
     comercios = await this.http.get<Comercio[]>(endpointUrl).toPromise();
@@ -48,7 +48,7 @@ export class ComercioService {
   }
 
   eliminarComercio(id: number) {
-    let endpoint = this.BASE_URL + 'comercio/EliminarComercio?id=' + id;
+    let endpoint = this.BASE_URL + '/comercio/EliminarComercio?id=' + id;
     return this.http.delete(endpoint)
       .pipe(
         catchError((error) => {

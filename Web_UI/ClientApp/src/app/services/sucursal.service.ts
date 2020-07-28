@@ -19,7 +19,7 @@ export class SucursalService {
   }
 
   async ObtenerTodoSucursales(id : number) {
-    let endpointUrl = this.BASE_URL + 'api/sucursal/obtenertodosucursal?idComercio=' + id;
+    let endpointUrl = this.BASE_URL + '/sucursal/obtenertodosucursal?idComercio=' + id;
     let sucursales: Sucursal[];
 
     sucursales = await this.http.get<Sucursal[]>(endpointUrl).toPromise();
@@ -28,7 +28,7 @@ export class SucursalService {
   }
 
   eliminarSucursal(id: number) {
-    let endpoint = this.BASE_URL + 'api/sucursal/eliminarsucursal?id=' + id;
+    let endpoint = this.BASE_URL + '/sucursal/eliminarsucursal?id=' + id;
     return this.http.delete(endpoint)
       .pipe(
         catchError((error) => {

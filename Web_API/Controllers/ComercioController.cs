@@ -11,7 +11,7 @@ using Utils.Email;
 
 namespace Web_API.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ComercioController : ControllerBase
     {
