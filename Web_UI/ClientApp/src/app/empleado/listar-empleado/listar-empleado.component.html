@@ -1,27 +1,33 @@
-<div class="jumbotron">
-  <h1 class="display-4 text-center">Lista de empleados</h1>
-  <table class="table table-hover ">
-    <thead>
+<app-header></app-header>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4 text-center">Lista de empleados</h1>
+    <table class="table table-hover ">
+      <thead>
         <tr>
           <th>Id</th>
-          <!--<th>Nombre</th>
-          <th>Cédula</th>
+          <!-- <th>Cédula</th>
+           <th>Nombre</th>
           <th>Apellido</th>
-          <th>Nacimiento</th>-->
+          <th>Correo</th>
+          <th>Teléfono</th>-->
           <th>Id_usuario</th>
           <th>Rol</th>
           <th>Sucursal</th>
           <th></th>
         </tr>
       </thead>
-    <tr *ngFor="let empleado of service.list">
+      <tr *ngFor="let empleado of service.list">
         <td>{{empleado.id}}</td>
         <td>{{empleado.id_usuario}}</td>
         <td>{{empleado.id_rol}}</td>
         <td>{{empleado.id_sucursal}}</td>
         <td><button (click)="onDelete(empleado.id)" class="btn btn-sm btn-outline-danger">X</button></td>
-    </tr>
-</table>
-  
+      </tr>
+    </table>
+
+  </div>
 </div>
 
+<app-footer></app-footer>

@@ -20,6 +20,12 @@ import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-em
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
 import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
+import { ListarRolComponent } from './rol/listar-rol/listar-rol.component';
+import { RolService } from './services/rol.service';
+import { VistaService } from './services/vista.service';
+import { HorarioService } from './services/horario.service';
+import { VistaXRolService } from './services/vista-xrol.service';
+import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -43,6 +49,8 @@ const maskConfig: Partial<IConfig> = {
     AgregarEmpleadoComponent,
     ListarEmpleadoComponent,
     AutenticacionComponent,
+    ListarRolComponent,
+    AgregarRolComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -61,10 +69,16 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'listar-rol', component: ListarRolComponent },
+      { path: 'agregar-rol', component: AgregarRolComponent },
     ])
   ],
   providers: [
-    EmpleadoService
+    EmpleadoService,
+    RolService,
+    VistaService,
+    HorarioService,
+    VistaXRolService
   ],
   bootstrap: [AppComponent]
 })

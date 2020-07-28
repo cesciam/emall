@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { NgForm } from '@angular/forms';
+import { RolService } from 'src/app/services/rol.service';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -10,7 +11,8 @@ import { NgForm } from '@angular/forms';
 export class AgregarEmpleadoComponent implements OnInit {
 
 
-  constructor(private service: EmpleadoService) { }
+  constructor(private service: EmpleadoService,
+     private serviceRol: RolService) { }
 
   ngOnInit(): void {
     this.resetForm();
