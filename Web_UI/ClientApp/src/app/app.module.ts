@@ -29,6 +29,9 @@ import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
+import { ItemCrearComponent } from './item/item-crear/item-crear.component';
+import { ItemService } from './services/item.service';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -56,6 +59,8 @@ const maskConfig: Partial<IConfig> = {
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
     LandingPulsarComponent,
+    ItemSucursalComponent,
+    ItemCrearComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -81,11 +86,13 @@ const maskConfig: Partial<IConfig> = {
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'item-crear', component: ItemCrearComponent },
     ])
   ],
   providers: [
     EmpleadoService,
-    ComercioService
+    ComercioService,
+    ItemService,
   ],
   bootstrap: [AppComponent]
 })
