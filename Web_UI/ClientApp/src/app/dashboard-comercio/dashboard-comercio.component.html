@@ -1,1 +1,118 @@
-<p>dashboard-comercio works!</p>
+<div class="container-fluid" *ngIf="comercioSeleccionado">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Opciones</span>
+          <a class="d-flex align-items-center text-muted" href="#">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Mis reportes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Roles
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Modificar comercio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Agregar archivos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Promociones
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ comercioSeleccionado.nombre }}</h1>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+        <strong>{{error.message}}</strong>
+        <!--<ul>
+        <li *ngFor="let detail of error.details">{{detail}}</li>
+        </ul>-->
+      </div>
+
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Agregar sucursales</div>
+
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Agregar productos</div>
+
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Horarios</div>
+
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Empleados</div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <h2>Sucursales</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Detalles de dirección</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sucursal of sucursales">
+              <td>{{ sucursal.nombre }}</td>
+              <td>{{ sucursal.detallesDireccion }}</td>
+              <td>
+                <a>
+                  <button type="button" class="btn btn-primary">Seleccionar sucursal</button>
+                </a>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="eliminarSucursal(sucursal)">Eliminar sucursal</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
