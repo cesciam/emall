@@ -24,6 +24,12 @@
                     <td>{{ promocion.cantidad }}</td>
                     <td *ngIf="promocion.id_comercio > 0; else sinComercio">{{promocion.id_comercio}}</td>
                     <td *ngIf="promocion.id_sucursal > 0; else sinSucursal">{{ promocion.id_sucursal }}</td>
+                    <td>
+                        <button class="btn btn-secondary" >Editar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="eliminar(promocion.id)">X</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -37,6 +43,6 @@
   </ng-template>
 
   <ng-template #sinSucursal>
-    <td>Sin comercio asociado</td>
+    <td>Sin sucursal asociada</td>
   </ng-template>
   <app-footer></app-footer>

@@ -83,7 +83,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
-      { path: 'promociones-admin', component: ListarPromocionComponent },
+      { path: 'promociones', component: ListarPromocionComponent },
     ])
   ],
   providers: [

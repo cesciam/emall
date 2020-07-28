@@ -20,4 +20,15 @@ export class ListarPromocionComponent implements OnInit {
     );
   }
 
+  eliminar(id: number): void {
+    this.service.eliminar(id)
+    .subscribe(
+      (data: void) => {
+        let index: number = this.promociones.findIndex(promocion => promocion.id === id);
+        this.promociones.splice(index, 1);
+      },
+      (err: any) => console.log(err)
+    );
+  }
+
 }

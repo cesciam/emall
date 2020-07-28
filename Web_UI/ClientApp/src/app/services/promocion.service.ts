@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Promocion } from '../models/promocion';
@@ -7,14 +7,21 @@ import { Promocion } from '../models/promocion';
   providedIn: 'root'
 })
 export class PromocionService {
-  readonly BASE_URL = 'http://localhost:5000/api/';
+  baseURL: string;
   serviceEndPoint: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) { 
+    this.baseURL = baseUrl;
+  }
 
 
   obtenerPromociones(): Observable<Promocion[]> {
-    this.serviceEndPoint = 'promocion/RetrieveAll';
-    return this.http.get<Promocion[]>(this.BASE_URL + this.serviceEndPoint);
+    this.serviceEndPoint = '/promocion/RetrieveAll';
+    return this.http.get<Promocion[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  eliminar(id: number): Observable<void>{
+    this.serviceEndPoint = `/promocion/delete?id=${id}`;
+    return this.http.delete<void>(this.baseURL + this.serviceEndPoint);
   }
 }
