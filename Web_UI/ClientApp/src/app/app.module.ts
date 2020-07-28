@@ -22,6 +22,14 @@ import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
 import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
+import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
+import { ComercioService } from './services/comercio.service';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -45,13 +53,19 @@ const maskConfig: Partial<IConfig> = {
     AgregarEmpleadoComponent,
     ListarEmpleadoComponent,
     AutenticacionComponent,
+    DashboardComercioComponent,
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent,
     LandingPulsarComponent,
     ListarPromocionComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
+    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    FileUploadModule,
+    Ng2CloudinaryModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -65,12 +79,16 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
       { path: 'promociones-admin', component: ListarPromocionComponent },
     ])
   ],
   providers: [
-    EmpleadoService
+    EmpleadoService,
+    ComercioService
   ],
   bootstrap: [AppComponent]
 })

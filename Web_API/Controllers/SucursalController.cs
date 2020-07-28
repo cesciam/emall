@@ -61,7 +61,7 @@ namespace Web_API.Controllers
                 return Ok();
             } catch(Exception e)
             {
-                return StatusCode(500, e);
+                return BadRequest(new { message = "Ha ocurrido un error al eliminar esta sucursal. Vuelva a intentarlo más tarde" });
             }
         }
     }
