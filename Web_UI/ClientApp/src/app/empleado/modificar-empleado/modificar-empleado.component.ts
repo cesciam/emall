@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { NgForm } from '@angular/forms';
 import { Empleado } from 'src/app/models/empleado.model';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-modificar-empleado',
@@ -31,12 +32,8 @@ export class ModificarEmpleadoComponent implements OnInit {
   }
 
   fillForm(){
-    this.service.formData={
-      id: 0,
-      id_usuario: 0,
-      id_rol: 0,
-      id_sucursal: 0
-    }
+    this.empleado = JSON.parse(localStorage.getItem("empleado")); 
+    this.service.formData = Object.assign({}, this.empleado);
   }
 
 

@@ -66,7 +66,7 @@ const maskConfig: Partial<IConfig> = {
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
       { path: 'agregar-empleado', component: AgregarEmpleadoComponent },
-      { path: 'listar-empleado', component: ListarEmpleadoComponent },
+      { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
       { path: 'dashboard-admin', component: DashboardAdminComponent },
       { path: 'dashboard-admin/usuario', component: ListarUsuarioComponent },

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario.model';
 import { NgForm } from '@angular/forms';
 import { Empleado } from 'src/app/models/empleado.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-empleado',
@@ -14,7 +15,7 @@ import { Empleado } from 'src/app/models/empleado.model';
 export class ListarEmpleadoComponent implements OnInit {
   
 
-  constructor(private service : EmpleadoService) { }
+  constructor(private service : EmpleadoService, private router: Router) { }
 
   ngOnInit(): void {
     this.service.fillList();
@@ -34,6 +35,7 @@ export class ListarEmpleadoComponent implements OnInit {
     this.service.getById(id);
     let empleado = this.service.formData;
     localStorage.setItem("empleado", JSON.stringify(empleado) );
+    this.router.navigate(['modificar-empleado']);
   }
 
 }
