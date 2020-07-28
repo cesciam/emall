@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
@@ -83,10 +83,18 @@ const maskConfig: Partial<IConfig> = {
       { path: 'landing-pulsar', component: LandingPulsarComponent },
     ])
   ],
+  exports: [
+    AgregarUsuarioComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA 
+  ],
   providers: [
     EmpleadoService,
     ComercioService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
