@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped .table-responsive-sm"  *ngIf="promociones  ">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Porcentaje de descuento</th>
+                    <th>Código</th>
+                    <th>Cantidad disponible</th>
+                    <th>Comercio</th>
+                    <th>Surcusal</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let promocion of promociones">
+                    <td>{{ promocion.nombre }}</td>
+                    <td>{{ promocion.porcentaje }}%</td>
+                    <td>{{ promocion.codigo }}</td>
+                    <td>{{ promocion.cantidad }}</td>
+                    <td *ngIf="promocion.id_comercio > 0; else sinComercio">{{promocion.id_comercio}}</td>
+                    <td *ngIf="promocion.id_sucursal > 0; else sinSucursal">{{ promocion.id_sucursal }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+  <ng-template #sinComercio>
+    <td>Sin comercio asociado</td>
+  </ng-template>
+
+  <ng-template #sinSucursal>
+    <td>Sin comercio asociado</td>
+  </ng-template>
+  <app-footer></app-footer>

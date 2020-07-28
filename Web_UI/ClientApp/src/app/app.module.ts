@@ -21,6 +21,7 @@ import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-emple
 import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
+import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -45,6 +46,7 @@ const maskConfig: Partial<IConfig> = {
     ListarEmpleadoComponent,
     AutenticacionComponent,
     LandingPulsarComponent,
+    ListarPromocionComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -64,6 +66,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'promociones-admin', component: ListarPromocionComponent },
     ])
   ],
   providers: [
