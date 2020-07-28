@@ -33,6 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\config.ts" />
+    <None Remove="ClientApp\src\app\models\Archivo.ts" />
+    <None Remove="ClientApp\src\app\models\Categoria.ts" />
+    <None Remove="ClientApp\src\app\models\Comercio.ts" />
+    <None Remove="ClientApp\src\app\models\Sucursal.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
   </ItemGroup>
 
@@ -43,6 +51,14 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\sesion-usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\usuario.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\config.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Archivo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Categoria.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Comercio.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Sucursal.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
