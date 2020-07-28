@@ -1,11 +1,11 @@
-<h2 id="tableLabel">Registro de comercio</h2>
+<h1 class="text-center">Registro de comercio</h1>
 <form class="text-left form-group border border-light p-5">
 
   <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
     <strong>{{error.message}}</strong>
     <!--<ul>
-     <li *ngFor="let detail of error.details">{{detail}}</li>
-   </ul>-->
+      <li *ngFor="let detail of error.details">{{detail}}</li>
+    </ul>-->
   </div>
 
   <div class="form-row mb-4">
@@ -22,6 +22,10 @@
         </div>
       </div>
 
+      
+    </div>
+
+    <div class="col">
       <label for="nombreLegal">Nombre legal</label>
       <input id="nombreLegal" name="nombreLegal" class="form-control"
              [(ngModel)]="comercio.nombreLegal" #nombreLegal="ngModel" type="text" required>
@@ -36,6 +40,9 @@
 
     </div>
 
+  </div>
+
+  <div class="form-row mb-4">
     <div class="col">
       <label for="cedula">Cédula jurídica</label>
       <input id="cedula" name="cedula" class="form-control"
@@ -64,6 +71,9 @@
       </div>
 
     </div>
+  </div>
+
+  <div class="form-row mb-4">
 
     <div class="col">
       <label>Logo de comercio</label>
@@ -84,9 +94,7 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="form-row mb-4">
     <div class="col">
       <label>Comprobante de hacienda</label>
       <div class="z-depth-1-half mb-4">
@@ -129,14 +137,20 @@
     </div>
   </div>
 
-  <div *ngIf="(nombre.valid && nombreLegal.valid && cedula.valid && categoria.valid); else noValido">
-    <button class="btn btn-primary btn-lg btn-block" (click)="registrarComercio()">Registrar comercio</button>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div *ngIf="(nombre.valid && nombreLegal.valid && cedula.valid && categoria.valid); else noValido">
+        <button class="btn btn-primary btn-lg btn-block" (click)="registrarComercio()">Registrar comercio</button>
+      </div>
+
+      <ng-template #noValido>
+        <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Registrar comercio</button>
+      </ng-template>
+
+    </div>
+
   </div>
-
-  <ng-template #noValido>
-    <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Registrar comercio</button>
-  </ng-template>
-
 
   <hr>
 </form>
