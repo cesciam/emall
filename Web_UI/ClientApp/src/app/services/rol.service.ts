@@ -21,7 +21,6 @@ export class RolService {
 
   deleteRol(id : number){
     return this.http.delete(this.BASE_URL+'Rol/Delete'+'?id=' +id)
-    //pendiente hacer el cambio en el backend
   }
 
   postRol(formData: Rol){

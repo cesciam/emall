@@ -41,9 +41,5 @@ export class AgregarEmpleadoComponent implements OnInit {
     })
   }
 
-  updateRecord(form: NgForm) {
-    this.service.putEmpleado(form.value).subscribe(res => {
-      this.resetForm(form)
-    })
-  }
+  
 }

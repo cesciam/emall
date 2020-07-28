@@ -23,6 +23,7 @@
         <td>{{empleado.id_usuario}}</td>
         <td>{{empleado.id_rol}}</td>
         <td>{{empleado.id_sucursal}}</td>
+        <td><button (click)="onUpdate(empleado.id)" class="btn btn-sm ">Editar</button></td>
         <td><button (click)="onDelete(empleado.id)" class="btn btn-sm btn-outline-danger">X</button></td>
       </tr>
     </table>

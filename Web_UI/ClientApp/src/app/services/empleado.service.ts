@@ -29,15 +29,16 @@ export class EmpleadoService {
    }
 
    fillList(){
-    //this.http.get<Empleado[]>(this.BASE_URL+'Empleado/RetrieveAll').subscribe(
-     // result =>{},error => console.error(error)
-    //);
-
      this.http.get(this.BASE_URL+'Empleado/RetrieveAllDatos')
      .toPromise().then(res=>this.list = res as Empleado[])
    }
 
    deleteEmpleado(id: number){
      return this.http.delete(this.BASE_URL+'Empleado/Delete'+'?id=' +id)
+   }
+
+   getById(id: number){
+     return this.http.get(this.BASE_URL+'Empleado/RetrieveById'+'?id=' +id)
+     .toPromise().then(res=>this.formData =res as Empleado)
    }
 }

@@ -26,6 +26,8 @@ import { VistaService } from './services/vista.service';
 import { HorarioService } from './services/horario.service';
 import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
+import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
+import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -50,7 +52,9 @@ const maskConfig: Partial<IConfig> = {
     ListarEmpleadoComponent,
     AutenticacionComponent,
     ListarRolComponent,
-    AgregarRolComponent
+    AgregarRolComponent,
+    ModificarRolComponent,
+    ModificarEmpleadoComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
