@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Promocion } from '../models/promocion';
 
@@ -23,5 +23,19 @@ export class PromocionService {
   eliminar(id: number): Observable<void>{
     this.serviceEndPoint = `/promocion/delete?id=${id}`;
     return this.http.delete<void>(this.baseURL + this.serviceEndPoint);
+  }
+
+  editar(promocion: Promocion): Observable<void> {
+    this.serviceEndPoint = `/promocion/update`;
+    return this.http.put<void>(this.baseURL + this.serviceEndPoint, promocion, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
+  }
+
+  obtenerPromocion(id: number): Observable<Promocion> {
+    this.serviceEndPoint = `/promocion/retrieve?id=${id}`;
+    return this.http.get<Promocion>(this.baseURL + this.serviceEndPoint);
   }
 }
