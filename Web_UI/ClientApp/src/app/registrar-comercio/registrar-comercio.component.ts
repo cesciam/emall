@@ -41,8 +41,9 @@ export class RegistrarComercioComponent implements OnInit {
     this.error = null;
   }
 
-  async llenarCategorias() {
-    this.categoriasList = await this.comercioService.ObtenerTodoCategorias();
+  llenarCategorias() {
+    this.comercioService.ObtenerTodoCategorias()
+      .subscribe(data => this.categoriasList = data);
   }
 
   ngOnInit(): void {

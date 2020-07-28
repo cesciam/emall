@@ -24,13 +24,24 @@ export class DashboardComercioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.comercioSeleccionado = JSON.parse(localStorage.getItem('comercioSeleccionado'));
-    console.log(this.comercioSeleccionado);
-    this.llenarSucursales();
+    this.llenarComercio();
   }
 
-  async llenarSucursales() {
-    this.sucursales = await this.sucursalService.ObtenerTodoSucursales(this.comercioSeleccionado.id);
+
+
+  llenarComercio() {
+    let comercioLocal: Comercio = JSON.parse(localStorage.getItem('comercioSeleccionado'));
+
+    this.comercioService.obtenerComercio(comercioLocal)
+      .subscribe(data => {
+        this.comercioSeleccionado = data
+        this.llenarSucursales();
+      });
+  }
+
+   llenarSucursales() {
+     this.sucursalService.ObtenerTodoSucursales(this.comercioSeleccionado.id)
+       .subscribe(data => this.sucursales = data);
   }
 
   eliminarSucursal(sucursal: Sucursal) {

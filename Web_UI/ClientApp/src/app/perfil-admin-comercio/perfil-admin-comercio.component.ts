@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Comercio } from '../models/Comercio';
 import { ComercioService } from '../services/comercio.service';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 @Component({
   selector: 'app-perfil-admin-comercio',
@@ -24,7 +25,14 @@ export class PerfilAdminComercioComponent implements OnInit {
   }
 
   async llenarComercios() {
-    this.comercios = await  this.comercioService.obtenerTodoComercio();
+    let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
+    let usuarioLogueado: Usuario = usuarioLocal.usuario;
+
+    let comercio: Comercio = new Comercio();
+    comercio.idAdmin = parseInt(usuarioLogueado.Id);
+
+    this.comercioService.ObtenerComerciosAdmin(comercio)
+      .subscribe(data => this.comercios = data);
   }
 
   seleccionarComercio(comercio: Comercio) {

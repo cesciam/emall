@@ -29,6 +29,7 @@ import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { ModificarComercioComponent } from './modificar-comercio/modificar-comercio.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -56,6 +57,7 @@ const maskConfig: Partial<IConfig> = {
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
     LandingPulsarComponent,
+    ModificarComercioComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -81,6 +83,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
     ])
   ],
   providers: [
