@@ -31,15 +31,23 @@
                 <label for="id_comercio">Comercio</label>
                 <input type="number" name="id_comercio" #id_comercio="ngModel" [(ngModel)]=service.formData.id_comercio
                     class="form-control" required>
-                    <div class="alert alert-danger" *ngIf="id_comercio.invalid && id_comercio.touched">
-                        El comercio es requerido
-                    </div>
+                <div class="alert alert-danger" *ngIf="id_comercio.invalid && id_comercio.touched">
+                    El comercio es requerido
+                </div>
             </div>
             <div class="form-group">
-                <button type="submit"[disabled]="form.invalid" class="btn btn-lg btn-block">Registrar</button>
+                <label class="text-center">Marque los elementos sobre los que tendrá permiso el rol:</label>
+                
+                <div  *ngFor="let vista of serviceVista.list">
+                    <input  type="checkbox" name="{{vista.id}}" [value]="vista.id"> 
+                    <label  for="{{vista.id}}"> {{vista.nombre}}</label> 
+                </div>
+                <!-- todo: llevar los datos seleccionados para registrar un vistaxRol para cada uno -->
+            </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">Registrar</button>
             </div>
         </form>
-
     </div>
 </div>
 <app-footer></app-footer>

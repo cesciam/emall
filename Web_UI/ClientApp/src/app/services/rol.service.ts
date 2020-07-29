@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Rol } from '../models/rol.model';
 import { HttpClient } from '@angular/common/http';
+import { Vista } from '../models/vista.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class RolService {
   }
 
   fillList(){
-    this.http.get(this.BASE_URL+'Rol/RetrieveAll')
+    this.http.get(this.BASE_URL+'Rol/RetrieveByIdComercio'+'?id=' +7)
     .toPromise().then(res=>this.list=res as Rol[]);
   }
 

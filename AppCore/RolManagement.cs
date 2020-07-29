@@ -25,6 +25,10 @@ namespace AppCore
         {
             return crud.Retrieve<Rol>(rol);
         }
+        public List<Rol> RetrieveByIdComercio(Rol rol)
+        {
+            return crud.RetrieveByIdComercio<Rol>(rol);
+        }
         public void Update(Rol rol)
         {
             crud.Update(rol);

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RolService } from 'src/app/services/rol.service';
 import { NgForm } from '@angular/forms';
+import { VistaService } from 'src/app/services/vista.service';
+import { VistaXRolService } from 'src/app/services/vista-xrol.service';
 
 @Component({
   selector: 'app-agregar-rol',
@@ -9,7 +11,9 @@ import { NgForm } from '@angular/forms';
 })
 export class AgregarRolComponent implements OnInit {
 
-  constructor(private service: RolService) { }
+  constructor(private service: RolService, 
+    private serviceVista: VistaService, 
+    private serviceVistaXRol: VistaXRolService) { }
 
   ngOnInit() {
     this.resetForm();
@@ -35,7 +39,12 @@ export class AgregarRolComponent implements OnInit {
   insertRecord(form:NgForm){
     this.service.postRol(form.value).subscribe(res=>{
       this.resetForm()
+      this.insertVistaXRol();
     });
+  }
+
+  insertVistaXRol(){
+    
   }
 
 }
