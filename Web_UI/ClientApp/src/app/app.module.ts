@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
@@ -79,6 +79,12 @@ const maskConfig: Partial<IConfig> = {
       { path: 'agregar-rol', component: AgregarRolComponent },
     ])
   ],
+  exports: [
+    AgregarUsuarioComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA 
+  ],
   providers: [
     EmpleadoService,
     RolService,
@@ -86,6 +92,8 @@ const maskConfig: Partial<IConfig> = {
     HorarioService,
     VistaXRolService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
