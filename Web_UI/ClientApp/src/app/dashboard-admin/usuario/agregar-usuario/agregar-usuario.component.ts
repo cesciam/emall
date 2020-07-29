@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -9,6 +9,7 @@ import cloudinaryConfig from '../../../config';
 import { Archivo } from '../../../models/Archivo';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { RegistroUsuario } from '../../../models/registro-usuario.model';
+import { DashboardAdminComponent } from '../../dashboard-admin.component';
 
 @Component({
   selector: 'app-agregar-usuario',
@@ -17,9 +18,12 @@ import { RegistroUsuario } from '../../../models/registro-usuario.model';
 })
 
 export class AgregarUsuarioComponent implements OnInit {
+  @Input() integrarCon: string;
+  
   private usuarioForm: FormGroup;
   private submitted: boolean = false;
   private error: object = null;
+  private registerComplete: boolean = false;
   private uploader: CloudinaryUploader;
   private imgUrl: any;
   private archivo: Archivo;
@@ -117,7 +121,12 @@ export class AgregarUsuarioComponent implements OnInit {
       this.usuarioService.registrarUsuario(this.sanitizeData(this.usuarioForm))
       .subscribe(
         (response) => {
-          this.router.navigate(['dashboard-admin/usuario/listar-usuario']);
+          if (this.integrarCon == null)
+            this.router.navigate(['dashboard-admin/usuario/listar-usuario']);
+          else {
+            window.scroll(0, 0);
+            this.registerComplete = true;
+          }
       },
         (error) => {
           this.error = error.error;

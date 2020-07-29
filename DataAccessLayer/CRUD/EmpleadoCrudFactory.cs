@@ -22,6 +22,24 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(sqlOperation);
         }
 
+        public List<T> RetrieveAllDatos<T>()
+        {
+            var lstEmpleados = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllDatosStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstEmpleados.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstEmpleados;
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var empleado = (Empleado)entity;

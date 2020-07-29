@@ -21,6 +21,12 @@ namespace AppCore
         {
             return crud.RetrieveAll<Empleado>();
         }
+
+        public List<Empleado> RetrieveAllDatos()
+        {
+            return crud.RetrieveAllDatos<Empleado>();
+        }
+
         public Empleado RetrieveById(Empleado e)
         {
             return crud.Retrieve<Empleado>(e);
