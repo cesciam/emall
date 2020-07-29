@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
@@ -20,18 +20,14 @@ import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-em
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
 import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
-import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
-import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
-import { ComercioService } from './services/comercio.service';
-import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
-import { Cloudinary } from 'cloudinary-core';
-import { FileUploadModule } from "ng2-file-upload";
-import cloudinaryConfiguration from './config';
-import { Ng2CloudinaryModule } from 'ng2-cloudinary';
-import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
-import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
-import { ItemCrearComponent } from './item/item-crear/item-crear.component';
-import { ItemService } from './services/item.service';
+import { ListarRolComponent } from './rol/listar-rol/listar-rol.component';
+import { RolService } from './services/rol.service';
+import { VistaService } from './services/vista.service';
+import { HorarioService } from './services/horario.service';
+import { VistaXRolService } from './services/vista-xrol.service';
+import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
+import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
+import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -55,45 +51,47 @@ const maskConfig: Partial<IConfig> = {
     AgregarEmpleadoComponent,
     ListarEmpleadoComponent,
     AutenticacionComponent,
-    DashboardComercioComponent,
-    RegistrarComercioComponent,
-    PerfilAdminComercioComponent,
-    LandingPulsarComponent,
-    ItemSucursalComponent,
-    ItemCrearComponent,
+    ListarRolComponent,
+    AgregarRolComponent,
+    ModificarRolComponent,
+    ModificarEmpleadoComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
-    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FileUploadModule,
-    Ng2CloudinaryModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
       { path: 'agregar-empleado', component: AgregarEmpleadoComponent },
-      { path: 'listar-empleado', component: ListarEmpleadoComponent },
+      { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
       { path: 'dashboard-admin', component: DashboardAdminComponent },
       { path: 'dashboard-admin/usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
-      { path: 'registrar-comercio', component: RegistrarComercioComponent },
-      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
-      { path: 'dashboard-comercio', component: DashboardComercioComponent },
-      { path: 'landing-pulsar', component: LandingPulsarComponent },
-      { path: 'item-crear', component: ItemCrearComponent },
+      { path: 'listar-rol', component: ListarRolComponent },
+      { path: 'agregar-rol', component: AgregarRolComponent },
     ])
+  ],
+  exports: [
+    AgregarUsuarioComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA 
   ],
   providers: [
     EmpleadoService,
-    ComercioService,
-    ItemService,
+    RolService,
+    VistaService,
+    HorarioService,
+    VistaXRolService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

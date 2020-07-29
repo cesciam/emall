@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Empleado } from '../models/empleado.model';
 import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../models/usuario.model';
+import { UsuarioService } from './usuario.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class EmpleadoService {
   formData: Empleado;
   list: Empleado[];
-
+  listUsuarios: Usuario[];
 
   //private BASE_URL: string;
   readonly BASE_URL = 'http://localhost:5000/api/';
@@ -26,15 +29,16 @@ export class EmpleadoService {
    }
 
    fillList(){
-    //this.http.get<Empleado[]>(this.BASE_URL+'Empleado/RetrieveAll').subscribe(
-     // result =>{},error => console.error(error)
-    //);
-
-     this.http.get(this.BASE_URL+'Empleado/RetrieveAll')
+     this.http.get(this.BASE_URL+'Empleado/RetrieveAllDatos')
      .toPromise().then(res=>this.list = res as Empleado[])
    }
 
    deleteEmpleado(id: number){
      return this.http.delete(this.BASE_URL+'Empleado/Delete'+'?id=' +id)
+   }
+
+   getById(id: number){
+     return this.http.get(this.BASE_URL+'Empleado/RetrieveById'+'?id=' +id)
+     .toPromise().then(res=>this.formData =res as Empleado)
    }
 }
