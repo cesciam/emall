@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { NgForm } from '@angular/forms';
+import { RolService } from 'src/app/services/rol.service';
+import { SucursalService } from 'src/app/services/sucursal.service';
+import { Sucursal } from 'src/app/models/Sucursal';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -8,12 +11,14 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./agregar-empleado.component.css']
 })
 export class AgregarEmpleadoComponent implements OnInit {
+  private sucursales : Sucursal[];
 
+  constructor(private service: EmpleadoService,
+     private serviceRol: RolService, private serviceSucursal : SucursalService) { }
 
-  constructor(private service: EmpleadoService) { }
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.resetForm();
+    this.sucursales = await this.serviceSucursal.ObtenerTodoSucursales(7);
   }
 
   resetForm(form?: NgForm) {
@@ -39,9 +44,5 @@ export class AgregarEmpleadoComponent implements OnInit {
     })
   }
 
-  updateRecord(form: NgForm) {
-    this.service.putEmpleado(form.value).subscribe(res => {
-      this.resetForm(form)
-    })
-  }
+  
 }

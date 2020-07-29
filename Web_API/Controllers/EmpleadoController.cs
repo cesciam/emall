@@ -13,6 +13,12 @@ namespace Web_API.Controllers
     [ApiController]
     public class EmpleadoController : ControllerBase
     {
+        [HttpGet]
+        public List<Empleado> RetrieveAllDatos()
+        {
+            var em = new EmpleadoManagement();
+            return em.RetrieveAllDatos();
+        }
 
         [HttpGet]
         public List<Empleado> RetrieveAll()
