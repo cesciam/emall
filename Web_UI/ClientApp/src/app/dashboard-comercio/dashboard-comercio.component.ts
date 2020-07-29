@@ -17,6 +17,7 @@ export class DashboardComercioComponent implements OnInit {
   private comercioSeleccionado: Comercio;
   private sucursales: Sucursal[];
   private error: any;
+  private filterSucursal = ''; 
 
   constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute) {
     this.comercioService = comercioService;

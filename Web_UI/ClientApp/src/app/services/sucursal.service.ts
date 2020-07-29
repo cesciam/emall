@@ -29,11 +29,26 @@ export class SucursalService {
       );
   }
 
+  obtenerSucursal(idSucursal: number) {
+    let endpointUrl = this.BASE_URL + '/sucursal/obtenersucursal?id=' + idSucursal;
+    return this.http.get<Sucursal>(endpointUrl);
+  }
+
    ObtenerTodoSucursales(id : number) {
     let endpointUrl = this.BASE_URL + '/sucursal/obtenertodosucursal?idComercio=' + id;
-   
 
     return this.http.get<Sucursal[]>(endpointUrl);
+  }
+
+  modificarSucursal(sucursal: Sucursal) {
+    let endpointUrl = this.BASE_URL + '/sucursal/modificarsucursal';
+
+    return this.http.put<Sucursal>(endpointUrl, sucursal)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
   }
 
   eliminarSucursal(id: number) {

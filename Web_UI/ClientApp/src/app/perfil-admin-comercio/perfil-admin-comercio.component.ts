@@ -14,6 +14,7 @@ export class PerfilAdminComercioComponent implements OnInit {
   private comercios: Comercio[];
   private comercioService: ComercioService;
   private error: any;
+  private filterComercio = ''; 
 
   constructor(comercioService: ComercioService, private router: Router) {
     this.comercioService = comercioService;
@@ -24,7 +25,7 @@ export class PerfilAdminComercioComponent implements OnInit {
     this.llenarComercios();
   }
 
-  async llenarComercios() {
+  llenarComercios() {
     let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
     let usuarioLogueado: Usuario = usuarioLocal.usuario;
 
@@ -52,5 +53,4 @@ export class PerfilAdminComercioComponent implements OnInit {
     let element: HTMLElement = document.getElementById('wrapper');
     element.classList.toggle('toggled');
   }
-
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '
 import { Sucursal } from '../models/Sucursal';
 import { SucursalService } from '../services/sucursal.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'app-registrar-sucursal',
@@ -65,8 +64,6 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
     google.maps.event.addListener(map, 'click', function (event) {
       placeMarker(event.latLng);
       
-      console.log(event.latLng.lat());
-      console.log(event.latLng.lng());
       me.sucursal.latitud = String(event.latLng.lat());
       me.sucursal.longitud = String(event.latLng.lng());
       

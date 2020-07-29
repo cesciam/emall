@@ -45,13 +45,18 @@ namespace Web_API.Controllers
         [HttpPut]
         public IActionResult ModificarSucursal(Sucursal sucursal)
         {
+            if (sucursal.Latitud.Length == 0 || sucursal.Longitud.Length == 0)
+            {
+                return BadRequest(new { message = "Ingrese una ubicación en el mapa." });
+            }
+
             try
             {
                 new SucursalManagement().ModificarSucursal(sucursal);
                 return Ok();
             } catch(Exception e)
             {
-                return StatusCode(500, e);
+                return BadRequest(new { message = "Ha ocurrido un error al editar. Vuelva a intentarlo más tarde" });
             }
         }
 

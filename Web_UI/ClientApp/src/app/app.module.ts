@@ -32,6 +32,9 @@ import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-adm
 import { ModificarComercioComponent } from './modificar-comercio/modificar-comercio.component';
 import { RegistrarSucursalComponent } from './registrar-sucursal/registrar-sucursal.component';
 import { AgmCoreModule } from '@agm/core';
+import { FilterComercioPipe } from './pipes/filter-comercio.pipe';
+import { FilterSucursalPipe } from './pipes/filter-sucursal.pipe';
+import { ModificarSucursalComponent } from './modificar-sucursal/modificar-sucursal.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -61,6 +64,9 @@ const maskConfig: Partial<IConfig> = {
     LandingPulsarComponent,
     ModificarComercioComponent,
     RegistrarSucursalComponent,
+    FilterComercioPipe,
+    FilterSucursalPipe,
+    ModificarSucursalComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -89,6 +95,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'landing-pulsar', component: LandingPulsarComponent },
       { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
       { path: 'dashboard-comercio/registrar-sucursal', component: RegistrarSucursalComponent },
+      { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
     ])
   ],
   exports: [
