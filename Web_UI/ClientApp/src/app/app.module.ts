@@ -28,6 +28,7 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -54,7 +55,8 @@ const maskConfig: Partial<IConfig> = {
     ListarRolComponent,
     AgregarRolComponent,
     ModificarRolComponent,
-    ModificarEmpleadoComponent
+    ModificarEmpleadoComponent,
+    ListarConfiguracionComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -75,6 +77,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'configuracion', component: ListarConfiguracionComponent },
     ])
   ],
   exports: [
