@@ -1,11 +1,16 @@
 <div *ngIf="sucursal">
 
+  <div class="col-sm-auto d-flex justify-content-end">
+    <a [routerLink]="['../perfil-admin-comercio']">Volver atras</a>
+    
+  </div>
 
-  <h2>Registro de Item</h2>
+
+  <h2 class="d-flex justify-content-center">Registro de Item</h2>
 
 
   <div>
-    <form class="form-horizontal">
+    <form class="d-flex justify-content-center">
 
 
       <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
@@ -13,7 +18,7 @@
       </div>
 
 
-      <fieldset>
+      <div class="formulario justify-content-center">
 
         <div class="col-sm-6">
           <label for="nombre">Nombre</label>
@@ -93,16 +98,15 @@
 
         <div class="col-sm-6">
           <label for="id_sucursal">Sucursal</label>
-          <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
+          <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal.id" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
         </div>
 
         <div class="col-sm-6">
           <label>Foto</label>
           <div class="col">
 
-            <div class="col-sm-6">
-              <img [src]="foto" class="img-fluid"
-                   alt="Foto">
+            <div class="d-flex justify-content-center">
+              <img [src]="foto" class="img-fluid d-flex justify-content-center" alt="Foto" align="middle">
             </div>
             <div class="d-flex justify-content-center">
               <div class="btn btn-mdb-color btn-rounded float-left">
@@ -119,15 +123,15 @@
           </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="d-flex justify-content-center">
 
           <div class="row">
             <div *ngIf="(nombre.valid && descripcion.valid && precio.valid && inventario.valid && tipo.valid && duracion.valid && id_impuesto.valid); else noValido">
               <button class="btn btn-primary btn-lg btn-block" (click)="crearItem()">Crear Item</button>
             </div>
 
-            <ng-template #noValido>
-              <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Crear Item</button>
+            <ng-template #noValido class="row">
+              <button class="btn btn-primary btn-lg btn-block" disabled>Crear Item</button>
             </ng-template>
 
           </div>
@@ -137,22 +141,22 @@
 
 
         <!--<div class="col-sm-6">
-    <label for="rate">Rate</label>
-    <input type="number" class="form-control" name="rate" ngModel>
-  </div>
-  <div class="col-sm-6">
-    <label for="fee">Fee</label>
-    <input type="number" class="form-control" name="fee" ngModel>
-  </div>
-  <div class="col-sm-6">
-    <label for="detail">Detail</label>
-    <input type="text" class="form-control" name="detail" ngModel>
-  </div>
-  <div class="col-sm-6">
-    <button type="submit" class="btn btn-primary acciones">Save</button>
-    <button type="button" class="btn btn-primary acciones" [routerLink]="['/customer-details', customer_id]">Back</button>
-  </div>-->
-      </fieldset>
+          <label for="rate">Rate</label>
+          <input type="number" class="form-control" name="rate" ngModel>
+        </div>
+        <div class="col-sm-6">
+          <label for="fee">Fee</label>
+          <input type="number" class="form-control" name="fee" ngModel>
+        </div>
+        <div class="col-sm-6">
+          <label for="detail">Detail</label>
+          <input type="text" class="form-control" name="detail" ngModel>
+        </div>
+        <div class="col-sm-6">
+          <button type="submit" class="btn btn-primary acciones">Save</button>
+          <button type="button" class="btn btn-primary acciones" [routerLink]="['/customer-details', customer_id]">Back</button>
+        </div>-->
+      </div>
 
     </form>
   </div>
