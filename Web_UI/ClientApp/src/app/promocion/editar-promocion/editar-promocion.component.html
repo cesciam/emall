@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10">
+            <h1>Editar promoción</h1>
+            <p>Edite los datos que desea modificar</p>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <a [routerLink]="['../../promociones']">Volver atras</a>
+          </div>
+    </div>
+
+    <form *ngIf="promocionSeleccionada">
+        <div class="row">
+
+            <div class="form-group col-lg-6 col-md-6">
+                <label for="nombre">Nombre</label>
+                <input name="nombre" [(ngModel)]="promocionSeleccionada && promocionSeleccionada.nombre" type="text" class="form-control">
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6">
+                <label for="porcentaje">Porcentaje</label>
+                <input name="porcentaje" [(ngModel)]="promocionSeleccionada && promocionSeleccionada.porcentaje" type="number" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-6 col-md-6">
+                <label for="codigo">Codigo</label>
+                <input name="codigo" [(ngModel)]="promocionSeleccionada && promocionSeleccionada.codigo" type="text" class="form-control">
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6">
+                <label for="cantidad">Cantidad</label>
+                <input name="cantidad" [(ngModel)]="promocionSeleccionada && promocionSeleccionada.cantidad" type="number" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <button type="submit" (click)="save()" class="btn btn-success float-right">Guardar</button>
+            </div>
+        </div>
+    </form>
+
+</div>

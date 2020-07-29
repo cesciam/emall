@@ -28,15 +28,19 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
+import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
+import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
+import { ComercioService } from './services/comercio.service';
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
 import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
-import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
-import { ItemCrearComponent } from './item/item-crear/item-crear.component';
-import { ItemService } from './services/item.service';
-import { ItemEditarComponent } from './item/item-editar/item-editar.component';
+import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
+import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
+import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -63,15 +67,17 @@ const maskConfig: Partial<IConfig> = {
     ListarRolComponent,
     AgregarRolComponent,
     ModificarRolComponent,
-    ModificarEmpleadoComponent,
-    ItemSucursalComponent,
-    ItemCrearComponent,
-    ItemEditarComponent,
+    ModificarEmpleadoComponent
+    DashboardComercioComponent,
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent,
+    LandingPulsarComponent,
+    ListarPromocionComponent,
+    EditarPromocionComponent,
+    RegistrarPromocionComponent,
+    FiltroPromocionPipe,
   ],
   imports: [
-    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
-    FileUploadModule,
-    Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -90,24 +96,27 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
-      { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
-      { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
-      { path: 'item-editar/:id_item', component: ItemEditarComponent },
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'promociones', component: ListarPromocionComponent },
+      { path: 'promocion/:id', component: EditarPromocionComponent },
+      { path: 'promocion-registro', component: RegistrarPromocionComponent }
     ])
   ],
   exports: [
     AgregarUsuarioComponent
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA 
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     EmpleadoService,
     RolService,
     VistaService,
     HorarioService,
-    VistaXRolService,
-    ItemService
+    VistaXRolService
   ],
   bootstrap: [
     AppComponent
