@@ -38,4 +38,14 @@ export class PromocionService {
     this.serviceEndPoint = `/promocion/retrieve?id=${id}`;
     return this.http.get<Promocion>(this.baseURL + this.serviceEndPoint);
   }
+
+  registrarPromocion(promocion: Promocion): Observable<void>{
+    this.serviceEndPoint = '/promocion/create';
+    return this.http.post<void>(this.baseURL + this.serviceEndPoint, promocion, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
+  }
+
 }

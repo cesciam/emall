@@ -31,6 +31,7 @@ import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
 import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
+import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -60,6 +61,7 @@ const maskConfig: Partial<IConfig> = {
     LandingPulsarComponent,
     ListarPromocionComponent,
     EditarPromocionComponent,
+    RegistrarPromocionComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -87,13 +89,14 @@ const maskConfig: Partial<IConfig> = {
       { path: 'landing-pulsar', component: LandingPulsarComponent },
       { path: 'promociones', component: ListarPromocionComponent },
       { path: 'promocion/:id', component: EditarPromocionComponent },
+      { path: 'promocion-registro', component: RegistrarPromocionComponent }
     ])
   ],
   exports: [
     AgregarUsuarioComponent
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA 
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     EmpleadoService,
