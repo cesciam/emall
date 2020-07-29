@@ -20,6 +20,10 @@
         <div *ngIf="nombre.errors.required">
           El nombre es requerido.
         </div>
+
+        <div *ngIf="nombre.errors.minlength">
+          El nombre comercial debe tener al menos 3 caracteres.
+        </div>
       </div>
 
       <label for="nombreLegal">Nombre legal</label>
@@ -31,6 +35,10 @@
 
         <div *ngIf="nombreLegal.errors.required">
           El nombre legal es requerido
+        </div>
+
+        <div *ngIf="nombreLegal.errors.minlength">
+          El nombre legal debe tener al menos 3 caracteres.
         </div>
       </div>
     </div>

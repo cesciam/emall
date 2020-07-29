@@ -4,7 +4,7 @@ import { Comercio } from '../models/Comercio';
 import { Archivo } from '../models/Archivo';
 import { CloudinaryUploader, CloudinaryOptions } from 'ng2-cloudinary';
 import cloudinaryConfig from '../config';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modificar-comercio',
@@ -18,14 +18,26 @@ export class ModificarComercioComponent implements OnInit {
   private logo: string;
   private uploader: CloudinaryUploader;
 
-  constructor(comercioService: ComercioService, private router: Router) {
+  constructor(comercioService: ComercioService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.comercioService = comercioService;
     this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
+    this.comercioSeleccionado = new Comercio();
   }
 
   ngOnInit() {
-    this.comercioSeleccionado = JSON.parse(localStorage.getItem('comercioSeleccionado'));
-    this.logo = this.comercioSeleccionado.archivos[0].enlace;   
+    this.llenarComercio();
+  }
+
+  llenarComercio() {
+    let idComercio: number = this.activatedRoute.snapshot.queryParams['comercio'];
+    let comercio = new Comercio();
+    comercio.id = idComercio;
+
+    this.comercioService.obtenerComercio(comercio)
+      .subscribe(data => {
+        this.comercioSeleccionado = data
+        this.logo = this.comercioSeleccionado.archivos[0].enlace;
+      });
   }
 
   upload() {
@@ -49,8 +61,8 @@ export class ModificarComercioComponent implements OnInit {
 
     this.comercioService.modificarComercio(this.comercioSeleccionado)
        .subscribe(
-        (response) => {
-           this.router.navigate(['dashboard-comercio']);
+         (response) => {
+           this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercioSeleccionado.id } });
         },
         (error) => {
           console.log(error);

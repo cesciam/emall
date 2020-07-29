@@ -3,6 +3,7 @@ import { ComercioService } from '../services/comercio.service';
 import { Comercio } from '../models/Comercio';
 import { Sucursal } from '../models/Sucursal';
 import { SucursalService } from '../services/sucursal.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-comercio',
@@ -17,7 +18,7 @@ export class DashboardComercioComponent implements OnInit {
   private sucursales: Sucursal[];
   private error: any;
 
-  constructor(comercioService: ComercioService, sucursalService: SucursalService) {
+  constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute) {
     this.comercioService = comercioService;
     this.sucursalService = sucursalService;
     this.error = null;
@@ -27,12 +28,12 @@ export class DashboardComercioComponent implements OnInit {
     this.llenarComercio();
   }
 
-
-
   llenarComercio() {
-    let comercioLocal: Comercio = JSON.parse(localStorage.getItem('comercioSeleccionado'));
+    let idComercio: number = this.activatedRoute.snapshot.queryParams['comercio'];
+    let comercio = new Comercio();
+    comercio.id = idComercio;
 
-    this.comercioService.obtenerComercio(comercioLocal)
+    this.comercioService.obtenerComercio(comercio)
       .subscribe(data => {
         this.comercioSeleccionado = data
         this.llenarSucursales();

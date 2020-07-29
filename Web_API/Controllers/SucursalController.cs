@@ -16,13 +16,18 @@ namespace Web_API.Controllers
         [HttpPost]
         public IActionResult CrearSucursal(Sucursal sucursal)
         {
+            if(sucursal.Latitud.Length == 0 || sucursal.Longitud.Length == 0)
+            {
+                return BadRequest(new { message = "Ingrese una ubicación en el mapa." });
+            }
+
             try
             {
                 new SucursalManagement().CrearSucursal(sucursal);
                 return Ok();
             } catch(Exception e)
             {
-                return StatusCode(500, e);
+                return BadRequest(new { message = "Ha ocurrido un error al registrar. Vuelva a intentarlo más tarde" });
             }
         }
         [HttpGet]

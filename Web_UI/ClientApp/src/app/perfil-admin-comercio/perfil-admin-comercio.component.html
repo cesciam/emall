@@ -67,8 +67,8 @@
               <td>{{ comercio.nombreLegal }}</td>
               <td>{{ comercio.categorias[0] }}</td>
               <td>
-                <a>
-                  <button type="button" class="btn btn-primary" (click)="seleccionarComercio(comercio)">Seleccionar comercio</button>
+                <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
+                  <button type="button" class="btn btn-primary">Seleccionar comercio</button>
                 </a>
               </td>
               <td>

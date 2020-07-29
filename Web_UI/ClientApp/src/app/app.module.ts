@@ -30,6 +30,8 @@ import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
 import { ModificarComercioComponent } from './modificar-comercio/modificar-comercio.component';
+import { RegistrarSucursalComponent } from './registrar-sucursal/registrar-sucursal.component';
+import { AgmCoreModule } from '@agm/core';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -58,6 +60,7 @@ const maskConfig: Partial<IConfig> = {
     PerfilAdminComercioComponent,
     LandingPulsarComponent,
     ModificarComercioComponent,
+    RegistrarSucursalComponent,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -68,6 +71,7 @@ const maskConfig: Partial<IConfig> = {
     Ng2CloudinaryModule,
     FormsModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
@@ -84,6 +88,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
       { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
+      { path: 'dashboard-comercio/registrar-sucursal', component: RegistrarSucursalComponent },
     ])
   ],
   providers: [

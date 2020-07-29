@@ -18,6 +18,17 @@ export class SucursalService {
     this.BASE_URL = getBaseUrl();
   }
 
+  registrarSucursal(sucursal: Sucursal) {
+    let endpoint = this.BASE_URL + '/sucursal/crearsucursal';
+
+    return this.http.post<Sucursal>(endpoint, sucursal)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+  }
+
    ObtenerTodoSucursales(id : number) {
     let endpointUrl = this.BASE_URL + '/sucursal/obtenertodosucursal?idComercio=' + id;
    

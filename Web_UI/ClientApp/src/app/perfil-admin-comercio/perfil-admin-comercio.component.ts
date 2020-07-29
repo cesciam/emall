@@ -35,11 +35,6 @@ export class PerfilAdminComercioComponent implements OnInit {
       .subscribe(data => this.comercios = data);
   }
 
-  seleccionarComercio(comercio: Comercio) {
-    localStorage.setItem('comercioSeleccionado', JSON.stringify(comercio));
-    this.router.navigate(['dashboard-comercio']);
-  }
-
   eliminarComercio(comercio: Comercio) {
     this.comercioService.eliminarComercio(comercio.id)
       .subscribe(
