@@ -32,6 +32,7 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
 import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
 import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
+import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -62,6 +63,7 @@ const maskConfig: Partial<IConfig> = {
     ListarPromocionComponent,
     EditarPromocionComponent,
     RegistrarPromocionComponent,
+    FiltroPromocionPipe,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),

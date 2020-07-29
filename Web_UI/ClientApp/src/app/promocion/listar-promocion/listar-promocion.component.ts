@@ -9,6 +9,7 @@ import { Promocion } from 'src/app/models/promocion';
 })
 export class ListarPromocionComponent implements OnInit {
   promociones: Promocion[];
+  filtroPromociones = '';
 
   constructor(private service: PromocionService) { }
 

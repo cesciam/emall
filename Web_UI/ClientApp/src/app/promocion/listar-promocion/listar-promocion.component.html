@@ -1,8 +1,14 @@
-<app-header></app-header>
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table table-striped .table-responsive-sm"  *ngIf="promociones  ">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." name="filtroPromociones" [(ngModel)]="filtroPromociones">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped .table-responsive-sm"  *ngIf="promociones">
                 <thead>
                 <tr>
                     <th>Nombre</th>
@@ -17,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let promocion of promociones">
+                <tr *ngFor="let promocion of promociones | filtroPromocion:filtroPromociones">
                     <td>{{ promocion.nombre }}</td>
                     <td>{{ promocion.porcentaje }}%</td>
                     <td>{{ promocion.codigo }}</td>
@@ -45,4 +51,4 @@
   <ng-template #sinSucursal>
     <td>Sin sucursal asociada</td>
   </ng-template>
-  <app-footer></app-footer>
+  
