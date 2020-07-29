@@ -60,12 +60,16 @@ namespace Web_API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Delete(Rol c)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
             try
             {
                 var rm = new RolManagement();
+                var c = new Rol
+                {
+                    id = id
+                };
                 rm.Delete(c);
                 return Ok();
             }

@@ -20,6 +20,14 @@ import { AgregarEmpleadoComponent } from './empleado/agregar-empleado/agregar-em
 import { ListarEmpleadoComponent } from './empleado/listar-empleado/listar-empleado.component';
 import { EmpleadoService } from './services/empleado.service';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
+import { ListarRolComponent } from './rol/listar-rol/listar-rol.component';
+import { RolService } from './services/rol.service';
+import { VistaService } from './services/vista.service';
+import { HorarioService } from './services/horario.service';
+import { VistaXRolService } from './services/vista-xrol.service';
+import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
+import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
+import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
 import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
 import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
@@ -56,6 +64,10 @@ const maskConfig: Partial<IConfig> = {
     AgregarEmpleadoComponent,
     ListarEmpleadoComponent,
     AutenticacionComponent,
+    ListarRolComponent,
+    AgregarRolComponent,
+    ModificarRolComponent,
+    ModificarEmpleadoComponent
     DashboardComercioComponent,
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
@@ -67,24 +79,23 @@ const maskConfig: Partial<IConfig> = {
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
-    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FileUploadModule,
-    Ng2CloudinaryModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
       { path: 'agregar-empleado', component: AgregarEmpleadoComponent },
-      { path: 'listar-empleado', component: ListarEmpleadoComponent },
+      { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
       { path: 'dashboard-admin', component: DashboardAdminComponent },
       { path: 'dashboard-admin/usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'listar-rol', component: ListarRolComponent },
+      { path: 'agregar-rol', component: AgregarRolComponent },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
@@ -102,7 +113,10 @@ const maskConfig: Partial<IConfig> = {
   ],
   providers: [
     EmpleadoService,
-    ComercioService
+    RolService,
+    VistaService,
+    HorarioService,
+    VistaXRolService
   ],
   bootstrap: [
     AppComponent
