@@ -15,7 +15,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <div class="header__top__right__auth">
-                            <a [routerLink]="['autenticacion']" *ngIf="usuarioLogueado == null"><i class="fa fa-user"></i> Iniciar sesión</a>
+                            <a [routerLink]="['/autenticacion']" *ngIf="usuarioLogueado == null"><i class="fa fa-user"></i> Iniciar sesión</a>
                             <span *ngIf="usuarioLogueado != null">
                               <i class="fa fa-user"></i> {{ usuarioLogueado.usuario.Nombre }} {{ usuarioLogueado.usuario.Apellido }}
                               <a href="#" (click)="logout()">Cerrar Sesión</a>
