@@ -1,3 +1,5 @@
+import { Archivo } from "./Archivo";
+
 export interface RegistroUsuario {
   Cedula: string;
   Nombre: string;
@@ -6,4 +8,5 @@ export interface RegistroUsuario {
   Contrasena: string;
   Telefono: string;
   Tipo: number;
+  Imagen: Archivo;
 }
