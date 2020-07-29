@@ -11,6 +11,8 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_ID = "ID";
         private const string DB_COL_NOMBRE = "NOMBRE";
         private const string DB_COL_VALOR = "VALOR";
+        private const string DB_COL_CODIGO = "CODIGO";
+        private const string DB_COL_DESCRIPCION = "DESCRIPCION";
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
@@ -18,7 +20,9 @@ namespace DataAccessLayer.Mapper
             {
                 id = GetIntValue(row, DB_COL_ID),
                 nombre = GetStringValue(row, DB_COL_NOMBRE),
-                valor = GetIntValue(row, DB_COL_VALOR)
+                valor = GetIntValue(row, DB_COL_VALOR),
+                descripcion = GetStringValue(row, DB_COL_DESCRIPCION),
+                codigo = GetStringValue(row, DB_COL_CODIGO)
             };
 
             return configuracion;
@@ -44,6 +48,8 @@ namespace DataAccessLayer.Mapper
 
             operacion.AddVarcharParam(DB_COL_NOMBRE, c.nombre);
             operacion.AddIntParam(DB_COL_VALOR, c.valor);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
+            operacion.AddVarcharParam(DB_COL_DESCRIPCION, c.descripcion);
 
             return operacion;
         }
@@ -69,7 +75,7 @@ namespace DataAccessLayer.Mapper
             var operacion = new SqlOperation { ProcedureName = "OBTENER_CONFIGURACION" };
 
             var c = (Configuracion)entity;
-            operacion.AddVarcharParam(DB_COL_NOMBRE, c.nombre);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
 
             return operacion;
         }
@@ -82,6 +88,8 @@ namespace DataAccessLayer.Mapper
             operacion.AddIntParam(DB_COL_ID, c.id);
             operacion.AddVarcharParam(DB_COL_NOMBRE, c.nombre);
             operacion.AddIntParam(DB_COL_VALOR, c.valor);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
+            operacion.AddVarcharParam(DB_COL_DESCRIPCION, c.descripcion);
 
 
             return operacion;
