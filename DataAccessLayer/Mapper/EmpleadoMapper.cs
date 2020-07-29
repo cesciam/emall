@@ -3,7 +3,6 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Entities;
 
 namespace DataAccessLayer.Mapper
 {
@@ -17,11 +16,19 @@ namespace DataAccessLayer.Mapper
         {
             var empleado = new Empleado
             {
+                id = GetIntValue(row, DB_COL_ID),
                 id_usuario = GetIntValue(row, DB_COL_ID_USUARIO),
                 id_rol = GetIntValue(row, DB_COL_ID_ROL),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
             };
             return empleado;
+        }
+
+        internal SqlOperation GetRetriveAllDatosStatement()
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_DATOS_EMPLEADO_PR" };
+
+            return operation;
         }
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
