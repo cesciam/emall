@@ -40,13 +40,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(Item c)
+        public IActionResult CreateItem(Item c, string fotoUrl)
         {
             try
             {
                 var cm = new ItemManagement();
 
-                cm.CreateItem(c);
+                cm.CreateItem(c, fotoUrl);
 
                 return Ok();
 

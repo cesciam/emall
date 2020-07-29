@@ -35,8 +35,8 @@ export class ItemService {
     return observableThrowError(errorMessage);
   }
 
-  crearItem(item: Item): Observable<any> {
-    this.serviceApi = '/item/CreateItem';
+  crearItem(item: Item, fotoUrl: string): Observable<any> {
+    this.serviceApi = `/item/CreateItem/?fotoUrl=${fotoUrl}`;
     return this.http
       .post<void>(this.appUrl + this.serviceApi, item, this.httpOptions)
       .pipe(catchError(this.errorHandler)

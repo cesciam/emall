@@ -42,6 +42,18 @@ namespace DataAccessLayer.Mapper
             return lstResults;
         }
 
+        public SqlOperation CrearFotoItem(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "CREAR_ARCHIVO_ITEM" };
+            var a = (Archivo)entity;
+
+            operation.AddVarcharParam(DB_COL_ENLACE, a.Enlace);
+
+            return operation;
+        }
+
+
+
         public SqlOperation GetCreateStatement(BaseEntity entity, string CedulaJuridica)
         {
             var operation = new SqlOperation { ProcedureName = "CREAR_ARCHIVO_COMERCIO" };
@@ -54,6 +66,7 @@ namespace DataAccessLayer.Mapper
 
             return operation;
         }
+
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {

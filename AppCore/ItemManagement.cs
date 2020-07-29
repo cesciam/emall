@@ -14,9 +14,11 @@ namespace AppCore
             crudItem = new ItemCrudFactory();
         }
 
-        public void CreateItem(Item item)
+        public void CreateItem(Item item, string fotoUrl)
         {
 
+            var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
+            item.id_foto = archivo.Id;
             crudItem.Create(item);
 
         }

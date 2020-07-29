@@ -2,7 +2,7 @@ import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../../models/item';
 import { getBaseUrl } from '../../../main';
-import { Impuesto } from '../../models/impuesto';
+//import { Impuesto } from '../../models/impuesto';
 import { ItemService } from '../../services/item.service';
 import { async } from '@angular/core/testing';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
@@ -26,7 +26,7 @@ import { parse } from 'ts-node';
 
 export class ItemCrearComponent implements OnInit {
 
-  sucursal: number;
+  sucursal: Sucursal;
   message: string;
   impuestos: number[];
   item: Item;
@@ -38,12 +38,13 @@ export class ItemCrearComponent implements OnInit {
 
 
   constructor(private service: ItemService) {
-    //this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
+    this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
     this.impuestos = [1, 2, 3]
     this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
     this.foto = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
     this.item = new Item();
-    this.sucursal = 1;
+    this.sucursal = new Sucursal();
+    this.sucursal.id = 1;
   }
 
 
@@ -51,36 +52,27 @@ export class ItemCrearComponent implements OnInit {
 
 
   ngOnInit() {
-    //this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
-    this.impuestos = [1,2,3]
-    this.sucursal = 1;
+    this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
+    this.impuestos = [1, 2, 3]
+    this.sucursal = new Sucursal();
+    this.sucursal.id = 1;
+
+
   }
 
 
   crearItem() {
     this.item.id_impuesto = Number(this.item.id_impuesto)
-    this.item.id_foto = 1;
+    //this.item.id_foto = 1;
+    this.item.id_sucursal = this.sucursal.id;
     console.log(this.item);
-    this.service.crearItem(this.item)
+    console.log(this.foto);
+    this.service.crearItem(this.item, this.foto)
       .subscribe(
         (data: any) => console.log(data),
         (err: any) => console.log(err)
       );
   }
-
-
-  //crearItem(formValues: any): void {
-  //  let item: Item = <Item>formValues;
-  //  item.id_sucursal = 1;
-  //  item.id_foto = 1;
-  //  item.id_impuesto = 1;
-  //  this.service.crearItem(item)
-  //    .subscribe(
-  //      (data: any) => console.log(data),
-  //      (err: any) => console.log(err)
-  //    );
-
-  //}
 
   upload() {
     this.uploader.uploadAll();
@@ -90,27 +82,7 @@ export class ItemCrearComponent implements OnInit {
       res = JSON.parse(response);
       console.log(res);
       this.foto = res.url;
-      //var archivo = new Archivo();
-      //archivo.nombre = nombre;
-      //archivo.tipo = tipo;
-      //archivo.enlace = res.url;
-
-      //switch (nombre) {
-      //  case 'logo':
-      //    this.logo = res.url;
-      //    this.comercio.archivos[0] = archivo;
-      //    break;
-      //  case 'imagenHacienda':
-      //    this.imagenHacienda = res.url;
-      //    this.comercio.archivos[1] = archivo;
-      //    break;
-      //  case 'imagenSalud':
-      //    this.imagenSalud = res.url;
-      //    this.comercio.archivos[2] = archivo;
-      //    break;
-      //}
-
-      //console.log(this.comercio);
+      
       return res;
     };
   }
