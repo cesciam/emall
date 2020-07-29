@@ -38,6 +38,11 @@ namespace AppCore
             crudItem.Update(item);
         }
 
+        public void UpdateArchivo(Archivo archivo)
+        {
+            crudItem.UpdateArchivo(archivo);
+        }
+
         public void DeleteItem(Item item)
         {
             crudItem.Delete(item);
@@ -57,6 +62,14 @@ namespace AppCore
         public List<Item> RetrieveAllByTipo(string tipo)
         {
             return crudItem.RetrieveAllByTipo<Item>(tipo);
+        }
+
+        public Archivo RetrieveItemArchivo(Archivo archivo)
+        {
+
+
+
+            return crudItem.RetrieveItemArchivo<Archivo>(archivo);
         }
 
 

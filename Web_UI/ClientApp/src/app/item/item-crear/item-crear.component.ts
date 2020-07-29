@@ -26,7 +26,8 @@ import { parse } from 'ts-node';
 
 export class ItemCrearComponent implements OnInit {
 
-  sucursal: Sucursal;
+  //sucursal: Sucursal;
+  sucursal: number;
   message: string;
   impuestos: number[];
   item: Item;
@@ -37,14 +38,15 @@ export class ItemCrearComponent implements OnInit {
 
 
 
-  constructor(private service: ItemService) {
-    this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
+  constructor(private route: ActivatedRoute, private service: ItemService) {
+    //this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
+    this.sucursal = parseInt(this.route.snapshot.params['id_sucursal']);
     this.impuestos = [1, 2, 3]
     this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
     this.foto = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
     this.item = new Item();
-    this.sucursal = new Sucursal();
-    this.sucursal.id = 1;
+    //this.sucursal = new Sucursal();
+    //this.sucursal.id = 1;
   }
 
 
@@ -52,10 +54,11 @@ export class ItemCrearComponent implements OnInit {
 
 
   ngOnInit() {
-    this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
+    this.sucursal = parseInt(this.route.snapshot.params['id_sucursal']);
+    //this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
     this.impuestos = [1, 2, 3]
-    this.sucursal = new Sucursal();
-    this.sucursal.id = 1;
+    //this.sucursal = new Sucursal();
+    //this.sucursal.id = 1;
 
 
   }
@@ -64,7 +67,7 @@ export class ItemCrearComponent implements OnInit {
   crearItem() {
     this.item.id_impuesto = Number(this.item.id_impuesto)
     //this.item.id_foto = 1;
-    this.item.id_sucursal = this.sucursal.id;
+    this.item.id_sucursal = this.sucursal;
     console.log(this.item);
     console.log(this.foto);
     this.service.crearItem(this.item, this.foto)

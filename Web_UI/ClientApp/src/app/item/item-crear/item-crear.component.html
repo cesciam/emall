@@ -1,7 +1,7 @@
 <div *ngIf="sucursal">
 
   <div class="col-sm-auto d-flex justify-content-end">
-    <a [routerLink]="['../perfil-admin-comercio']">Volver atras</a>
+    <a [routerLink]="['/item-sucursal', sucursal]">Volver atras</a>
     
   </div>
 
@@ -98,7 +98,7 @@
 
         <div class="col-sm-6">
           <label for="id_sucursal">Sucursal</label>
-          <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal.id" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
+          <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
         </div>
 
         <div class="col-sm-6">

@@ -85,6 +85,12 @@ namespace DataAccessLayer.Crud
             dao.ExecuteProcedure(mapper.GetUpdateStatement(item));
         }
 
+        public void UpdateArchivo(BaseEntity entity)
+        {
+            var archivo = (Archivo)entity;
+            dao.ExecuteProcedure(foto.ModificarArchivoItem(archivo));
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var item = (Item)entity;
@@ -126,6 +132,20 @@ namespace DataAccessLayer.Crud
 
             return lista;
         }
+
+        public T RetrieveItemArchivo<T>(BaseEntity entity)
+        {
+            var lista = dao.ExecuteQueryProcedure(foto.ObtenerArchivoItem(entity));
+            var dic = new Dictionary<string, object>();
+            if (lista.Count > 0)
+            {
+                dic = lista[0];
+                var objs = foto.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+            return default(T);
+        }
+
 
         //public List<T> RetrieveAllByComercio<T>(int id_comercio)
         //{

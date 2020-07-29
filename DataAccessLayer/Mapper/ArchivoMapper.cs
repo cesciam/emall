@@ -52,6 +52,29 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation ObtenerArchivoItem(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ARCHIVO_ITEM" };
+            var a = (Archivo)entity;
+
+            operation.AddIntParam(DB_COL_ID, a.Id);
+
+            return operation;
+        }
+
+        public SqlOperation ModificarArchivoItem(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ARCHIVO_ITEM" };
+            var a = (Archivo)entity;
+
+            operation.AddIntParam(DB_COL_ID, a.Id);
+            operation.AddVarcharParam(DB_COL_NOMBRE, a.Nombre);
+            operation.AddVarcharParam(DB_COL_ENLACE, a.Enlace);
+            operation.AddVarcharParam(DB_COL_TIPO, a.Tipo);
+
+            return operation;
+        }
+
 
 
         public SqlOperation GetCreateStatement(BaseEntity entity, string CedulaJuridica)

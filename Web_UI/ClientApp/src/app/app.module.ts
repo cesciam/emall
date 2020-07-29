@@ -36,6 +36,7 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
 import { ItemCrearComponent } from './item/item-crear/item-crear.component';
 import { ItemService } from './services/item.service';
+import { ItemEditarComponent } from './item/item-editar/item-editar.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -65,6 +66,7 @@ const maskConfig: Partial<IConfig> = {
     ModificarEmpleadoComponent,
     ItemSucursalComponent,
     ItemCrearComponent,
+    ItemEditarComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -88,8 +90,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
-      { path: 'item-crear', component: ItemCrearComponent },
-      { path: 'item-sucursal', component: ItemSucursalComponent },
+      { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
+      { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
+      { path: 'item-editar/:id_item', component: ItemEditarComponent },
     ])
   ],
   exports: [

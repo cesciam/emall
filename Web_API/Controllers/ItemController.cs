@@ -75,6 +75,24 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut]
+        public IActionResult UpdateArchivo(Archivo c)
+        {
+            try
+            {
+                var cm = new ItemManagement();
+
+                cm.UpdateArchivo(c);
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
 
         [HttpDelete]
         public IActionResult DeleteItem(int id)
@@ -115,6 +133,19 @@ namespace WebAPI.Controllers
 
             return cm.RetrieveAllByTipo(tipo);
 
+        }
+
+        [HttpGet]
+        public Archivo RetrieveItemArchivo(int id)
+        {
+            var cm = new ItemManagement();
+
+            var archivo = new Archivo()
+            {
+                Id = id
+            };
+
+            return cm.RetrieveItemArchivo(archivo);
         }
 
 
