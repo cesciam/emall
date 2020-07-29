@@ -28,6 +28,14 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
+import { ItemCrearComponent } from './item/item-crear/item-crear.component';
+import { ItemService } from './services/item.service';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -54,9 +62,14 @@ const maskConfig: Partial<IConfig> = {
     ListarRolComponent,
     AgregarRolComponent,
     ModificarRolComponent,
-    ModificarEmpleadoComponent
+    ModificarEmpleadoComponent,
+    ItemSucursalComponent,
+    ItemCrearComponent,
   ],
   imports: [
+    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
+    FileUploadModule,
+    Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -75,6 +88,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'item-crear', component: ItemCrearComponent },
+      { path: 'item-sucursal', component: ItemSucursalComponent },
     ])
   ],
   exports: [
@@ -88,7 +103,8 @@ const maskConfig: Partial<IConfig> = {
     RolService,
     VistaService,
     HorarioService,
-    VistaXRolService
+    VistaXRolService,
+    ItemService
   ],
   bootstrap: [
     AppComponent
