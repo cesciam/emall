@@ -61,6 +61,14 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
+        public List<Comercio> ObtenerComerciosAdmin(int IdAdmin)
+        {
+            var comercio = new Comercio { IdAdmin = IdAdmin };
+
+            return new ComercioManagement().ObtenerTodoComercio(comercio);
+        }
+
+        [HttpGet]
         public Comercio ObtenerComercio(int id)
         {
             Comercio comercio = new Comercio
@@ -80,7 +88,7 @@ namespace Web_API.Controllers
                 return Ok();
             } catch(Exception e)
             {
-                return StatusCode(500, e);
+                return BadRequest(new { message = "Ha ocurrido un error al editar. Vuelva a intentarlo más tarde" });
             }
         }
 
@@ -94,7 +102,7 @@ namespace Web_API.Controllers
                 return Ok();
             } catch(Exception)
             {
-                return BadRequest(new { message = "Ha ocurrido un error al eliminar este comercio. Vuelva a intentarlo más tarde" });
+                return BadRequest(new { message = "Este comercio tiene sucursales ligadas, elimínelas y vuelva a intentarlo." });
             }
 
         }

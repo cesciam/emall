@@ -31,11 +31,11 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
-        public Configuracion Retrieves(string nombre)
+        public Configuracion Retrieves(string codigo)
         {
             var configuracion = new Configuracion
             {
-                nombre = nombre
+                codigo = codigo
             };
 
             return mng.Retrieve(configuracion);

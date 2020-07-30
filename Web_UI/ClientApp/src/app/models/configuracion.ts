@@ -1,5 +1,7 @@
-export class configuracion {
+export class Configuracion{
     id: number;
     nombre: string;
-    valor: number;   
+    valor: number;
+    descripcion: string;
+    codigo: string;
 }
