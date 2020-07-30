@@ -47,12 +47,11 @@ import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-adm
 import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
 import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
 import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
-import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
-import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
 import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
 import { ItemCrearComponent } from './item/item-crear/item-crear.component';
 import { ItemService } from './services/item.service';
 import { ItemEditarComponent } from './item/item-editar/item-editar.component';
+import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -90,6 +89,7 @@ const maskConfig: Partial<IConfig> = {
     FilterSucursalPipe,
     ModificarSucursalComponent,
     ModificarEmpleadoComponent,
+    ModificarEmpleadoComponent,
     DashboardComercioComponent,
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
@@ -98,12 +98,10 @@ const maskConfig: Partial<IConfig> = {
     EditarPromocionComponent,
     RegistrarPromocionComponent,
     FiltroPromocionPipe,
-    CardsComercioComponent,
-    ModificarEmpleadoComponent,
-    ListarConfiguracionComponent,
     ItemSucursalComponent,
     ItemCrearComponent,
     ItemEditarComponent,
+    CardsComercioComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -148,7 +146,6 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'configuracion', component: ListarConfiguracionComponent },
     ])
   ],
   exports: [
