@@ -1,4 +1,6 @@
-export interface RegistroUsuario {
+import { Archivo } from "./Archivo";
+
+export class RegistroUsuario {
   Cedula: string;
   Nombre: string;
   Apellido: string;
@@ -6,4 +8,5 @@ export interface RegistroUsuario {
   Contrasena: string;
   Telefono: string;
   Tipo: number;
+  Foto: Archivo;
 }

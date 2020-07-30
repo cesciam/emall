@@ -5,7 +5,6 @@ using AppCore;
 using Entities;
 using Entities.ViewModels;
 using Utils;
-using Utils.Email;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
@@ -17,12 +16,10 @@ namespace Web_API.Controllers {
 
     public class UsuarioController : Controller {
         private UsuarioManagement usuarioManagement;
-        private EmailService emailService;
         private readonly IConfiguration configuration;
 
-        public UsuarioController(IConfiguration configuration, EmailService emailService) {
+        public UsuarioController(IConfiguration configuration) {
             this.usuarioManagement = new UsuarioManagement();
-            this.emailService = emailService;
             this.configuration = configuration;
         }
 
@@ -61,45 +58,10 @@ namespace Web_API.Controllers {
             if (registro == null)
                 return BadRequest(new ErrorResultViewModel { message = "El formato de registro no es valido." });
 
-            var errores = this.usuarioManagement.ComprobarErrores(registro);
-
-            if (errores != null)
-                return BadRequest(errores);
-
-            Usuario nuevoUsuario = new Usuario {
-                Id = 0,
-                Cedula = registro.Cedula,
-                Nombre = registro.Nombre,
-                Apellido = registro.Apellido,
-                Correo =  registro.Correo,
-                Telefono = registro.Telefono,
-                Tipo = registro.Tipo,
-                Estado = 0,
-                Foto = 1,
-                CorreoConfirmado = 0,
-                TelefonoConfirmado = 0,
-                CodigoTelefono = TokenGenerator.Generar(8),
-                CodigoCorreo = TokenGenerator.Generar(8),
-            };
-
-            int usuarioId = this.usuarioManagement.Registrar(nuevoUsuario);
-
-            if (usuarioId != 0) {
-                this.usuarioManagement.CrearContrasena(registro.Contrasena, usuarioId);
-                var url = "http://" + HttpContext.Request.Host.Value;
-
-                //Envia email de activacion de cuenta
-                this.emailService.Send(new EmailModel {
-                    To = nuevoUsuario.Correo,
-                    Subject = "Activar cuenta",
-                    Message = "<p>Activar cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" +
-                              "<p><a href=\"" + url + "\">Activar cuenta</a></p>"
-                });
-
+            if (this.usuarioManagement.Registrar(registro))
                 return Ok();
-            } else {
+            else
                 return BadRequest(new { message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos." });
-            }
         }
 
         [HttpPut]

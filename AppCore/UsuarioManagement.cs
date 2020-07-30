@@ -6,19 +6,64 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Utils;
+using Utils.Email;
+using Microsoft.Extensions.Configuration;
 
 namespace AppCore {
     public class UsuarioManagement {
         private UsuarioCrudFactory crudUsuario;
         private ContrasenaCrudFactory crudContrasena;
+        private ErrorResultViewModel errorResult;
+        private EmailService emailService;
 
         public UsuarioManagement() {
             this.crudUsuario = new UsuarioCrudFactory();
             this.crudContrasena = new ContrasenaCrudFactory();
+            this.errorResult = new ErrorResultViewModel();
+            this.emailService = new EmailService();
         }
 
-        public int Registrar(Usuario usuario) {
-            return this.crudUsuario.Insert(usuario);
+        public bool Registrar(RegistroViewModel registro) {
+            var errores = this.ComprobarErrores(registro);
+
+            if (errores != null)
+                return false;
+
+            Usuario nuevoUsuario = new Usuario {
+                Id = 0,
+                Cedula = registro.Cedula,
+                Nombre = registro.Nombre,
+                Apellido = registro.Apellido,
+                Correo = registro.Correo,
+                Telefono = registro.Telefono,
+                Tipo = registro.Tipo,
+                Estado = 0,
+                Foto = registro.Foto,
+                CorreoConfirmado = 0,
+                TelefonoConfirmado = 0,
+                CodigoTelefono = TokenGenerator.Generar(8),
+                CodigoCorreo = TokenGenerator.Generar(8),
+            };
+
+            int nuevoUsuarioId = this.crudUsuario.Insert(nuevoUsuario);
+
+            if (nuevoUsuarioId != 0) {
+                this.CrearContrasena(registro.Contrasena, nuevoUsuarioId);
+
+                var url = "http://[host]"; //HttpContext.Request.Host.Value;
+                //Envia email de activacion de cuenta
+                this.emailService.Send(new EmailModel {
+                    To = nuevoUsuario.Correo,
+                    Subject = "Activar cuenta",
+                    Message = "<p>Activar cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" +
+                              "<p><a href=\"" + url + "\">Activar cuenta</a></p>"
+                });
+
+                return true;
+            } else {
+                this.errorResult.message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos.";
+                return false;
+            }
         }
 
         public Usuario Login(string correo, string contrasena) {
@@ -37,23 +82,22 @@ namespace AppCore {
         }
 
         public ErrorResultViewModel ComprobarErrores(RegistroViewModel registro) {
-            ErrorResultViewModel message = new ErrorResultViewModel();
-            message.details = new List<string>();
+            this.errorResult.details = new List<string>();
 
             if (!FormatValidation.IsValidEmail(registro.Correo))
-                message.details.Add("El email no tiene un formato valido");
+                this.errorResult.details.Add("El email no tiene un formato valido");
 
             if (!FormatValidation.IsValidPassword(registro.Contrasena))
-                message.details.Add("La contraseña no tiene un formato valido");
+                this.errorResult.details.Add("La contraseña no tiene un formato valido");
 
             if (!FormatValidation.IsValidPhone(registro.Telefono))
-                message.details.Add("El telefono no tiene un formato valido");
+                this.errorResult.details.Add("El telefono no tiene un formato valido");
 
-            if (message.details.Count == 0) {
+            if (this.errorResult.details.Count == 0) {
                 return null;
             } else {
-                message.message = "Han ocurrido errores al registrar el usuario";
-                return message;
+                this.errorResult.message = "Han ocurrido errores al registrar el usuario";
+                return this.errorResult;
             }
                 
         }

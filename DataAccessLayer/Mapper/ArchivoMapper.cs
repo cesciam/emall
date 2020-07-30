@@ -93,7 +93,14 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "CREAR_ARCHIVO_USUARIO" };
+            var a = (Archivo)entity;
+
+            operation.AddVarcharParam(DB_COL_NOMBRE, a.Nombre);
+            operation.AddVarcharParam(DB_COL_ENLACE, a.Enlace);
+            operation.AddVarcharParam(DB_COL_TIPO, a.Tipo);
+
+            return operation;
         }
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)

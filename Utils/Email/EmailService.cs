@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Mail;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Bcpg.OpenPgp;
 using Utils.Email;
+using Microsoft.Extensions.Configuration;
 
 namespace Utils {
     public class EmailService {
@@ -14,15 +14,16 @@ namespace Utils {
         private string user;
         private string password;
 
-        public EmailService(IConfiguration iConfiguration) {
-            var smtpSection = iConfiguration.GetSection("Smtp");
+        public EmailService() {
+            var setting = ConfigHelper.GetConfig();
+            var connectionstring = setting["ConnectionStrings"];
 
-            if (smtpSection != null) {
-                this.host = smtpSection.GetSection("Host").Value;
-                this.port = Int32.Parse(smtpSection.GetSection("Port").Value);
-                this.from = smtpSection.GetSection("From").Value;
-                this.user = smtpSection.GetSection("User").Value;
-                this.password = smtpSection.GetSection("Password").Value;
+            if (setting != null) {
+                this.host = setting["Smtp:Host"];
+                this.port = Int32.Parse(setting["Smtp:Port"]);
+                this.from = setting["Smtp:From"];
+                this.user = setting["Smtp:User"];
+                this.password = setting["Smtp:Password"];
             }
         }
 
@@ -48,5 +49,17 @@ namespace Utils {
                 return false;
             }
         }
+    }
+}
+
+
+public static class ConfigHelper {
+    public static IConfiguration GetConfig() {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", 
+                         optional: true, 
+                         reloadOnChange: true); 
+        return builder.Build();
     }
 }
