@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { getBaseUrl } from '../../main';
 import { Categoria } from '../models/categoria.model';
 import { catchError, retry } from 'rxjs/operators';
 import { Comercio } from '../models/Comercio';
@@ -13,9 +12,9 @@ export class ComercioService {
   private http: HttpClient;
   private BASE_URL: string;
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.http = http;
-    this.BASE_URL = getBaseUrl();
+    this.BASE_URL = baseUrl;
   }
 
   ObtenerTodoCategorias() {
@@ -53,6 +52,11 @@ export class ComercioService {
     return this.http.get<Comercio>(endpointUrl);
   }
 
+  obtenerTodoComercioPendiente() {
+    let endpointUrl = this.BASE_URL + '/comercio/ObtenerTodoComercioPendiente';
+    return this.http.get<Comercio[]>(endpointUrl);
+  }
+
   eliminarComercio(id: number) {
     let endpoint = this.BASE_URL + '/comercio/EliminarComercio?id=' + id;
     return this.http.delete(endpoint)
@@ -71,6 +75,16 @@ export class ComercioService {
           return throwError(error);
           })
         );
+  }
+
+  modificarEstadoComercio(comercio: Comercio) {
+    let endpointUrl = this.BASE_URL + '/comercio/ModificarEstadoComercio';
+    return this.http.put(endpointUrl, comercio)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
   }
 
  
