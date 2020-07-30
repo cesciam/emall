@@ -40,6 +40,23 @@ namespace DataAccessLayer.CRUD
 
             return default(T);
         }
+        public List<T> RetrieveByIdComercio<T>(BaseEntity entity)
+        {
+            var lstRol = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveByIdComercioStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstRol.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstRol;
+        }
 
         public override List<T> RetrieveAll<T>()
         {

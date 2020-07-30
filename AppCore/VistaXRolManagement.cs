@@ -33,5 +33,10 @@ namespace AppCore
         {
             crud.Delete(vr);
         }
+
+        public List<VistaXRol> RetrieveByRol(VistaXRol V)
+        {
+            return crud.RetrieveByRol<VistaXRol>(V);
+        }
     }
 }

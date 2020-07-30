@@ -37,13 +37,10 @@ import { ModificarSucursalComponent } from './modificar-sucursal/modificar-sucur
 import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
 import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
-import { ComercioService } from './services/comercio.service';
-import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
-import { Cloudinary } from 'cloudinary-core';
-import { FileUploadModule } from "ng2-file-upload";
-import cloudinaryConfiguration from './config';
-import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
+import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
+import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
 import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
 import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
@@ -52,6 +49,12 @@ import { ItemCrearComponent } from './item/item-crear/item-crear.component';
 import { ItemService } from './services/item.service';
 import { ItemEditarComponent } from './item/item-editar/item-editar.component';
 import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
+import { ComercioService } from './services/comercio.service';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -114,6 +117,7 @@ const maskConfig: Partial<IConfig> = {
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([

@@ -1,1 +1,54 @@
-<p>modificar-rol works!</p>
+<app-header></app-header>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4 text-center">Modificar rol</h1>
+        <hr>
+        <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+            <div class="form-group" hidden>
+                <label for="id">ID</label>
+                <input type="number" name="id" #id="ngModel" [(ngModel)]=service.formData.id class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]=service.formData.nombre
+                    class="form-control" required>
+
+                <div class="alert alert-danger" *ngIf="nombre.invalid && nombre.touched">
+                    El nombre es requerido
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <input type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]=service.formData.descripcion
+                    class="form-control" required>
+                <div class="alert alert-danger" *ngIf="descripcion.invalid && descripcion.touched">
+                    La descripción es requerida
+                </div>
+
+            </div>
+            <div class="form-group" hidden>
+                <label for="id_comercio">Comercio</label>
+                <input type="number" name="id_comercio" #id_comercio="ngModel" [(ngModel)]=service.formData.id_comercio
+                    class="form-control" required>
+                <div class="alert alert-danger" *ngIf="id_comercio.invalid && id_comercio.touched">
+                    El comercio es requerido
+                </div>
+            </div>
+            <br>
+            <hr>
+            <div class="form-group">
+                <h4>Marque los elementos sobre los que desea otorgar permisos al rol:</h4>
+                <br>
+                <div *ngFor="let vista of serviceVista.list">
+                    <input  type="checkbox" name="{{vista.id}}" [value]="vista.id" (change)="getVistaId($event, vista.id)"> 
+                    <label for="{{vista.id}}"> {{vista.nombre}}</label> 
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+<app-footer></app-footer>

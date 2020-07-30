@@ -30,6 +30,18 @@ namespace Web_API.Controllers
             };
             return vrm.RetrieveById(credito);
         }
+
+        [HttpGet]
+        public List<VistaXRol> RetrieveByRol(int id)
+        {
+            var vrm = new VistaXRolManagement();
+            var credito = new VistaXRol()
+            {
+                id_rol = id
+            };
+            return vrm.RetrieveByRol(credito);
+        }
+
         [HttpPost]
         public IActionResult Create(VistaXRol c)
         {

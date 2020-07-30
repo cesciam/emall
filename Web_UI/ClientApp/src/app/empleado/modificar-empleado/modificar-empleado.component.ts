@@ -13,7 +13,7 @@ export class ModificarEmpleadoComponent implements OnInit {
 
   empleado : Empleado
   constructor(private service: EmpleadoService) {
-    //this.empleado = this.service.getById(localStorage.getItem.)
+    
    }
 
   ngOnInit() {
