@@ -28,6 +28,14 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
+import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
+import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
+import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
+import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
+import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -54,7 +62,7 @@ const maskConfig: Partial<IConfig> = {
     ListarRolComponent,
     AgregarRolComponent,
     ModificarRolComponent,
-    ModificarEmpleadoComponent
+    ModificarEmpleadoComponent,
     DashboardComercioComponent,
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
@@ -84,6 +92,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'modificar-rol', component: ModificarRolComponent },
     ])
   ],
   exports: [
