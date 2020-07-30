@@ -3,13 +3,12 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { equalValueValidator } from '../../../helpers/equal-value.validator';
+import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../../../config';
-import { Archivo } from '../../../models/Archivo';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { RegistroUsuario } from '../../../models/registro-usuario.model';
-import { DashboardAdminComponent } from '../../dashboard-admin.component';
+import { Archivo } from '../../../models/Archivo';
 
 @Component({
   selector: 'app-agregar-usuario',
@@ -26,7 +25,8 @@ export class AgregarUsuarioComponent implements OnInit {
   private registerComplete: boolean = false;
   private uploader: CloudinaryUploader;
   private imgUrl: any;
-  private archivo: Archivo;
+  private foto: Archivo;
+  private isSendingData: boolean = false;
       
   constructor(
     private router: Router,
@@ -74,21 +74,23 @@ export class AgregarUsuarioComponent implements OnInit {
     }
   }
 
-  subirFoto():boolean {
-    this.uploader.uploadAll();
+  subirFoto() {
+    const upload = new Promise((resolve, reject) => {
+      this.uploader.uploadAll();
 
-    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
-      let res = JSON.parse(response);
+      this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
+        let res = JSON.parse(response);
 
-      this.archivo = new Archivo();
-      this.archivo.enlace = res.url;
-      this.archivo.nombre = this.usuarioForm.controls['Foto'].value;
-      this.archivo.tipo = 'Foto';
+        this.foto = new Archivo();
+        this.foto.enlace = res.url;
+        this.foto.nombre = this.usuarioForm.controls['Foto'].value;
+        this.foto.tipo = 'Foto';
 
-      return true;
-    };
+        resolve();
+      }
+    });
 
-    return false;
+    return upload;
   }
 
   get f() {
@@ -96,41 +98,55 @@ export class AgregarUsuarioComponent implements OnInit {
   }
 
   sanitizeData(data: FormGroup): RegistroUsuario {
-    let nuevoUsuario: RegistroUsuario;
+    let nuevoUsuario: RegistroUsuario = new RegistroUsuario();
 
     nuevoUsuario.Nombre = this.usuarioForm.controls['Nombre'].value;
     nuevoUsuario.Apellido = this.usuarioForm.controls['Apellido'].value;
     nuevoUsuario.Cedula = this.usuarioForm.controls['Cedula'].value;
     nuevoUsuario.Contrasena = this.usuarioForm.controls['Contrasena'].value;
     nuevoUsuario.Correo = this.usuarioForm.controls['Correo'].value;
-    nuevoUsuario.Imagen = this.archivo;
+    nuevoUsuario.Foto = this.foto;
     nuevoUsuario.Telefono = this.usuarioForm.controls['Telefono'].value;
     nuevoUsuario.Tipo = +this.usuarioForm.controls['Tipo'].value;
 
     return nuevoUsuario;
   }
 
-  onSubmit() {
-    console.log('submitted');
-    this.submitted = true;
-
-    if (this.usuarioForm.invalid)
-      return;
-
-    if (this.subirFoto())
-      this.usuarioService.registrarUsuario(this.sanitizeData(this.usuarioForm))
+  registrarUsuario() {
+    this.usuarioService.registrarUsuario(this.sanitizeData(this.usuarioForm))
       .subscribe(
         (response) => {
+          this.isSendingData = false;
+
           if (this.integrarCon == null)
             this.router.navigate(['dashboard-admin/usuario/listar-usuario']);
           else {
             window.scroll(0, 0);
             this.registerComplete = true;
           }
-      },
+        },
         (error) => {
+          this.isSendingData = false;
           this.error = error.error;
           window.scroll(0, 0);
-      });
+        });
+  }
+
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.usuarioForm.invalid)
+      return;
+
+    if (this.usuarioForm.controls['Foto'].value != '') {
+      this.subirFoto()
+        .then(() => {
+          this.isSendingData = true;
+          this.registrarUsuario();
+        });
+    } else {
+      this.registrarUsuario();
+    }
   }
 }

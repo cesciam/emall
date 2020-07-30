@@ -36,11 +36,17 @@ namespace Utils {
         }
 
         public static bool IsValidPassword(string password) {
+            if (string.IsNullOrWhiteSpace(password))
+                return false;
+
             // Minimo 8 caracteres, al menos una Mayuscula, al menos una minuscula, al menos un numero y almenos 1 caracter especial
             return Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
         }
 
         public static bool IsValidPhone(string phone) {
+            if (string.IsNullOrWhiteSpace(phone))
+                return false;
+
             return Regex.IsMatch(phone, @"^[0-9]{8}$");
         }
     }

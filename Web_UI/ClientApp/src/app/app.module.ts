@@ -28,6 +28,12 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -58,8 +64,11 @@ const maskConfig: Partial<IConfig> = {
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
+    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    FileUploadModule,
+    Ng2CloudinaryModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([

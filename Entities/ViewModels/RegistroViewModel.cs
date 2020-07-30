@@ -25,5 +25,7 @@ namespace Entities.ViewModels {
         
         [Required]
         public int Tipo { get; set; }
+
+        public Archivo Foto { get; set; }
     }
 }
