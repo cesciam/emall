@@ -4,7 +4,7 @@
     "outDir": "../out-tsc/app",
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "types": []
+    "types": ["googlemaps"]
   },
   "exclude": [
     "src/test.ts",

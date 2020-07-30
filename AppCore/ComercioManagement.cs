@@ -24,6 +24,11 @@ namespace AppCore
             return comercioFactory.RetrieveAll<Comercio>();
         }
 
+        public List<Comercio> ObtenerTodoComercio(Comercio comercio)
+        {
+            return comercioFactory.RetrieveAll<Comercio>(comercio);
+        }
+
         public Comercio ObtenerComercio(Comercio comercio)
         {
             return comercioFactory.Retrieve<Comercio>(comercio);

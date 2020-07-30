@@ -28,6 +28,12 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { ModificarComercioComponent } from './modificar-comercio/modificar-comercio.component';
+import { RegistrarSucursalComponent } from './registrar-sucursal/registrar-sucursal.component';
+import { AgmCoreModule } from '@agm/core';
+import { FilterComercioPipe } from './pipes/filter-comercio.pipe';
+import { FilterSucursalPipe } from './pipes/filter-sucursal.pipe';
+import { ModificarSucursalComponent } from './modificar-sucursal/modificar-sucursal.component';
 import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
 import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
@@ -45,6 +51,7 @@ import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.compon
 import { ItemCrearComponent } from './item/item-crear/item-crear.component';
 import { ItemService } from './services/item.service';
 import { ItemEditarComponent } from './item/item-editar/item-editar.component';
+import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -76,6 +83,17 @@ const maskConfig: Partial<IConfig> = {
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
     LandingPulsarComponent,
+    ModificarComercioComponent,
+    RegistrarSucursalComponent,
+    FilterComercioPipe,
+    FilterSucursalPipe,
+    ModificarSucursalComponent,
+    ModificarEmpleadoComponent,
+    ModificarEmpleadoComponent,
+    DashboardComercioComponent,
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent,
+    LandingPulsarComponent,
     ListarPromocionComponent,
     EditarPromocionComponent,
     RegistrarPromocionComponent,
@@ -83,6 +101,7 @@ const maskConfig: Partial<IConfig> = {
     ItemSucursalComponent,
     ItemCrearComponent,
     ItemEditarComponent,
+    CardsComercioComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -90,9 +109,13 @@ const maskConfig: Partial<IConfig> = {
     Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    FileUploadModule,
+    Ng2CloudinaryModule,
+    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
@@ -106,6 +129,13 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
+      { path: 'dashboard-comercio/registrar-sucursal', component: RegistrarSucursalComponent },
+      { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
