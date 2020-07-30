@@ -40,7 +40,7 @@ export class ComercioService {
      return this.http.get<Comercio[]>(endpointUrl);
   }
 
-  async obtenerTodoComercio() {
+  obtenerTodoComercio() {
     let endpointUrl = this.BASE_URL + '/comercio/ObtenerTodoComercio';
     let comercios: Comercio[];
 
