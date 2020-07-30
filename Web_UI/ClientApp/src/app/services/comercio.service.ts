@@ -18,13 +18,9 @@ export class ComercioService {
     this.BASE_URL = getBaseUrl();
   }
 
-  async ObtenerTodoCategorias() {
+  ObtenerTodoCategorias() {
     let endpointUrl = this.BASE_URL + '/categoria/ObtenerTodoCategoria';
-    let categorias: Categoria[];
-
-    categorias = await this.http.get<Categoria[]>(endpointUrl).toPromise();
-
-    return categorias;
+    return this.http.get<Categoria[]>(endpointUrl);
   }
 
   registrarComercio(comercio: Comercio) {
@@ -38,13 +34,23 @@ export class ComercioService {
       );
   }
 
-  async obtenerTodoComercio() {
+   ObtenerComerciosAdmin(comercio: Comercio) {
+    let endpointUrl = this.BASE_URL + '/comercio/ObtenerComerciosAdmin?idAdmin=' + comercio.idAdmin;
+
+     return this.http.get<Comercio[]>(endpointUrl);
+  }
+
+  obtenerTodoComercio() {
     let endpointUrl = this.BASE_URL + '/comercio/ObtenerTodoComercio';
     let comercios: Comercio[];
 
-    comercios = await this.http.get<Comercio[]>(endpointUrl).toPromise();
+    return this.http.get<Comercio[]>(endpointUrl);
+  }
 
-    return comercios;
+  obtenerComercio(comercio: Comercio) {
+    let endpointUrl = this.BASE_URL + '/comercio/ObtenerComercio?id=' + comercio.id;
+
+    return this.http.get<Comercio>(endpointUrl);
   }
 
   eliminarComercio(id: number) {
@@ -55,6 +61,16 @@ export class ComercioService {
           return throwError(error);
         })
       );
+  }
+
+  modificarComercio(comercio: Comercio) {
+    let endpointUrl = this.BASE_URL + '/comercio/ModificarComercio';
+    return this.http.put(endpointUrl, comercio)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+          })
+        );
   }
 
  
