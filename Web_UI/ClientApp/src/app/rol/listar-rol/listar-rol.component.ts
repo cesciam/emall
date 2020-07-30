@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RolService } from 'src/app/services/rol.service';
+import { Rol } from 'src/app/models/rol.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-rol',
@@ -8,7 +10,8 @@ import { RolService } from 'src/app/services/rol.service';
 })
 export class ListarRolComponent implements OnInit {
 
-  constructor(private service: RolService) { }
+  constructor(private service: RolService,
+    private router: Router) { }
 
   ngOnInit() {
     this.service.fillList();
@@ -22,6 +25,11 @@ export class ListarRolComponent implements OnInit {
     }
   }
 
+  onUpdate(id: number){
+    this.service.getById(id);
+    //localStorage.setItem("rol", JSON.stringify(rol));
+    this.router.navigate(['modificar-rol'])
+  }
 
 
 }

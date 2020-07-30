@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Rol } from '../models/rol.model';
 import { HttpClient } from '@angular/common/http';
+import { Vista } from '../models/vista.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class RolService {
   }
 
   fillList(){
-    this.http.get(this.BASE_URL+'Rol/RetrieveAll')
+    this.http.get(this.BASE_URL+'Rol/RetrieveByIdComercio'+'?id=' +7)
     .toPromise().then(res=>this.list=res as Rol[]);
   }
 
@@ -27,8 +28,17 @@ export class RolService {
     return this.http.post(this.BASE_URL+'Rol/Create', formData);
   }
 
-  putEmpleado(formData : Rol){
+  putRol(formData : Rol){
     return this.http.put(this.BASE_URL+'Rol/Update',formData)
   }
+
+  getById(id: number){
+    return this.http.get(this.BASE_URL+'Rol/RetrieveById'+'?id=' +id)
+     .toPromise().then(res=>this.formData =res as Rol)
+  }
+
+  // getSelectedRol(){
+  //   this.formData= JSON.parse(localStorage.getItem("rol"))
+  // }
 
 }
