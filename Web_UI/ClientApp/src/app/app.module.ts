@@ -28,7 +28,19 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
+import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
+import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
+import { ComercioService } from './services/comercio.service';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
+import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
+import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -56,13 +68,20 @@ const maskConfig: Partial<IConfig> = {
     AgregarRolComponent,
     ModificarRolComponent,
     ModificarEmpleadoComponent
+    DashboardComercioComponent,
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent,
+    LandingPulsarComponent,
+    ListarPromocionComponent,
+    EditarPromocionComponent,
+    RegistrarPromocionComponent,
+    FiltroPromocionPipe,
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -77,14 +96,20 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
-      { path: 'modificar-rol', component: ModificarRolComponent }
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'dashboard-comercio', component: DashboardComercioComponent },
+      { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'promociones', component: ListarPromocionComponent },
+      { path: 'promocion/:id', component: EditarPromocionComponent },
+      { path: 'promocion-registro', component: RegistrarPromocionComponent }
     ])
   ],
   exports: [
     AgregarUsuarioComponent
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA 
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     EmpleadoService,
