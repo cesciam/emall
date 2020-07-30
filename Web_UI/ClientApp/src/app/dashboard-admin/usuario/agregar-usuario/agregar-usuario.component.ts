@@ -42,13 +42,13 @@ export class AgregarUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioForm = new FormGroup({
-      Cedula: new FormControl('456345634', [Validators.required, Validators.minLength(9)]),
-      Nombre: new FormControl('Gerardo', [Validators.required]),
-      Apellido: new FormControl('Campos', [Validators.required]),
-      Correo: new FormControl('gererdo@domain.com', [Validators.required, Validators.email]),
-      Contrasena: new FormControl('Michael123@', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-      ContrasenaConfirmar: new FormControl('Michael123@', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-      Telefono: new FormControl('45454545', [Validators.required]),
+      Cedula: new FormControl('', [Validators.required, Validators.minLength(9)]),
+      Nombre: new FormControl('', [Validators.required]),
+      Apellido: new FormControl('', [Validators.required]),
+      Correo: new FormControl('', [Validators.required, Validators.email]),
+      Contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+      ContrasenaConfirmar: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+      Telefono: new FormControl('', [Validators.required]),
       Tipo: new FormControl(this.integrarCon == 'pagina' ? '2' : '', [Validators.required]),
       Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpe?g|bmp|png|webp|tiff|eps)$/igm)])
     }, {
