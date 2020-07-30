@@ -1,5 +1,5 @@
 import { Archivo } from "./Archivo";
-import { Categoria } from "./Categoria";
+import { Categoria } from "./categoria.model";
 
 export class Comercio {
   id: number;

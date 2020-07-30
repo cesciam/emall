@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Comercio } from '../models/Comercio';
-import { Categoria } from '../models/Categoria';
+import { Categoria } from '../models/categoria.model';
 import { ComercioService } from '../services/comercio.service';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Cloudinary } from '@cloudinary/angular-5.x';

@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\helpers\equal-value.validator.ts" />
+    <None Remove="ClientApp\src\app\models\categoria.model.ts" />
+    <None Remove="ClientApp\src\app\models\impuesto.model.ts" />
     <None Remove="ClientApp\src\app\models\login-usuario.model.ts" />
     <None Remove="ClientApp\src\app\models\registro-usuario.model.ts" />
     <None Remove="ClientApp\src\app\models\sesion-usuario.model.ts" />
@@ -35,7 +37,6 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\config.ts" />
     <None Remove="ClientApp\src\app\models\Archivo.ts" />
-    <None Remove="ClientApp\src\app\models\Categoria.ts" />
     <None Remove="ClientApp\src\app\models\Comercio.ts" />
     <None Remove="ClientApp\src\app\models\Sucursal.ts" />
   </ItemGroup>
@@ -46,6 +47,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\helpers\equal-value.validator.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\impuesto.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\login-usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\registro-usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\sesion-usuario.model.ts" />
@@ -56,7 +58,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\config.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Archivo.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\Categoria.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\categoria.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Comercio.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Sucursal.ts" />
   </ItemGroup>

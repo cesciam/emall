@@ -6,4 +6,4 @@ var Categoria = /** @class */ (function () {
     return Categoria;
 }());
 exports.Categoria = Categoria;
-//# sourceMappingURL=Categoria.js.map
+//# sourceMappingURL=categoria.model.js.map
