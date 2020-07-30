@@ -53,6 +53,10 @@ import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
+import { ListarImpuestoComponent } from '../app/impuesto/listar-impuesto/listar-impuesto.component';
+import { CrearImpuestoComponent } from '../app/impuesto/crear-impuesto/crear-impuesto.component';
+import { ListarCategoriaComponent } from '../app/categoria/listar-categoria/listar-categoria.component';
+import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component'; 
 
 
 const maskConfig: Partial<IConfig> = {
@@ -103,6 +107,10 @@ const maskConfig: Partial<IConfig> = {
     ItemEditarComponent,
     CardsComercioComponent,
     ListarConfiguracionComponent,
+    ListarImpuestoComponent,
+    CrearImpuestoComponent,
+    ListarCategoriaComponent,
+    CrearCategoriaComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -141,7 +149,11 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'configuracion', component: ListarConfiguracionComponent }
+      { path: 'configuracion', component: ListarConfiguracionComponent },
+      { path: 'listar-impuesto', component: ListarImpuestoComponent },
+      { path: 'crear-impuesto', component: CrearImpuestoComponent },
+      { path: 'listar-categoria', component: ListarCategoriaComponent },
+      { path: 'crear-categoria', component: CrearCategoriaComponent }
     ])
   ],
   exports: [
@@ -156,7 +168,7 @@ const maskConfig: Partial<IConfig> = {
     VistaService,
     HorarioService,
     VistaXRolService,
-    ItemService,
+    ItemService
   ],
   bootstrap: [
     AppComponent
