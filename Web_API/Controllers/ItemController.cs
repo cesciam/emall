@@ -40,13 +40,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(Item c)
+        public IActionResult CreateItem(Item c, string fotoUrl)
         {
             try
             {
                 var cm = new ItemManagement();
 
-                cm.CreateItem(c);
+                cm.CreateItem(c, fotoUrl);
 
                 return Ok();
 
@@ -65,6 +65,24 @@ namespace WebAPI.Controllers
                 var cm = new ItemManagement();
 
                 cm.UpdateItem(c);
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateArchivo(Archivo c)
+        {
+            try
+            {
+                var cm = new ItemManagement();
+
+                cm.UpdateArchivo(c);
 
                 return Ok();
 
@@ -115,6 +133,19 @@ namespace WebAPI.Controllers
 
             return cm.RetrieveAllByTipo(tipo);
 
+        }
+
+        [HttpGet]
+        public Archivo RetrieveItemArchivo(int id)
+        {
+            var cm = new ItemManagement();
+
+            var archivo = new Archivo()
+            {
+                Id = id
+            };
+
+            return cm.RetrieveItemArchivo(archivo);
         }
 
 

@@ -38,13 +38,13 @@ import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pul
 import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
 import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
-import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
-import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
-import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
 import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
 import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
 import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
-import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
+import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
+import { ItemCrearComponent } from './item/item-crear/item-crear.component';
+import { ItemService } from './services/item.service';
+import { ItemEditarComponent } from './item/item-editar/item-editar.component';
 import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
 import { ComercioService } from './services/comercio.service';
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
@@ -52,6 +52,8 @@ import { Cloudinary } from 'cloudinary-core';
 import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
+
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -92,16 +94,20 @@ const maskConfig: Partial<IConfig> = {
     DashboardComercioComponent,
     RegistrarComercioComponent,
     PerfilAdminComercioComponent,
-    LandingPulsarComponent,
     ListarPromocionComponent,
     EditarPromocionComponent,
     RegistrarPromocionComponent,
     FiltroPromocionPipe,
+    ItemSucursalComponent,
+    ItemCrearComponent,
+    ItemEditarComponent,
     CardsComercioComponent,
-    ModificarEmpleadoComponent,
-    ListarConfiguracionComponent
+    ListarConfiguracionComponent,
   ],
   imports: [
+    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
+    FileUploadModule,
+    Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FileUploadModule,
@@ -109,7 +115,6 @@ const maskConfig: Partial<IConfig> = {
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
@@ -135,11 +140,13 @@ const maskConfig: Partial<IConfig> = {
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
-      { path: 'landing-pulsar', component: LandingPulsarComponent },
       { path: 'promociones', component: ListarPromocionComponent },
       { path: 'promocion/:id', component: EditarPromocionComponent },
-      { path: 'promocion-registro', component: RegistrarPromocionComponent }
-      { path: 'configuracion', component: ListarConfiguracionComponent },
+      { path: 'promocion-registro', component: RegistrarPromocionComponent },
+      { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
+      { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
+      { path: 'item-editar/:id_item', component: ItemEditarComponent },
+      { path: 'configuracion', component: ListarConfiguracionComponent }
     ])
   ],
   exports: [
@@ -153,7 +160,8 @@ const maskConfig: Partial<IConfig> = {
     RolService,
     VistaService,
     HorarioService,
-    VistaXRolService
+    VistaXRolService,
+    ItemService,
   ],
   bootstrap: [
     AppComponent
