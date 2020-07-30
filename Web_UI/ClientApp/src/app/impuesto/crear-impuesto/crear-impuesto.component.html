@@ -1,0 +1,20 @@
+<div>
+  <h1>Registro de impuestos</h1>
+  <form>
+    <fieldset>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Id</label>
+        <input type="text" class="form-control" id="txtId" readonly value="{{selectedImpuesto.Id}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Nombre</label>
+        <input type="text" class="form-control" id="txtName" value="{{selectedImpuesto.Nombre}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Apellido</label>
+        <input type="number" class="form-control" id="txtLastName" value="{{selectedImpuesto.Porcentaje}}">
+      </div>
+      <button class="btn btn-primary" (click)="modificar(selectedImpuesto)">Guardar cambios</button>
+    </fieldset>
+  </form>
+</div>

@@ -13,6 +13,7 @@ namespace Entities
         [JsonPropertyName("Nombre")]
         public string Nombre { get; set; }
 
+
         public Categoria()
         {
 

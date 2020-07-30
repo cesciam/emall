@@ -10,14 +10,14 @@
           </a>
         </h6>
         <ul class="nav flex-column mb-2">
+          <!--<li class="nav-item">
+    <a class="nav-link" href="#">
+      <span data-feather="file-text"></span>
+      Mis reportes
+    </a>
+  </li>-->
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Mis reportes
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" [routerLink]="['/listar-rol']" [queryParams]="{comercio: comercioSeleccionado.id}">
               <span data-feather="file-text"></span>
               Roles
             </a>
@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" [routerLink]="['/promociones']">
               <span data-feather="file-text"></span>
               Promociones
             </a>
@@ -74,10 +74,12 @@
   </div>-->
 
         <div class="col-xl-3 col-md-6">
-          <div class="card bg-primary text-white mb-4">
-            <div class="card-body">Empleados</div>
+          <a [routerLink]="['/listar-empleado']" [queryParams]="{comercio: comercioSeleccionado.id}">
+            <div class="card bg-primary text-white mb-4">
+              <div class="card-body">Empleados</div>
 
-          </div>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -97,7 +99,9 @@
               <td>{{ sucursal.nombre }}</td>
               <td>{{ sucursal.detallesDireccion }}</td>
               <td>
-                <button type="button" class="btn btn-primary">Items de sucursal</button>
+                <a [routerLink]="['/item-sucursal', sucursal.id]">
+                  <button type="button" class="btn btn-primary">Items de sucursal</button>
+                </a>
               </td>
               <td>
                 <a style="text-decoration: none" [routerLink]="['/dashboard-comercio/modificar-sucursal']" [queryParams]="{sucursal: sucursal.id}">
