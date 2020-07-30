@@ -3,6 +3,7 @@ import { ComercioService } from '../services/comercio.service';
 import { Comercio } from '../models/Comercio';
 import { Sucursal } from '../models/Sucursal';
 import { SucursalService } from '../services/sucursal.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-comercio',
@@ -16,21 +17,33 @@ export class DashboardComercioComponent implements OnInit {
   private comercioSeleccionado: Comercio;
   private sucursales: Sucursal[];
   private error: any;
+  private filterSucursal = ''; 
 
-  constructor(comercioService: ComercioService, sucursalService: SucursalService) {
+  constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute) {
     this.comercioService = comercioService;
     this.sucursalService = sucursalService;
     this.error = null;
   }
 
   ngOnInit() {
-    this.comercioSeleccionado = JSON.parse(localStorage.getItem('comercioSeleccionado'));
-    console.log(this.comercioSeleccionado);
-    this.llenarSucursales();
+    this.llenarComercio();
   }
 
-  async llenarSucursales() {
-    this.sucursales = await this.sucursalService.ObtenerTodoSucursales(this.comercioSeleccionado.id);
+  llenarComercio() {
+    let idComercio: number = this.activatedRoute.snapshot.queryParams['comercio'];
+    let comercio = new Comercio();
+    comercio.id = idComercio;
+
+    this.comercioService.obtenerComercio(comercio)
+      .subscribe(data => {
+        this.comercioSeleccionado = data
+        this.llenarSucursales();
+      });
+  }
+
+   llenarSucursales() {
+     this.sucursalService.ObtenerTodoSucursales(this.comercioSeleccionado.id)
+       .subscribe(data => this.sucursales = data);
   }
 
   eliminarSucursal(sucursal: Sucursal) {
