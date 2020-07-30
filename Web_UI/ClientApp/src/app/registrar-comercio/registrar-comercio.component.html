@@ -12,13 +12,17 @@
     <div class="col">
       <label for="nombre">Nombre de su comercio</label>
       <input id="nombre" name="nombre" class="form-control"
-             [(ngModel)]="comercio.nombre" #nombre="ngModel" type="text" required>
+             [(ngModel)]="comercio.nombre" minlength="3" #nombre="ngModel" type="text" required>
 
       <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
            class="alert alert-danger">
 
         <div *ngIf="nombre.errors.required">
           El nombre es requerido.
+        </div>
+
+        <div *ngIf="nombre.errors.minlength">
+          El nombre comercial debe tener al menos 3 caracteres.
         </div>
       </div>
 
@@ -28,13 +32,17 @@
     <div class="col">
       <label for="nombreLegal">Nombre legal</label>
       <input id="nombreLegal" name="nombreLegal" class="form-control"
-             [(ngModel)]="comercio.nombreLegal" #nombreLegal="ngModel" type="text" required>
+             [(ngModel)]="comercio.nombreLegal" minlength="3" #nombreLegal="ngModel" type="text" required>
 
       <div *ngIf="nombreLegal.invalid && (nombreLegal.dirty || nombreLegal.touched)"
            class="alert alert-danger">
 
         <div *ngIf="nombreLegal.errors.required">
           El nombre legal es requerido
+        </div>
+
+        <div *ngIf="nombreLegal.errors.minlength">
+          El nombre legal debe tener al menos 3 caracteres.
         </div>
       </div>
 
@@ -46,13 +54,17 @@
     <div class="col">
       <label for="cedula">Cédula jurídica</label>
       <input id="cedula" name="cedula" class="form-control"
-             [(ngModel)]="comercio.cedulaJuridica" #cedula="ngModel" type="text" required>
+             [(ngModel)]="comercio.cedulaJuridica" minlength="11" #cedula="ngModel" type="text" required>
 
       <div *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)"
            class="alert alert-danger">
 
         <div *ngIf="cedula.errors.required">
           La cédula jurídica es requerida.
+        </div>
+
+        <div *ngIf="cedula.errors.minlength">
+          La cédula debe tener al menos 11 caracteres.
         </div>
       </div>
 

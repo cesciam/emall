@@ -1,11 +1,7 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
 import { Comercio } from '../models/Comercio';
-import { getBaseUrl } from '../../main';
 import { Categoria } from '../models/Categoria';
 import { ComercioService } from '../services/comercio.service';
-import { async } from '@angular/core/testing';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../config';
@@ -41,12 +37,21 @@ export class RegistrarComercioComponent implements OnInit {
     this.error = null;
   }
 
-  async llenarCategorias() {
-    this.categoriasList = await this.comercioService.ObtenerTodoCategorias();
+  llenarCategorias() {
+    this.comercioService.ObtenerTodoCategorias()
+      .subscribe(data => this.categoriasList = data);
   }
 
   ngOnInit(): void {
     this.llenarCategorias();
+    this.inicializarComercio();
+  }
+
+  inicializarComercio() {
+    let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
+    this.comercio.idAdmin = usuarioLogeado.usuario.Id;
+
+    console.log(this.comercio);
   }
 
   upload(nombre: string, tipo: string) {

@@ -18,13 +18,37 @@ export class SucursalService {
     this.BASE_URL = getBaseUrl();
   }
 
-  async ObtenerTodoSucursales(id : number) {
+  registrarSucursal(sucursal: Sucursal) {
+    let endpoint = this.BASE_URL + '/sucursal/crearsucursal';
+
+    return this.http.post<Sucursal>(endpoint, sucursal)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+  }
+
+  obtenerSucursal(idSucursal: number) {
+    let endpointUrl = this.BASE_URL + '/sucursal/obtenersucursal?id=' + idSucursal;
+    return this.http.get<Sucursal>(endpointUrl);
+  }
+
+   ObtenerTodoSucursales(id : number) {
     let endpointUrl = this.BASE_URL + '/sucursal/obtenertodosucursal?idComercio=' + id;
-    let sucursales: Sucursal[];
 
-    sucursales = await this.http.get<Sucursal[]>(endpointUrl).toPromise();
+    return this.http.get<Sucursal[]>(endpointUrl);
+  }
 
-    return sucursales;
+  modificarSucursal(sucursal: Sucursal) {
+    let endpointUrl = this.BASE_URL + '/sucursal/modificarsucursal';
+
+    return this.http.put<Sucursal>(endpointUrl, sucursal)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
   }
 
   eliminarSucursal(id: number) {

@@ -1,0 +1,23 @@
+<section class="container-fluid main-section">
+
+  <div class="row">
+    <div class="col-3" *ngFor="let comercio of comercios" style="margin-bottom: 2%; width:20%">
+      <div class="card h-100" style="width: 18rem;" >
+        <div class="img-container">
+          <img class="card-img-top img-fluid img" [src]="comercio.archivos[0].enlace" alt="Logo de comercio">
+        </div>
+        <div class="card-body">
+          <hr />
+          <h4>{{comercio.nombre}}</h4>
+          <p class="card-text">{{comercio.categorias[0]}}</p>
+        </div>
+        <div class="card-footer">
+          
+          <a>
+            <button class="btn btn-primary">Ver comercio</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
