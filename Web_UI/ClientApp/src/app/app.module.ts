@@ -46,6 +46,12 @@ import { RegistrarPromocionComponent } from './promocion/registrar-promocion/reg
 import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
 import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
 import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
+import { ComercioService } from './services/comercio.service';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+import { FileUploadModule } from "ng2-file-upload";
+import cloudinaryConfiguration from './config';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
