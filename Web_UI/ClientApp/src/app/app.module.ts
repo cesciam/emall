@@ -47,6 +47,7 @@ import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-adm
 import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
 import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
 import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
+import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
 import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
 
 const maskConfig: Partial<IConfig> = {
@@ -94,6 +95,8 @@ const maskConfig: Partial<IConfig> = {
     RegistrarPromocionComponent,
     FiltroPromocionPipe,
     CardsComercioComponent,
+    ModificarEmpleadoComponent,
+    ListarConfiguracionComponent
   ],
   imports: [
     NgxMaskModule.forRoot(maskConfig),
@@ -132,6 +135,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'promociones', component: ListarPromocionComponent },
       { path: 'promocion/:id', component: EditarPromocionComponent },
       { path: 'promocion-registro', component: RegistrarPromocionComponent }
+      { path: 'configuracion', component: ListarConfiguracionComponent },
     ])
   ],
   exports: [
