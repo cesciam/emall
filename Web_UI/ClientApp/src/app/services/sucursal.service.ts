@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { getBaseUrl } from '../../main';
 import { Sucursal } from '../models/Sucursal';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -13,9 +12,9 @@ export class SucursalService {
   private http: HttpClient;
   private BASE_URL: string;
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.http = http;
-    this.BASE_URL = getBaseUrl();
+    this.BASE_URL = baseUrl;
   }
 
   registrarSucursal(sucursal: Sucursal) {

@@ -79,6 +79,12 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveAllPendingStatement()
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_COMERCIOS_PENDIENTES" };
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "OBTENER_COMERCIO" };

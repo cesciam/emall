@@ -53,6 +53,7 @@ import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
+import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -103,6 +104,7 @@ const maskConfig: Partial<IConfig> = {
     ItemEditarComponent,
     CardsComercioComponent,
     ListarConfiguracionComponent,
+    AprobarComercioComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -144,7 +146,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'configuracion', component: ListarConfiguracionComponent }
+      { path: 'configuracion', component: ListarConfiguracionComponent },
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent }
     ])
   ],
   exports: [
