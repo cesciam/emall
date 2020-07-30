@@ -42,14 +42,14 @@ export class AgregarUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioForm = new FormGroup({
-      Cedula: new FormControl('', [Validators.required, Validators.minLength(9)]),
-      Nombre: new FormControl('', [Validators.required]),
-      Apellido: new FormControl('', [Validators.required]),
-      Correo: new FormControl('', [Validators.required, Validators.email]),
-      Contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-      ContrasenaConfirmar: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-      Telefono: new FormControl('', [Validators.required]),
-      Tipo: new FormControl('', [Validators.required]),
+      Cedula: new FormControl('456345634', [Validators.required, Validators.minLength(9)]),
+      Nombre: new FormControl('Gerardo', [Validators.required]),
+      Apellido: new FormControl('Campos', [Validators.required]),
+      Correo: new FormControl('gererdo@domain.com', [Validators.required, Validators.email]),
+      Contrasena: new FormControl('Michael123@', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+      ContrasenaConfirmar: new FormControl('Michael123@', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+      Telefono: new FormControl('45454545', [Validators.required]),
+      Tipo: new FormControl(this.integrarCon == 'pagina' ? '2' : '', [Validators.required]),
       Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpe?g|bmp|png|webp|tiff|eps)$/igm)])
     }, {
         validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
@@ -57,11 +57,11 @@ export class AgregarUsuarioComponent implements OnInit {
   }
 
   validarFoto(files) {
+    this.imgUrl = '';
+
     if (!this.usuarioForm.controls['Foto'].errors) {
-      if (files.length === 0) {
-        this.imgUrl = '';
+      if (files.length === 0)
         return;
-      }
 
       let reader = new FileReader();
       reader.readAsDataURL(files[0]);
@@ -69,8 +69,6 @@ export class AgregarUsuarioComponent implements OnInit {
       reader.onload = (_event) => {
         this.imgUrl = reader.result;
       }
-    } else {
-      this.imgUrl = '';
     }
   }
 
@@ -83,7 +81,7 @@ export class AgregarUsuarioComponent implements OnInit {
 
         this.foto = new Archivo();
         this.foto.enlace = res.url;
-        this.foto.nombre = this.usuarioForm.controls['Foto'].value;
+        this.foto.nombre = res.original_filename + '.' + res.format;
         this.foto.tipo = 'Foto';
 
         resolve();
@@ -107,7 +105,9 @@ export class AgregarUsuarioComponent implements OnInit {
     nuevoUsuario.Correo = this.usuarioForm.controls['Correo'].value;
     nuevoUsuario.Foto = this.foto;
     nuevoUsuario.Telefono = this.usuarioForm.controls['Telefono'].value;
-    nuevoUsuario.Tipo = +this.usuarioForm.controls['Tipo'].value;
+    
+    let type: number = +this.usuarioForm.controls['Tipo'].value;
+    nuevoUsuario.Tipo = type;
 
     return nuevoUsuario;
   }
@@ -128,6 +128,11 @@ export class AgregarUsuarioComponent implements OnInit {
         (error) => {
           this.isSendingData = false;
           this.error = error.error;
+
+          if (!this.error.hasOwnProperty('message')) {
+            this.error = { message: 'Error general al registrar el usuario. Vuelva a intertarlo en unos minutos' };
+          }
+
           window.scroll(0, 0);
         });
   }
@@ -136,8 +141,10 @@ export class AgregarUsuarioComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.usuarioForm.invalid)
+    if (this.usuarioForm.invalid) {
+      window.scroll(0, 0);
       return;
+    }
 
     if (this.usuarioForm.controls['Foto'].value != '') {
       this.subirFoto()

@@ -132,7 +132,7 @@
           </div>
         </div>
 
-        <div *ngIf="integrarCon == null" class="form-group col-lg-4 col-md-4">
+        <div [hidden]="integrarCon == 'pagina'" class="form-group col-lg-4 col-md-4">
           <label for="tipo">Tipo de Usuario</label>
           <select class="form-control"
                   name="tipo"
@@ -142,17 +142,13 @@
                   [ngClass]="{ 'is-invalid': submitted && f.Tipo.errors }">
             <option value=""></option>
             <option value="1">Administrador</option>
-            <option value="2">Cliente</option>
+            <option value="2" [selected]="integrarCon == 'pagina'">Cliente</option>
             <option value="3">Administrador de Comercio</option>
             <option value="4">Empleado</option>
           </select>
           <div *ngIf="submitted && f.Tipo.errors" class="invalid-feedback">
             <div *ngIf="f.Tipo.errors.required">Tipo es requerido</div>
           </div>
-        </div>
-
-        <div *ngIf="integrarCon == 'pagina'">
-          <input type="hidden" name="tipo" id="tipo" formControlName="Tipo" value="2">
         </div>
       </div>
 
