@@ -28,8 +28,17 @@ export class RolService {
     return this.http.post(this.BASE_URL+'Rol/Create', formData);
   }
 
-  putEmpleado(formData : Rol){
+  putRol(formData : Rol){
     return this.http.put(this.BASE_URL+'Rol/Update',formData)
   }
+
+  getById(id: number){
+    return this.http.get(this.BASE_URL+'Rol/RetrieveById'+'?id=' +id)
+     .toPromise().then(res=>this.formData =res as Rol)
+  }
+
+  // getSelectedRol(){
+  //   this.formData= JSON.parse(localStorage.getItem("rol"))
+  // }
 
 }

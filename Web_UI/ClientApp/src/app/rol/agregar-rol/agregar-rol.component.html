@@ -35,9 +35,11 @@
                     El comercio es requerido
                 </div>
             </div>
+            <br>
+            <hr>
             <div class="form-group">
-                <label class="text-center">Marque los elementos sobre los que desea otorgar permisos al rol:</label>
-                
+                <h4>Marque los elementos sobre los que desea otorgar permisos al rol:</h4>
+                <br>
                 <div  *ngFor="let vista of serviceVista.list">
                     <input  type="checkbox" name="{{vista.id}}" [value]="vista.id" (change)="getVistaId($event, vista.id)"> 
                     <label  for="{{vista.id}}"> {{vista.nombre}}</label> 

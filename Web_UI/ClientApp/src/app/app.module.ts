@@ -77,6 +77,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'modificar-rol', component: ModificarRolComponent }
     ])
   ],
   exports: [

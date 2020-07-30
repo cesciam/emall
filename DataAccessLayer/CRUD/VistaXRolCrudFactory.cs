@@ -41,6 +41,24 @@ namespace DataAccessLayer.CRUD
             return default(T);
         }
 
+        public List<T> RetrieveByRol<T>(BaseEntity entity)
+        {
+            var lstVr = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveByRol(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstVr.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstVr;
+        }
+
         public override List<T> RetrieveAll<T>()
         {
             var lstVr = new List<T>();

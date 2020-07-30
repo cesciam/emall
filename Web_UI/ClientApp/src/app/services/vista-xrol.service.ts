@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class VistaXRolService {
-
+  list: VistaXRol[];
   vistaXRol : VistaXRol;
   readonly BASE_URL = 'http://localhost:5000/api/';
 
@@ -22,5 +22,10 @@ export class VistaXRolService {
         return throwError(error);
       })
     );;
+  }
+
+  getByRol(id: number){
+    this.http.get(this.BASE_URL+'VistaXRol/RetrieveByRol'+'?id=' +id)
+     .toPromise().then(res=>this.list = res as VistaXRol[])
   }
 }
