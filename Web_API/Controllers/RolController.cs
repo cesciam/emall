@@ -30,6 +30,17 @@ namespace Web_API.Controllers
             };
             return rm.RetrieveById(direccion);
         }
+
+        [HttpGet]
+        public List<Rol> RetrieveByIdComercio(int id)
+        {
+            var rm = new RolManagement();
+            var r = new Rol()
+            {
+                id_comercio = id
+            };
+            return rm.RetrieveByIdComercio(r);
+        }
         [HttpPost]
         public IActionResult Create(Rol c)
         {

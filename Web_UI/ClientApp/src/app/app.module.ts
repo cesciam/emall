@@ -28,11 +28,31 @@ import { VistaXRolService } from './services/vista-xrol.service';
 import { AgregarRolComponent } from './rol/agregar-rol/agregar-rol.component';
 import { ModificarRolComponent } from './rol/modificar-rol/modificar-rol.component';
 import { ModificarEmpleadoComponent } from './empleado/modificar-empleado/modificar-empleado.component';
+import { ModificarComercioComponent } from './modificar-comercio/modificar-comercio.component';
+import { RegistrarSucursalComponent } from './registrar-sucursal/registrar-sucursal.component';
+import { AgmCoreModule } from '@agm/core';
+import { FilterComercioPipe } from './pipes/filter-comercio.pipe';
+import { FilterSucursalPipe } from './pipes/filter-sucursal.pipe';
+import { ModificarSucursalComponent } from './modificar-sucursal/modificar-sucursal.component';
+import { LandingPulsarComponent } from './landingPage/landing-pulsar/landing-pulsar.component';
+import { ListarPromocionComponent } from './promocion/listar-promocion/listar-promocion.component';
+import { RegistrarComercioComponent } from './registrar-comercio/registrar-comercio.component';
+import { PerfilAdminComercioComponent } from './perfil-admin-comercio/perfil-admin-comercio.component';
+import { EditarPromocionComponent } from './promocion/editar-promocion/editar-promocion.component';
+import { RegistrarPromocionComponent } from './promocion/registrar-promocion/registrar-promocion.component';
+import { FiltroPromocionPipe } from './pipes/filtro-promocion.pipe';
+import { ItemSucursalComponent } from './item/item-sucursal/item-sucursal.component';
+import { ItemCrearComponent } from './item/item-crear/item-crear.component';
+import { ItemService } from './services/item.service';
+import { ItemEditarComponent } from './item/item-editar/item-editar.component';
+import { CardsComercioComponent } from './homepagecomponents/cards-comercio/cards-comercio.component';
+import { ComercioService } from './services/comercio.service';
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
 import { FileUploadModule } from "ng2-file-upload";
 import cloudinaryConfiguration from './config';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { ListarConfiguracionComponent } from './configuracion/listar-configuracion/listar-configuracion.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -60,17 +80,40 @@ const maskConfig: Partial<IConfig> = {
     ListarRolComponent,
     AgregarRolComponent,
     ModificarRolComponent,
-    ModificarEmpleadoComponent
+    ModificarEmpleadoComponent,
+    DashboardComercioComponent,
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent,
+    LandingPulsarComponent,
+    ModificarComercioComponent,
+    RegistrarSucursalComponent,
+    FilterComercioPipe,
+    FilterSucursalPipe,
+    ModificarSucursalComponent,
+    ModificarEmpleadoComponent,
+    DashboardComercioComponent,
+    RegistrarComercioComponent,
+    PerfilAdminComercioComponent,
+    ListarPromocionComponent,
+    EditarPromocionComponent,
+    RegistrarPromocionComponent,
+    FiltroPromocionPipe,
+    ItemSucursalComponent,
+    ItemCrearComponent,
+    ItemEditarComponent,
+    CardsComercioComponent,
+    ListarConfiguracionComponent,
   ],
   imports: [
-    NgxMaskModule.forRoot(maskConfig),
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
     FileUploadModule,
     Ng2CloudinaryModule,
+    NgxMaskModule.forRoot(maskConfig),
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
@@ -84,20 +127,36 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
       { path: 'listar-rol', component: ListarRolComponent },
       { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'landing-pulsar', component: LandingPulsarComponent },
+      { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
+      { path: 'dashboard-comercio/registrar-sucursal', component: RegistrarSucursalComponent },
+      { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
+      { path: 'registrar-comercio', component: RegistrarComercioComponent },
+      { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
+      { path: 'promociones', component: ListarPromocionComponent },
+      { path: 'promocion/:id', component: EditarPromocionComponent },
+      { path: 'promocion-registro', component: RegistrarPromocionComponent },
+      { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
+      { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
+      { path: 'item-editar/:id_item', component: ItemEditarComponent },
+      { path: 'configuracion', component: ListarConfiguracionComponent }
     ])
   ],
   exports: [
     AgregarUsuarioComponent
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA 
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     EmpleadoService,
     RolService,
     VistaService,
     HorarioService,
-    VistaXRolService
+    VistaXRolService,
+    ItemService,
   ],
   bootstrap: [
     AppComponent

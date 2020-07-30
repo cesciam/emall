@@ -48,6 +48,14 @@ namespace DataAccessLayer.Mapper
 
         }
 
+        internal SqlOperation GetRetriveByIdComercioStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ROL_COMERCIO_PR" };
+            var rol = (Rol)entity;
+            operation.AddIntParam(DB_COL_ID_COMERCIO, rol.id_comercio);
+            return operation;
+        }
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "ELIMINAR_ROL_PR" };

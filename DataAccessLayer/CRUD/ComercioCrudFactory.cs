@@ -99,6 +99,29 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(comercioMapper.GetUpdateStateStatement(entity));
         }
 
+        public List<T> RetrieveAll<T>(BaseEntity entity)
+        {
+            var comerciosList = new List<T>();
+            var comerciosResult = dao.ExecuteQueryProcedure(comercioMapper.GetRetriveAllStatement(entity));
+            if (comerciosResult.Count > 0)
+            {
+                var comercios = comercioMapper.BuildObjects(comerciosResult);
+                foreach (var c in comercios)
+                {
+                    comerciosList.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            foreach (var c in comerciosList)
+            {
+                var comercio = (Comercio)Convert.ChangeType(c, typeof(Comercio));
+                comercio.Categorias = GenerarCategorias(comercio.Id);
+                comercio.Archivos = GenerarArchivos(comercio.Id);
+            }
+
+            return comerciosList;
+        }
+
         public Archivo[] GenerarArchivos(int IdComercio)
         {
             var archivo = new Archivo { Id_Comercio = IdComercio };

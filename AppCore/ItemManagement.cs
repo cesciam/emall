@@ -14,9 +14,11 @@ namespace AppCore
             crudItem = new ItemCrudFactory();
         }
 
-        public void CreateItem(Item item)
+        public void CreateItem(Item item, string fotoUrl)
         {
 
+            var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
+            item.id_foto = archivo.Id;
             crudItem.Create(item);
 
         }
@@ -34,6 +36,11 @@ namespace AppCore
         public void UpdateItem(Item item)
         {
             crudItem.Update(item);
+        }
+
+        public void UpdateArchivo(Archivo archivo)
+        {
+            crudItem.UpdateArchivo(archivo);
         }
 
         public void DeleteItem(Item item)
@@ -55,6 +62,14 @@ namespace AppCore
         public List<Item> RetrieveAllByTipo(string tipo)
         {
             return crudItem.RetrieveAllByTipo<Item>(tipo);
+        }
+
+        public Archivo RetrieveItemArchivo(Archivo archivo)
+        {
+
+
+
+            return crudItem.RetrieveItemArchivo<Archivo>(archivo);
         }
 
 
