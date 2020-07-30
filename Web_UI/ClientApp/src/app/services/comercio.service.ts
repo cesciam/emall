@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { getBaseUrl } from '../../main';
-import { Categoria } from '../models/Categoria';
+import { Categoria } from '../models/categoria.model';
 import { catchError, retry } from 'rxjs/operators';
 import { Comercio } from '../models/Comercio';
 import { throwError } from 'rxjs';

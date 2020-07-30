@@ -1,0 +1,21 @@
+<div>
+  <h1>Lista de categorias</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Porcentaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let impuesto">
+        <td>{{Categoria.Nombre}}</td>
+        <td>{{Categoria.Porcentaje}}</td>
+        <td><button (click)="edit(categoria)">Editar</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
