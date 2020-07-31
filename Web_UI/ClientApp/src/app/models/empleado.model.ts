@@ -1,6 +1,7 @@
 export class Empleado {
-    id : number;
-    id_usuario : number;
-    id_rol : number;
-    id_sucursal: number;
+  Id: number;
+  Correo: string;
+  IdUsuario: number;
+  IdRol: number;
+  IdSucursal: number;
 }

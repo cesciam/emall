@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpleadoService } from 'src/app/services/empleado.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { EmpleadoService } from '../../services/empleado.service';
 import { Observable } from 'rxjs';
-import { Usuario } from 'src/app/models/usuario.model';
-import { NgForm } from '@angular/forms';
-import { Empleado } from 'src/app/models/empleado.model';
 import { Router } from '@angular/router';
+import { EmpleadoList } from '../../models/empleado-list.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listar-empleado',
@@ -13,25 +11,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./listar-empleado.component.css']
 })
 export class ListarEmpleadoComponent implements OnInit {
+  private empleados: EmpleadoList[];
+  private comercioId: number;
   
-
-  constructor(private service : EmpleadoService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.service.fillList();
+  constructor(
+    private service: EmpleadoService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
   }
 
-  
+  ngOnInit(): void {
+    this.comercioId = this.activatedRoute.snapshot.queryParams['comercio'];
+    this.obtenerEmpleados();
+  }
 
-  onDelete(id : number){
-    if(confirm('Confirma que desea eliminar el registro')){
-      this.service.deleteEmpleado(id).subscribe(res=>{
-        this.service.fillList();
-      })
+  obtenerEmpleados(): void {
+    this.service.obtenerEmpleados(this.comercioId)
+      .subscribe(data => this.empleados = data);
+  }
+
+  agregarEmpleado() {
+    this.router.navigate(['agregar-empleado', this.comercioId]);
+  }
+
+  onDelete(id : number) {
+    if (confirm('Confirma que desea eliminar el registro')) {
+      this.service.deleteEmpleado(id)
+        .subscribe(response => {
+          this.obtenerEmpleados();
+        })
     }
   }
 
-  onUpdate(id : number){
+  onUpdate(id : number) {
     this.service.getById(id);
     let empleado = this.service.formData;
     localStorage.setItem("empleado", JSON.stringify(empleado) );
