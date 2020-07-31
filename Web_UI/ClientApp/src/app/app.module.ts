@@ -135,8 +135,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
-      { path: 'listar-rol', component: ListarRolComponent },
-      { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'listar-rol/:id', component: ListarRolComponent },
+      { path: 'agregar-rol/:id', component: AgregarRolComponent },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
@@ -157,7 +157,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-categoria', component: ListarCategoriaComponent },
       { path: 'crear-categoria', component: CrearCategoriaComponent },
       { path: 'configuracion', component: ListarConfiguracionComponent },
-      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent }
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
+      { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent }
     ])
   ],
   exports: [

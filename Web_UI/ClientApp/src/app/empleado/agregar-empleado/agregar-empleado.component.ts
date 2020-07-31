@@ -18,10 +18,10 @@ export class AgregarEmpleadoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.resetForm();
-    this.serviceSucursal.ObtenerTodoSucursales(7)
-      .subscribe(data => {
-        this.sucursales = data;
-      });
+    // this.serviceSucursal.ObtenerTodoSucursales(7)
+    //   .subscribe(data => {
+    //     this.sucursales = data;
+    //   });
     //this.sucursales = await this.serviceSucursal.ObtenerTodoSucursales(7);
   }
 

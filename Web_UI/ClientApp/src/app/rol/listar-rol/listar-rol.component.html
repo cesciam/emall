@@ -2,6 +2,9 @@
 <div class="container">
   <div class="jumbotron">
   <h1 class="display-4 text-center">Lista de roles</h1>
+  <br>
+  <button class="primary-btn btn-sm btn"><a [routerLink]="['/agregar-rol', service.id_comercio]">Nuevo rol +</a></button>
+  <br>
   <table class="table table-hover ">
     <thead>
       <tr>
@@ -13,9 +16,9 @@
       </tr>
     </thead>
     <tr *ngFor="let rol of service.list">
-      <td>{{rol.id}}</td>
-      <td>{{rol.nombre}}</td>
-      <td>{{rol.descripcion}}</td>
+      <td >{{rol.id}}</td>
+      <td >{{rol.nombre}}</td>
+      <td >{{rol.descripcion}}</td>
       <!-- <td>{{rol.id_comercio}}</td> -->
       <td><button (click)="onUpdate(rol.id)" class="btn btn-sm">Editar</button></td>
       <td><button (click)="onDelete(rol.id)" class="btn btn-sm btn-outline-danger">X</button></td>

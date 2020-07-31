@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RolService } from 'src/app/services/rol.service';
 import { Rol } from 'src/app/models/rol.model';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listar-rol',
@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./listar-rol.component.css']
 })
 export class ListarRolComponent implements OnInit {
-
   constructor(private service: RolService,
-    private router: Router) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.service.fillList();
+    let id= parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.service.id_comercio = id;
+    this.service.fillRolComercio();
   }
   
   onDelete(id: number){
@@ -26,9 +28,7 @@ export class ListarRolComponent implements OnInit {
   }
 
   onUpdate(id: number){
-    this.service.getById(id);
-    //localStorage.setItem("rol", JSON.stringify(rol));
-    this.router.navigate(['modificar-rol'])
+    this.router.navigate(['listar-rol/',this.service.id_comercio,'modificar-rol', id])
   }
 
 
