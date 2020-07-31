@@ -58,6 +58,7 @@ import { CrearImpuestoComponent } from '../app/impuesto/crear-impuesto/crear-imp
 import { ListarCategoriaComponent } from '../app/categoria/listar-categoria/listar-categoria.component';
 import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component'; 
 import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
+import { PerfilComercioComponent } from './perfil-comercio/perfil-comercio.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -113,6 +114,7 @@ const maskConfig: Partial<IConfig> = {
     ListarCategoriaComponent,
     CrearCategoriaComponent,
     AprobarComercioComponent,
+    PerfilComercioComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -157,7 +159,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-categoria', component: ListarCategoriaComponent },
       { path: 'crear-categoria', component: CrearCategoriaComponent },
       { path: 'configuracion', component: ListarConfiguracionComponent },
-      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent }
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
+      { path: 'perfil-comercio', component: PerfilComercioComponent }
     ])
   ],
   exports: [
