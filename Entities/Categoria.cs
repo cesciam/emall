@@ -12,6 +12,9 @@ namespace Entities
 
         [JsonPropertyName("Nombre")]
         public string Nombre { get; set; }
+        
+        //Variable utilizada solamente para el reporte de comercios por categoria
+        public int cantidad { get; set; }
 
 
         public Categoria()
