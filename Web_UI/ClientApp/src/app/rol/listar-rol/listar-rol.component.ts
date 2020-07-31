@@ -9,6 +9,7 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./listar-rol.component.css']
 })
 export class ListarRolComponent implements OnInit {
+  id_rol : number;
   constructor(private service: RolService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
@@ -20,16 +21,18 @@ export class ListarRolComponent implements OnInit {
   }
   
   onDelete(id: number){
-    if(confirm('Confirma que desea eliminar el registro')){
-      this.service.deleteRol(id).subscribe(res=>{
-        this.service.fillList();
-      })
-    }
+    this.service.deleteRol(id).subscribe(res=>{
+      this.service.fillList();
+      
+    })
   }
 
   onUpdate(id: number){
     this.router.navigate(['listar-rol/',this.service.id_comercio,'modificar-rol', id])
   }
 
+  rolToDelete(id:number){
+    this.id_rol=id;
+  }
 
 }
