@@ -7,6 +7,7 @@ import { Sucursal } from '../../models/Sucursal';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { Rol } from '../../models/rol.model';
+import { Empleado } from '../../models/empleado.model';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -24,8 +25,9 @@ export class AgregarEmpleadoComponent implements OnInit {
   private comercioId: number;
 
   constructor(
-    private service: EmpleadoService,
+    private serviceEmpleado: EmpleadoService,
     private serviceRol: RolService,
+    private router: Router,
     private route: ActivatedRoute,
     private serviceSucursal: SucursalService) {
   }
@@ -61,8 +63,38 @@ export class AgregarEmpleadoComponent implements OnInit {
 
   }
 
+  sanitizeData(data: FormGroup): Empleado {
+    let nuevoEmpleado: Empleado = new Empleado();
+    let rol: number = +this.empleadoForm.controls['Rol'].value;
+    let sucursal: number = +this.empleadoForm.controls['Sucursal'].value;
+
+    nuevoEmpleado.Correo = this.empleadoForm.controls['Correo'].value;
+    nuevoEmpleado.Rol = rol;
+    nuevoEmpleado.Sucursal = sucursal;
+
+    return nuevoEmpleado;
+  }
+
   registrarEmpleado() {
-    console.log(this.empleadoForm.value);
+    this.isSendingData = true;
+    console.log(this.sanitizeData(this.empleadoForm));
+
+    this.serviceEmpleado.postEmpleado(this.sanitizeData(this.empleadoForm))
+      .subscribe(
+        (response) => {
+          this.isSendingData = false;
+          this.router.navigate(['listar-empleado?comercio', this.comercioId]);
+        },
+        (error) => {
+          this.isSendingData = false;
+          this.error = error.error;
+
+          if (!this.error.hasOwnProperty('message')) {
+            this.error = { message: 'Error general al registrar el usuario. Vuelva a intertarlo en unos minutos' };
+          }
+
+          window.scroll(0, 0);
+        });
   }
 
   onSubmit() {

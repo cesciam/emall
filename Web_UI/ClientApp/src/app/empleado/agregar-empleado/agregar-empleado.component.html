@@ -29,8 +29,9 @@
                class="form-control"
                name="correo"
                id="correo"
-               formControlName="Correo" 
+               formControlName="Correo"
                required
+               [ngClass]="{ 'is-invalid': submitted && f.Correo.errors }"
                placeholder="usuario@example.com">
         <div *ngIf="submitted && f.Correo.errors" class="invalid-feedback">
           <div *ngIf="f.Correo.errors.required">Email es requerido</div>

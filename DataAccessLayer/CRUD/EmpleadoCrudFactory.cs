@@ -63,7 +63,8 @@ namespace DataAccessLayer.CRUD
                         IdSucursal = Convert.ToInt32(row["ID_SUCURSAL"]),
                         SucursalNombre = row["SUCURSAL_NOMBRE"].ToString(),
                         IdComercio = Convert.ToInt32(row["ID_COMERCIO"]),
-                        NombreComercio = row["NOMBRE_COMERCIO"].ToString()
+                        NombreComercio = row["NOMBRE_COMERCIO"].ToString(),
+                        Estado = Convert.ToInt32(row["ESTADO"])
                     };
 
                     lstEmpleados.Add((T)Convert.ChangeType(empleadoViewModel, typeof(T)));

@@ -36,10 +36,7 @@ export class ListarEmpleadoComponent implements OnInit {
 
   onDelete(id : number) {
     if (confirm('Confirma que desea eliminar el registro')) {
-      this.service.deleteEmpleado(id)
-        .subscribe(response => {
-          this.obtenerEmpleados();
-        })
+      this.service.deleteEmpleado(id);
     }
   }
 

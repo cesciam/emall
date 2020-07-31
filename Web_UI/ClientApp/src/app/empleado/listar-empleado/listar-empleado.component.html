@@ -17,19 +17,20 @@
             <th>Correo</th>
             <th>Nombre</th>
             <th>Rol</th>
-            <th>Comercio</th>
             <th>Sucursal</th>
+            <th>Estado</th>
             <th></th>
           </tr>
         </thead>
-        <tr *ngFor="let empleado of empleados">
+        <tr *ngFor="let empleado of empleados" [ngClass]="{ 'disabled': empleado.Estado == 0 }">
           <td>{{empleado.Id}}</td>
           <td>{{empleado.Correo}}</td>
           <td>{{empleado.UsuarioNombre}} {{empleado.Apellido}}</td>
           <td>{{empleado.RolNombre}}</td>
-          <td>{{empleado.NombreComercio}}</td>
           <td>{{empleado.SucursalNombre}}</td>
+          <td class="small">{{empleado.Estado == 0 ? 'Pendiente de aprobacion' : 'Activo'}}</td>
           <td>
+            <button class="btn btn-outline-primary btn-sm">Reenviar invitacion</button>
             <button (click)="onUpdate(empleado.Id)" class="btn btn-sm"> Editar</button>
             <button (click)="onDelete(empleado.Id)" class="btn btn-sm btn-outline-danger">X</button>
           </td>

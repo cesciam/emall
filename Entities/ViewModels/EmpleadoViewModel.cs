@@ -17,5 +17,6 @@ namespace Entities.ViewModels {
 		public string SucursalNombre { get; set; }
 		public int IdComercio { get; set; }
 		public string NombreComercio { get; set; }
+		public int Estado { get; set; }
 	}
 }
