@@ -23,7 +23,6 @@
 
 <app-header></app-header>
 <div class="container">
-    <button (click)="prueba()"></button>
     <h1 class="display-4 text-center">Modificar rol</h1>
     <hr>
     <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
@@ -64,7 +63,7 @@
             <h4>Marque los elementos sobre los que desea otorgar permisos al rol:</h4>
             <br>
             <div *ngFor="let vista of serviceVista.list">
-                <input checked="permisos.indexOf(vista.id)> -1" type="checkbox" name="{{vista.id}}" [value]="vista.id" (change)="getVistaId($event, vista.id)">
+                <input checked="permisos.includes(vista.id)" type="checkbox" name="{{vista.id}}" [value]="vista.id" (change)="getVistaId($event, vista.id)">
                 <label for="{{vista.id}}"> {{vista.nombre}}</label>
             </div>
         </div>
