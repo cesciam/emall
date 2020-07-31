@@ -12,7 +12,7 @@ export class CategoriaService {
   formData: Categoria;
   private categorias: Categoria[];
 
-  readonly BaseURL = 'http://localhost:5000/api/';
+  readonly BaseURL = 'http://localhost:5000/api/'; //inject 
 
   constructor(private http: HttpClient) { }
 

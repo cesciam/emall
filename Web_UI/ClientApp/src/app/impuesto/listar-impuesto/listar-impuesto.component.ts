@@ -11,7 +11,8 @@ import { Impuesto } from 'src/app/models/impuesto.model';
 
 export class ListarImpuestoComponent implements OnInit {
 
-  public selectedImpuesto: Impuesto = { Id: null, Nombre: '', Porcentaje: null};
+  public selectedImpuesto: Impuesto = { Id: null, Nombre: '', Porcentaje: null };
+  buscarImpuesto = ''; 
 
   constructor(private service: ImpuestoService) { }
 
@@ -30,10 +31,15 @@ export class ListarImpuestoComponent implements OnInit {
 
   public editar(impuesto: Impuesto): void {
 
-    this.service.modificarImpuesto(impuesto);
+    this.selectedImpuesto = impuesto;
+    
   }
 
-   eliminar(id: number) {
+  public completarModificar(selectedImpuesto: Impuesto): void {
+    this.service.modificarImpuesto(this.selectedImpuesto);
+  }
+
+   public eliminar(id: number) {
     this.service.eliminarImpuesto(id).subscribe(res => {
       this.service.ObtenerTodoImpuesto();
     })

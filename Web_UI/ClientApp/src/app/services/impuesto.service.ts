@@ -23,7 +23,7 @@ export class ImpuestoService {
 
   public ObtenerImpuesto(nombre: string) {
     this.http.get(this.BaseURL + 'impuesto/obtenerimpuesto?nombre=' + nombre)
-      .toPromise().then(res => this.impuestos = res as Impuesto[])
+      .toPromise().then(res => this.formData = res as Impuesto)
     
   }
 

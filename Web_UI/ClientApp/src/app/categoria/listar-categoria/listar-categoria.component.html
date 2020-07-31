@@ -1,21 +1,44 @@
+
 <div>
+
+
   <h1>Lista de categorias</h1>
 
-  <table>
+  <div>
+    <input #searchImp type="text" (input)="obtener(searchImp.value)" placeholder="Buscar.." />
+
+  </div>
+  <table class="tabla table-hover">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Nombre</th>
-        <th>Porcentaje</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let impuesto">
-        <td>{{Categoria.Nombre}}</td>
-        <td>{{Categoria.Porcentaje}}</td>
-        <td><button (click)="edit(categoria)">Editar</button></td>
+      <tr *ngFor="let categoria of service.categorias">
+        <td>{{categoria.id}}</td>
+        <td>{{categoria.Nombre}}</td>
+        <td><button (click)="editar(categoria)" class="btn btn-sm btn-outline-danger"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+        <td><button (click)="eliminar(categoria.id)" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
       </tr>
     </tbody>
   </table>
 
-
+  <div>
+    <form>
+      <fieldset>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Id</label>
+          <input type="text" class="form-control" id="txtId" readonly value="{{selectedCategoria.Id}}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre</label>
+          <input type="text" class="form-control" id="txtName" value="{{selectedCategoria.Nombre}}">
+        </div>
+        <button class="btn btn-primary" (click)="completarModificar(selectedCategoria)">Guardar cambios</button>
+      </fieldset>
+    </form>
+  </div>
 </div>
+
