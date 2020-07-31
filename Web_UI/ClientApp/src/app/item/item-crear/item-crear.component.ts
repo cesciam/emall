@@ -68,9 +68,10 @@ export class ItemCrearComponent implements OnInit {
     this.item.id_impuesto = Number(this.item.id_impuesto)
     //this.item.id_foto = 1;
     this.item.id_sucursal = this.sucursal;
+    this.item.id_foto = this.foto;
     console.log(this.item);
     console.log(this.foto);
-    this.service.crearItem(this.item, this.foto)
+    this.service.crearItem(this.item)
       .subscribe(
         (data: any) => console.log(data),
         (err: any) => console.log(err)

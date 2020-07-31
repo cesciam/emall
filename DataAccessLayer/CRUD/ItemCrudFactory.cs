@@ -15,30 +15,30 @@ namespace DataAccessLayer.Crud
 
         public ItemCrudFactory() : base()
         {
-            foto = new ArchivoMapper();
+            //foto = new ArchivoMapper();
             mapper = new ItemMapper();
             dao = SqlDao.GetInstance();
         }
 
 
-        public T RetrieveFotoItem<T>(string fotoUrl)
-        {
-            var archivo = new Archivo();
-            archivo.Nombre = "Foto Item";
-            archivo.Tipo = "Item";
-            archivo.Id_Comercio = 0;
-            archivo.Enlace = fotoUrl;
-            var sqlOperation = foto.CrearFotoItem(archivo);
-            var lista = dao.ExecuteQueryProcedure(sqlOperation);
-            var dic = new Dictionary<string, object>();
-            if (lista.Count > 0)
-            {
-                dic = lista[0];
-                var objs = foto.BuildObject(dic);
-                return (T)Convert.ChangeType(objs, typeof(T));
-            }
-            return default(T);
-        }
+        //public T RetrieveFotoItem<T>(string fotoUrl)
+        //{
+        //    var archivo = new Archivo();
+        //    archivo.Nombre = "Foto Item";
+        //    archivo.Tipo = "Item";
+        //    archivo.Id_Comercio = 0;
+        //    archivo.Enlace = fotoUrl;
+        //    var sqlOperation = foto.CrearFotoItem(archivo);
+        //    var lista = dao.ExecuteQueryProcedure(sqlOperation);
+        //    var dic = new Dictionary<string, object>();
+        //    if (lista.Count > 0)
+        //    {
+        //        dic = lista[0];
+        //        var objs = foto.BuildObject(dic);
+        //        return (T)Convert.ChangeType(objs, typeof(T));
+        //    }
+        //    return default(T);
+        //}
 
 
         public override void Create(BaseEntity entity)
@@ -145,24 +145,5 @@ namespace DataAccessLayer.Crud
             }
             return default(T);
         }
-
-
-        //public List<T> RetrieveAllByComercio<T>(int id_comercio)
-        //{
-        //    var lista = new List<T>();
-
-        //    var resultados = dao.ExecuteQueryProcedure(mapper.GetRetriveAllByComercio(id_comercio));
-        //    var dic = new Dictionary<string, object>();
-        //    if (resultados.Count > 0)
-        //    {
-        //        var objs = mapper.BuildObjects(resultados);
-        //        foreach (var c in objs)
-        //        {
-        //            lista.Add((T)Convert.ChangeType(c, typeof(T)));
-        //        }
-        //    }
-
-        //    return lista;
-        //}
     }
 }

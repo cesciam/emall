@@ -15,6 +15,6 @@ namespace Entities
         public int duracion { get; set; }
         public int id_sucursal { get; set; }
         public int id_impuesto { get; set; }
-        public int id_foto { get; set; }
+        public string id_foto { get; set; }
     }
 }

@@ -54,7 +54,7 @@ export class ItemEditarComponent implements OnInit {
 
   async obtenerItem(itemId: number) {
     this.item_seleccionado = await this.service.ObtenerItem(itemId);
-    this.item_archivo = await this.service.ObtenerArchivo(this.item_seleccionado.id_foto);
+    //this.item_archivo = await this.service.ObtenerArchivo(this.item_seleccionado.id_foto);
   }
 
 
@@ -70,7 +70,7 @@ export class ItemEditarComponent implements OnInit {
       let res;
       res = JSON.parse(response);
       console.log(res);
-      this.item_archivo.enlace = res.url;
+      this.item_seleccionado.id_foto = res.url;
 
       return res;
     };
@@ -80,11 +80,11 @@ export class ItemEditarComponent implements OnInit {
   save(): void {
 
 
-    this.service.updateArchivo(this.item_archivo)
-      .subscribe(
-        (data: any) => console.log('Archivo was updated'),
-        (err: any) => console.log(err)
-      );
+    //this.service.updateArchivo(this.item_archivo)
+    //  .subscribe(
+    //    (data: any) => console.log('Archivo was updated'),
+    //    (err: any) => console.log(err)
+    //  );
 
     this.item_seleccionado.id_impuesto = Number(this.item_seleccionado.id_impuesto)
 
