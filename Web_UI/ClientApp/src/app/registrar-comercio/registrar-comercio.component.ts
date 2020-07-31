@@ -6,6 +6,7 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../config';
 import { Archivo } from '../models/Archivo';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrar-comercio',
@@ -25,7 +26,7 @@ export class RegistrarComercioComponent implements OnInit {
   @Input() txtCategoria: string;
   private error: any;
 
-  constructor(comercioService: ComercioService, private cloudinary: Cloudinary) {
+  constructor(comercioService: ComercioService, private cloudinary: Cloudinary, private router: Router) {
     this.comercioService = comercioService;
     this.comercio = new Comercio();
     this.comercio.archivos = new Array();
@@ -60,7 +61,6 @@ export class RegistrarComercioComponent implements OnInit {
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
       let res;
       res = JSON.parse(response);
-      console.log(res);
       var archivo = new Archivo();
       archivo.nombre = nombre;
       archivo.tipo = tipo;
@@ -81,7 +81,6 @@ export class RegistrarComercioComponent implements OnInit {
           break;
       }
 
-      console.log(this.comercio);
       return res;
     };
   }
@@ -93,10 +92,9 @@ export class RegistrarComercioComponent implements OnInit {
     this.comercioService.registrarComercio(this.comercio)
       .subscribe(
         (response) => {
-          //TODO: Envíar al usuario al perfil de administrador de comercio
+          this.router.navigate(['/']);
         },
         (error) => {
-          console.log(error);
           this.error = error.error;
           window.scroll(0, 0);
         });

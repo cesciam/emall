@@ -155,5 +155,25 @@ namespace Web_API.Controllers
                 return BadRequest(new { message = "Ha ocurrido un error al modificar este comercio. Vuelva a intentarlo más tarde." });
             }
         }
+
+        [HttpPost]
+        public IActionResult AgregarArchivoComercio(Comercio comercio)
+        {
+            if(comercio.Archivos.Length == 0)
+            {
+               return BadRequest(new { message = "Ingrese un archivo." });
+            }
+
+            var tmpComercio = ObtenerComercio(comercio.Id);
+            comercio.CedulaJuridica = tmpComercio.CedulaJuridica;
+            try
+            {
+                new ComercioManagement().AgregarArchivoComercio(comercio);
+                return Ok();
+            } catch (Exception e)
+            {
+                return BadRequest(new { message = "Ha ocurrido un error al registrar el archivo. Vuelva a intentarlo más tarde." });
+            }
+        }
     }
 }
