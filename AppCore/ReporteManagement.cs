@@ -15,9 +15,9 @@ namespace AppCore
             crud = new ReporteCrudFactory();
         }
 
-        public List<Reporte> RetrieveAll()
+        public List<Reporte> RetrieveCategoriaPorComercio()
         {
-            return crud.RetrieveAll<Reporte>();
+            return crud.RetrieveCategoriaPorComercio<Reporte>();
         }
     }
 }

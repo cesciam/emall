@@ -27,7 +27,15 @@ namespace DataAccessLayer.Mapper
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {
-            throw new NotImplementedException();
+            var lstResult = new List<BaseEntity>();
+
+            foreach (var row in lstRows)
+            {
+                var reporte = BuildObject(row);
+                lstResult.Add(reporte);
+            }
+
+            return lstResult;
         }
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
@@ -41,6 +49,10 @@ namespace DataAccessLayer.Mapper
         }
 
         public SqlOperation GetRetriveAllStatement()
+        {
+            throw new NotImplementedException();
+        }
+        public SqlOperation GetRetrieveCategoriaPorComercioStatement()
         {
             var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_CATEGORIA" };
 

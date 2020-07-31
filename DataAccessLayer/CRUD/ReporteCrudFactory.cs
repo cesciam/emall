@@ -13,7 +13,7 @@ namespace DataAccessLayer.CRUD
 
         public ReporteCrudFactory(): base()
         {
-            mapper = new ReporteMapper;
+            mapper = new ReporteMapper();
             dao = SqlDao.GetInstance();
         }
         public override void Create(BaseEntity entity)
@@ -33,8 +33,18 @@ namespace DataAccessLayer.CRUD
 
         public override List<T> RetrieveAll<T>()
         {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public  List<T> RetrieveCategoriaPorComercio<T>()
+        {
             var lstConfigs = new List<T>();
-            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllStatement());
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveCategoriaPorComercioStatement());
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {
@@ -45,11 +55,6 @@ namespace DataAccessLayer.CRUD
                 }
             }
             return lstConfigs;
-        }
-
-        public override void Update(BaseEntity entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }
