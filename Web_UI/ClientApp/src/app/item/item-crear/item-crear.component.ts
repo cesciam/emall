@@ -68,9 +68,10 @@ export class ItemCrearComponent implements OnInit {
     this.item.id_impuesto = Number(this.item.id_impuesto)
     //this.item.id_foto = 1;
     this.item.id_sucursal = this.sucursal;
+    this.item.id_foto = this.foto;
     console.log(this.item);
     console.log(this.foto);
-    this.service.crearItem(this.item, this.foto)
+    this.service.crearItem(this.item)
       .subscribe(
         (data: any) => console.log(data),
         (err: any) => console.log(err)
@@ -96,77 +97,3 @@ export class ItemCrearComponent implements OnInit {
 
 }
 
-
-
-//export class ItemCrearComponent implements OnInit {
-
-
-//  uploader: CloudinaryUploader;
-//  itemService: ItemService;
-//  item: Item;
-//  foto: string;
-//  impuestos: Impuesto[];
-
-
-//  itemForm: FormGroup;
-//  submitted: boolean = false;
-//  error: object = null;
-
-//  sucursal: Sucursal;
-
-
-//  constructor(private servicio: ItemService, private route: Router) { }
-
-//  ngOnInit() {
-
-//    this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionado'));
-
-
-
-//    this.itemForm = new FormGroup({
-//      Inventario: new FormControl('', [Validators.required, Validators.min(1)]),
-//      Nombre: new FormControl('', [Validators.required]),
-//      Descripcion: new FormControl('', [Validators.required]),
-//      Precio: new FormControl('', [Validators.required]),
-//      Id_Sucursal: new FormControl('', [Validators.required]),
-//      Duracion: new FormControl('', [Validators.required]),
-//      Tipo: new FormControl('', [Validators.required]),
-//      Id_Impuesto: new FormControl('', [Validators.required]),
-//      Id_Foto: new FormControl('', [Validators.required]),
-
-//    });
-
-//  }
-
-
-//  get f() {
-//    return this.itemForm.controls;
-//  }
-
-//  //sanitizeData(): void {
-//  //  //Transforma el dato 'Tipo' de string a number
-//  //  let type: number = +this.usuarioForm.controls['Tipo'].value;
-//  //  this.usuarioForm.controls['Tipo'].setValue(type);
-//  //}
-
-//  onSubmit() {
-//    this.submitted = true;
-
-//    if (this.itemForm.invalid)
-//      return;
-
-//    //this.sanitizeData();
-
-//    this.servicio.crearItem(this.itemForm.value)
-//      .subscribe(
-//        (response) => {
-//          this.route.navigate(['***']);
-//        },
-//        (error) => {
-//          this.error = error.error;
-//          window.scroll(0, 0);
-//        });
-//  }
-
-
-//}

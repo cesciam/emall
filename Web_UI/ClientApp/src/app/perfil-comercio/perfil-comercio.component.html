@@ -1,0 +1,25 @@
+<app-header></app-header>
+<section class="main-section">
+  <h1>{{comercioSeleccionado.nombre}}</h1>
+  <h2>Lista de sucursales</h2>
+  <div class="row">
+
+    <div class="col-sm-3" *ngFor="let sucursal of sucursales">
+      <div class="card w-100" style="margin-bottom: 2%">
+
+        <!--<agm-map [latitude]="parse(sucursal.latitud)" [zoom]="8" [longitude]="parse(sucursal.longitud)">
+    <agm-marker [latitude]="parse(sucursal.latitud)" [longitude]="parse(sucursal.longitud)"></agm-marker>
+  </agm-map>-->
+
+        <div class="card-body">
+          <h5 class="card-title">{{ sucursal.nombre }}</h5>
+          <p class="card-text">{{ sucursal.detallesDireccion }}</p>
+          <a>
+            <button class="btn btn-primary">Ver productos</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

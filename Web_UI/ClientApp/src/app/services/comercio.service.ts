@@ -87,6 +87,16 @@ export class ComercioService {
       );
   }
 
+  agregarArchivo(comercio: Comercio) {
+    let endpointUrl = this.BASE_URL + '/comercio/AgregarArchivoComercio';
+    return this.http.post(endpointUrl, comercio)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+  }
+
  
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
