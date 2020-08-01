@@ -1,137 +1,151 @@
-<div *ngIf="sucursal">
+<app-main-header></app-main-header>
+<div class="container" *ngIf="sucursal">
 
-  <div class="col-sm-auto d-flex justify-content-end">
+  <!--<div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/item-sucursal', sucursal]">Volver atras</a>
-    
-  </div>
+
+  </div>-->
+
+  <div class="pt-3 px-4">
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Agregar Item</h1>
+    </div>
 
 
-  <h2 class="d-flex justify-content-center">Registro de Item</h2>
+    <div>
+      <form class="text-left form-group border border-light p-3">
 
 
-  <div>
-    <form class="d-flex justify-content-center">
-
-
-      <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
-        <strong>{{error.message}}</strong>
-      </div>
-
-
-      <div class="formulario justify-content-center">
-
-        <div class="col-sm-6">
-          <label for="nombre">Nombre</label>
-          <input id="nombre" name="nombre" class="form-control" [(ngModel)]="item.nombre" #nombre="ngModel" type="text" required>
-          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
-            <div *ngIf="nombre.errors.required">
-              El nombre es requerido.
-            </div>
-          </div>
+        <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+          <strong>{{error.message}}</strong>
         </div>
 
-        <div class="col-sm-6">
-          <label for="descripcion">Descripcion</label>
-          <input id="descripcion" name="descripcion" class="form-control" [(ngModel)]="item.descripcion" #descripcion="ngModel" type="text" required>
-          <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
-            <div *ngIf="descripcion.errors.required">
-              La descripcion es requerida.
-            </div>
-          </div>
-        </div>
 
-        <div class="col-sm-6">
-          <label for="precio">Precio</label>
-          <input id="precio" name="precio" class="form-control" [(ngModel)]="item.precio" #precio="ngModel" type="number" required>
-          <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="alert alert-danger">
-            <div *ngIf="precio.errors.required">
-              El precio es requerido.
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="inventario">Inventario</label>
-          <input id="inventario" name="inventario" class="form-control" [(ngModel)]="item.inventario" #inventario="ngModel" type="number" required>
-          <div *ngIf="inventario.invalid && (inventario.dirty || inventario.touched)" class="alert alert-danger">
-            <div *ngIf="inventario.errors.required">
-              El inventario es requerido.
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="tipo">Tipo</label>
-          <select id="tipo" name="tipo" class="form-control" [(ngModel)]="item.tipo" #tipo="ngModel" type="text" required>
-            <option value=""></option>
-            <option value="Producto">Producto</option>
-            <option value="Servicio">Servicio</option>
-          </select>
-          <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">
-            <div *ngIf="tipo.errors.required">
-              El tipo es requerido.
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="duracion">Duracion - "Total en minutos"</label>
-          <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" required>
-          <div *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)" class="alert alert-danger">
-            <div *ngIf="duracion.errors.required">
-              La duracion es requerida. Si es un producto ingrese 0
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="id_impuesto">Impuesto</label>
-          <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="item.id_impuesto" #id_impuesto="ngModel" type="number" required>
-            <option *ngFor="let imp of impuestos">{{imp}}</option>
-          </select>
-          <div *ngIf="id_impuesto.invalid && (id_impuesto.dirty || id_impuesto.touched)" class="alert alert-danger">
-            <div *ngIf="id_impuesto.errors.required">
-              El impuesto es requerido.
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="id_sucursal">Sucursal</label>
-          <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
-        </div>
-
-        <div class="col-sm-6">
-          <label>Foto</label>
+        <div class="form-row mb-4">
           <div class="col">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" class="form-control" [(ngModel)]="item.nombre" #nombre="ngModel" type="text" required>
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+              <div *ngIf="nombre.errors.required">
+                El nombre es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <div class="d-flex justify-content-center">
-              <img [src]="foto" class="img-fluid d-flex justify-content-center" alt="Foto" align="middle">
+        <div class="form-row mb-4">
+          <div class="col">
+            <label for="descripcion">Descripcion</label>
+            <input id="descripcion" name="descripcion" class="form-control" [(ngModel)]="item.descripcion" #descripcion="ngModel" type="text" required>
+            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+              <div *ngIf="descripcion.errors.required">
+                La descripcion es requerida.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mb-4">
+          <div class="col">
+            <label for="precio">Precio</label>
+            <input id="precio" name="precio" class="form-control" [(ngModel)]="item.precio" #precio="ngModel" type="number" required>
+            <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="alert alert-danger">
+              <div *ngIf="precio.errors.required">
+                El precio es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <label for="inventario">Inventario</label>
+            <input id="inventario" name="inventario" class="form-control" [(ngModel)]="item.inventario" #inventario="ngModel" type="number" required>
+            <div *ngIf="inventario.invalid && (inventario.dirty || inventario.touched)" class="alert alert-danger">
+              <div *ngIf="inventario.errors.required">
+                El inventario es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mb-4">
+          <div class="col">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" class="form-control" [(ngModel)]="item.tipo" #tipo="ngModel" type="text" required>
+              <option value=""></option>
+              <option value="Producto">Producto</option>
+              <option value="Servicio">Servicio</option>
+            </select>
+            <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">
+              <div *ngIf="tipo.errors.required">
+                El tipo es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="col" *ngIf="tipo.value!='Producto'; else ItemProducto">
+            <label for="duracion">Duracion en minutos</label>
+            <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" required>
+            <div *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)" class="alert alert-danger">
+              <div *ngIf="duracion.errors.required">
+                La duracion es requerida para el servicio.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mb-4">
+          <div class="col">
+            <label for="id_impuesto">Impuesto</label>
+            <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="item.id_impuesto" #id_impuesto="ngModel" type="number" required>
+              <option *ngFor="let imp of impuestos">{{imp}}</option>
+            </select>
+            <div *ngIf="id_impuesto.invalid && (id_impuesto.dirty || id_impuesto.touched)" class="alert alert-danger">
+              <div *ngIf="id_impuesto.errors.required">
+                El impuesto es requerido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="id_sucursal">Sucursal</label>
+            <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
+          </div>
+
+        </div>
+
+
+        <div class="form-row mb-4">
+
+          <div class="col">
+            <div class="d-flex justify-content-center img-container">
+              <img [src]="foto" class="img-fluid d-flex justify-content-center" alt="Foto" style="width: 550px; height: 400px;">
             </div>
             <div class="d-flex justify-content-center">
               <div class="btn btn-mdb-color btn-rounded float-left">
                 <div>
                   <label for="file-upload" style="cursor: pointer" class="btn btn-outline-secondary">
                     <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
-                    Elegir archivo
+                    Elegir foto
                   </label>
                 </div>
 
-                <button class="btn btn-primary" [disabled]="loading" (click)="upload()">Subir imagen</button>
+                <button class="btn btn-primary" [disabled]="loading" (click)="upload()">Cargar</button>
               </div>
             </div>
+
           </div>
+
+
         </div>
 
-        <div class="d-flex justify-content-center">
 
-          <div class="row">
-            <div *ngIf="(nombre.valid && descripcion.valid && precio.valid && inventario.valid && tipo.valid && duracion.valid && id_impuesto.valid); else noValido">
+        <div class="container-fluid">
+
+          <div>
+            <div *ngIf="(nombre.valid && descripcion.valid && precio.valid && inventario.valid && tipo.valid && id_impuesto.valid); else noValido">
               <button class="btn btn-primary btn-lg btn-block" (click)="crearItem()">Crear Item</button>
             </div>
 
-            <ng-template #noValido class="row">
-              <button class="btn btn-primary btn-lg btn-block" disabled>Crear Item</button>
+            <ng-template #noValido>
+              <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Crear Item</button>
             </ng-template>
 
           </div>
@@ -140,213 +154,20 @@
 
 
 
-        <!--<div class="col-sm-6">
-          <label for="rate">Rate</label>
-          <input type="number" class="form-control" name="rate" ngModel>
-        </div>
-        <div class="col-sm-6">
-          <label for="fee">Fee</label>
-          <input type="number" class="form-control" name="fee" ngModel>
-        </div>
-        <div class="col-sm-6">
-          <label for="detail">Detail</label>
-          <input type="text" class="form-control" name="detail" ngModel>
-        </div>
-        <div class="col-sm-6">
-          <button type="submit" class="btn btn-primary acciones">Save</button>
-          <button type="button" class="btn btn-primary acciones" [routerLink]="['/customer-details', customer_id]">Back</button>
-        </div>-->
-      </div>
 
-    </form>
+      </form>
+    </div>
   </div>
-
 </div>
 
+<ng-template #ItemProducto>
+  <div class="col">
+    <label for="duracion">Duracion en minutos</label>
+    <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" value="0" required readonly>
 
-
-
-
-
-
-
-
-
-
-
-<!--<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-md-10">
-      <h1>Registro de Item</h1>
-      <p>Ingrese los siguientes datos</p>
-    </div>
-    <div class="col-lg-2 col-md-2">
-      <a [routerLink]="['../***']">Volver atras</a>
-    </div>
   </div>
 
-  <div *ngIf="submitted && itemForm.invalid" class="alert alert-danger col-lg-12" role="alert">
-    * Existen algunos datos invalidos. Por favor corrija los datos de los controles marcados en rojo
-  </div>
 
-  <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
-    <strong>{{error.message}}</strong>
-    <ul>
-      <li *ngFor="let detail of error.details">{{detail}}</li>
-    </ul>
-  </div>
+</ng-template>
 
-  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="nombre">Nombre</label>
-        <input type="text"
-               class="form-control"
-               name="nombre"
-               id="nombre"
-               formControlName="Nombre"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }">
-        <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
-          <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="descripcion">Descripcion</label>
-        <input type="text"
-               class="form-control"
-               name="descripcion"
-               id="descripcion"
-               formControlName="Descripcion"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Descripcion.errors }">
-        <div *ngIf="submitted && f.Descripcion.errors" class="invalid-feedback">
-          <div *ngIf="f.Descripcion.errors.required">Descripcion es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="precio">Precio</label>
-        <input type="text"
-               class="form-control"
-               name="precio"
-               id="precio"
-               formControlName="Precio"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Precio.errors }">
-        <div *ngIf="submitted && f.Precio.errors" class="invalid-feedback">
-          <div *ngIf="f.Precio.errors.required">Precio es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="inventario">Inventario</label>
-        <input type="text"
-               class="form-control"
-               name="inventario"
-               id="inventario"
-               formControlName="Inventario"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Inventario.errors }">
-        <div *ngIf="submitted && f.Inventario.errors" class="invalid-feedback">
-          <div *ngIf="f.Inventario.errors.required">Inventario es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="id_sucursal">Sucursal</label>
-        <input type="text"
-               class="form-control"
-               name="id_sucursal"
-               id="id_sucursal"
-               formControlName="Id_Sucursal"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Id_Sucursal.errors }">
-        <div *ngIf="submitted && f.Id_Sucursal.errors" class="invalid-feedback">
-          <div *ngIf="f.Id_Sucursal.errors.required">Sucursal es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="tipo">Tipo de Item</label>
-        <select class="form-control"
-                name="tipo"
-                id="tipo"
-                formControlName="Tipo"
-                required
-                [ngClass]="{ 'is-invalid': submitted && f.Tipo.errors }">
-          <option value=""></option>
-          <option value="Producto">Producto</option>
-          <option value="Servicio">Servicio</option>
-        </select>
-        <div *ngIf="submitted && f.Tipo.errors" class="invalid-feedback">
-          <div *ngIf="f.Tipo.errors.required">Tipo es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="duracion">Duracion</label>
-        <input type="text"
-               class="form-control"
-               name="duracion"
-               id="duracion"
-               formControlName="Duracion"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Duracion.errors }">
-        <div *ngIf="submitted && f.Duracion.errors" class="invalid-feedback">
-          <div *ngIf="f.Duracion.errors.required">Duracion es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="id_impuesto">Impuesto</label>
-        <input type="text"
-               class="form-control"
-               name="id_impuesto"
-               id="id_impuesto"
-               formControlName="Id_Impuesto"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Id_Impuesto.errors }">
-        <div *ngIf="submitted && f.Id_Impuesto.errors" class="invalid-feedback">
-          <div *ngIf="f.Id_Impuesto.errors.required">Impuesto es requerido</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-group col-lg-6 col-md-6">
-        <label for="id_foto">Foto</label>
-        <input type="text"
-               class="form-control"
-               name="id_foto"
-               id="id_foto"
-               formControlName="Id_Foto"
-               required
-               [ngClass]="{ 'is-invalid': submitted && f.Id_Foto.errors }">
-        <div *ngIf="submitted && f.Id_Foto.errors" class="invalid-feedback">
-          <div *ngIf="f.Id_Foto.errors.required">Foto es requerido</div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <button type="submit" class="btn btn-primary">Crear Item</button>
-    <p>&nbsp;</p>
-  </form>
-</div>-->
+<app-footer></app-footer>

@@ -1,48 +1,65 @@
-<div *ngIf="sucursal_id">
+<app-main-header></app-main-header>
+<div class="container" *ngIf="sucursal_id">
 
-  <div class="col-sm-auto d-flex justify-content-end">
+  <!--<div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/item-sucursal', sucursal_id]">Volver atras</a>
 
-  </div>
-
-  <h2 class="d-flex justify-content-center">Items de sucursal</h2>
-
-  <div>
+  </div>-->
+  <!--<h1 class="d-flex justify-content-center">Items de sucursal</h1>-->
+  <!--<div>
     <button type="button" class="btn btn-primary" [routerLink]="['/item-crear', sucursal_id]">Crear Item</button>
-  </div>
+  </div>-->
+  <div class="pt-3 px-4">
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Items de sucursal</h1>
+    </div>
 
-  <div>
-    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="items_sucursal">
-      <thead>
-        <tr>
-          <th>Id Item</th>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>Precio</th>
-          <th>Tipo</th>
-          <th>Duracion</th>
-          <th>Impuesto</th>
-          <th>Inventario</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of items_sucursal">
-          <td>{{ item.id }}</td>
-          <td>{{ item.nombre }}</td>
-          <td>{{ item.descripcion }}</td>
-          <td>{{ item.precio }}</td>
-          <td>{{ item.tipo }}</td>
-          <td>{{ item.duracion }}</td>
-          <td>{{ item.id_impuesto }}</td>
-          <td>{{ item.inventario }}</td>
-          <!--<td><button class="btn btn-primary" [routerLink]="['/transaction-create', account.id_account, 'Debit']"> Debit </button></td>-->
-          <td><button class="btn btn-primary" [routerLink]="['/item-editar', item.id]"> Editar </button></td>
-          <td><button type="button" class="btn btn-danger" (click)="delete(item.id)">Eliminar</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col-xl-3 col-md-6" style="cursor: pointer">
+      <a style="text-decoration: none" [routerLink]="['/item-crear', sucursal_id]">
+        <div class="card bg-primary text-white mb-4">
+          <div class="card-body">Agregar Item</div>
+        </div>
+        
+      </a>
+    </div>
+
+    <div class="table-responsive">
+      <div class="mb-4 col-md-6">
+        <input type="text" class="form-control" placeholder="Buscar" name="filtroItem" [(ngModel)]="filtroItem" />
+      </div>
+      <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="items_sucursal">
+        <thead>
+          <tr>
+            <th>Id Item</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Tipo</th>
+            <th>Duracion</th>
+            <th>Impuesto</th>
+            <th>Inventario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items_sucursal | filtroItem:filtroItem">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.descripcion }}</td>
+            <td>₡ {{ item.precio }}</td>
+            <td>{{ item.tipo }}</td>
+            <td>{{ item.duracion }} min</td>
+            <td>{{ item.id_impuesto }}</td>
+            <td>{{ item.inventario }} uds</td>
+            <!--<td><button class="btn btn-primary" [routerLink]="['/transaction-create', account.id_account, 'Debit']"> Debit </button></td>-->
+            <td><button class="btn btn-primary" [routerLink]="['/item-editar', item.id]"> Editar </button></td>
+            <td><button class="btn btn-danger" (click)="delete(item.id)">X</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
 
 
 </div>
+<app-footer></app-footer>
