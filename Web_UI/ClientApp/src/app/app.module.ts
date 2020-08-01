@@ -170,10 +170,10 @@ const maskConfig: Partial<IConfig> = {
       { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
       { path: 'perfil-comercio', component: PerfilComercioComponent },
-      { path: 'dashboard-comercio/agregar-archivo', component: AgregarArchivoComponent }
+      { path: 'dashboard-comercio/agregar-archivo', component: AgregarArchivoComponent },
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
     ])
   ],
   exports: [
