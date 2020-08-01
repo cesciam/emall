@@ -1,6 +1,17 @@
+<app-header-admin></app-header-admin>
+
 <div class="container">
   <h1>Usuarios</h1>
   <p>Listado de usuarios registrados</p>
+
+  <div class="row">
+    <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
+      <strong>{{error.message}}</strong>
+      <ul>
+        <li *ngFor="let detail of error.details">{{detail}}</li>
+      </ul>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col">
@@ -14,21 +25,28 @@
         <thead>
           <tr>
             <th>#</th>
-            <th class=".d-none .d-sm-block">Cedula</th>
+            <th class="d-none d-sm-block">Cedula</th>
             <th>Nombre</th>
-            <th class=".d-none .d-sm-block">Email</th>
+            <th class="d-none d-sm-block">Email</th>
+            <th>Estado</th>
             <th colspan="2">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let usuario of usuarios">
+          <tr *ngFor="let usuario of usuarios" [ngClass]="{ 'disabled': usuario.Estado == 0 }">
             <td>{{usuario.Id}}</td>
-            <td class=".d-none .d-sm-block">{{usuario.Cedula}}</td>
+            <td class="d-none d-sm-block">{{usuario.Cedula}}</td>
             <td>{{usuario.Nombre}} {{ usuario.Apellido }}</td>
-            <td class=".d-none .d-sm-block">{{usuario.Correo}}</td>
-            <td>
-              <button type="button" class="btn btn-primary btn-sm" routerLink="">Editar</button>&nbsp;
-              <button type="button" class="btn btn-primary btn-sm" (click)="deleteUser()">X</button>&nbsp;
+            <td class="d-none d-sm-block">{{usuario.Correo}}</td>
+            <td>{{usuario.Estado == 0 ? 'Pendiente de activar' : 'Activo'}}</td>
+            <td class="text-right">
+              <button
+                      type="button"
+                      class="btn btn-primary btn-sm"
+                      (click)="activarUsuario(usuario.Id)"
+                      [hidden]="usuario.Estado == 1">Activar</button>&nbsp;
+              <button type="button" class="btn btn-primary btn-sm" routerLink="../../usuario/editar-usuario/{{usuario.Id}}">Editar</button>&nbsp;
+              <button type="button" class="btn btn-primary btn-sm btn-danger" (click)="eliminarUsuario(usuario.Id)">X</button>&nbsp;
             </td>
           </tr>
         </tbody>
@@ -36,3 +54,5 @@
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

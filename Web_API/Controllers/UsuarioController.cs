@@ -45,7 +45,7 @@ namespace Web_API.Controllers {
         [Route("api/[controller]/{id}/activar/{codigo}")]
         public IActionResult Activar(int id, string codigo) {
             if (this.usuarioManagement.Activar(id, codigo)) {
-                return Ok("Usuario activado correctamente");
+                return Ok();
             } else {
                 return BadRequest(new { message = "Ha ocurrido un error al activar el usuario." });
             }

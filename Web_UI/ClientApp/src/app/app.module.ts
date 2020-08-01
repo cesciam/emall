@@ -64,6 +64,8 @@ import { ItemProductoComponent } from './item/item-producto/item-producto.compon
 import { ItemServicioComponent } from './item/item-servicio/item-servicio.component';
 import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.component';
 import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
+import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
+import { HeaderAdminComponent } from './dashboard-admin/header/header-admin/header-admin.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -125,6 +127,8 @@ const maskConfig: Partial<IConfig> = {
     ItemServicioComponent,
     ItemBusquedaComponent,
     ItemPerfilComponent,
+    EditarUsuarioComponent,
+    HeaderAdminComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -176,11 +180,14 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
     ])
   ],
   exports: [
-    AgregarUsuarioComponent
+    AgregarUsuarioComponent,
+    EditarUsuarioComponent,
+    HeaderAdminComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

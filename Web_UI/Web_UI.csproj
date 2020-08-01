@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\dashboard-admin\header\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 
