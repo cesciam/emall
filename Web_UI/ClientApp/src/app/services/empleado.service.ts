@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Inject } from '@angular/core';
 import { Empleado } from '../models/empleado.model';
+import { EmpleadoList } from '../models/empleado-list.model';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario.model';
 import { UsuarioService } from './usuario.service';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,33 +15,40 @@ export class EmpleadoService {
   formData: Empleado;
   list: Empleado[];
   listUsuarios: Usuario[];
+  private baseUrl: string;
 
-  //private BASE_URL: string;
-  readonly BASE_URL = 'http://localhost:5000/api/';
-
-  constructor(private http : HttpClient) {
-    //this.BASE_URL = 'http://localhost:5000/api/'
+  constructor(
+    @Inject('BASE_URL') baseUrl: string,
+    private http: HttpClient) {
+    this.baseUrl = baseUrl;
    }
 
-   postEmpleado(formData : Empleado){
-     return this.http.post(this.BASE_URL+'Empleado/Create', formData);
-   }
+  postEmpleado(formData : Empleado) {
+    return this.http.post(this.baseUrl + '/Empleado/Create', formData);
+  }
 
-   putEmpleado(formData : Empleado){
-     return this.http.put(this.BASE_URL+'Empleado/Update',formData)
-   }
+  putEmpleado(formData : Empleado) {
+    return this.http.put(this.baseUrl + '/Empleado/Update',formData)
+  }
 
-   fillList(){
-     this.http.get(this.BASE_URL+'Empleado/RetrieveAllDatos')
-     .toPromise().then(res=>this.list = res as Empleado[])
-   }
+  fillList() {
+    this.http.get(this.baseUrl + '/Empleado/RetrieveAllDatos')
+    .toPromise().then(res => this.list = res as Empleado[])
+  }
 
-   deleteEmpleado(id: number){
-     return this.http.delete(this.BASE_URL+'Empleado/Delete'+'?id=' +id)
-   }
+  obtenerEmpleados(comercio_id: number): Observable<EmpleadoList[]> {
+    return this.http.get<EmpleadoList[]>(this.baseUrl + '/Empleado/RetrieveByComercioId?comercio=' + comercio_id);
+  }
 
-   getById(id: number){
-     return this.http.get(this.BASE_URL+'Empleado/RetrieveById'+'?id=' +id)
-     .toPromise().then(res=>this.formData =res as Empleado)
-   }
+  deleteEmpleado(id: number) { 
+    return this.http.delete(this.baseUrl + '/Empleado/Delete?id=' + id)
+      .subscribe(response => {
+
+      });
+  }
+
+  getById(id: number) {
+    return this.http.get(this.baseUrl + '/Empleado/RetrieveById?id=' + id)
+    .toPromise().then(res => this.formData = res as Empleado)
+  }
 }

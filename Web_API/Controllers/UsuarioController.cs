@@ -58,7 +58,7 @@ namespace Web_API.Controllers {
             if (registro == null)
                 return BadRequest(new ErrorResultViewModel { message = "El formato de registro no es valido." });
 
-            if (this.usuarioManagement.Registrar(registro))
+            if (this.usuarioManagement.Registrar(registro) != 0)
                 return Ok();
             else
                 return BadRequest(new { message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos." });

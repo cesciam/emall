@@ -31,7 +31,7 @@ namespace DataAccessLayer.Mapper
             operation.AddIntParam(DB_COL_DURACION, c.duracion);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
             operation.AddIntParam(DB_COL_ID_IMPUESTO, c.id_impuesto);
-            operation.AddIntParam(DB_COL_ID_FOTO, c.id_foto);
+            operation.AddVarcharParam(DB_COL_ID_FOTO, c.id_foto);
             return operation;
         }
 
@@ -65,7 +65,7 @@ namespace DataAccessLayer.Mapper
             operation.AddIntParam(DB_COL_DURACION, c.duracion);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
             operation.AddIntParam(DB_COL_ID_IMPUESTO, c.id_impuesto);
-            operation.AddIntParam(DB_COL_ID_FOTO, c.id_foto);
+            operation.AddVarcharParam(DB_COL_ID_FOTO, c.id_foto);
 
             return operation;
         }
@@ -105,7 +105,7 @@ namespace DataAccessLayer.Mapper
                 duracion = GetIntValue(row, DB_COL_DURACION),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL),
                 id_impuesto = GetIntValue(row, DB_COL_ID_IMPUESTO),
-                id_foto = GetIntValue(row, DB_COL_ID_FOTO),
+                id_foto = GetStringValue(row, DB_COL_ID_FOTO),
             };
 
             return item;
@@ -123,6 +123,17 @@ namespace DataAccessLayer.Mapper
         {
             var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_ITEM_TIPO" };
             operation.AddVarcharParam(DB_COL_TIPO, tipo);
+            return operation;
+        }
+
+        public SqlOperation ItemBusqueda(string busqueda)
+        {
+
+
+
+            var operation = new SqlOperation { ProcedureName = "BUSCAR_ITEM" };
+            operation.AddVarcharParam(DB_COL_NOMBRE, busqueda);
+            //operation.AddVarcharParam(DB_COL_DESCRIPCION, busqueda);
             return operation;
         }
 

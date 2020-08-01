@@ -38,7 +38,6 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
     let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.sucursal.idPersona = usuarioLogeado.usuario.Id;
 
-    console.log(this.sucursal);
     }
 
   mapa() {
@@ -82,7 +81,6 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
           this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.sucursal.idComercio } });
         },
         (error) => {
-          console.log(error);
           this.error = error.error;
           window.scroll(0, 0);
         });

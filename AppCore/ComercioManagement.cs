@@ -53,5 +53,10 @@ namespace AppCore
         {
             comercioFactory.UpdateState(comercio);
         }
+
+        public void AgregarArchivoComercio(Comercio comercio)
+        {
+            comercioFactory.CrearArchivo(comercio);
+        }
     }
 }

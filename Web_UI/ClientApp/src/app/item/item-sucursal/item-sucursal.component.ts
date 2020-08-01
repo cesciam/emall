@@ -13,6 +13,7 @@ export class ItemSucursalComponent implements OnInit {
 
   sucursal_id: number;
   items_sucursal: Item[];
+  private filtroItem = '';
 
   constructor(private route: ActivatedRoute, private itemservice: ItemService) {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
@@ -29,10 +30,27 @@ export class ItemSucursalComponent implements OnInit {
     );
   }
 
+  //delete(id: number): void {
+  //  this.itemservice.deleteItem(id)
+  //    .subscribe(
+  //      (data: void) => {
+  //        let index: number = this.items_sucursal.findIndex(item => item.id === id);
+  //        this.items_sucursal.splice(index, 1);
+  //      },
+  //      (err: any) => console.log(err)
+  //    );
+  //  //window.location.reload();
+  //}
+
   delete(id: number): void {
     this.itemservice.deleteItem(id)
-      .subscribe((err: any) => console.log(err));
-    //window.location.reload();
+      .subscribe(
+        (data: void) => {
+          let index: number = this.items_sucursal.findIndex(item => item.id === id);
+          this.items_sucursal.splice(index, 1);
+        },
+        (err: any) => console.log(err)
+      );
   }
 
 

@@ -5,6 +5,7 @@ import { VistaService } from 'src/app/services/vista.service';
 import { VistaXRolService } from 'src/app/services/vista-xrol.service';
 import { Vista } from 'src/app/models/vista.model';
 import { VistaXRol } from 'src/app/models/vista-xrol.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-rol',
@@ -14,14 +15,18 @@ import { VistaXRol } from 'src/app/models/vista-xrol.model';
 export class AgregarRolComponent implements OnInit {
 
   vistasSeleccionadas : Array<Number>;
-
+  
   constructor(private service: RolService, 
     private serviceVista: VistaService, 
-    private serviceVistaXRol: VistaXRolService) {
+    private serviceVistaXRol: VistaXRolService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
       
      }
 
   ngOnInit() {
+    let id= parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.service.id_comercio = id;
     this.resetForm();
     this.vistasSeleccionadas = new Array<Number>();
   }
@@ -34,15 +39,20 @@ export class AgregarRolComponent implements OnInit {
       id: 0,
       nombre: '',
       descripcion: '',
-      id_comercio: 7 //TODO: traer valor desde localstorage. Comercio en edición.
+      id_comercio: this.service.id_comercio
     }
   }
 
   onSubmit(form:NgForm){
     this.insertRecord(form);
+    this.delay(3000);
     this.insertVistaXRol();
     form.resetForm();
   }
+
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+}
 
   insertRecord(form:NgForm){
     this.service.postRol(form.value).subscribe(res=>{

@@ -14,12 +14,48 @@ namespace AppCore
             crudItem = new ItemCrudFactory();
         }
 
-        public void CreateItem(Item item, string fotoUrl)
+        public Boolean validarItem(Item item)
+        {
+            Boolean status = true;
+            if (item.tipo.Equals("Producto"))
+            {
+                if(item.precio<=0 || item.inventario <= 0)
+                {
+                    status = false;
+                } 
+            }
+            else if (item.precio <= 0 || item.inventario <= 0 || item.duracion <= 0)
+            {
+                status = false;
+            }
+            return status;
+
+        }
+
+        public void CreateItem(Item item)
         {
 
-            var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
-            item.id_foto = archivo.Id;
-            crudItem.Create(item);
+            if (validarItem(item))
+            {
+                if (item.tipo.Equals("Producto"))
+                {
+                    item.duracion = 0;
+                }
+                crudItem.Create(item);
+            } else
+            {
+                throw new Exception("Valores numericos deben ser positivos");
+            }
+
+
+            
+
+
+
+
+            //var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
+            //item.id_foto = archivo.Id;
+            //crudItem.Create(item);
 
         }
 
@@ -35,7 +71,18 @@ namespace AppCore
 
         public void UpdateItem(Item item)
         {
-            crudItem.Update(item);
+            if (validarItem(item))
+            {
+                if (item.tipo.Equals("Producto"))
+                {
+                    item.duracion = 0;
+                }
+                crudItem.Update(item);
+            }
+            else
+            {
+                throw new Exception("Valores numericos deben ser positivos");
+            }
         }
 
         public void UpdateArchivo(Archivo archivo)
@@ -72,7 +119,10 @@ namespace AppCore
             return crudItem.RetrieveItemArchivo<Archivo>(archivo);
         }
 
-
+        public List<Item> ItemBusqueda(string busqueda)
+        {
+            return crudItem.ItemBusqueda<Item>(busqueda);
+        }
 
     }
 }

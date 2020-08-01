@@ -1,55 +1,78 @@
-<app-header></app-header>
-
 <div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4 text-center">Agregar empleados</h1>
-        <hr>
-        <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off" >
-            <div class="form-group" hidden>
-                <label for="id">ID</label>
-                <input type="number" name="id" #id="ngModel" [(ngModel)]=service.formData.id
-                    class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="id_usuario">Usuario</label>
-                <input type="number" name="id_usuario" #id_usuario="ngModel" [(ngModel)]=service.formData.id_usuario
-                    class="form-control" required>
-                    <div class="alert alert-danger" *ngIf="id_usuario.invalid && id_usuario.touched">
-                        El id del usuario es requerido
-                    </div>
-            </div>
-            <div class="form-group">
-                <label for="id_rol">Rol</label>
-                <select name="id_rol" id="id_rol" class="form-control" [(ngModel)]=service.formData.id_rol
-                    #id_rol="ngModel" >
-                    <option *ngFor="let rol of serviceRol.list" [ngValue]="rol.id" required>{{rol.id}}-{{rol.nombre}}</option>
-                        
-                </select>
-                <div class="alert alert-danger" *ngIf="id_rol.invalid && id_rol.touched">
-                    El rol es requerido
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label for="id_sucursal">Sucursal</label>
-                <select name="id_sucursal" id="id_sucursal" class="form-control" [(ngModel)]=service.formData.id_sucursal #id_sucursal="ngModel">
-                    <option *ngFor="let sucursal of sucursales" [ngValue]="sucursal.id" required>{{sucursal.id}}-{{sucursal.nombre}}</option >   
-                </select>
-            </div>
-            <!-- <div class="form-group">
-                <label for="id_sucursal">Sucursal</label>
-                <input type="number" name="id_sucursal" #id_sucursal="ngModel" [(ngModel)]=service.formData.id_sucursal
-                    class="form-control" required>
-                    <div class="alert alert-danger" *ngIf="id_sucursal.invalid && id_sucursal.touched">
-                        La sucursal es requerida
-                    </div>
-            </div> -->
-            <div class="form-group">
-                <button type="submit" [disabled]="form.untouched" class="btn btn-lg btn-block">Registrar</button>
-            </div>
-        </form>
+  <div class="row">
+    <div class="col-lg-10 col-md-10">
+      <h1>Registro de empleado</h1>
+      <p>Ingrese los siguientes datos</p>
     </div>
+
+    <div class="col-lg-2 col-md-2">
+      <a [routerLink]="['../../listar-empleado', {comercio:comercioId}]">Volver atras</a>
+    </div>
+  </div>
+
+  <div *ngIf="submitted && empleadoForm.invalid" class="alert alert-danger col-lg-12" role="alert">
+    * Existen algunos datos invalidos. Por favor corrija los datos de los controles marcados en rojo
+  </div>
+
+  <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
+    <strong>{{error.message}}</strong>
+    <ul>
+      <li *ngFor="let detail of error.details">{{detail}}</li>
+    </ul>
+  </div>
+
+  <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="form-group col-lg-12 col-md-12">
+        <label for="correo">Email</label>
+        <input type="email"
+               class="form-control"
+               name="correo"
+               id="correo"
+               formControlName="Correo"
+               required
+               [ngClass]="{ 'is-invalid': submitted && f.Correo.errors }"
+               placeholder="usuario@example.com">
+        <div *ngIf="submitted && f.Correo.errors" class="invalid-feedback">
+          <div *ngIf="f.Correo.errors.required">Email es requerido</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-lg-6 col-md-6">
+        <label for="sucursal">Sucursal</label>
+        <select class="form-control"
+                name="sucursal"
+                id="sucursal"
+                formControlName="Sucursal"
+                required
+                [ngClass]="{ 'is-invalid': submitted && f.Sucursal.errors }">
+          <option value=""></option>
+          <option *ngFor="let sucursal of sucursales" value="{{sucursal.id}}">{{sucursal.nombre}}</option>
+        </select>
+        <div *ngIf="submitted && f.Sucursal.errors" class="invalid-feedback">
+          <div *ngIf="f.Sucursal.errors.required">Sucursal es requerida</div>
+        </div>
+      </div>
+
+      <div class="form-group col-lg-6 col-md-6">
+        <label for="rol">Rol</label>
+        <select class="form-control"
+                name="rol"
+                id="rol"
+                formControlName="Rol"
+                required
+                [ngClass]="{ 'is-invalid': submitted && f.Rol.errors }">
+          <option value=""></option>
+          <option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.nombre}}</option>
+        </select>
+        <div *ngIf="submitted && f.Rol.errors" class="invalid-feedback">
+          <div *ngIf="f.Rol.errors.required">Rol es requerido</div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="isSendingData"> Registrar </button>
+  </form>
 </div>
-
-
-<app-footer></app-footer>

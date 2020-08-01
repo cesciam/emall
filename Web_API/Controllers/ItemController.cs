@@ -40,13 +40,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(Item c, string fotoUrl)
+        public IActionResult CreateItem(Item c)
         {
             try
             {
                 var cm = new ItemManagement();
 
-                cm.CreateItem(c, fotoUrl);
+                cm.CreateItem(c);
 
                 return Ok();
 
@@ -146,6 +146,15 @@ namespace WebAPI.Controllers
             };
 
             return cm.RetrieveItemArchivo(archivo);
+        }
+
+        [HttpGet]
+        public List<Item> ItemBusqueda(string busqueda)
+        {
+            var cm = new ItemManagement();
+
+            return cm.ItemBusqueda(busqueda);
+
         }
 
 

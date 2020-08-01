@@ -27,9 +27,10 @@ export class ItemEditarComponent implements OnInit {
   item_archivo: Archivo;
   impuestos: number[];
   uploader: CloudinaryUploader;
+  error: any;
 
 
-  constructor(private route: ActivatedRoute, private service: ItemService) {
+  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router) {
     //this.item_seleccionado = new Item();
     //this.item_archivo = new Archivo();
     this.impuestos = [1, 2, 3]
@@ -54,7 +55,7 @@ export class ItemEditarComponent implements OnInit {
 
   async obtenerItem(itemId: number) {
     this.item_seleccionado = await this.service.ObtenerItem(itemId);
-    this.item_archivo = await this.service.ObtenerArchivo(this.item_seleccionado.id_foto);
+    //this.item_archivo = await this.service.ObtenerArchivo(this.item_seleccionado.id_foto);
   }
 
 
@@ -70,7 +71,7 @@ export class ItemEditarComponent implements OnInit {
       let res;
       res = JSON.parse(response);
       console.log(res);
-      this.item_archivo.enlace = res.url;
+      this.item_seleccionado.id_foto = res.url;
 
       return res;
     };
@@ -80,20 +81,23 @@ export class ItemEditarComponent implements OnInit {
   save(): void {
 
 
-    this.service.updateArchivo(this.item_archivo)
-      .subscribe(
-        (data: any) => console.log('Archivo was updated'),
-        (err: any) => console.log(err)
-      );
+    //this.service.updateArchivo(this.item_archivo)
+    //  .subscribe(
+    //    (data: any) => console.log('Archivo was updated'),
+    //    (err: any) => console.log(err)
+    //  );
 
     this.item_seleccionado.id_impuesto = Number(this.item_seleccionado.id_impuesto)
 
     this.service.updateItem(this.item_seleccionado)
       .subscribe(
-        (data: any) => console.log('Item was updated'),
-        (err: any) => console.log(err)
-      );
+        (reponse) => this.router.navigate(['item-sucursal', this.item_seleccionado.id_sucursal]),
+        (error) => {
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
   }
+
 
 
 }
