@@ -6,13 +6,10 @@ import { Component, OnInit } from '@angular/core';
   //styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
- 
 
   constructor() {
   }
-    ngOnInit(): void {
-        throw new Error("Method not implemented.");
-    }
 
-
+  ngOnInit(): void {
+  }
 }

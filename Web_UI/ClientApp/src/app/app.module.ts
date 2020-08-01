@@ -67,7 +67,7 @@ import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 import { FiltroItemPipe } from './pipes/filtro-item.pipe';
 import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
-import { HeaderAdminComponent } from './dashboard-admin/header/header-admin/header-admin.component';
+import { SidebarAdminComponent } from './dashboard-admin/sidebar-admin/sidebar-admin.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -132,7 +132,7 @@ const maskConfig: Partial<IConfig> = {
     MainHeaderComponent,
     FiltroItemPipe,
     EditarUsuarioComponent,
-    HeaderAdminComponent,
+    SidebarAdminComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -191,7 +191,7 @@ const maskConfig: Partial<IConfig> = {
   exports: [
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
-    HeaderAdminComponent,
+    SidebarAdminComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
