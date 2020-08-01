@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PieChartComercioComponent } from './pie-chart-comercio.component';
+import { ComPorCatReporteComponent } from './com-por-cat-reporte.component';
 
-describe('PieChartComercioComponent', () => {
-  let component: PieChartComercioComponent;
-  let fixture: ComponentFixture<PieChartComercioComponent>;
+describe('ComPorCatReporteComponent', () => {
+  let component: ComPorCatReporteComponent;
+  let fixture: ComponentFixture<ComPorCatReporteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PieChartComercioComponent ]
+      declarations: [ ComPorCatReporteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PieChartComercioComponent);
+    fixture = TestBed.createComponent(ComPorCatReporteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

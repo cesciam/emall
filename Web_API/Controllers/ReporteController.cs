@@ -20,5 +20,10 @@ namespace Web_API.Controllers
             return mng.RetrieveCategoriaPorComercio();
         }
 
+        [HttpGet]
+        public List<Reporte> empleadoPorCategoria()
+        {
+            return mng.RetrieveEmpleadoPorComercio();
+        }
     }
 }

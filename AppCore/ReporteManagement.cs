@@ -19,5 +19,10 @@ namespace AppCore
         {
             return crud.RetrieveCategoriaPorComercio<Reporte>();
         }
+        public List<Reporte> RetrieveEmpleadoPorComercio()
+        {
+            return crud.RetrieveEmpleadoPorComercio<Reporte>();
+        }
+
     }
 }

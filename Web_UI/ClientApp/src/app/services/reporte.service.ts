@@ -19,4 +19,9 @@ export class ReporteService {
     this.serviceEndPoint = '/reporte/comercioPorCategoria';
     return  this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
+
+  getEmpleadoPorCom(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/empleadoPorCategoria';
+    return  this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
 }

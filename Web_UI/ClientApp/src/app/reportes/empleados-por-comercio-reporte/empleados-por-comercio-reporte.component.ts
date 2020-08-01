@@ -1,29 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { ReporteService } from 'src/app/services/reporte.service';
 import { Reporte } from 'src/app/models/Reporte';
-import * as Chart from 'chart.js';
+import { ReporteService } from 'src/app/services/reporte.service';
 
 @Component({
-  selector: 'app-pie-chart-comercio',
-  templateUrl: './pie-chart-comercio.component.html',
-  styleUrls: ['./pie-chart-comercio.component.css']
+  selector: 'app-empleados-por-comercio-reporte',
+  templateUrl: './empleados-por-comercio-reporte.component.html',
+  styleUrls: ['./empleados-por-comercio-reporte.component.css']
 })
-export class PieChartComercioComponent implements OnInit {
+export class EmpleadosPorComercioReporteComponent implements OnInit {
 
-   categorias: string[] = [];
-   comerciosPorCat: number[] = [];
-   reportes: Reporte[] = [];
+  categorias: string[] = [];
+  comerciosPorCat: number[] = [];
+  reportes: Reporte[] = [];
 
-  public pieChartLabels = [];
-  public pieChartData = [];
-  public pieChartType = 'pie';
-  public randomColor = [];
-  public pieColors = [];
-  constructor( private service: ReporteService) {
-   }
+ public pieChartLabels = [];
+ public pieChartData = [];
+ public pieChartType = 'pie';
+ public randomColor = [];
+ public pieColors = [];
+
+  constructor(private service: ReporteService) { }
 
   ngOnInit() {
-    this.service.getComercioPorCat()
+    this.service.getEmpleadoPorCom()
     .subscribe(
       (data: Reporte[]) => {
         for (const report of data) {
@@ -31,7 +30,7 @@ export class PieChartComercioComponent implements OnInit {
           this.pieChartData.push(report.cantidad);
           this.randomColor.push(this.getRandomColor());
         }
-
+ 
         this.pieColors = [{
           backgroundColor: this.randomColor
         }];
@@ -40,14 +39,17 @@ export class PieChartComercioComponent implements OnInit {
     );
   }
 
+
+
   getRandomColor() {
-    var rgba = 'rgba(' +
+    const rgba = 'rgba(' +
     (Math.floor(Math.random() * ( 256 - 1 ) + 1)) + ', ' +
     (Math.floor(Math.random() * ( 256 - 1 ) + 1)) + ', ' +
     '171' + ', ' + '1)';
-
+  
     console.log(rgba);
-
+  
     return rgba;
   }
+
 }

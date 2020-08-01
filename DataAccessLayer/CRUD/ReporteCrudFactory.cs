@@ -56,5 +56,21 @@ namespace DataAccessLayer.CRUD
             }
             return lstConfigs;
         }
+
+        public List<T> RetrieveEmpleadoPorComercio<T>()
+        {
+            var lstConfigs = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveEmpleadoPorComercioStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
     }
 }

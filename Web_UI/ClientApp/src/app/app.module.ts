@@ -58,8 +58,10 @@ import { CrearImpuestoComponent } from '../app/impuesto/crear-impuesto/crear-imp
 import { ListarCategoriaComponent } from '../app/categoria/listar-categoria/listar-categoria.component';
 import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component'; 
 import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
-import { PieChartComercioComponent } from './reportes/pie-chart-comercio/pie-chart-comercio.component';
 import { ChartsModule } from 'ng2-charts';
+import { ReportesComponent } from './reportes/reportes/reportes.component';
+import { ComPorCatReporteComponent } from './reportes/com-por-cat-reporte/com-por-cat-reporte.component';
+import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-comercio-reporte/empleados-por-comercio-reporte.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -115,7 +117,9 @@ const maskConfig: Partial<IConfig> = {
     ListarCategoriaComponent,
     CrearCategoriaComponent,
     AprobarComercioComponent,
-    PieChartComercioComponent,
+    ReportesComponent,
+    ComPorCatReporteComponent,
+    EmpleadosPorComercioReporteComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -162,7 +166,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'crear-categoria', component: CrearCategoriaComponent },
       { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
-      { path: 'reportes', component: PieChartComercioComponent }
+      { path: 'reportes', component: ReportesComponent }
     ])
   ],
   exports: [

@@ -59,6 +59,15 @@ namespace DataAccessLayer.Mapper
             return operacion;
         }
 
+        public SqlOperation GetRetrieveEmpleadoPorComercioStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_EMPLEADOS_COMERCIO" };
+
+            return operacion;
+
+        }
+
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             throw new NotImplementedException();
