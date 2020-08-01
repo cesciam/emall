@@ -38,6 +38,7 @@ export class DashboardComercioComponent implements OnInit {
 
   ngOnInit() {
     this.llenarComercio();
+    this.validarEmpleado();
 
   }
 
@@ -47,12 +48,20 @@ export class DashboardComercioComponent implements OnInit {
 
     let vistas : Vista[];
 
-    if(usuarioLogueado.Tipo == 3){
-        this.vistaService.obtenerVistasPorUsuario(parseInt(usuarioLogueado.Id))
+    if (usuarioLogueado.Tipo == 4) {
+      this.vistaService.obtenerVistasPorUsuario(parseInt(usuarioLogueado.Id))
         .subscribe(data => {
           vistas = data;
           this.validarVistas(vistas);
         });
+    } else {
+      this.permisoSucursales = true;
+      this.permisoProductos = true;
+      this.permisoEmpleados = true;
+      this.permisoRoles = true;
+      this.permisoPromociones = true;
+      this.permisoArchivos = true;
+      this.permisoEditarComercio = true;
     }
   }
 
