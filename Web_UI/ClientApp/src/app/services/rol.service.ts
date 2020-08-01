@@ -7,6 +7,7 @@ import { Vista } from '../models/vista.model';
   providedIn: 'root'
 })
 export class RolService {
+  public id_comercio : number;
   formData: Rol;
   list: Rol[];
   readonly BASE_URL = 'http://localhost:5000/api/';
@@ -16,7 +17,12 @@ export class RolService {
   }
 
   fillList(){
-    this.http.get(this.BASE_URL+'Rol/RetrieveByIdComercio'+'?id=' +7)
+    this.http.get(this.BASE_URL+'Rol/RetrieveAll')
+    .toPromise().then(res=>this.list=res as Rol[]);
+  }
+
+  fillRolComercio(){
+    this.http.get(this.BASE_URL+'Rol/RetrieveByIdComercio'+'?id=' +this.id_comercio)
     .toPromise().then(res=>this.list=res as Rol[]);
   }
 
@@ -33,12 +39,9 @@ export class RolService {
   }
 
   getById(id: number){
-    return this.http.get(this.BASE_URL+'Rol/RetrieveById'+'?id=' +id)
-     .toPromise().then(res=>this.formData =res as Rol)
+    //TODO< QUE ESTA FUCKING LLAMADA FUNQUE
+     return this.http.get(this.BASE_URL+'Rol/RetrieveById'+'?id=' +id)
+      .toPromise().then(res=>this.formData =res as Rol)
   }
-
-  // getSelectedRol(){
-  //   this.formData= JSON.parse(localStorage.getItem("rol"))
-  // }
 
 }
