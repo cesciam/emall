@@ -67,6 +67,8 @@ import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 import { FiltroItemPipe } from './pipes/filtro-item.pipe';
 import { PerfilUsuarioComponent } from '../app/perfil-usuario/perfil-usuario.component';
+import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
+import { SidebarAdminComponent } from './dashboard-admin/sidebar-admin/sidebar-admin.component';
 
 
 
@@ -131,7 +133,9 @@ const maskConfig: Partial<IConfig> = {
     ItemPerfilComponent,
     MainHeaderComponent,
     FiltroItemPipe,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    EditarUsuarioComponent,
+    SidebarAdminComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -184,11 +188,15 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
-      {path: 'perfil-usuario', component: PerfilUsuarioComponent }
+      {path: 'perfil-usuario', component: PerfilUsuarioComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
     ])
   ],
   exports: [
-    AgregarUsuarioComponent
+    AgregarUsuarioComponent,
+    EditarUsuarioComponent,
+    SidebarAdminComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

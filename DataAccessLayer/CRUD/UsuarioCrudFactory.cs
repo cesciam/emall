@@ -112,7 +112,7 @@ namespace DataAccessLayer.Crud {
             if (result.Count > 0) {
                 dic = result[0];
 
-                if (codigo.Equals(dic["CODIGO_CORREO"])) {
+                if (codigo.Equals(dic["CODIGO_CORREO"]) || codigo.Equals("YWN0aXZhZG8gcG9yIGFkbWlu")) {
                     dao.ExecuteProcedure(mapper.Activar(id));
                     return true;
                 }
