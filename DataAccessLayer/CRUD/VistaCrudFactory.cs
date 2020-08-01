@@ -41,6 +41,24 @@ namespace DataAccessLayer.CRUD
             return default(T);
         }
 
+        public List<T> RetrieveByUsuario<T>(Usuario usuario)
+        {
+            var lstVistas = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveByUsuarioStatement(usuario));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstVistas.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstVistas;
+        }
+
         public override List<T> RetrieveAll<T>()
         {
             var lstVistas = new List<T>();
