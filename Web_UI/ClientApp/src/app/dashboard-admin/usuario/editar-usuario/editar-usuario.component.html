@@ -2,19 +2,19 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2 col-md-2">
+    <div class="col-lg-2">
       <app-sidebar-admin></app-sidebar-admin>
     </div>
 
-    <div class="col-lg-10 col-lg-10">
-      <div id="register" *ngIf="!registerComplete">
+    <div class="col-lg-10">
+      <div id="register" *ngIf="!editComplete">
         <div class="row">
           <div class="col-lg-10 col-md-10">
-            <h1>Registro de usuario</h1>
-            <p>Ingrese los siguientes datos</p>
+            <h1>Usuario</h1>
+            <p>Editar los datos del usuario</p>
           </div>
           <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
-            <a [routerLink]="['../listar-usuario']">Volver atras</a>
+            <a [routerLink]="['../../listar-usuario']">Volver atras</a>
           </div>
         </div>
 
@@ -139,25 +139,6 @@
                 <div *ngIf="f.Telefono.errors.required">Telefono es requerido</div>
               </div>
             </div>
-
-            <div [hidden]="integrarCon == 'pagina'" class="form-group col-lg-4 col-md-4">
-              <label for="tipo">Tipo de Usuario</label>
-              <select class="form-control"
-                      name="tipo"
-                      id="tipo"
-                      formControlName="Tipo"
-                      required
-                      [ngClass]="{ 'is-invalid': submitted && f.Tipo.errors }">
-                <option value=""></option>
-                <option value="1">Administrador</option>
-                <option value="2" [selected]="integrarCon == 'pagina'">Cliente</option>
-                <option value="3">Administrador de Comercio</option>
-                <option value="4">Empleado</option>
-              </select>
-              <div *ngIf="submitted && f.Tipo.errors" class="invalid-feedback">
-                <div *ngIf="f.Tipo.errors.required">Tipo es requerido</div>
-              </div>
-            </div>
           </div>
 
           <div class="row">
@@ -186,17 +167,17 @@
           <button type="submit"
                   [ngClass]="{ 'btn btn-primary': integrarCon == null, 'site-btn': integrarCon == 'pagina' }"
                   [disabled]="isSendingData">
-            Registrar
+            Guardar Cambios
           </button>
           <p>&nbsp;</p>
         </form>
       </div>
 
-      <div class="row justify-content-lg-center justify-content-md-center" *ngIf="registerComplete">
+      <div class="row justify-content-lg-center justify-content-md-center" *ngIf="editComplete">
         <div class="form-group col-lg-12 col-md-12 register-complete">
-          <h1>Registro Completado</h1>
-          <p>Gracias por registrarte en nuestro sitio!!!</p>
-          <p>Un mensaje fue enviado a la cuenta de correo proporcionada con los pasos necesarios para la activacion de tu cuenta.</p>
+          <h1>Felicidades!</h1>
+          <p>Tus datos han sido guardados correctamente</p>
+          <p>Tu usuario es libre de navegar por nuestro sitio!!!</p>
         </div>
       </div>
     </div>

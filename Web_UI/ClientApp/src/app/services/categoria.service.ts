@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../models/categoria.model';
 import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class CategoriaService {
   formData: Categoria;
   private categorias: Categoria[];
 
-  readonly BaseURL = 'http://localhost:5000/api/';
+  readonly BaseURL = 'http://localhost:5000/api/'; //inject 
 
   constructor(private http: HttpClient) { }
 
@@ -28,22 +29,17 @@ export class CategoriaService {
 
   crearCategoria(categoria: Categoria) {
 
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http
-      .post<Categoria>(this.BaseURL + "/crearcategoria", categoria)
-      .pipe(catchError(this.handleError));
+    return this.http.post(this.BaseURL + "categoria/crearcategoria", categoria)
+      
   }
    
 
-  modificarCategoria(categoria: Categoria) {
-    this.http.put(this.BaseURL + 'categoria/modificarcategoria', categoria)
+  modificarCategoria(categoria: Categoria): Observable<any> {
+    return this.http.put(this.BaseURL + 'categoria/modificarcategoria', categoria)
   }
 
   eliminarCategoria(id:number) {
-    return this.http.delete(this.BaseURL + 'impuesto/eliminarcategoria/?id=' + id)
+    return this.http.delete(this.BaseURL + 'categoria/eliminarcategoria/?id=' + id)
   }
 
   handleError(handleError: any): import("rxjs").OperatorFunction<Categoria, any> {

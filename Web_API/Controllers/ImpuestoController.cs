@@ -68,12 +68,17 @@ namespace Web_API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult EliminarImpuesto(Impuesto impuesto)
+        public IActionResult EliminarImpuesto(int id)
         {
             var im = new ImpuestoManagement();
 
             try
             {
+                Impuesto impuesto = new Impuesto
+                {
+                    Id = id
+                }; 
+
                 im.Delete(impuesto);
                 return Ok(); //200
             }

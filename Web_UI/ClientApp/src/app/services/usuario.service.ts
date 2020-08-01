@@ -42,6 +42,37 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.baseUrl + '/usuario');
   }
 
+  obtenerUsuarioPorId(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(this.baseUrl + '/usuario/' + id);
+  }
+
+  editarUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(this.baseUrl + '/customer/', JSON.stringify(usuario), this.httpOptions)
+      .pipe(
+        catchError((err) => {
+          return throwError(err);
+        })
+      )
+  }
+
+  activarUsuario(id: number, codigo: string): Observable<{}> {
+    return this.http.get(this.baseUrl + '/usuario/' + id + '/activar/' + codigo, this.httpOptions)
+      .pipe(
+        catchError((err) => {
+          return throwError(err);
+        })
+      );;
+  }
+
+  eliminarUsuario(id: number): Observable<{}> {
+    return this.http.delete(this.baseUrl + '/usuario/' + id, this.httpOptions)
+      .pipe(
+        catchError((err) => {
+          return throwError(err);
+        })
+      );
+  }
+
   login(login: LoginUsuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.baseUrl + '/usuario/login', JSON.stringify(login), this.httpOptions)
       .pipe(
