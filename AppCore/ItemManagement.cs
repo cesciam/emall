@@ -14,11 +14,16 @@ namespace AppCore
             crudItem = new ItemCrudFactory();
         }
 
-        public void CreateItem(Item item, string fotoUrl)
+        public void CreateItem(Item item)
         {
+            if (item.tipo.Equals("Producto"))
+            {
+                item.duracion = 0;
+            }
 
-            var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
-            item.id_foto = archivo.Id;
+
+            //var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
+            //item.id_foto = archivo.Id;
             crudItem.Create(item);
 
         }
@@ -72,7 +77,10 @@ namespace AppCore
             return crudItem.RetrieveItemArchivo<Archivo>(archivo);
         }
 
-
+        public List<Item> ItemBusqueda(string busqueda)
+        {
+            return crudItem.ItemBusqueda<Item>(busqueda);
+        }
 
     }
 }

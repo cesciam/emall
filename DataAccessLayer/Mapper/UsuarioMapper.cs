@@ -24,12 +24,34 @@ namespace DataAccessLayer.Mapper {
 
             var u = (Usuario)entity;
             operation.AddIntParam(DB_COL_ID, u.Id);
-            operation.AddVarcharParam(DB_COL_CEDULA, u.Cedula);
-            operation.AddVarcharParam(DB_COL_NOMBRE, u.Nombre);
-            operation.AddVarcharParam(DB_COL_APELLIDO, u.Apellido);
+
+            if (String.IsNullOrEmpty(u.Cedula))
+                operation.AddVarcharParam(DB_COL_CEDULA, Utils.TokenGenerator.Generar(8));
+            else
+                operation.AddVarcharParam(DB_COL_CEDULA, u.Cedula);
+
+            if (String.IsNullOrEmpty(u.Nombre))
+                operation.AddNullParam(DB_COL_NOMBRE);
+            else
+                operation.AddVarcharParam(DB_COL_NOMBRE, u.Nombre);
+
+            if (String.IsNullOrEmpty(u.Apellido))
+                operation.AddNullParam(DB_COL_APELLIDO);
+            else
+                operation.AddVarcharParam(DB_COL_APELLIDO, u.Apellido);
+
             operation.AddVarcharParam(DB_COL_CORREO, u.Correo);
-            operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
-            operation.AddIntParam(DB_COL_ID_FOTO, u.Foto);
+
+            if (String.IsNullOrEmpty(u.Telefono))
+                operation.AddNullParam(DB_COL_TELEFONO);
+            else
+                operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
+
+            if (u.Foto == null)
+                operation.AddNullParam(DB_COL_ID_FOTO);
+            else
+                operation.AddIntParam(DB_COL_ID_FOTO, u.Foto.Id);
+
             operation.AddIntParam(DB_COL_TELEFONO_CONFIRMADO, u.TelefonoConfirmado);
             operation.AddIntParam(DB_COL_CORREO_CONFIRMADO, u.CorreoConfirmado);
             operation.AddVarcharParam(DB_COL_CODIGO_TELEFONO, u.CodigoTelefono);
@@ -102,10 +124,10 @@ namespace DataAccessLayer.Mapper {
             else
                 operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
 
-            if (u.Foto == 0)
+            if (u.Foto.Id == 0)
                 operation.AddNullParam(DB_COL_ID_FOTO);
             else
-                operation.AddIntParam(DB_COL_ID_FOTO, u.Foto);
+                operation.AddIntParam(DB_COL_ID_FOTO, u.Foto.Id);
 
             if (u.TelefonoConfirmado == 0)
                 operation.AddNullParam(DB_COL_TELEFONO_CONFIRMADO);
@@ -150,7 +172,7 @@ namespace DataAccessLayer.Mapper {
             operation.AddVarcharParam(DB_COL_APELLIDO, u.Apellido);
             operation.AddVarcharParam(DB_COL_CORREO, u.Correo);
             operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
-            operation.AddIntParam(DB_COL_ID_FOTO, u.Foto);
+            operation.AddIntParam(DB_COL_ID_FOTO, u.Foto.Id);
             operation.AddIntParam(DB_COL_TELEFONO_CONFIRMADO, u.TelefonoConfirmado);
             operation.AddIntParam(DB_COL_CORREO_CONFIRMADO, u.CorreoConfirmado);
             operation.AddVarcharParam(DB_COL_CODIGO_TELEFONO, u.CodigoTelefono);
@@ -189,7 +211,7 @@ namespace DataAccessLayer.Mapper {
                 Apellido = GetStringValue(row, DB_COL_APELLIDO),
                 Correo = GetStringValue(row, DB_COL_CORREO),
                 Telefono = GetStringValue(row, DB_COL_TELEFONO),
-                Foto = GetIntValue(row, DB_COL_ID_FOTO),
+                Foto = new Archivo { Id = GetIntValue(row, DB_COL_ID_FOTO) },
                 TelefonoConfirmado = GetIntValue(row, DB_COL_TELEFONO_CONFIRMADO),
                 CorreoConfirmado = GetIntValue(row, DB_COL_CORREO_CONFIRMADO),
                 CodigoTelefono = GetStringValue(row, DB_COL_CODIGO_TELEFONO),

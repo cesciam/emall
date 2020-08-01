@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AppCore;
 using Entities;
+using Entities.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,24 +14,34 @@ namespace Web_API.Controllers
     [ApiController]
     public class EmpleadoController : ControllerBase
     {
+        private EmpleadoManagement em;
+        private UsuarioManagement um;
+
+        public EmpleadoController() {
+            this.em = new EmpleadoManagement();
+            this.um = new UsuarioManagement();
+        }
+
         [HttpGet]
         public List<Empleado> RetrieveAllDatos()
         {
-            var em = new EmpleadoManagement();
             return em.RetrieveAllDatos();
+        }
+
+        [HttpGet]
+        public List<EmpleadoViewModel> RetrieveByComercioId(int comercio) {
+            return em.RetrieveByComercioId(comercio);
         }
 
         [HttpGet]
         public List<Empleado> RetrieveAll()
         {
-            var em = new EmpleadoManagement();
             return em.RetrieveAll();
         }
 
         [HttpGet]
         public Empleado RetrieveById(int id)
         {
-            var em = new EmpleadoManagement();
             var cuenta = new Empleado()
             {
                 id = id
@@ -39,17 +50,29 @@ namespace Web_API.Controllers
             return em.RetrieveById(cuenta);
         }
         [HttpPost]
-        public IActionResult Create(Empleado c)
+        public IActionResult Create(RegistroEmpleadoViewModel registroEmpleado)
         {
-            try
-            {
-                var em = new EmpleadoManagement();
-                em.Create(c);
+            if (registroEmpleado == null)
+                return BadRequest(new ErrorResultViewModel { message = "El formato de  empleado no es valido." });
+
+            RegistroViewModel registroUsuario = new RegistroViewModel {
+                Correo = registroEmpleado.Correo,
+                Tipo = 4 // 4 = Empleado
+            };
+
+            int usuarioId = this.um.Registrar(registroUsuario, true);
+
+            if (usuarioId != 0) {
+                Empleado nuevoEmpleado = new Empleado {
+                    id_rol = registroEmpleado.Rol,
+                    id_sucursal = registroEmpleado.Sucursal,
+                    id_usuario = usuarioId
+                };
+
+                this.em.Create(nuevoEmpleado);
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
+            } else {
+                return BadRequest(new { message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos." });
             }
         }
 
@@ -58,7 +81,6 @@ namespace Web_API.Controllers
         {
             try
             {
-                var em = new EmpleadoManagement();
                 em.Update(c);
                 return Ok();
             }
@@ -77,7 +99,6 @@ namespace Web_API.Controllers
                 {
                     id = id
                 };
-                var em = new EmpleadoManagement();
                 em.Delete(c);
                 return Ok();
             }

@@ -122,6 +122,35 @@ namespace DataAccessLayer.CRUD
             return comerciosList;
         }
 
+        public List<T> RetrieveAllPending<T>()
+        {
+            var comerciosList = new List<T>();
+            var comerciosResult = dao.ExecuteQueryProcedure(comercioMapper.GetRetriveAllPendingStatement());
+            if (comerciosResult.Count > 0)
+            {
+                var comercios = comercioMapper.BuildObjects(comerciosResult);
+                foreach (var c in comercios)
+                {
+                    comerciosList.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            foreach (var c in comerciosList)
+            {
+                var comercio = (Comercio)Convert.ChangeType(c, typeof(Comercio));
+                comercio.Categorias = GenerarCategorias(comercio.Id);
+                comercio.Archivos = GenerarArchivos(comercio.Id);
+            }
+
+            return comerciosList;
+        }
+
+        public void CrearArchivo(BaseEntity entity)
+        {
+            var c = (Comercio)entity;
+            dao.ExecuteProcedure(archivoMapper.GetCreateStatement(c.Archivos[0], c.CedulaJuridica));
+        }
+
         public Archivo[] GenerarArchivos(int IdComercio)
         {
             var archivo = new Archivo { Id_Comercio = IdComercio };

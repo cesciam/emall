@@ -12,7 +12,7 @@
     <div class="col">
       <label for="nombre">Nombre de su comercio</label>
       <input id="nombre" name="nombre" class="form-control"
-             [(ngModel)]="comercioSeleccionado.nombre" #nombre="ngModel" type="text" required>
+             [(ngModel)]="comercioSeleccionado.nombre" minlength="3" #nombre="ngModel" type="text" required>
 
       <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
            class="alert alert-danger">
@@ -28,7 +28,7 @@
 
       <label for="nombreLegal">Nombre legal</label>
       <input id="nombreLegal" name="nombreLegal" class="form-control"
-             [(ngModel)]="comercioSeleccionado.nombreLegal" #nombreLegal="ngModel" type="text" required>
+             [(ngModel)]="comercioSeleccionado.nombreLegal" minlength="3" #nombreLegal="ngModel" type="text" required>
 
       <div *ngIf="nombreLegal.invalid && (nombreLegal.dirty || nombreLegal.touched)"
            class="alert alert-danger">
@@ -44,10 +44,6 @@
     </div>
 
     <div class="col-lg-3">
-
-
-
-
       <label>Logo de comercio</label>
       <div class="z-depth-1-half mb-4">
         <img [src]="logo" class="img-fluid"
@@ -65,15 +61,8 @@
           <button class="btn btn-primary" [disabled]="loading" (click)="upload()">Subir imagen</button>
         </div>
       </div>
-
-
     </div>
-
-
-
   </div>
-
-
 
   <div class="container-fluid">
 
@@ -94,5 +83,6 @@
   </div>
   <hr>
 </form>
+<app-footer></app-footer>
 
 

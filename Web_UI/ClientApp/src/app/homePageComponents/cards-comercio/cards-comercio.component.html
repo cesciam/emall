@@ -1,23 +1,22 @@
-<section class="container-fluid main-section">
-
+<section class="main-section">
   <div class="row">
-    <div class="col-3" *ngFor="let comercio of comercios" style="margin-bottom: 2%; width:20%">
-      <div class="card h-100" style="width: 18rem;" >
+
+    <div class="col-sm-3" *ngFor="let comercio of comercios">
+      <div class="card w-100" style="margin-bottom: 2%">
         <div class="img-container">
-          <img class="card-img-top img-fluid img" [src]="comercio.archivos[0].enlace" alt="Logo de comercio">
+          <img class="img mx-auto d-block" [src]="comercio.archivos[0].enlace" alt="Logo de comercio">
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <hr />
-          <h4>{{comercio.nombre}}</h4>
-          <p class="card-text">{{comercio.categorias[0]}}</p>
-        </div>
-        <div class="card-footer">
-          
-          <a>
+          <h4>{{ comercio.nombre }}</h4>
+          <p>{{ comercio.categorias[0] }}</p>
+          <a [routerLink]="['/perfil-comercio']" [queryParams]="{comercio: comercio.id}">
             <button class="btn btn-primary">Ver comercio</button>
           </a>
         </div>
       </div>
     </div>
   </div>
+
+
 </section>

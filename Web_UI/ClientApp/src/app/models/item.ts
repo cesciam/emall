@@ -8,5 +8,5 @@ export class Item {
   duracion: number;
   tipo: string;
   id_impuesto: number;
-  id_foto: number;
+  id_foto: string;
 }

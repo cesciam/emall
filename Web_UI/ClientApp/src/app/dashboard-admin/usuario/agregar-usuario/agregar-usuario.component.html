@@ -5,7 +5,7 @@
         <h1>Registro de usuario</h1>
         <p>Ingrese los siguientes datos</p>
       </div>
-      <div class="col-lg-2 col-md-2"  *ngIf="integrarCon == null">
+      <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
         <a [routerLink]="['../listar-usuario']">Volver atras</a>
       </div>
     </div>
@@ -132,8 +132,8 @@
           </div>
         </div>
 
-        <div *ngIf="integrarCon == null" class="form-group col-lg-4 col-md-4">
-          <label for="telefono">Tipo de Usuario</label>
+        <div [hidden]="integrarCon == 'pagina'" class="form-group col-lg-4 col-md-4">
+          <label for="tipo">Tipo de Usuario</label>
           <select class="form-control"
                   name="tipo"
                   id="tipo"
@@ -142,7 +142,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.Tipo.errors }">
             <option value=""></option>
             <option value="1">Administrador</option>
-            <option value="2">Cliente</option>
+            <option value="2" [selected]="integrarCon == 'pagina'">Cliente</option>
             <option value="3">Administrador de Comercio</option>
             <option value="4">Empleado</option>
           </select>
@@ -150,14 +150,35 @@
             <div *ngIf="f.Tipo.errors.required">Tipo es requerido</div>
           </div>
         </div>
+      </div>
 
-        <div *ngIf="integrarCon == 'pagina'">
-          <input type="hidden" name="tipo" id="tipo" formControlName="Tipo" value="2">
+      <div class="row">
+        <div class="form-group col-lg-3 col-md-3">
+          <label for="foto">Foto</label>
+          <input #fotoInput
+                 type="file"
+                 class="form-control-file"
+                 name="foto"
+                 id="foto"
+                 formControlName="Foto"
+                 [uploader]="uploader"
+                 ng2FileSelect
+                 [ngClass]="{ 'is-invalid': f.Foto.errors?.pattern }"
+                 (change)="validarFoto(fotoInput.files)">
+          <div *ngIf="f.Foto.errors" class="invalid-feedback">
+            <div *ngIf="f.Foto.errors.pattern">Imagen no valida (Formatos permitidos: gif, jpg, jpeg, bmp, png, webp, tiff, eps)</div>
+          </div>
+        </div>
+        <div class="form-group col-lg-3 col-md-3" *ngIf="imgUrl">
+          <label for="foto">Foto Preview</label><br>
+          <img [src]="imgUrl" alt="Foto" id="foto-preview" title="Foto" class="rounded" height="100">
         </div>
       </div>
 
-      <button type="submit"
-              [ngClass]="{ 'btn btn-primary': integrarCon == null, 'site-btn': integrarCon == 'pagina' }">
+      <button
+              type="submit"
+              [ngClass]="{ 'btn btn-primary': integrarCon == null, 'site-btn': integrarCon == 'pagina' }"
+              [disabled]="isSendingData">
         Registrar
       </button>
       <p>&nbsp;</p>

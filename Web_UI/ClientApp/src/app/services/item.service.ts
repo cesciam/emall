@@ -36,8 +36,8 @@ export class ItemService {
     return observableThrowError(errorMessage);
   }
 
-  crearItem(item: Item, fotoUrl: string): Observable<any> {
-    this.serviceApi = `/item/CreateItem/?fotoUrl=${fotoUrl}`;
+  crearItem(item: Item): Observable<any> {
+    this.serviceApi = `/item/CreateItem`;
     return this.http
       .post<void>(this.appUrl + this.serviceApi, item, this.httpOptions)
       .pipe(catchError(this.errorHandler)
@@ -65,6 +65,18 @@ export class ItemService {
     this.serviceApi = `/item/RetrieveItemArchivo/?id=${id}`;
     return this.http
       .get<Archivo>(this.appUrl + this.serviceApi);
+  }
+
+  getItemTipo(tipo: string): Observable<Item[]> {
+    this.serviceApi = `/item/RetrieveAllByTipo/?tipo=${tipo}`;
+    return this.http
+      .get<Item[]>(this.appUrl + this.serviceApi);
+  }
+
+  getItemBusqueda(busqueda: string): Observable<Item[]> {
+    this.serviceApi = `/item/ItemBusqueda/?busqueda=${busqueda}`;
+    return this.http
+      .get<Item[]>(this.appUrl + this.serviceApi);
   }
 
 

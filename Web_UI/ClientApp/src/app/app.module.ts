@@ -56,8 +56,15 @@ import { ListarConfiguracionComponent } from './configuracion/listar-configuraci
 import { ListarImpuestoComponent } from '../app/impuesto/listar-impuesto/listar-impuesto.component';
 import { CrearImpuestoComponent } from '../app/impuesto/crear-impuesto/crear-impuesto.component';
 import { ListarCategoriaComponent } from '../app/categoria/listar-categoria/listar-categoria.component';
-import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component';
-import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component'; 
+import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component'; 
+import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
+import { PerfilComercioComponent } from './perfil-comercio/perfil-comercio.component';
+import { AgregarArchivoComponent } from './agregar-archivo/agregar-archivo.component';
+import { ItemProductoComponent } from './item/item-producto/item-producto.component';
+import { ItemServicioComponent } from './item/item-servicio/item-servicio.component';
+import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.component';
+import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
+import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -112,7 +119,14 @@ const maskConfig: Partial<IConfig> = {
     CrearImpuestoComponent,
     ListarCategoriaComponent,
     CrearCategoriaComponent,
-    PerfilUsuarioComponent
+    AprobarComercioComponent,
+    PerfilComercioComponent,
+    AgregarArchivoComponent,
+    ItemProductoComponent,
+    ItemServicioComponent,
+    ItemBusquedaComponent,
+    ItemPerfilComponent,
+    MainHeaderComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -120,9 +134,6 @@ const maskConfig: Partial<IConfig> = {
     Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    FileUploadModule,
-    Ng2CloudinaryModule,
-    CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -130,7 +141,7 @@ const maskConfig: Partial<IConfig> = {
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
-      { path: 'agregar-empleado', component: AgregarEmpleadoComponent },
+      { path: 'agregar-empleado/:comercio', component: AgregarEmpleadoComponent },
       { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
       { path: 'dashboard-admin', component: DashboardAdminComponent },
@@ -138,8 +149,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/listar-usuario', component: ListarUsuarioComponent },
       { path: 'dashboard-admin/usuario/agregar-usuario', component: AgregarUsuarioComponent },
       { path: 'dashboard-comercio', component: DashboardComercioComponent },
-      { path: 'listar-rol', component: ListarRolComponent },
-      { path: 'agregar-rol', component: AgregarRolComponent },
+      { path: 'listar-rol/:id', component: ListarRolComponent },
+      { path: 'agregar-rol/:id', component: AgregarRolComponent },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'landing-pulsar', component: LandingPulsarComponent },
@@ -158,7 +169,16 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-impuesto', component: ListarImpuestoComponent },
       { path: 'crear-impuesto', component: CrearImpuestoComponent },
       { path: 'listar-categoria', component: ListarCategoriaComponent },
-      { path: 'crear-categoria', component: CrearCategoriaComponent }
+      { path: 'crear-categoria', component: CrearCategoriaComponent },
+      { path: 'configuracion', component: ListarConfiguracionComponent },
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
+      { path: 'perfil-comercio', component: PerfilComercioComponent },
+      { path: 'dashboard-comercio/agregar-archivo', component: AgregarArchivoComponent },
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
+      { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
+      { path: 'item-producto', component: ItemProductoComponent },
+      { path: 'item-servicio', component: ItemServicioComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
     ])
   ],
   exports: [

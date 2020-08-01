@@ -1,0 +1,46 @@
+<div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+  <strong>{{error.message}}</strong>
+  <!--<ul>
+  <li *ngFor="let detail of error.details">{{detail}}</li>
+  </ul>-->
+</div>
+<div class="table-responsive">
+  <input type="text" class="form-control" placeholder="Buscar" name="filterComercio" [(ngModel)]="filterComercio" />
+  <table class="table table-striped table-sm text-center">
+    <thead>
+      <tr>
+        <th class="text-center">Cédula jurídica</th>
+        <th class="text-center">Nombre legal</th>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Categoría</th>
+        <th class="text-center">Logo</th>
+        <th class="text-center">Comprobante de hacienda</th>
+        <th class="text-center">Permiso de salud</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comercio of comercios | filterComercio:filterComercio">
+        <td>{{ comercio.cedulaJuridica }}</td>
+        <td>{{ comercio.nombreLegal }}</td>
+        <td>{{ comercio.nombre }}</td>
+        <td>{{ comercio.categorias[0] }}</td>
+        <td>
+          <a (click)="abrirLink(comercio.archivos[0].enlace)" style="cursor:pointer">Ver imagen</a>
+        </td>
+        <td>
+          <a (click)="abrirLink(comercio.archivos[1].enlace)" style="cursor:pointer">Ver imagen</a>
+        </td>
+        <td>
+          <a (click)="abrirLink(comercio.archivos[2].enlace)" style="cursor:pointer">Ver imagen</a>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="aprobar(comercio)">Aprobar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="rechazar(comercio)">Rechazar</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,13 @@
+.main-section {
+    width: 80%;
+    margin: 0 auto;
+}
+
+agm-map {
+  width: 200x;
+  height: 200px;
+}
+
+.card {
+    height: 200px;
+}

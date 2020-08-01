@@ -29,9 +29,22 @@ export class PerfilAdminComercioComponent implements OnInit {
     let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
     let usuarioLogueado: Usuario = usuarioLocal.usuario;
 
-    let comercio: Comercio = new Comercio();
-    comercio.idAdmin = parseInt(usuarioLogueado.Id);
+    
+    if (usuarioLogueado.Tipo == 1) {
+      this.comerciosAdmin();
+    } else {
+      this.comerciosDuenno(usuarioLogueado);
+    }
+  }
 
+  comerciosAdmin() {
+    this.comercioService.obtenerTodoComercio()
+      .subscribe(data => this.comercios = data);
+  }
+
+  comerciosDuenno(usuario: Usuario) {
+    let comercio: Comercio = new Comercio();
+    comercio.idAdmin = parseInt(usuario.Id);
     this.comercioService.ObtenerComerciosAdmin(comercio)
       .subscribe(data => this.comercios = data);
   }
