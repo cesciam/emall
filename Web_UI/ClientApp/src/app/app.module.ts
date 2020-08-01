@@ -60,6 +60,10 @@ import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-
 import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
 import { PerfilComercioComponent } from './perfil-comercio/perfil-comercio.component';
 import { AgregarArchivoComponent } from './agregar-archivo/agregar-archivo.component';
+import { ItemProductoComponent } from './item/item-producto/item-producto.component';
+import { ItemServicioComponent } from './item/item-servicio/item-servicio.component';
+import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.component';
+import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -117,6 +121,10 @@ const maskConfig: Partial<IConfig> = {
     AprobarComercioComponent,
     PerfilComercioComponent,
     AgregarArchivoComponent,
+    ItemProductoComponent,
+    ItemServicioComponent,
+    ItemBusquedaComponent,
+    ItemPerfilComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -165,7 +173,10 @@ const maskConfig: Partial<IConfig> = {
       { path: 'perfil-comercio', component: PerfilComercioComponent },
       { path: 'dashboard-comercio/agregar-archivo', component: AgregarArchivoComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
-      { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent }
+      { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
+      { path: 'item-producto', component: ItemProductoComponent },
+      { path: 'item-servicio', component: ItemServicioComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
     ])
   ],
   exports: [
