@@ -60,6 +60,7 @@ import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-
 import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
 import { PerfilComercioComponent } from './perfil-comercio/perfil-comercio.component';
 import { AgregarArchivoComponent } from './agregar-archivo/agregar-archivo.component';
+import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -117,6 +118,7 @@ const maskConfig: Partial<IConfig> = {
     AprobarComercioComponent,
     PerfilComercioComponent,
     AgregarArchivoComponent,
+    MainHeaderComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
