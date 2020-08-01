@@ -24,8 +24,8 @@ export class VistaXRolService {
       );;
   }
 
-  putVistaXRol(vistaXRol: VistaXRol) {
-    return this.http.put<VistaXRol>(this.BASE_URL + 'VistaXRol/Update', vistaXRol)
+  postVistaXRolUpdate(vistaXRol: VistaXRol) {
+    return this.http.post<VistaXRol>(this.BASE_URL + 'VistaXRol/CreateWRol', vistaXRol)
       .pipe(
         catchError((error) => {
           return throwError(error);

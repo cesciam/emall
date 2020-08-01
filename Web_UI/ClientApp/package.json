@@ -24,6 +24,7 @@
     "@angular/router": "8.2.12",
     "@cloudinary/angular-5.x": "^1.3.2",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@popperjs/core": "^2.4.4",
     "@types/googlemaps": "^3.39.11",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.5.0",

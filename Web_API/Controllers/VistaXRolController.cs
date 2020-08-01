@@ -57,6 +57,20 @@ namespace Web_API.Controllers
             }
         }
 
+        public IActionResult CreateWRol(VistaXRol c)
+        {
+            try
+            {
+                var vrm = new VistaXRolManagement();
+                vrm.CreateWRol(c);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpPut]
         public IActionResult Update(VistaXRol c)
         {
