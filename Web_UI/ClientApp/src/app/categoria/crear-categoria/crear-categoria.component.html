@@ -1,11 +1,11 @@
 
-<div>
+<div class="container">
   <h1>Registro de categorias</h1>
-  <form>
+  <form class="form-group">
     <fieldset>
-      <div class="form-group">
+      <div class="form-group col-lg-6 col-md-6">
         <label for="exampleInputEmail1">Nombre</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre" [(ngModel)]="crearCategoria.Nombre">
+        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearCategoria.Nombre">
       </div>
 
       <button class="btn btn-primary" (click)="crear(crearCategoria)">Guardar categoria</button>

@@ -1,5 +1,5 @@
 
-<div>
+<div class="container">
 
   <h1>Lista de impuestos</h1>
 
@@ -7,7 +7,7 @@
     <input type="text" class="form-control" name="buscarImpuesto"  placeholder="Buscar.." />
 
   </div>
-  <table class="tabla table-hover"  *ngIf ="service.impuestos" >
+  <table class="table table-striped .table-responsive-sm"  *ngIf ="service.impuestos" >
     <thead>
       <tr>
         <th>Id</th>
@@ -20,8 +20,8 @@
         <td>{{impuesto.Id}}</td>
         <td>{{impuesto.Nombre}}</td>
         <td>{{impuesto.Porcentaje}}</td>
-        <td><button (click)="editar(impuesto)" class="btn btn-sm btn-outline-danger"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-        <td><button (click)="eliminar(impuesto.Id)" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+        <td><button (click)="editar(impuesto)" class="btn btn-secondary">Editar</button></td>
+        <td><button (click)="eliminar(impuesto.Id)" class="btn btn-secondary">X</button></td>
       </tr>
     </tbody>
   </table>
@@ -46,3 +46,5 @@
     </form>
   </div>
 </div>
+
+<app-footer></app-footer>
