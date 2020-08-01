@@ -26,11 +26,20 @@ export class ListarCategoriaComponent implements OnInit {
     this.service.ObtenerCategoria(nombre); 
   }
 
-  modificar(categoria: Categoria) {
-    this.service.modificarCategoria(categoria); 
+  public editar(categoria: Categoria) {
+
+    this.selectedCategoria = categoria; 
+  }
+
+  public completarModificar(selectedCategoria: Categoria) {
+    this.service.modificarCategoria(selectedCategoria).subscribe(res => {
+      this.obtenerTodo();
+    }) 
   }
 
   eliminar(id: number) {
-    this.service.eliminarCategoria(id);
-  }
+    this.service.eliminarCategoria(id).subscribe(res => {
+      this.service.ObtenerTodoCategoria();
+    })
+   }
 }

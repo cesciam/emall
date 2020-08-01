@@ -66,8 +66,10 @@ import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.compon
 import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 import { FiltroItemPipe } from './pipes/filtro-item.pipe';
+import { PerfilUsuarioComponent } from '../app/perfil-usuario/perfil-usuario.component';
 import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
 import { SidebarAdminComponent } from './dashboard-admin/sidebar-admin/sidebar-admin.component';
+
 
 
 const maskConfig: Partial<IConfig> = {
@@ -131,6 +133,7 @@ const maskConfig: Partial<IConfig> = {
     ItemPerfilComponent,
     MainHeaderComponent,
     FiltroItemPipe,
+    PerfilUsuarioComponent
     EditarUsuarioComponent,
     SidebarAdminComponent,
   ],
@@ -184,6 +187,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      {path: 'perfil-usuario', component: PerfilUsuarioComponent }
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
     ])

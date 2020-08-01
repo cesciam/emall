@@ -9,6 +9,9 @@ import { Impuesto } from 'src/app/models/impuesto.model';
 })
 export class CrearImpuestoComponent implements OnInit {
 
+
+  public crearImpuesto: Impuesto = { Id: 0, Nombre: '', Porcentaje: null };
+
   constructor(private service: ImpuestoService) { }
 
   ngOnInit() {
@@ -16,7 +19,9 @@ export class CrearImpuestoComponent implements OnInit {
   }
 
   public crear(impuesto: Impuesto) {
-    this.service.crearImpuesto(impuesto); 
+    this.service.crearImpuesto(impuesto).subscribe(res => {
+      this.service.ObtenerTodoImpuesto();
+    })
   }
 
 }
