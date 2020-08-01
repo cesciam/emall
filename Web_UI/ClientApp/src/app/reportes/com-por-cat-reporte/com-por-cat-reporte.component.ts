@@ -45,8 +45,6 @@ export class ComPorCatReporteComponent implements OnInit {
   (Math.floor(Math.random() * ( 256 - 1 ) + 1)) + ', ' +
   '171' + ', ' + '1)';
 
-  console.log(rgba);
-
   return rgba;
 }
 }

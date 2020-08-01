@@ -24,4 +24,14 @@ export class ReporteService {
     this.serviceEndPoint = '/reporte/empleadoPorCategoria';
     return  this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
+
+  getUsuarioTipo(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/usuarioPorTipo';
+    return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  getUsuarioEstado(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/usuarioPorEstado';
+    return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
 }

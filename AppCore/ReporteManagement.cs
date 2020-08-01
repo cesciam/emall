@@ -24,5 +24,14 @@ namespace AppCore
             return crud.RetrieveEmpleadoPorComercio<Reporte>();
         }
 
+        public List<Reporte> RetrieveUsuarioPorTipo()
+        {
+            return crud.RetrieveUusuarioPorTipo<Reporte>();
+        }
+
+        public List<Reporte> RetrieveUsuarioPorEstado()
+        {
+            return crud.RetrieveUusuarioPorEstado<Reporte>();
+        }
     }
 }

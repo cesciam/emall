@@ -72,5 +72,42 @@ namespace DataAccessLayer.CRUD
             }
             return lstConfigs;
         }
+
+        public List<T> RetrieveUusuarioPorTipo<T>()
+        {
+            var lstConfigs = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveUsuarioPorTipoStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
+
+        public List<T> RetrieveUusuarioPorEstado<T>()
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveUsuarioPorEstadoStatement());
+            return crearLista<T>(lstResult);   
+        }
+
+        public List<T> crearLista<T>(List<Dictionary<string, object>> lstResult) 
+        {
+            var lstConfigs = new List<T>();
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
     }
 }

@@ -70,6 +70,8 @@ import { ChartsModule } from 'ng2-charts';
 import { ReportesComponent } from './reportes/reportes/reportes.component';
 import { ComPorCatReporteComponent } from './reportes/com-por-cat-reporte/com-por-cat-reporte.component';
 import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-comercio-reporte/empleados-por-comercio-reporte.component';
+import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
+import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -136,6 +138,8 @@ const maskConfig: Partial<IConfig> = {
     ReportesComponent,
     ComPorCatReporteComponent,
     EmpleadosPorComercioReporteComponent,
+    UsuarioTipoReporteComponent,
+    UsuarioEstadoReporteComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -188,7 +192,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
       { path: 'reportes', component: ReportesComponent }
     ])

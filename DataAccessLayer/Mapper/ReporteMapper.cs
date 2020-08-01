@@ -64,7 +64,6 @@ namespace DataAccessLayer.Mapper
             var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_EMPLEADOS_COMERCIO" };
 
             return operacion;
-
         }
 
 
@@ -76,6 +75,20 @@ namespace DataAccessLayer.Mapper
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
             throw new NotImplementedException();
+        }
+
+        public SqlOperation GetRetrieveUsuarioPorTipoStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_USUARIOS_TIPO" };
+
+            return operacion;
+        }
+
+        public SqlOperation GetRetrieveUsuarioPorEstadoStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_USUARIOS_ESTADO" };
+
+            return operacion;
         }
     }
 }

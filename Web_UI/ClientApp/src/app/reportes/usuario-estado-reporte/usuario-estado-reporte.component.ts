@@ -3,26 +3,24 @@ import { Reporte } from 'src/app/models/Reporte';
 import { ReporteService } from 'src/app/services/reporte.service';
 
 @Component({
-  selector: 'app-empleados-por-comercio-reporte',
-  templateUrl: './empleados-por-comercio-reporte.component.html',
-  styleUrls: ['./empleados-por-comercio-reporte.component.css']
+  selector: 'app-usuario-estado-reporte',
+  templateUrl: './usuario-estado-reporte.component.html',
+  styleUrls: ['./usuario-estado-reporte.component.css']
 })
-export class EmpleadosPorComercioReporteComponent implements OnInit {
-
+export class UsuarioEstadoReporteComponent implements OnInit {
   categorias: string[] = [];
   comerciosPorCat: number[] = [];
   reportes: Reporte[] = [];
 
- public pieChartLabels = [];
- public pieChartData = [];
- public pieChartType = 'pie';
- public randomColor = [];
- public pieColors = [];
-
+  public pieChartLabels = [];
+  public pieChartData = [];
+  public pieChartType = 'pie';
+  public randomColor = [];
+  public pieColors = [];
   constructor(private service: ReporteService) { }
 
   ngOnInit() {
-    this.service.getEmpleadoPorCom()
+    this.service.getUsuarioEstado()
     .subscribe(
       (data: Reporte[]) => {
         for (const report of data) {
@@ -45,5 +43,4 @@ export class EmpleadosPorComercioReporteComponent implements OnInit {
     '171' + ', ' + '1)';
     return rgba;
   }
-
 }

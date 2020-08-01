@@ -25,5 +25,16 @@ namespace Web_API.Controllers
         {
             return mng.RetrieveEmpleadoPorComercio();
         }
+
+        [HttpGet]
+        public List<Reporte> usuarioPorTipo()
+        {
+            return mng.RetrieveUsuarioPorTipo();
+        }
+        [HttpGet]
+        public List<Reporte> usuarioPorEstado()
+        {
+            return mng.RetrieveUsuarioPorEstado();
+        }
     }
 }
