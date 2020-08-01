@@ -24,11 +24,28 @@ namespace DataAccessLayer.Mapper {
 
             var u = (Usuario)entity;
             operation.AddIntParam(DB_COL_ID, u.Id);
-            operation.AddVarcharParam(DB_COL_CEDULA, u.Cedula);
-            operation.AddVarcharParam(DB_COL_NOMBRE, u.Nombre);
-            operation.AddVarcharParam(DB_COL_APELLIDO, u.Apellido);
+
+            if (String.IsNullOrEmpty(u.Cedula))
+                operation.AddVarcharParam(DB_COL_CEDULA, Utils.TokenGenerator.Generar(8));
+            else
+                operation.AddVarcharParam(DB_COL_CEDULA, u.Cedula);
+
+            if (String.IsNullOrEmpty(u.Nombre))
+                operation.AddNullParam(DB_COL_NOMBRE);
+            else
+                operation.AddVarcharParam(DB_COL_NOMBRE, u.Nombre);
+
+            if (String.IsNullOrEmpty(u.Apellido))
+                operation.AddNullParam(DB_COL_APELLIDO);
+            else
+                operation.AddVarcharParam(DB_COL_APELLIDO, u.Apellido);
+
             operation.AddVarcharParam(DB_COL_CORREO, u.Correo);
-            operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
+
+            if (String.IsNullOrEmpty(u.Telefono))
+                operation.AddNullParam(DB_COL_TELEFONO);
+            else
+                operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
 
             if (u.Foto == null)
                 operation.AddNullParam(DB_COL_ID_FOTO);

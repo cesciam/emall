@@ -1,0 +1,39 @@
+<div *ngIf="servicios">
+
+  <div class="col-sm-auto d-flex justify-content-end">
+    <a [routerLink]="['/']">Volver atras</a>
+
+  </div>
+
+
+  <h2 class="d-flex justify-content-center">Servicios</h2>
+
+  <div>
+    <div *ngFor="let item of servicios">
+
+      <div class="card h-100" style="width: 18rem;">
+        <div class="img-container">
+          <img class="card-img-top img-fluid img" [src]="item.id_foto" alt="Foto">
+        </div>
+        <div class="card-body">
+          <hr />
+          <h4>{{item.nombre}}</h4>
+          <p class="card-text">{{item.precio}}</p>
+          <p class="card-text">{{item.duracion}}</p>
+        </div>
+        <div class="card-footer">
+
+          <a>
+            <button class="btn btn-primary">Ver item</button>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+

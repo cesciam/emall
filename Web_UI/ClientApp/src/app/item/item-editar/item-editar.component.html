@@ -1,4 +1,4 @@
-<div *ngIf="item_seleccionado && item_archivo">
+<div *ngIf="item_seleccionado">
 
   <div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/item-sucursal', item_seleccionado.id_sucursal]">Volver atras</a>
@@ -106,7 +106,7 @@
           <div class="col">
 
             <div class="d-flex justify-content-center">
-              <img [src]="item_archivo.enlace" class="img-fluid d-flex justify-content-center" alt="Foto" align="middle">
+              <img [src]="item_seleccionado.id_foto" class="img-fluid d-flex justify-content-center" alt="Foto" align="middle">
             </div>
             <div class="d-flex justify-content-center">
               <div class="btn btn-mdb-color btn-rounded float-left">

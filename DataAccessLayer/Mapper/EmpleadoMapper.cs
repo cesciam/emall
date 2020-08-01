@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Dao;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,8 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_ID_USUARIO = "ID_USUARIO";
         private const string DB_COL_ID_ROL = "ID_ROL";
         private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
+        private const string DB_COL_COMERCIO_ID = "COMERCIO_ID";
+
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var empleado = new Empleado
@@ -24,9 +27,17 @@ namespace DataAccessLayer.Mapper
             return empleado;
         }
 
-        internal SqlOperation GetRetriveAllDatosStatement()
+        public SqlOperation GetRetriveAllDatosStatement()
         {
             var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_DATOS_EMPLEADO_PR" };
+
+            return operation;
+        }
+
+        public SqlOperation GetRetriveAllDatosByComercioIdStatement(BaseEntity entity) {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_DATOS_EMPLEADO_COMERCIO_PR" };
+            var comercio = (Comercio)entity;
+            operation.AddIntParam(DB_COL_COMERCIO_ID, comercio.Id);
 
             return operation;
         }
