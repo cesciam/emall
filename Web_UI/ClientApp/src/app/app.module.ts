@@ -58,10 +58,8 @@ import { CrearImpuestoComponent } from '../app/impuesto/crear-impuesto/crear-imp
 import { ListarCategoriaComponent } from '../app/categoria/listar-categoria/listar-categoria.component';
 import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component'; 
 import { AprobarComercioComponent } from './aprobar-comercio/aprobar-comercio.component';
-import { ItemProductoComponent } from './item/item-producto/item-producto.component';
-import { ItemServicioComponent } from './item/item-servicio/item-servicio.component';
-import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.component';
-import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
+import { PerfilComercioComponent } from './perfil-comercio/perfil-comercio.component';
+import { AgregarArchivoComponent } from './agregar-archivo/agregar-archivo.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -117,10 +115,8 @@ const maskConfig: Partial<IConfig> = {
     ListarCategoriaComponent,
     CrearCategoriaComponent,
     AprobarComercioComponent,
-    ItemProductoComponent,
-    ItemServicioComponent,
-    ItemBusquedaComponent,
-    ItemPerfilComponent,
+    PerfilComercioComponent,
+    AgregarArchivoComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -166,9 +162,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'crear-categoria', component: CrearCategoriaComponent },
       { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
-      { path: 'item-producto', component: ItemProductoComponent },
-      { path: 'item-servicio', component: ItemServicioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'perfil-comercio', component: PerfilComercioComponent },
+      { path: 'dashboard-comercio/agregar-archivo', component: AgregarArchivoComponent }
     ])
   ],
   exports: [

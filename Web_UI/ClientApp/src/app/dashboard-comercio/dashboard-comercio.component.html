@@ -17,7 +17,7 @@
     </a>
   </li>-->
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/listar-rol']" [queryParams]="{comercio: comercioSeleccionado.id}">
+            <a class="nav-link" [routerLink]="['/listar-rol', comercioSeleccionado.id]">
               <span data-feather="file-text"></span>
               Roles
             </a>
@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" [routerLink]="['/dashboard-comercio/agregar-archivo']" [queryParams]="{comercio: comercioSeleccionado.id}">
               <span data-feather="file-text"></span>
               Agregar archivos
             </a>
@@ -119,3 +119,4 @@
     </main>
   </div>
 </div>
+<app-footer></app-footer>
