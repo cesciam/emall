@@ -167,7 +167,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
       { path: 'item-producto', component: ItemProductoComponent },
-      { path: 'item-servicio', component: ItemServicioComponent }
+      { path: 'item-servicio', component: ItemServicioComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
     ])
   ],
   exports: [

@@ -77,7 +77,10 @@ namespace AppCore
             return crudItem.RetrieveItemArchivo<Archivo>(archivo);
         }
 
-
+        public List<Item> ItemBusqueda(string busqueda)
+        {
+            return crudItem.ItemBusqueda<Item>(busqueda);
+        }
 
     }
 }

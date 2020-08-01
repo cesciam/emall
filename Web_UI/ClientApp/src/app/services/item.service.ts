@@ -73,6 +73,12 @@ export class ItemService {
       .get<Item[]>(this.appUrl + this.serviceApi);
   }
 
+  getItemBusqueda(busqueda: string): Observable<Item[]> {
+    this.serviceApi = `/item/ItemBusqueda/?busqueda=${busqueda}`;
+    return this.http
+      .get<Item[]>(this.appUrl + this.serviceApi);
+  }
+
 
   async ObtenerItem(id_item: number) {
     this.serviceApi = `/item/RetrieveByIdItem/?id=${id_item}`;

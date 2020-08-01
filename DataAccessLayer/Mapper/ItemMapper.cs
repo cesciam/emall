@@ -126,5 +126,16 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation ItemBusqueda(string busqueda)
+        {
+
+
+
+            var operation = new SqlOperation { ProcedureName = "BUSCAR_ITEM" };
+            operation.AddVarcharParam(DB_COL_NOMBRE, busqueda);
+            //operation.AddVarcharParam(DB_COL_DESCRIPCION, busqueda);
+            return operation;
+        }
+
     }
 }
