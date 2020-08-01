@@ -66,6 +66,8 @@ import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.compon
 import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 import { FiltroItemPipe } from './pipes/filtro-item.pipe';
+import { PerfilUsuarioComponent } from '../app/perfil-usuario/perfil-usuario.component';
+
 
 
 const maskConfig: Partial<IConfig> = {
@@ -129,6 +131,7 @@ const maskConfig: Partial<IConfig> = {
     ItemPerfilComponent,
     MainHeaderComponent,
     FiltroItemPipe,
+    PerfilUsuarioComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -180,7 +183,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      {path: 'perfil-usuario', component: PerfilUsuarioComponent }
     ])
   ],
   exports: [
