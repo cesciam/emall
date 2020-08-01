@@ -145,6 +145,12 @@ namespace DataAccessLayer.CRUD
             return comerciosList;
         }
 
+        public void CrearArchivo(BaseEntity entity)
+        {
+            var c = (Comercio)entity;
+            dao.ExecuteProcedure(archivoMapper.GetCreateStatement(c.Archivos[0], c.CedulaJuridica));
+        }
+
         public Archivo[] GenerarArchivos(int IdComercio)
         {
             var archivo = new Archivo { Id_Comercio = IdComercio };
