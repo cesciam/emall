@@ -75,6 +75,7 @@ import { ComPorCatReporteComponent } from './reportes/com-por-cat-reporte/com-po
 import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-comercio-reporte/empleados-por-comercio-reporte.component';
 import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
 import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
+import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
 
 
 
@@ -147,6 +148,7 @@ const maskConfig: Partial<IConfig> = {
     EmpleadosPorComercioReporteComponent,
     UsuarioTipoReporteComponent,
     UsuarioEstadoReporteComponent,
+    AdminReportesComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -205,7 +207,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
-      { path: 'reportes', component: ReportesComponent }
+      { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
     ])
   ],
   exports: [
