@@ -1,15 +1,15 @@
 
-<div>
+<div class="container">
   <h1>Registro de impuestos</h1>
-  <form>
+  <form class="form-group" >
     <fieldset>
-      <div class="form-group">
+      <div  class="form-group col-lg-6 col-md-6">
         <label for="exampleInputEmail1">Nombre</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre" [(ngModel)]="crearImpuesto.Nombre">
+        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearImpuesto.Nombre">
       </div>
-      <div class="form-group">
+      <div class="form-group col-lg-6 col-md-6">
         <label for="exampleInputEmail1">Porcentaje</label>
-        <input type="number" class="form-control" id="Porcentaje" name="Porcentaje" [(ngModel)]="crearImpuesto.Porcentaje" >
+        <input type="number" class="form-control" id="Porcentaje" name="Porcentaje" required [(ngModel)]="crearImpuesto.Porcentaje" >
       </div>
       <button class="btn btn-primary" (click)="crear(crearImpuesto)">Guardar Impuesto</button>
     </fieldset>
