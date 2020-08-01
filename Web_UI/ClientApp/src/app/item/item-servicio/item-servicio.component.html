@@ -1,4 +1,5 @@
-<div *ngIf="servicios">
+<app-main-header></app-main-header>
+<div class="container" *ngIf="servicios">
 
   <div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/']">Volver atras</a>
@@ -8,32 +9,27 @@
 
   <h2 class="d-flex justify-content-center">Servicios</h2>
 
-  <div>
-    <div *ngFor="let item of servicios">
+  <div class="row">
 
-      <div class="card h-100" style="width: 18rem;">
-        <div class="img-container">
-          <img class="card-img-top img-fluid img" [src]="item.id_foto" alt="Foto">
+    <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let item of servicios">
+      <div class="product__item">
+        <div class="product__item__pic set-bg img-container" data-setbg="item.id_foto">
+          <img [src]="item.id_foto" alt="Foto">
+          <ul class="product__item__pic__hover">
+            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+          </ul>
         </div>
-        <div class="card-body">
-          <hr />
-          <h4>{{item.nombre}}</h4>
-          <p class="card-text">{{item.precio}}</p>
-          <p class="card-text">{{item.duracion}}</p>
+        <div class="product__item__text">
+          <h6><a href="#">{{item.nombre}}</a></h6>
+          <h5>{{item.precio}}</h5>
+          <h6>{{item.duracion}}</h6>
         </div>
-        <div class="card-footer">
-
-          <a>
-            <button class="btn btn-primary">Ver item</button>
-          </a>
-        </div>
-
       </div>
     </div>
 
-
-
-
-
   </div>
 
+</div>
+<app-footer></app-footer>

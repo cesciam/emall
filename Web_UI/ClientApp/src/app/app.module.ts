@@ -65,6 +65,7 @@ import { ItemServicioComponent } from './item/item-servicio/item-servicio.compon
 import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.component';
 import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
+import { FiltroItemPipe } from './pipes/filtro-item.pipe';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -127,6 +128,7 @@ const maskConfig: Partial<IConfig> = {
     ItemBusquedaComponent,
     ItemPerfilComponent,
     MainHeaderComponent,
+    FiltroItemPipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

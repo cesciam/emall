@@ -31,6 +31,7 @@ export class ItemCrearComponent implements OnInit {
   message: string;
   impuestos: number[];
   item: Item;
+  error: any;
 
 
   uploader: CloudinaryUploader;
@@ -38,7 +39,7 @@ export class ItemCrearComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private service: ItemService) {
+  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router) {
     //this.sucursal = JSON.parse(localStorage.getItem('sucursalSeleccionada'))
     this.sucursal = parseInt(this.route.snapshot.params['id_sucursal']);
     this.impuestos = [1, 2, 3]
@@ -73,9 +74,11 @@ export class ItemCrearComponent implements OnInit {
     console.log(this.foto);
     this.service.crearItem(this.item)
       .subscribe(
-        (data: any) => console.log(data),
-        (err: any) => console.log(err)
-      );
+        (reponse) => this.router.navigate(['item-sucursal', this.sucursal]),
+        (error) => {
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
   }
 
   upload() {
