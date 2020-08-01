@@ -4,6 +4,9 @@ import { Comercio } from '../models/Comercio';
 import { Sucursal } from '../models/Sucursal';
 import { SucursalService } from '../services/sucursal.service';
 import { ActivatedRoute } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
+import { VistaService } from '../services/vista.service';
+import { Vista } from '../models/vista.model';
 
 @Component({
   selector: 'app-dashboard-comercio',
@@ -18,8 +21,16 @@ export class DashboardComercioComponent implements OnInit {
   private sucursales: Sucursal[];
   private error: any;
   private filterSucursal = ''; 
+  private permisoSucursales: boolean;
+  private permisoProductos: boolean;
+  private permisoEmpleados: boolean;
+  private permisoRoles: boolean;
+  private permisoPromociones: boolean;
+  private permisoArchivos: boolean;
+  private permisoEditarComercio: boolean;
 
-  constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute) {
+
+  constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
     this.comercioService = comercioService;
     this.sucursalService = sucursalService;
     this.error = null;
@@ -27,6 +38,50 @@ export class DashboardComercioComponent implements OnInit {
 
   ngOnInit() {
     this.llenarComercio();
+
+  }
+
+  validarEmpleado(){
+    let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
+    let usuarioLogueado: Usuario = usuarioLocal.usuario;
+
+    let vistas : Vista[];
+
+    if(usuarioLogueado.Tipo == 3){
+        this.vistaService.obtenerVistasPorUsuario(parseInt(usuarioLogueado.Id))
+        .subscribe(data => {
+          vistas = data;
+          this.validarVistas(vistas);
+        });
+    }
+  }
+
+  validarVistas(vistas: Vista[]){
+    for(let vista of vistas) {
+        switch(vista.nombre) {
+          case "sucursales":
+            this.permisoSucursales = true;
+          break;
+          case "productos":
+            this.permisoProductos = true;
+          break;
+          case "empleados":
+            this.permisoEmpleados = true;
+          break;
+          case "roles":
+            this.permisoRoles = true;
+          break;
+          case "promociones":
+            this.permisoPromociones = true;
+          break;
+          case "achivos":
+            this.permisoArchivos = true;
+          break;
+          case "editar comercio":
+            this.permisoEditarComercio = true;
+          break;
+        };
+    }
   }
 
   llenarComercio() {
@@ -57,6 +112,8 @@ export class DashboardComercioComponent implements OnInit {
           window.scroll(0, 0);
         });
   }
+
+
 
 
 

@@ -31,6 +31,18 @@ namespace Web_API.Controllers
 
             return vm.RetrieveById(vista);
         }
+
+        [HttpGet]
+        public List<Vista> RetrieveByUsuario(int id)
+        {
+            var vm = new VistaManagement();
+            var u = new Usuario()
+            {
+                Id = id
+            };
+
+            return vm.RetrieveByUsuario(u);
+        }
         [HttpPost]
         public IActionResult Create(Vista v)
         {
