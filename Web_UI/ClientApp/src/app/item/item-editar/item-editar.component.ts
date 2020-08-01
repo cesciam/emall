@@ -27,9 +27,10 @@ export class ItemEditarComponent implements OnInit {
   item_archivo: Archivo;
   impuestos: number[];
   uploader: CloudinaryUploader;
+  error: any;
 
 
-  constructor(private route: ActivatedRoute, private service: ItemService) {
+  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router) {
     //this.item_seleccionado = new Item();
     //this.item_archivo = new Archivo();
     this.impuestos = [1, 2, 3]
@@ -90,10 +91,13 @@ export class ItemEditarComponent implements OnInit {
 
     this.service.updateItem(this.item_seleccionado)
       .subscribe(
-        (data: any) => console.log('Item was updated'),
-        (err: any) => console.log(err)
-      );
+        (reponse) => this.router.navigate(['item-sucursal', this.item_seleccionado.id_sucursal]),
+        (error) => {
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
   }
+
 
 
 }

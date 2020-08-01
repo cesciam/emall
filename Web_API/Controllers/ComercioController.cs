@@ -125,7 +125,7 @@ namespace Web_API.Controllers
 
                 if (comercio.Estado == 1)
                 {
-                    usuario.Tipo = 4;
+                    usuario.Tipo = 3;
                     new UsuarioManagement().Update(usuario);
 
                     this.emailService.Send(new EmailModel
