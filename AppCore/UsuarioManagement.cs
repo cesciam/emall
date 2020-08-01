@@ -23,11 +23,13 @@ namespace AppCore {
             this.emailService = new EmailService();
         }
 
-        public bool Registrar(RegistroViewModel registro) {
-            var errores = this.ComprobarErrores(registro);
+        public int Registrar(RegistroViewModel registro, bool saltarValidacion = false) {
+            if (!saltarValidacion) {
+                var errores = this.ComprobarErrores(registro);
 
-            if (errores != null)
-                return false;
+                if (errores != null)
+                    return 0;
+            }
 
             Usuario nuevoUsuario = new Usuario {
                 Id = 0,
@@ -58,12 +60,11 @@ namespace AppCore {
                     Message = "<p>Activar cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" +
                               "<p><a href=\"" + url + "\">Activar cuenta</a></p>"
                 });
-
-                return true;
             } else {
                 this.errorResult.message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos.";
-                return false;
             }
+
+            return nuevoUsuarioId;
         }
 
         public Usuario Login(string correo, string contrasena) {
