@@ -18,4 +18,10 @@ export class VistaService {
     this.http.get(this.BASE_URL+'Vista/RetrieveAll')
     .toPromise().then(res=>this.list=res as Vista[]);
   }
+
+  obtenerVistasPorUsuario(id : number) {
+    let endpointUrl = this.BASE_URL + '/Vista/RetrieveByUsuario?id='+ id;
+    return this.http.get<Vista[]>(endpointUrl);
+  }
+
 }

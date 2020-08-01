@@ -33,5 +33,10 @@ namespace AppCore
         {
             crud.Delete(v);
         }
+
+        public List<Vista> RetrieveByUsuario(Usuario u)
+        {
+            return crud.RetrieveByUsuario <Vista>(u);
+        }
     }
 }

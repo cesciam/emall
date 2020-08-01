@@ -47,7 +47,7 @@ namespace DataAccessLayer.Mapper
             var operation = new SqlOperation { ProcedureName = "ELIMINAR_VISTA_PR" };
 
             var v = (Vista)entity;
-            operation.AddIntParam(DB_COL_ID, v.id);
+            operation.AddIntParam("ID_USUARIO", v.id);
 
             return operation;
         }
@@ -65,6 +65,16 @@ namespace DataAccessLayer.Mapper
 
             var v = (Vista)entity;
             operation.AddIntParam(DB_COL_ID, v.id);
+
+            return operation;
+        }
+
+        public SqlOperation GetRetriveByUsuarioStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_VISTA_USUARIO_PR" };
+
+            var v = (Usuario)entity;
+            operation.AddIntParam("ID_USUARIO", v.Id);
 
             return operation;
         }
