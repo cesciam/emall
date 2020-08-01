@@ -3,6 +3,7 @@ import { Impuesto } from 'src/app/models/impuesto.model';
 //import { HttpClient } from '@angular/common/http';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,18 +29,13 @@ export class ImpuestoService {
   }
 
   public crearImpuesto(impuesto: Impuesto) {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http
-      .post<Impuesto>(this.BaseURL + "/crearimpuesto", impuesto)
-      .pipe(catchError(this.handleError));
+    return this.http.post(this.BaseURL + "impuesto/crearimpuesto", impuesto)
+      
   }
    
 
-  public modificarImpuesto(impuesto: Impuesto) {
-    this.http.put(this.BaseURL + 'impuesto/modificarimpuesto/', impuesto)
+  public modificarImpuesto(impuesto: Impuesto): Observable<any> {
+    return this.http.put(this.BaseURL + 'impuesto/modificarimpuesto/', impuesto)
   }
 
   public eliminarImpuesto(id: number) {

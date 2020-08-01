@@ -36,7 +36,9 @@ export class ListarImpuestoComponent implements OnInit {
   }
 
   public completarModificar(selectedImpuesto: Impuesto): void {
-    this.service.modificarImpuesto(this.selectedImpuesto);
+    this.service.modificarImpuesto(selectedImpuesto).subscribe(res => {
+      this.obtenerTodo();
+    })
   }
 
    public eliminar(id: number) {

@@ -5,13 +5,13 @@
     <fieldset>
       <div class="form-group">
         <label for="exampleInputEmail1">Nombre</label>
-        <input type="text" class="form-control" id="txtNombre" >
+        <input type="text" class="form-control" id="Nombre" name="Nombre" [(ngModel)]="crearImpuesto.Nombre">
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">Apellido</label>
-        <input type="number" class="form-control" id="txtPorcentaje">
+        <label for="exampleInputEmail1">Porcentaje</label>
+        <input type="number" class="form-control" id="Porcentaje" name="Porcentaje" [(ngModel)]="crearImpuesto.Porcentaje" >
       </div>
-      <button class="btn btn-primary" (click)="crear(selectedImpuesto)">Guardar Impuesto</button>
+      <button class="btn btn-primary" (click)="crear(crearImpuesto)">Guardar Impuesto</button>
     </fieldset>
   </form>
 </div>

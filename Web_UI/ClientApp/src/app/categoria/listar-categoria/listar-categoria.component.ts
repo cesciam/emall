@@ -32,7 +32,9 @@ export class ListarCategoriaComponent implements OnInit {
   }
 
   public completarModificar(selectedCategoria: Categoria) {
-    this.service.modificarCategoria(selectedCategoria); 
+    this.service.modificarCategoria(selectedCategoria).subscribe(res => {
+      this.obtenerTodo();
+    }) 
   }
 
   eliminar(id: number) {

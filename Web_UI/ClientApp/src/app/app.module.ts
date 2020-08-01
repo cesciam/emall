@@ -56,7 +56,8 @@ import { ListarConfiguracionComponent } from './configuracion/listar-configuraci
 import { ListarImpuestoComponent } from '../app/impuesto/listar-impuesto/listar-impuesto.component';
 import { CrearImpuestoComponent } from '../app/impuesto/crear-impuesto/crear-impuesto.component';
 import { ListarCategoriaComponent } from '../app/categoria/listar-categoria/listar-categoria.component';
-import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component'; 
+import { CrearCategoriaComponent } from '../app/categoria/crear-categoria/crear-categoria.component';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component'; 
 
 
 const maskConfig: Partial<IConfig> = {
@@ -110,7 +111,8 @@ const maskConfig: Partial<IConfig> = {
     ListarImpuestoComponent,
     CrearImpuestoComponent,
     ListarCategoriaComponent,
-    CrearCategoriaComponent
+    CrearCategoriaComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

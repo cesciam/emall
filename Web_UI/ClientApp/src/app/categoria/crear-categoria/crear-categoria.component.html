@@ -1,5 +1,19 @@
-<app-header></app-header>
 
-<p>crear-categoria works!</p>
+<div>
+  <h1>Registro de categorias</h1>
+  <form>
+    <fieldset>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Nombre</label>
+        <input type="text" class="form-control" id="Nombre" name="Nombre" [(ngModel)]="crearCategoria.Nombre">
+      </div>
+
+      <button class="btn btn-primary" (click)="crear(crearCategoria)">Guardar categoria</button>
+    </fieldset>
+  </form>
+</div>
+
+
+
 
 <app-footer></app-footer>
