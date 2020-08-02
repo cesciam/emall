@@ -70,6 +70,21 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveAllStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_ADMIN_COMERIO" };
+            var c = (Comercio)entity;
+            operation.AddIntParam(DB_COL_ID_ADMIN, c.IdAdmin);
+
+            return operation;
+        }
+
+        public SqlOperation GetRetriveAllPendingStatement()
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_COMERCIOS_PENDIENTES" };
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "OBTENER_COMERCIO" };

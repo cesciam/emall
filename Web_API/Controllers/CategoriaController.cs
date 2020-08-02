@@ -69,12 +69,17 @@ namespace Web_API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult EliminarCategoria(Categoria categoria)
+        public IActionResult EliminarCategoria(int id)
         {
             var cm = new CategoriaManagement();
 
             try
             {
+                Categoria categoria = new Categoria
+                {
+                    Id = id
+                }; 
+
                 cm.Delete(categoria);
                 return Ok(); //200
             }

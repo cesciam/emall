@@ -66,6 +66,14 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveByRol(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_VISTAXROL_ROL_PR" };
+            var vr = (VistaXRol)entity;
+            operation.AddIntParam(DB_COL_ID_ROL, vr.id_rol);
+            return operation;
+        }
+
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "MODIFICAR_VISTAXROL_PR" };

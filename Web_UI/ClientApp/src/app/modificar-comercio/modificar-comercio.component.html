@@ -1,0 +1,88 @@
+<h1 class="text-center">Editar comercio</h1>
+<form class="text-left form-group border border-light p-5">
+
+  <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+    <strong>{{error.message}}</strong>
+    <!--<ul>
+      <li *ngFor="let detail of error.details">{{detail}}</li>
+    </ul>-->
+  </div>
+
+  <div class="form-row mb-4">
+    <div class="col">
+      <label for="nombre">Nombre de su comercio</label>
+      <input id="nombre" name="nombre" class="form-control"
+             [(ngModel)]="comercioSeleccionado.nombre" minlength="3" #nombre="ngModel" type="text" required>
+
+      <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+           class="alert alert-danger">
+
+        <div *ngIf="nombre.errors.required">
+          El nombre es requerido.
+        </div>
+
+        <div *ngIf="nombre.errors.minlength">
+          El nombre comercial debe tener al menos 3 caracteres.
+        </div>
+      </div>
+
+      <label for="nombreLegal">Nombre legal</label>
+      <input id="nombreLegal" name="nombreLegal" class="form-control"
+             [(ngModel)]="comercioSeleccionado.nombreLegal" minlength="3" #nombreLegal="ngModel" type="text" required>
+
+      <div *ngIf="nombreLegal.invalid && (nombreLegal.dirty || nombreLegal.touched)"
+           class="alert alert-danger">
+
+        <div *ngIf="nombreLegal.errors.required">
+          El nombre legal es requerido
+        </div>
+
+        <div *ngIf="nombreLegal.errors.minlength">
+          El nombre legal debe tener al menos 3 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <label>Logo de comercio</label>
+      <div class="z-depth-1-half mb-4">
+        <img [src]="logo" class="img-fluid"
+             alt="Logo de comercio">
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="btn btn-mdb-color btn-rounded float-left">
+          <div>
+            <label for="file-upload" style="cursor: pointer" class="btn btn-outline-secondary">
+              <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
+              Elegir archivo
+            </label>
+          </div>
+
+          <button class="btn btn-primary" [disabled]="loading" (click)="upload()">Subir imagen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col text-center">
+        <div class="text-center" *ngIf="(nombre.valid && nombreLegal.valid); else noValido">
+          <button class="btn btn-primary btn-lg btn-block" (click)="modificarComercio()">Guardar cambios</button>
+        </div>
+
+        <ng-template #noValido class="text-center">
+          <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Guardar cambios</button>
+        </ng-template>
+
+      </div>
+
+    </div>
+
+  </div>
+  <hr>
+</form>
+<app-footer></app-footer>
+
+

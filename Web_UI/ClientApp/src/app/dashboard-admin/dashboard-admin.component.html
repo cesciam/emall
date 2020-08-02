@@ -1,5 +1,79 @@
-<div class="container">
-  <p>dashboard-admin works!</p>
+<app-main-header></app-main-header>
 
-  <a [routerLink]="['usuario/listar-usuario']">Usuarios</a>
+<div class="container p-3">
+  <div class="row p-3">
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Usuarios</h5>
+          <p class="card-text">Administrar usuarios</p>
+          <a [routerLink]="['/dashboard-admin/usuario']" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Promociones</h5>
+          <p class="card-text">Administrar promociones</p>
+          <a [routerLink]="['/promociones']" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Configuracion</h5>
+          <p class="card-text">Parametros generales</p>
+          <a [routerLink]="['/configuracion']" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Comercios</h5>
+          <p class="card-text">Administrar comercios</p>
+          <a [routerLink]="['/perfil-admin-comercio']" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-3">
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Reportes</h5>
+          <p class="card-text">Ver reportes</p>
+          <a [routerLink]="['reportes']" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3">s
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Impuestos</h5>
+          <p class="card-text">Administrar impuestos</p>
+          <a [routerLink]="['../listar-impuesto']" href="#" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Categorias</h5>
+          <p class="card-text">Administrar categorias</p>
+          <a [routerLink]="['../listar-categoria']" href="#" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<app-footer></app-footer>

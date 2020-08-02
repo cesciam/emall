@@ -1,0 +1,78 @@
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cambios guardados</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Los cambios en el rol han sido guardados exitosamente
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"[routerLink]="['/listar-rol', this.service.id_comercio]" >Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<app-header></app-header>
+<div class="container">
+    <h1 class="display-4 text-center">Modificar rol</h1>
+    <hr>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+        <div class="form-group" hidden>
+            <label for="id">ID</label>
+            <input type="number" name="id" #id="ngModel" [(ngModel)]=service.formData.id class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]=service.formData.nombre class="form-control"
+                required>
+
+            <div class="alert alert-danger" *ngIf="nombre.invalid && nombre.touched">
+                El nombre es requerido
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]=service.formData.descripcion
+                class="form-control" required>
+            <div class="alert alert-danger" *ngIf="descripcion.invalid && descripcion.touched">
+                La descripción es requerida
+            </div>
+
+        </div>
+        <div class="form-group" hidden>
+            <label for="id_comercio">Comercio</label>
+            <input type="number" name="id_comercio" #id_comercio="ngModel" [(ngModel)]=service.formData.id_comercio
+                class="form-control" required>
+            <div class="alert alert-danger" *ngIf="id_comercio.invalid && id_comercio.touched">
+                El comercio es requerido
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="form-group">
+            <h4>Marque los elementos sobre los que desea otorgar permisos al rol:</h4>
+            <br>
+            <div *ngFor="let vista of serviceVista.list">
+                <input checked="permisos.includes(vista.id)" type="checkbox" name="{{vista.id}}" [value]="vista.id" (change)="getVistaId($event, vista.id)">
+                <label for="{{vista.id}}"> {{vista.nombre}}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="form.invalid"  type="submit" class="btn btn-block btn-primary" data-toggle="modal" data-target="#Modal">Guardar cambios</button>
+        </div>
+    </form>
+
+    <div *ngFor="let permiso of permisos">{{permiso.id}}</div>
+
+</div>
+<app-footer></app-footer>

@@ -24,6 +24,16 @@ namespace AppCore
             return comercioFactory.RetrieveAll<Comercio>();
         }
 
+        public List<Comercio> ObtenerTodoComercioPendiente()
+        {
+            return comercioFactory.RetrieveAllPending<Comercio>();
+        }
+
+        public List<Comercio> ObtenerTodoComercio(Comercio comercio)
+        {
+            return comercioFactory.RetrieveAll<Comercio>(comercio);
+        }
+
         public Comercio ObtenerComercio(Comercio comercio)
         {
             return comercioFactory.Retrieve<Comercio>(comercio);
@@ -42,6 +52,11 @@ namespace AppCore
         public void ModificarEstadoComercio(Comercio comercio)
         {
             comercioFactory.UpdateState(comercio);
+        }
+
+        public void AgregarArchivoComercio(Comercio comercio)
+        {
+            comercioFactory.CrearArchivo(comercio);
         }
     }
 }

@@ -1,31 +1,5 @@
 <header class="header">
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__left">
-                        <ul>
-                          <li *ngIf="usuarioLogueado != null"><i class="fa fa-envelope"></i>{{ usuarioLogueado.usuario.Correo }}</li>
-                          <li>#QuédateEnCasa</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!--Acá está el inicio de sesión-->
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__right">
-                        <div class="header__top__right__auth">
-                            <a [routerLink]="['autenticacion']" *ngIf="usuarioLogueado == null"><i class="fa fa-user"></i> Iniciar sesión</a>
-                            <span *ngIf="usuarioLogueado != null">
-                              <i class="fa fa-user"></i> {{ usuarioLogueado.usuario.Nombre }} {{ usuarioLogueado.usuario.Apellido }}
-                              <a href="#" (click)="logout()">Cerrar Sesión</a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <app-main-header></app-main-header>
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -36,10 +10,9 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a [routerLink]= "['/homePage']" >Inicio</a></li>
-                        <li><a [routerLink]= "['/']">Comercios</a></li>
-                        <li><a [routerLink]= "['/']">Servicios</a></li>
-                        <li><a [routerLink]= "['/']">Productos</a></li>
+                        <li class="active"><a [routerLink]= "['/']" >Inicio</a></li>
+                        <li><a [routerLink]= "['item-servicio']">Servicios</a></li>
+                        <li><a [routerLink]= "['item-producto']">Productos</a></li>
                       <!--  <li><a href="#">Pages</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="./shop-details.html">Productos</a></li>
@@ -52,16 +25,8 @@
                 </nav>
             </div>
             <div class="col-lg-3">
-                <div class="header__cart">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                    </ul>
-                    <div class="header__cart__price">Total <span>₡13000.00</span></div>
-                </div>
+               
             </div>
-        </div>
-        <div class="humberger__open">
-            <i class="fa fa-bars"></i>
         </div>
     </div>
 </header>

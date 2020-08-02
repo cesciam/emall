@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Dao;
 using DataAccessLayer.Mapper;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +21,57 @@ namespace DataAccessLayer.CRUD
             var empleado = (Empleado)entity;
             var sqlOperation = mapper.GetCreateStatement(empleado);
             dao.ExecuteProcedure(sqlOperation);
+        }
+
+        public List<T> RetrieveAllDatos<T>()
+        {
+            var lstEmpleados = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllDatosStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstEmpleados.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstEmpleados;
+        }
+
+        public List<T> RetrieveAllDatosByComercioId<T>(int comercioId) {
+            var lstEmpleados = new List<T>();
+            Comercio comercio = new Comercio { Id = comercioId };
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllDatosByComercioIdStatement(comercio));
+            var dic = new Dictionary<string, object>();
+
+            if (lstResult.Count > 0) {
+                foreach(var row in lstResult) {
+                    var empleadoViewModel = new EmpleadoViewModel {
+                        Id = Convert.ToInt32(row["ID"]),
+                        IdUsuario = Convert.ToInt32(row["ID_USUARIO"]),
+                        Cedula = row["CEDULA"].ToString(),
+                        UsuarioNombre = row["USUARIO_NOMBRE"].ToString(),
+                        Apellido = row["APELLIDO"].ToString(),
+                        Correo = row["CORREO"].ToString(),
+                        Telefono = row["TELEFONO"].ToString(),
+                        IdRol = Convert.ToInt32(row["ID_ROL"]),
+                        RolNombre = row["ROL_NOMBRE"].ToString(),
+                        IdSucursal = Convert.ToInt32(row["ID_SUCURSAL"]),
+                        SucursalNombre = row["SUCURSAL_NOMBRE"].ToString(),
+                        IdComercio = Convert.ToInt32(row["ID_COMERCIO"]),
+                        NombreComercio = row["NOMBRE_COMERCIO"].ToString(),
+                        Estado = Convert.ToInt32(row["ESTADO"])
+                    };
+
+                    lstEmpleados.Add((T)Convert.ChangeType(empleadoViewModel, typeof(T)));
+                }   
+            }
+
+            return lstEmpleados;
         }
 
         public override void Delete(BaseEntity entity)

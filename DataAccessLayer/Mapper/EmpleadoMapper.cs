@@ -1,9 +1,9 @@
 ﻿using DataAccessLayer.Dao;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Entities;
 
 namespace DataAccessLayer.Mapper
 {
@@ -13,15 +13,33 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_ID_USUARIO = "ID_USUARIO";
         private const string DB_COL_ID_ROL = "ID_ROL";
         private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
+        private const string DB_COL_COMERCIO_ID = "COMERCIO_ID";
+
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var empleado = new Empleado
             {
+                id = GetIntValue(row, DB_COL_ID),
                 id_usuario = GetIntValue(row, DB_COL_ID_USUARIO),
                 id_rol = GetIntValue(row, DB_COL_ID_ROL),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
             };
             return empleado;
+        }
+
+        public SqlOperation GetRetriveAllDatosStatement()
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_DATOS_EMPLEADO_PR" };
+
+            return operation;
+        }
+
+        public SqlOperation GetRetriveAllDatosByComercioIdStatement(BaseEntity entity) {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_DATOS_EMPLEADO_COMERCIO_PR" };
+            var comercio = (Comercio)entity;
+            operation.AddIntParam(DB_COL_COMERCIO_ID, comercio.Id);
+
+            return operation;
         }
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)

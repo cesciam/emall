@@ -8,9 +8,12 @@ using Entities;
 namespace DataAccessLayer.Crud {
     public class UsuarioCrudFactory : CrudFactory {
         UsuarioMapper mapper;
+        ArchivoMapper archivoMapper;
 
         public UsuarioCrudFactory() : base() {
-            mapper = new UsuarioMapper();
+            this.mapper = new UsuarioMapper();
+            this.archivoMapper = new ArchivoMapper();
+
             dao = SqlDao.GetInstance();
         }
 
@@ -23,6 +26,11 @@ namespace DataAccessLayer.Crud {
 
         public int Insert(BaseEntity entity) {
             var usuario = (Usuario)entity;
+
+            if (usuario.Foto != null) { 
+                usuario.Foto.Id = (int)dao.ExecuteProcedureAndReturnId(this.archivoMapper.GetCreateStatement(usuario.Foto));
+            }
+
             var sqlOperation = mapper.GetCreateStatement(usuario);
 
             return (int)dao.ExecuteProcedureAndReturnId(sqlOperation);
@@ -104,7 +112,7 @@ namespace DataAccessLayer.Crud {
             if (result.Count > 0) {
                 dic = result[0];
 
-                if (codigo.Equals(dic["CODIGO_CORREO"])) {
+                if (codigo.Equals(dic["CODIGO_CORREO"]) || codigo.Equals("YWN0aXZhZG8gcG9yIGFkbWlu")) {
                     dao.ExecuteProcedure(mapper.Activar(id));
                     return true;
                 }

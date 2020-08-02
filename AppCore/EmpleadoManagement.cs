@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.CRUD;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace AppCore
     public class EmpleadoManagement
     {
         private EmpleadoCrudFactory crud;
+
         public EmpleadoManagement()
         {
             crud = new EmpleadoCrudFactory();
@@ -21,6 +23,16 @@ namespace AppCore
         {
             return crud.RetrieveAll<Empleado>();
         }
+
+        public List<EmpleadoViewModel> RetrieveByComercioId(int comercio) {
+            return crud.RetrieveAllDatosByComercioId<EmpleadoViewModel>(comercio);
+        }
+
+        public List<Empleado> RetrieveAllDatos()
+        {
+            return crud.RetrieveAllDatos<Empleado>();
+        }
+
         public Empleado RetrieveById(Empleado e)
         {
             return crud.Retrieve<Empleado>(e);

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row"> 
+        <div class="col">
+            <h1>Configuracion</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <table *ngIf="contrasennasAnt" class="table table-striped .table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>{{ contrasennasAnt.nombre}}</td>
+                    <td>{{ contrasennasAnt.descripcion}}</td>
+                    <td *ngIf="!pressed; else Editar">{{ contrasennasAnt.valor}}</td>
+                    <td *ngIf="!pressed; else EditarBtn">
+                        <button class="btn btn-secondary"  (click)="editar()">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #Editar>
+        <td><input type="number" class="form-control" [(ngModel)]="contrasennasAnt.valor"></td>
+    </ng-template>
+
+    <ng-template #EditarBtn>
+        <td>
+            <button class="btn btn-secondary"  (click)="save()">Guardar</button>
+        </td>
+    </ng-template>
+
+</div>

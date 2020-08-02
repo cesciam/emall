@@ -1,0 +1,82 @@
+<h1 class="text-center">Editar sucursal de sucursal</h1>
+<form class="text-left form-group border border-light p-5">
+
+  <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+    <strong>{{error.message}}</strong>
+    <!--<ul>
+      <li *ngFor="let detail of error.details">{{detail}}</li>
+    </ul>-->
+  </div>
+
+  <div class="form-row mb-4">
+    <div class="col">
+      <label for="nombre">Nombre de la sucursal</label>
+      <input id="nombre" name="nombre" class="form-control"
+             [(ngModel)]="sucursalSeleccionada.nombre" minlength="3" #nombre="ngModel" type="text" required>
+
+      <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+           class="alert alert-danger">
+
+        <div *ngIf="nombre.errors.required">
+          El nombre es requerido.
+        </div>
+
+        <div *ngIf="nombre.errors.minlength">
+          El nombre de la sucursal debe tener al menos 3 caracteres.
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col">
+      <label for="detalles">Detalles de la dirección</label>
+      <input id="detalles" name="detalles" class="form-control"
+             [(ngModel)]="sucursalSeleccionada.detallesDireccion" minlength="5" #detalles="ngModel" type="text" required>
+
+      <div *ngIf="detalles.invalid && (detalles.dirty || detalles.touched)"
+           class="alert alert-danger">
+
+        <div *ngIf="detalles.errors.required">
+          Los detalles de la dirección son requeridos.
+        </div>
+
+        <div *ngIf="detalles.errors.minlength">
+          Los detalles de la dirección deben tener al menos 5 caracteres.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="form-row mb-4">
+    <label>Seleccione la ubicación de la sucursal</label>
+    <div #mapContainer id="map">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div *ngIf="(nombre.valid && detalles.valid); else noValido">
+        <button class="btn btn-primary btn-lg btn-block" (click)="modificarSucursal()">Guardar cambios</button>
+      </div>
+
+      <ng-template #noValido>
+        <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Guardar cambios</button>
+      </ng-template>
+
+    </div>
+
+  </div>
+
+  <hr>
+</form>
+<app-footer></app-footer>
+
+

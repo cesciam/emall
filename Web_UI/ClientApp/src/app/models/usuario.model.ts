@@ -1,10 +1,12 @@
-export interface Usuario {
+import { Archivo } from "./Archivo";
+
+export class Usuario {
   Id: string;
   Cedula: string;
   Nombre: string;
   Apellido: string;
   Correo: string;
-  Foto: number;
+  Foto: string;
   Telefono: string;
   TelefonoConfirmado: number;
   CorreoConfirmado: number;
