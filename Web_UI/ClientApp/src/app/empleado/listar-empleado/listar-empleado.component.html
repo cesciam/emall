@@ -31,8 +31,8 @@
           <td class="small">{{empleado.Estado == 0 ? 'Pendiente de aprobacion' : 'Activo'}}</td>
           <td>
             <button class="btn btn-outline-primary btn-sm">Reenviar invitacion</button>
-            <button (click)="onUpdate(empleado.Id)" class="btn btn-sm"> Editar</button>
-            <button (click)="onDelete(empleado.Id)" class="btn btn-sm btn-outline-danger">X</button>
+            <button (click)="onUpdate(empleado.Id)" class="btn btn-primary"> Editar</button>
+            <button (click)="onDelete(empleado.Id)" class="btn btn-danger">X</button>
           </td>
         </tr>
       </table>

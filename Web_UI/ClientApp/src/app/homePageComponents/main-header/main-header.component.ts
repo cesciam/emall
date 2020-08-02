@@ -17,7 +17,6 @@ export class MainHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
-    console.log(this.usuarioLogueado)
   }
 
   validarEmpleado() {
