@@ -1,35 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { equalValueValidator } from '../../../helpers/equal-value.validator';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../../../config';
-import { RegistroUsuario } from '../../../models/registro-usuario.model';
 import { Archivo } from '../../../models/Archivo';
+import { Usuario } from '../../../models/usuario.model'
 
 @Component({
-  selector: 'app-agregar-usuario',
-  templateUrl: './agregar-usuario.component.html',
-  styleUrls: ['./agregar-usuario.component.css']
+  selector: 'app-editar-usuario',
+  templateUrl: './editar-usuario.component.html',
+  styleUrls: ['./editar-usuario.component.css']
 })
 
-export class AgregarUsuarioComponent implements OnInit {
+export class EditarUsuarioComponent implements OnInit {
   @Input() integrarCon: string;
-  
+
   private usuarioForm: FormGroup;
   private submitted: boolean = false;
   private error: object = null;
-  private registerComplete: boolean = false;
+  private editComplete: boolean = false;
   private uploader: CloudinaryUploader;
   private imgUrl: any;
   private foto: Archivo;
   private isSendingData: boolean = false;
-      
+  private usuario: Usuario;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
     this.uploader = new CloudinaryUploader(
@@ -49,11 +51,34 @@ export class AgregarUsuarioComponent implements OnInit {
       Contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       ContrasenaConfirmar: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       Telefono: new FormControl('', [Validators.required]),
-      Tipo: new FormControl(this.integrarCon == 'pagina' ? '2' : '', [Validators.required]),
       Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpe?g|bmp|png|webp|tiff|eps)$/igm)])
     }, {
-        validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
+      validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
     });
+
+    this.obtenerDatosUsuario().then(() => {
+      this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
+      this.usuarioForm.controls['Nombre'].setValue(this.usuario.Nombre);
+      this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
+      this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
+      this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
+    });
+  }
+
+  obtenerDatosUsuario() {
+    let usuarioId: number = +this.route.snapshot.paramMap.get('id');
+
+    const obtenerDatos = new Promise((resolve, reject) => {
+      this.usuarioService.obtenerUsuarioPorId(usuarioId)
+        .subscribe(data => {
+          this.usuario = data;
+          resolve();
+        }, (error) => {
+            reject();
+        });
+    });
+
+    return obtenerDatos;
   }
 
   validarFoto(files) {
@@ -95,25 +120,22 @@ export class AgregarUsuarioComponent implements OnInit {
     return this.usuarioForm.controls;
   }
 
-  sanitizeData(data: FormGroup): RegistroUsuario {
-    let nuevoUsuario: RegistroUsuario = new RegistroUsuario();
+  sanitizeData(data: FormGroup): Usuario {
+    let usuarioEditado: Usuario = new Usuario();
 
-    nuevoUsuario.Nombre = this.usuarioForm.controls['Nombre'].value;
-    nuevoUsuario.Apellido = this.usuarioForm.controls['Apellido'].value;
-    nuevoUsuario.Cedula = this.usuarioForm.controls['Cedula'].value;
-    nuevoUsuario.Contrasena = this.usuarioForm.controls['Contrasena'].value;
-    nuevoUsuario.Correo = this.usuarioForm.controls['Correo'].value;
-    nuevoUsuario.Foto = this.foto;
-    nuevoUsuario.Telefono = this.usuarioForm.controls['Telefono'].value;
-    
-    let type: number = +this.usuarioForm.controls['Tipo'].value;
-    nuevoUsuario.Tipo = type;
+    usuarioEditado.Id = this.usuario.Id;
+    usuarioEditado.Nombre = this.usuarioForm.controls['Nombre'].value;
+    usuarioEditado.Apellido = this.usuarioForm.controls['Apellido'].value;
+    usuarioEditado.Cedula = this.usuarioForm.controls['Cedula'].value;
+    usuarioEditado.Correo = this.usuarioForm.controls['Correo'].value;
+    usuarioEditado.Telefono = this.usuarioForm.controls['Telefono'].value;
+    usuarioEditado.Tipo = this.usuario.Tipo;
 
-    return nuevoUsuario;
+    return usuarioEditado;
   }
 
-  registrarUsuario() {
-    this.usuarioService.registrarUsuario(this.sanitizeData(this.usuarioForm))
+  editarUsuario() {
+    this.usuarioService.editarUsuario(this.sanitizeData(this.usuarioForm))
       .subscribe(
         (response) => {
           this.isSendingData = false;
@@ -122,7 +144,7 @@ export class AgregarUsuarioComponent implements OnInit {
             this.router.navigate(['dashboard-admin/usuario/listar-usuario']);
           else {
             window.scroll(0, 0);
-            this.registerComplete = true;
+            this.editComplete = true;
           }
         },
         (error) => {
@@ -130,7 +152,7 @@ export class AgregarUsuarioComponent implements OnInit {
           this.error = error.error;
 
           if (!this.error.hasOwnProperty('message')) {
-            this.error = { message: 'Error general al registrar el usuario. Vuelva a intertarlo en unos minutos' };
+            this.error = { message: 'Error general al editar el usuario. Vuelva a intertarlo en unos minutos' };
           }
 
           window.scroll(0, 0);
@@ -149,10 +171,10 @@ export class AgregarUsuarioComponent implements OnInit {
       this.subirFoto()
         .then(() => {
           this.isSendingData = true;
-          this.registrarUsuario();
+          this.editarUsuario();
         });
     } else {
-      this.registrarUsuario();
+      this.editarUsuario();
     }
   }
 }

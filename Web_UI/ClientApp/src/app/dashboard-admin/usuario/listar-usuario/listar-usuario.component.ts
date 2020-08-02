@@ -10,6 +10,8 @@ import { Usuario } from '../../../models/usuario.model';
 })
 export class ListarUsuarioComponent implements OnInit {
   private usuarios: Usuario[];
+  private submitted: boolean = false;
+  private error: object = null;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -29,4 +31,40 @@ export class ListarUsuarioComponent implements OnInit {
       .subscribe(data => this.usuarios = data);
   }
 
+  activarUsuario(id: number): void {
+    this.usuarioService.activarUsuario(id, 'YWN0aXZhZG8gcG9yIGFkbWlu')
+      .subscribe(
+        (response) => {
+          console.log(response)
+          this.obtenerUsuarios();
+        },
+        (error) => {
+          this.error = error.error;
+            console.log(error);
+            this.error = { message: 'Error general al activar el usuario. Vuelva a intertarlo en unos minutos' };
+        });
+  }
+
+  eliminarUsuario(id: number): void {
+    this.submitted = true;
+
+    if (confirm('¿Esta seguro que desea eliminar este usuario?')) {
+      this.usuarioService.eliminarUsuario(id)
+        .subscribe(
+          (response) => {
+            this.obtenerUsuarios();
+            this.submitted = false;
+          },
+          (error) => {
+            this.error = error.error;
+
+            if (!this.error.hasOwnProperty('message')) {
+              this.error = { message: 'Error general al eliminar el usuario. Vuelva a intertarlo en unos minutos' };
+            }
+
+            window.scroll(0, 0);
+          }
+        );
+    }
+  }
 }

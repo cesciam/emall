@@ -24,7 +24,8 @@ namespace Entities
 
         public Impuesto(string[] infoArray)
         {
-            var montoImp = 0.0; 
+            var montoImp = 0.0;
+            var id = 0; 
             if (infoArray != null && infoArray.Length >= 1)
             {
                 Nombre = infoArray[0];
@@ -33,6 +34,12 @@ namespace Entities
                     Porcentaje = montoImp;
                 else
                     throw new Exception("El porcentaje debe ser un numero ");
+
+                if (Int32.TryParse(infoArray[2], out id))
+
+                    Id = id;
+                else
+                    throw new Exception("-----");
             }
            
 
