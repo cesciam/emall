@@ -88,6 +88,15 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveByEmpleadoStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_COMERCIOXEMPLEADO" };
+            var s = (Usuario)entity;
+            operation.AddIntParam("ID_EMPLEADO", s.Id);
+
+            return operation;
+        }
+
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "MODIFICAR_SUCURSAL" };

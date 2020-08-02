@@ -30,6 +30,11 @@ namespace AppCore
             return sucursalFactory.Retrieve<Sucursal>(sucursal);
         }
 
+        public Sucursal ObtenerSucursalPorEmpleado(Usuario u)
+        {
+            return sucursalFactory.RetrieveByEmpleado<Sucursal>(u);
+        }
+
         public void ModificarSucursal(Sucursal sucursal)
         {
             sucursalFactory.Update(sucursal);
