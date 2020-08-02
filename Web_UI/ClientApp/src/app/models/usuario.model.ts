@@ -1,6 +1,6 @@
 import { Archivo } from "./Archivo";
 
-export interface Usuario {
+export class Usuario {
   Id: string;
   Cedula: string;
   Nombre: string;

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ListarCategoriaComponent } from '../../categoria/listar-categoria/listar-categoria.component';
+import { CategoriaService } from '../../services/categoria.service';
+import { Categoria } from '../../models/categoria.model';
+
 
 @Component({
   selector: 'app-hero',
@@ -8,17 +11,15 @@ import { Router } from "@angular/router";
 })
 export class HeroComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private servicio: CategoriaService) { }
+ 
 
   ngOnInit() {
+    this.obtenerCategorias();
   }
 
-  buscar() {
-    let busqueda = (document.getElementById("busqueda") as HTMLInputElement).value;
-    console.log(busqueda);
-    this.router.navigate(['item-busqueda', busqueda]);
+  obtenerCategorias() {
+    this.servicio.ObtenerTodoCategoria(); 
   }
-
-  
 
 }

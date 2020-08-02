@@ -21,6 +21,12 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(mapper.GetCreateStatement(vr));
         }
 
+        public void CreateWRol(BaseEntity entity)
+        {
+            var vr = (VistaXRol)entity;
+            dao.ExecuteProcedure(mapper.GetCreateWRolStatement(vr));
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var vr = (VistaXRol)entity;

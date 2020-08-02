@@ -40,6 +40,20 @@ namespace DataAccessLayer.CRUD
             return default(T);
         }
 
+        public T RetrieveByEmpleado<T>(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(sucursalMaper.GetRetriveByEmpleadoStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var objs = sucursalMaper.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+
+            return default(T);
+        }
+
         public List<T> RetrieveAll<T>(BaseEntity entity)
         {
             var lstSucursales = new List<T>();
