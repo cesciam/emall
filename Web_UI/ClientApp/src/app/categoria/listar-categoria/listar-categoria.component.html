@@ -3,7 +3,9 @@
   <h1>Lista de categorias</h1>
 
   <div >
-    <input #searchImp type="text" (input)="obtener(searchImp.value)" placeholder="Buscar.." />
+    <input #searchImp type="text" class="form-control" (input)="obtener(searchImp.value)" placeholder="Buscar.." />
+
+    <button class="btn btn-primary btn-categoria" type="button" onclick="window.location='./categoria/crear-categoria.component.html'">Crear Categeoria</button>
 
   </div>
   <table class="table table-striped .table-responsive-sm" >
