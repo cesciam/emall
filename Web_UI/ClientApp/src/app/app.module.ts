@@ -69,6 +69,13 @@ import { FiltroItemPipe } from './pipes/filtro-item.pipe';
 import { PerfilUsuarioComponent } from '../app/perfil-usuario/perfil-usuario.component';
 import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
 import { SidebarAdminComponent } from './dashboard-admin/sidebar-admin/sidebar-admin.component';
+import { ChartsModule } from 'ng2-charts';
+import { ReportesComponent } from './reportes/reportes/reportes.component';
+import { ComPorCatReporteComponent } from './reportes/com-por-cat-reporte/com-por-cat-reporte.component';
+import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-comercio-reporte/empleados-por-comercio-reporte.component';
+import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
+import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
+import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
 
 
 
@@ -136,10 +143,17 @@ const maskConfig: Partial<IConfig> = {
     PerfilUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    ReportesComponent,
+    ComPorCatReporteComponent,
+    EmpleadosPorComercioReporteComponent,
+    UsuarioTipoReporteComponent,
+    UsuarioEstadoReporteComponent,
+    AdminReportesComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     FileUploadModule,
+    ChartsModule,
     Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -191,6 +205,9 @@ const maskConfig: Partial<IConfig> = {
       {path: 'perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
+      { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
     ])
   ],
   exports: [

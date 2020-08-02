@@ -4,7 +4,8 @@
   <h1>Lista de impuestos</h1>
 
   <div>
-    <input type="text" class="form-control" name="buscarImpuesto"  placeholder="Buscar.." />
+    <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." />
+    <button class="btn btn-primary" type="button" onclick="window.location='crear-categoria.html'">Crear Impuesto</button>
 
   </div>
   <table class="table table-striped .table-responsive-sm"  *ngIf ="service.impuestos" >
