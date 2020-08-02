@@ -86,11 +86,16 @@ namespace Web_API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Delete(VistaXRol c)
+        [HttpDelete]
+        public IActionResult Delete(int id_rol ,int id_vista )
         {
             try
             {
+                var c = new VistaXRol
+                {
+                    id_rol = id_rol,
+                    id_vista = id_vista
+                };
                 var vrm = new VistaXRolManagement();
                 vrm.Delete(c);
                 return Ok();

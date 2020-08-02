@@ -33,6 +33,12 @@ export class VistaXRolService {
       );;
   }
 
+  deleteVistaXRol(id_rol: number, id_vista : number) {
+    let endpointUrl = this.BASE_URL + 'vistaxRol/Delete?id_rol=' + id_rol+ '&id_vista=' +id_vista;
+
+    return this.http.delete(endpointUrl)
+  }
+
   getByRol(id: number): Observable<VistaXRol[]> {
     let endpointUrl = this.BASE_URL + 'vistaxRol/retrieveByRol?id=' + id;
 
