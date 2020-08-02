@@ -124,5 +124,10 @@ namespace AppCore
             return crudItem.ItemBusqueda<Item>(busqueda);
         }
 
+        public Impuesto ImpuestoItem(Impuesto impuesto)
+        {
+            return crudItem.ImpuestoItem<Impuesto>(impuesto);
+        }
+
     }
 }

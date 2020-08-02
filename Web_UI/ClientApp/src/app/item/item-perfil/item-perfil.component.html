@@ -1,1 +1,65 @@
-<p>item-perfil works!</p>
+<app-header></app-header>
+
+
+<div class="container" *ngIf="item_seleccionado">
+
+
+  <div class="pt-3 px-4">
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2"></h1>
+    </div>
+  </div>
+
+
+  <div class="container">
+
+    <div class="row mb-4">
+
+      <div class="col">
+        <h1 class="h1">{{item_seleccionado.nombre}}</h1>
+        <h1 class="h1">{{item_seleccionado.descripcion}}</h1>
+        <h1 class="h1">₡{{preciofinal}} ii</h1>
+        <h1 class="h1">{{item_seleccionado.tipo}}</h1>
+
+      </div>
+
+
+
+
+    </div>
+
+    <div class="row mb-4">
+
+      <div class="col">
+        <div class="d-flex justify-content-center img-container">
+          <img [src]="item_seleccionado.id_foto" class="img-fluid d-flex justify-content-center" alt="Foto" style="width: 550px; height: 400px;">
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <app-footer></app-footer>
+
+
+  <p>item-perfil works!</p>

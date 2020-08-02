@@ -12,12 +12,14 @@ namespace DataAccessLayer.Crud
     {
         ItemMapper mapper;
         ArchivoMapper foto;
+        ImpuestoMapper impuestomapper;
 
         public ItemCrudFactory() : base()
         {
             //foto = new ArchivoMapper();
             mapper = new ItemMapper();
             dao = SqlDao.GetInstance();
+            impuestomapper = new ImpuestoMapper();
         }
 
         public override void Create(BaseEntity entity)
@@ -140,6 +142,19 @@ namespace DataAccessLayer.Crud
             {
                 dic = lista[0];
                 var objs = foto.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+            return default(T);
+        }
+
+        public T ImpuestoItem<T>(BaseEntity entity)
+        {
+            var lista = dao.ExecuteQueryProcedure(impuestomapper.ImpuestoItem(entity));
+            var dic = new Dictionary<string, object>();
+            if (lista.Count > 0)
+            {
+                dic = lista[0];
+                var objs = impuestomapper.BuildObject(dic);
                 return (T)Convert.ChangeType(objs, typeof(T));
             }
             return default(T);

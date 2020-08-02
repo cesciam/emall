@@ -76,6 +76,7 @@ import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-c
 import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
 import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
 import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
+import { ItemSucursalClienteComponent } from './item/item-sucursal-cliente/item-sucursal-cliente.component';
 
 
 
@@ -149,6 +150,7 @@ const maskConfig: Partial<IConfig> = {
     UsuarioTipoReporteComponent,
     UsuarioEstadoReporteComponent,
     AdminReportesComponent,
+    ItemSucursalClienteComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -202,12 +204,13 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
-      {path: 'perfil-usuario', component: PerfilUsuarioComponent },
+      { path: 'perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
       { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
+      { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
+      { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
     ])
   ],
   exports: [
