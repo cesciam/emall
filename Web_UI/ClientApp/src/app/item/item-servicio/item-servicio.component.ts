@@ -13,6 +13,7 @@ export class ItemServicioComponent implements OnInit {
 
   servicios: Item[];
   tipo: string;
+  private filtroItem = '';
 
   constructor(private itemservice: ItemService) { }
 

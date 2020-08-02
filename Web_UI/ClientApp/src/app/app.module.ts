@@ -180,7 +180,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'listar-rol/:id_comercio/modificar-rol/:id', component: ModificarRolComponent },
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
-      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent }
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'item-perfil/:id_item', component: ItemPerfilComponent }
     ])
   ],
   exports: [
