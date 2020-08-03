@@ -66,10 +66,12 @@ import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.compon
 import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 import { FiltroItemPipe } from './pipes/filtro-item.pipe';
-import { PerfilUsuarioComponent } from '../app/perfil-usuario/perfil-usuario.component';
+import { PerfilUsuarioComponent } from "../app/perfil-usuario/perfil-usuario.component";
 import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
 import { SidebarAdminComponent } from './dashboard-admin/sidebar-admin/sidebar-admin.component';
-
+import { LandingPageProductoComponent } from './landingPage/landing-page-producto/landing-page-producto.component';
+import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
+import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -136,6 +138,9 @@ const maskConfig: Partial<IConfig> = {
     PerfilUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    LandingPageProductoComponent,
+    FilterCategoriaPipe,
+    FilterImpuestoPipe
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -191,12 +196,14 @@ const maskConfig: Partial<IConfig> = {
       {path: 'perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
+      { path: 'landing-producto', component: LandingPageProductoComponent }
     ])
   ],
   exports: [
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    PerfilAdminComercioComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

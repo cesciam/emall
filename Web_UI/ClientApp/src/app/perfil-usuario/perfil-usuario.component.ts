@@ -1,3 +1,6 @@
+import { ComercioService } from '../services/comercio.service';
+import { Usuario } from '../models/usuario.model';
+import { PerfilAdminComercioComponent } from '../perfil-admin-comercio/perfil-admin-comercio.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil-usuario.component.css']
 })
 export class PerfilUsuarioComponent implements OnInit {
+  private usuarioLogueado: object = null;
+  private id: number;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private duenno: PerfilAdminComercioComponent) {
+    this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
+    
   }
-
+  ngOnInit() {
+    this.duenno.llenarComercios();
+  }
 }
