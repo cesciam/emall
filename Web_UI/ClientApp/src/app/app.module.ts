@@ -80,6 +80,10 @@ import { AdminPromocionesComponent } from './dashboard-admin/admin-promociones/a
 import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promociones-edit/admin-promociones-edit.component';
 import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
 import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
+import { LandingPageProductoComponent } from './landingPage/landing-page-producto/landing-page-producto.component';
+import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
+import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
+
 
 
 
@@ -157,6 +161,9 @@ const maskConfig: Partial<IConfig> = {
     AdminPromocionesEditComponent,
     AdminPromocionesRegistrarComponent,
     AdminConfiguracionComponent,
+    LandingPageProductoComponent,
+    FilterImpuestoPipe,
+    FilterCategoriaPipe
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -216,6 +223,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/promocion/:id', component: AdminPromocionesEditComponent },
       { path: 'dashboard-admin/promocion/registro', component: AdminPromocionesRegistrarComponent },
       { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
+      { path: 'landing-producto', component: LandingPageProductoComponent }
     ])
   ],
   exports: [
