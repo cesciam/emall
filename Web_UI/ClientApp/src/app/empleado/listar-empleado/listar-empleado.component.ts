@@ -41,10 +41,7 @@ export class ListarEmpleadoComponent implements OnInit {
   }
 
   onUpdate(id : number) {
-    this.service.getById(id);
-    let empleado = this.service.formData;
-    localStorage.setItem("empleado", JSON.stringify(empleado) );
-    this.router.navigate(['modificar-empleado']);
+    this.router.navigate(['listar-empleado/',this.comercioId,'modificar-empleado',id]);
   }
 
 }

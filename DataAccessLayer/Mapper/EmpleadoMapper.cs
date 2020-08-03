@@ -95,7 +95,6 @@ namespace DataAccessLayer.Mapper
             var operation = new SqlOperation { ProcedureName = "MODIFICAR_EMPLEADO_PR" };
             var e = (Empleado)entity;
             operation.AddIntParam(DB_COL_ID, e.id);
-            operation.AddIntParam(DB_COL_ID_USUARIO, e.id_usuario);
             operation.AddIntParam(DB_COL_ID_ROL, e.id_rol);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, e.id_sucursal);
             return operation;
