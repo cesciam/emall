@@ -83,7 +83,6 @@ export class AgregarEmpleadoComponent implements OnInit {
       .subscribe(
         (response) => {
           this.isSendingData = false;
-          this.router.navigate(['listar-empleado?comercio', this.comercioId]);
         },
         (error) => {
           this.isSendingData = false;

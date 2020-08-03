@@ -1,3 +1,26 @@
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cambios guardados</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Los cambios en el empleado han sido guardados exitosamente
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"[routerLink]="['/listar-empleado']"
+          [queryParams]="{comercio: comercioId}">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 <app-main-header></app-main-header>
 <br>
 <div class="container">
@@ -8,49 +31,33 @@
         </div>
 
         <div class="col-lg-2 col-md-2">
-            <a [routerLink]="['../../listar-empleado', {comercio:comercioId}]">Volver atras</a>
+            <a [routerLink]="['/listar-empleado']"
+            [queryParams]="{comercio: comercioId}">Volver atras</a>
         </div>
     </div>
+
     <hr>
-    <!-- <form (submit)="onSubmit(form)" autocomplete="off">
-
-        <div class="row">
-
-
-            <div class="form-group col-lg-6 col-md-6">
-                <label for="rol">Rol</label>
-                <select class="form-control" name="rol" id="rol" required
-                    [ngClass]="{ 'is-invalid': submitted && f.Rol.errors }">
-                    <option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.nombre}}</option>
-                </select>
-                <div *ngIf="submitted && f.Rol.errors" class="invalid-feedback">
-                    <div *ngIf="f.Rol.errors.required">Rol es requerido</div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </div>
-
-    </form> -->
-    <form class="form-group col-lg-6 col-md-6" [formGroup]="sucursalForm">
-        <select formControlName="sucursalControl">
+    
+    <div class="row">
+       <form class="form-group col-lg-6 col-md-6" [formGroup]="sucursalForm">
+        <label >Sucursal</label>
+        <select formControlName="sucursalControl" class="form-control">
             <option [ngValue]="sucursal" *ngFor="let sucursal of sucursales">{{sucursal.nombre}}</option>
         </select>
     </form>
 
     <form class="form-group col-lg-6 col-md-6" [formGroup]="rolForm">
-        <select formControlName="rolControl">
+        <label >Rol</label>
+        <select formControlName="rolControl" class="form-control">
             <option [ngValue]="rol" *ngFor="let rol of roles">{{rol.nombre}}</option>
         </select>
     </form>
-    <div class="form-group">
-        <button (click)="updateRecord()" class="btn btn-primary">Guardar Cambios</button>
+    
     </div>
-    <button (click)="verCambio()"></button>
+    <div class="form-group">
+        <button (click)="updateRecord()" class="btn btn-primary" data-toggle="modal" data-target="#Modal">Guardar Cambios</button>
+    </div> 
+    
 
 </div>
 

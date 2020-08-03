@@ -43,9 +43,7 @@ export class EmpleadoService {
 
   deleteEmpleado(id: number) { 
     return this.http.delete(this.baseUrl + '/Empleado/Delete?id=' + id)
-      .subscribe(response => {
-
-      });
+      
   }
 
   getById(id: number) {
