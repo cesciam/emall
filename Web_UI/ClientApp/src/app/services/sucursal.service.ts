@@ -38,7 +38,7 @@ export class SucursalService {
     return this.http.get<Sucursal>(endpointUrl);
   }
 
-   ObtenerTodoSucursales(id : number) {
+   ObtenerTodoSucursales (id : number) {
     let endpointUrl = this.BASE_URL + '/sucursal/obtenertodosucursal?idComercio=' + id;
 
     return this.http.get<Sucursal[]>(endpointUrl);
