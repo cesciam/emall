@@ -4,6 +4,7 @@ import { Item } from '../../models/item';
 import { getBaseUrl } from '../../../main';
 import { Impuesto } from '../../models/impuesto.model';
 import { ItemService } from '../../services/item.service';
+import { SucursalService } from '../../services/sucursal.service';
 import { ImpuestoService } from '../../services/impuesto.service';
 import { async } from '@angular/core/testing';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
@@ -26,11 +27,12 @@ export class ItemPerfilComponent implements OnInit {
 
   item_seleccionado: Item;
   impuesto: Impuesto;
+  sucursal: Sucursal;
   error: any;
   preciofinal = 0;
 
 
-  constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router) {
+  constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router, private serviceSucursal: SucursalService,) {
 
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
 
@@ -44,10 +46,8 @@ export class ItemPerfilComponent implements OnInit {
   async obtenerItem(itemId: number) {
     this.item_seleccionado = await this.serviceItem.ObtenerItem(itemId);
     this.impuesto = await this.serviceItem.ObtenerImpuestoItem(this.item_seleccionado.id_impuesto);
+    this.sucursal = await this.serviceSucursal.obtenerSucursalItem(this.item_seleccionado.id_sucursal);
 
-    console.log(this.preciofinal)
-    console.log(this.item_seleccionado.precio)
-    console.log(this.impuesto.Porcentaje)
 
     this.preciofinal = this.item_seleccionado.precio + (this.item_seleccionado.precio / 100 * this.impuesto.Porcentaje);
   }

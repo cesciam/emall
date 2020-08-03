@@ -22,6 +22,15 @@ export class ImpuestoService {
       .toPromise().then(res => this.impuestos = res as Impuesto[])
   }
 
+  ObtenerTodoImpuestoItem() {
+    let impuesto: Impuesto;
+
+    impuesto = this.http.get<Impuesto>(this.BaseURL + 'impuesto/obtenertodoimpuesto');
+
+    return impuesto;
+  }
+
+
   public ObtenerImpuesto(nombre: string) {
     this.http.get(this.BaseURL + 'impuesto/obtenerimpuesto?nombre=' + nombre)
       .toPromise().then(res => this.formData = res as Impuesto)

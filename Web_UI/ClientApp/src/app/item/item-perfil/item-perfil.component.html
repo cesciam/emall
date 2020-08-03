@@ -1,10 +1,89 @@
 <app-header></app-header>
 
 
-<div class="container" *ngIf="item_seleccionado">
+<div class="container" *ngIf="item_seleccionado && sucursal && impuesto">
 
 
-  <div class="pt-3 px-4">
+
+
+
+  <section class="product-details spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__pic">
+            <div class="product__details__pic__item">
+              <img class="product__details__pic__item--large" [src]="item_seleccionado.id_foto" alt="Foto">
+            </div>
+            <!--<div class="product__details__pic__slider owl-carousel">
+              <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                   src="img/product/details/thumb-1.jpg" alt="">
+              <img data-imgbigurl="img/product/details/product-details-3.jpg"
+                   src="img/product/details/thumb-2.jpg" alt="">
+              <img data-imgbigurl="img/product/details/product-details-5.jpg"
+                   src="img/product/details/thumb-3.jpg" alt="">
+              <img data-imgbigurl="img/product/details/product-details-4.jpg"
+                   src="img/product/details/thumb-4.jpg" alt="">
+            </div>-->
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__text">
+            <h3>{{item_seleccionado.nombre}}</h3>
+            <div class="product__details__rating">
+              <i class="fa fa-shopping-cart"> {{sucursal.nombre}}</i>
+              <!--<i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>-->
+            </div>
+            <div class="product__details__price">₡{{preciofinal}} ii</div>
+            <p>
+              {{item_seleccionado.descripcion}}
+            </p>
+            <!--<div class="product__details__quantity">
+              <div class="quantity">
+                <div class="pro-qty">
+                  <input type="text" value="1">
+                </div>
+              </div>
+            </div>-->
+            <a href="#" class="primary-btn">AGREGAR</a>
+            <a href="#" class="heart-icon"><span class="icon_cart_alt"></span></a>
+            <ul>
+              <li *ngIf="item_seleccionado.tipo === 'Servicio'" ><b>Duracion</b> <span>{{item_seleccionado.duracion}} minutos</span></li>
+              <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
+              <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp>  {{impuesto.Porcentaje}}%</samp></span></li>
+              <li><b>Detalle sucursal</b> <span>{{sucursal.detallesDireccion}}</span></li>
+              <!--<li>
+    <b>Share on</b>
+    <div class="share">
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-instagram"></i></a>
+      <a href="#"><i class="fa fa-pinterest"></i></a>
+    </div>
+  </li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<div class="pt-3 px-4">
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
       <h1 class="h2"></h1>
     </div>
@@ -42,7 +121,7 @@
     </div>
 
 
-  </div>
+  </div>-->
 
 
 
@@ -59,7 +138,5 @@
 
 
 
-  <app-footer></app-footer>
+      <app-footer></app-footer>
 
-
-  <p>item-perfil works!</p>
