@@ -76,6 +76,10 @@ import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-c
 import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
 import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
 import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
+import { AdminPromocionesComponent } from './dashboard-admin/admin-promociones/admin-promociones.component';
+import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promociones-edit/admin-promociones-edit.component';
+import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
+import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
 
 
 
@@ -149,6 +153,10 @@ const maskConfig: Partial<IConfig> = {
     UsuarioTipoReporteComponent,
     UsuarioEstadoReporteComponent,
     AdminReportesComponent,
+    AdminPromocionesComponent,
+    AdminPromocionesEditComponent,
+    AdminPromocionesRegistrarComponent,
+    AdminConfiguracionComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -182,13 +190,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
-      { path: 'promociones', component: ListarPromocionComponent },
-      { path: 'promocion/:id', component: EditarPromocionComponent },
-      { path: 'promocion-registro', component: RegistrarPromocionComponent },
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'listar-impuesto', component: ListarImpuestoComponent },
       { path: 'crear-impuesto', component: CrearImpuestoComponent },
       { path: 'listar-categoria', component: ListarCategoriaComponent },
@@ -208,6 +212,10 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
       { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
+      { path: 'dashboard-admin/promocion', component: AdminPromocionesComponent },
+      { path: 'dashboard-admin/promocion/:id', component: AdminPromocionesEditComponent },
+      { path: 'dashboard-admin/promocion/registro', component: AdminPromocionesRegistrarComponent },
+      { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
     ])
   ],
   exports: [
