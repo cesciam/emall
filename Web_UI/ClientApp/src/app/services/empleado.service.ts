@@ -27,8 +27,9 @@ export class EmpleadoService {
     return this.http.post(this.baseUrl + '/Empleado/Create', formData);
   }
 
-  putEmpleado(formData : Empleado) {
-    return this.http.put(this.baseUrl + '/Empleado/Update',formData)
+  putEmpleado(id, id_rol, id_sucursal : number) {
+    return this.http.put(this.baseUrl + '/Empleado/Update?id_empleado='+id+
+    '&id_rol='+id_rol+'&id_sucursal='+id_sucursal,null)
   }
 
   fillList() {
@@ -42,13 +43,22 @@ export class EmpleadoService {
 
   deleteEmpleado(id: number) { 
     return this.http.delete(this.baseUrl + '/Empleado/Delete?id=' + id)
-      .subscribe(response => {
-
-      });
+      
   }
 
   getById(id: number) {
-    return this.http.get(this.baseUrl + '/Empleado/RetrieveById?id=' + id)
-    .toPromise().then(res => this.formData = res as Empleado)
+     let endpointUrl = this.baseUrl + '/Empleado/RetrieveById?id=' + id;
+     return this.http.get<Empleado>(endpointUrl);
+
+    //return this.http.get(this.baseUrl + '/Empleado/RetrieveById?id=' + id)
+    //.toPromise().then(res => this.formData = res as Empleado)
   }
+
+  getByIdVM(id: number) {
+    let endpointUrl = this.baseUrl + '/Empleado/RetrieveByIdViewModel?id=' + id;
+    return this.http.get<EmpleadoList>(endpointUrl);
+
+   //return this.http.get(this.baseUrl + '/Empleado/RetrieveById?id=' + id)
+   //.toPromise().then(res => this.formData = res as Empleado)
+ }
 }

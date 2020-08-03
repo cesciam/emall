@@ -66,12 +66,21 @@ import { ItemBusquedaComponent } from './item/item-busqueda/item-busqueda.compon
 import { ItemPerfilComponent } from './item/item-perfil/item-perfil.component';
 import { MainHeaderComponent } from './homepagecomponents/main-header/main-header.component';
 import { FiltroItemPipe } from './pipes/filtro-item.pipe';
-import { PerfilUsuarioComponent } from "../app/perfil-usuario/perfil-usuario.component";
+import { PerfilUsuarioComponent } from '../app/perfil-usuario/perfil-usuario.component';
 import { EditarUsuarioComponent } from './dashboard-admin/usuario/editar-usuario/editar-usuario.component';
 import { SidebarAdminComponent } from './dashboard-admin/sidebar-admin/sidebar-admin.component';
-import { LandingPageProductoComponent } from './landingPage/landing-page-producto/landing-page-producto.component';
-import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
-import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
+import { ChartsModule } from 'ng2-charts';
+import { ReportesComponent } from './reportes/reportes/reportes.component';
+import { ComPorCatReporteComponent } from './reportes/com-por-cat-reporte/com-por-cat-reporte.component';
+import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-comercio-reporte/empleados-por-comercio-reporte.component';
+import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
+import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
+import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
+import { AdminPromocionesComponent } from './dashboard-admin/admin-promociones/admin-promociones.component';
+import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promociones-edit/admin-promociones-edit.component';
+import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
+import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
+
 
 
 const maskConfig: Partial<IConfig> = {
@@ -138,13 +147,21 @@ const maskConfig: Partial<IConfig> = {
     PerfilUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
-    LandingPageProductoComponent,
-    FilterCategoriaPipe,
-    FilterImpuestoPipe
+    ReportesComponent,
+    ComPorCatReporteComponent,
+    EmpleadosPorComercioReporteComponent,
+    UsuarioTipoReporteComponent,
+    UsuarioEstadoReporteComponent,
+    AdminReportesComponent,
+    AdminPromocionesComponent,
+    AdminPromocionesEditComponent,
+    AdminPromocionesRegistrarComponent,
+    AdminConfiguracionComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
     FileUploadModule,
+    ChartsModule,
     Ng2CloudinaryModule,
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -156,7 +173,7 @@ const maskConfig: Partial<IConfig> = {
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
       { path: 'agregar-empleado/:comercio', component: AgregarEmpleadoComponent },
-      { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
+      { path: 'listar-empleado/:id_comercio/modificar-empleado/:id', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
       { path: 'dashboard-admin', component: DashboardAdminComponent },
       { path: 'dashboard-admin/usuario', component: ListarUsuarioComponent },
@@ -173,13 +190,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
       { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
-      { path: 'promociones', component: ListarPromocionComponent },
-      { path: 'promocion/:id', component: EditarPromocionComponent },
-      { path: 'promocion-registro', component: RegistrarPromocionComponent },
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'listar-impuesto', component: ListarImpuestoComponent },
       { path: 'crear-impuesto', component: CrearImpuestoComponent },
       { path: 'listar-categoria', component: ListarCategoriaComponent },
@@ -196,14 +209,19 @@ const maskConfig: Partial<IConfig> = {
       {path: 'perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
-      { path: 'landing-producto', component: LandingPageProductoComponent }
+      { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
+      { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
+      { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
+      { path: 'dashboard-admin/promocion', component: AdminPromocionesComponent },
+      { path: 'dashboard-admin/promocion/:id', component: AdminPromocionesEditComponent },
+      { path: 'dashboard-admin/promocion/registro', component: AdminPromocionesRegistrarComponent },
+      { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
     ])
   ],
   exports: [
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
-    PerfilAdminComercioComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

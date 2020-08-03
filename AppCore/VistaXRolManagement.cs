@@ -17,6 +17,11 @@ namespace AppCore
         {
             crud.Create(vr);
         }
+        public void CreateWRol(VistaXRol vr)
+        {
+            crud.CreateWRol(vr);
+        }
+
         public List<VistaXRol> RetrieveAll()
         {
             return crud.RetrieveAll<VistaXRol>();

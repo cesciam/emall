@@ -13,7 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ListarEmpleadoComponent implements OnInit {
   private empleados: EmpleadoList[];
   private comercioId: number;
-  
+  id_empleado: number;
+
   constructor(
     private service: EmpleadoService,
     private router: Router,
@@ -34,17 +35,19 @@ export class ListarEmpleadoComponent implements OnInit {
     this.router.navigate(['agregar-empleado', this.comercioId]);
   }
 
-  onDelete(id : number) {
-    if (confirm('Confirma que desea eliminar el registro')) {
-      this.service.deleteEmpleado(id);
-    }
+  onDelete(id: number) {
+    this.service.deleteEmpleado(id).subscribe(response => {
+      this.service.fillList()
+    });
+
   }
 
-  onUpdate(id : number) {
-    this.service.getById(id);
-    let empleado = this.service.formData;
-    localStorage.setItem("empleado", JSON.stringify(empleado) );
-    this.router.navigate(['modificar-empleado']);
+  onUpdate(id: number) {
+    this.router.navigate(['listar-empleado/', this.comercioId, 'modificar-empleado', id]);
+  }
+
+  empleadoToDelete(id:number){
+    this.id_empleado=id;
   }
 
 }
