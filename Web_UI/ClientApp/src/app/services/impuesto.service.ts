@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Impuesto } from 'src/app/models/impuesto.model';
+import { Impuesto } from '../models/impuesto.model';
 //import { HttpClient } from '@angular/common/http';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -22,13 +22,14 @@ export class ImpuestoService {
       .toPromise().then(res => this.impuestos = res as Impuesto[])
   }
 
-  ObtenerTodoImpuestoItem() {
+  ObtenerTodoImpuestoItem(): Observable<Impuesto[]>{
     let impuesto: Impuesto;
 
-    impuesto = this.http.get<Impuesto>(this.BaseURL + 'impuesto/obtenertodoimpuesto');
+    return this.http.get<Impuesto[]>(this.BaseURL + 'impuesto/obtenertodoimpuesto');
 
-    return impuesto;
-  }
+}
+
+
 
 
   public ObtenerImpuesto(nombre: string) {
