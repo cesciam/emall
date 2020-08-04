@@ -28,8 +28,8 @@ namespace AppCore
             {
                 status = false;
             }
-            return status;
 
+            return status;
         }
 
         public void CreateItem(Item item)
@@ -46,17 +46,6 @@ namespace AppCore
             {
                 throw new Exception("Valores numericos deben ser positivos");
             }
-
-
-            
-
-
-
-
-            //var archivo = crudItem.RetrieveFotoItem<Archivo>(fotoUrl);
-            //item.id_foto = archivo.Id;
-            //crudItem.Create(item);
-
         }
 
         public List<Item> RetrieveAllItem()
@@ -95,12 +84,6 @@ namespace AppCore
             crudItem.Delete(item);
         }
 
-
-
-
-
-        
-
         public List<Item> RetrieveAllBySucursal(int id_sucursal)
         {
             return crudItem.RetrieveAllBySucursal<Item>(id_sucursal);
@@ -113,9 +96,6 @@ namespace AppCore
 
         public Archivo RetrieveItemArchivo(Archivo archivo)
         {
-
-
-
             return crudItem.RetrieveItemArchivo<Archivo>(archivo);
         }
 
@@ -123,6 +103,5 @@ namespace AppCore
         {
             return crudItem.ItemBusqueda<Item>(busqueda);
         }
-
     }
 }

@@ -12,12 +12,14 @@ using Microsoft.Extensions.Configuration;
 namespace AppCore {
     public class UsuarioManagement {
         private UsuarioCrudFactory crudUsuario;
+        private ItemManagement itemManagement;
         private ContrasenaCrudFactory crudContrasena;
         private ErrorResultViewModel errorResult;
         private EmailService emailService;
 
         public UsuarioManagement() {
             this.crudUsuario = new UsuarioCrudFactory();
+            this.itemManagement = new ItemManagement();
             this.crudContrasena = new ContrasenaCrudFactory();
             this.errorResult = new ErrorResultViewModel();
             this.emailService = new EmailService();
@@ -130,11 +132,21 @@ namespace AppCore {
         }
 
         public Usuario RetrieveById(Usuario usuario) {
-            return crudUsuario.Retrieve<Usuario>(usuario);
+            Usuario usuarioActualizado = crudUsuario.Retrieve<Usuario>(usuario);
+            Archivo archivo = new Archivo() { 
+                Id = usuarioActualizado.Foto.Id
+            };
+
+            usuarioActualizado.Foto = this.itemManagement.RetrieveItemArchivo(archivo);
+
+            return usuarioActualizado;
         }
 
         public void Update(Usuario usuario) {
             crudUsuario.Update(usuario);
+
+            if (!String.IsNullOrEmpty(usuario.Contrasena))
+                this.CrearContrasena(usuario.Contrasena, usuario.Id);
         }
 
         public void Delete(int Id) {

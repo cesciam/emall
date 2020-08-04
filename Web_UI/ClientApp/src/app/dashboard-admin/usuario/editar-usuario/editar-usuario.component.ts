@@ -51,6 +51,7 @@ export class EditarUsuarioComponent implements OnInit {
       Contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       ContrasenaConfirmar: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       Telefono: new FormControl('', [Validators.required]),
+      Tipo: new FormControl('', [Validators.required]),
       Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpe?g|bmp|png|webp|tiff|eps)$/igm)])
     }, {
       validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
@@ -62,6 +63,7 @@ export class EditarUsuarioComponent implements OnInit {
       this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
       this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
       this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
+      this.usuarioForm.controls['Tipo'].setValue(this.usuario.Tipo);
     });
   }
 
@@ -72,6 +74,15 @@ export class EditarUsuarioComponent implements OnInit {
       this.usuarioService.obtenerUsuarioPorId(usuarioId)
         .subscribe(data => {
           this.usuario = data;
+
+          if (data.Foto != null) {
+            this.imgUrl = data.Foto.enlace;
+            this.foto = data.Foto;
+          } else {
+            this.imgUrl = null;
+            this.foto = null;
+          }
+
           resolve();
         }, (error) => {
             reject();
@@ -103,8 +114,15 @@ export class EditarUsuarioComponent implements OnInit {
 
       this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
         let res = JSON.parse(response);
+        let oldIdFoto: number;
+
+        if (this.foto == null)
+          oldIdFoto = 0;
+        else
+          oldIdFoto = this.foto.id;
 
         this.foto = new Archivo();
+        this.foto.id = oldIdFoto;
         this.foto.enlace = res.url;
         this.foto.nombre = res.original_filename + '.' + res.format;
         this.foto.tipo = 'Foto';
@@ -129,12 +147,26 @@ export class EditarUsuarioComponent implements OnInit {
     usuarioEditado.Cedula = this.usuarioForm.controls['Cedula'].value;
     usuarioEditado.Correo = this.usuarioForm.controls['Correo'].value;
     usuarioEditado.Telefono = this.usuarioForm.controls['Telefono'].value;
-    usuarioEditado.Tipo = this.usuario.Tipo;
+
+    let tipo: number = +this.usuarioForm.controls['Tipo'].value;
+    usuarioEditado.Tipo = tipo;
+
+    if (this.usuarioForm.controls['Foto'].value == '')
+      usuarioEditado.Foto = null;
+    else
+      usuarioEditado.Foto = this.foto;
+
+    if (this.usuarioForm.controls['Contrasena'].value == "")
+      usuarioEditado.Contrasena = null;
+    else
+      usuarioEditado.Contrasena = this.usuarioForm.controls['Contrasena'].value;
 
     return usuarioEditado;
   }
 
   editarUsuario() {
+    console.log(this.sanitizeData(this.usuarioForm));
+
     this.usuarioService.editarUsuario(this.sanitizeData(this.usuarioForm))
       .subscribe(
         (response) => {
@@ -161,6 +193,14 @@ export class EditarUsuarioComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
+    let contrasena = this.usuarioForm.controls['Contrasena'];
+    let contrasena2 = this.usuarioForm.controls['ContrasenaConfirmar'];
+
+    if (contrasena.value === '' && contrasena2.value === '') {
+      contrasena.setErrors(null);
+      contrasena2.setErrors(null);
+    }
 
     if (this.usuarioForm.invalid) {
       window.scroll(0, 0);
