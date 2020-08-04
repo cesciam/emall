@@ -80,7 +80,7 @@ import { AdminPromocionesComponent } from './dashboard-admin/admin-promociones/a
 import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promociones-edit/admin-promociones-edit.component';
 import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
 import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
-
+import { ItemSucursalClienteComponent } from './item/item-sucursal-cliente/item-sucursal-cliente.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -157,6 +157,7 @@ const maskConfig: Partial<IConfig> = {
     AdminPromocionesEditComponent,
     AdminPromocionesRegistrarComponent,
     AdminConfiguracionComponent,
+    ItemSucursalClienteComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -216,6 +217,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/promocion/:id', component: AdminPromocionesEditComponent },
       { path: 'dashboard-admin/promocion/registro', component: AdminPromocionesRegistrarComponent },
       { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
+      { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
+      { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
     ])
   ],
   exports: [
