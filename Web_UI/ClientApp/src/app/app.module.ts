@@ -81,6 +81,8 @@ import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promocion
 import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
 import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
 import { ItemSucursalClienteComponent } from './item/item-sucursal-cliente/item-sucursal-cliente.component';
+import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
+import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -158,6 +160,8 @@ const maskConfig: Partial<IConfig> = {
     AdminPromocionesRegistrarComponent,
     AdminConfiguracionComponent,
     ItemSucursalClienteComponent,
+    FiltroRolPipe,
+    FiltroEmpleadoPipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
