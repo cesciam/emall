@@ -9,12 +9,14 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"  alt="" />
+          <img src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg" *ngIf="usuarioLogueado.usuario.enlace == null" alt="" />
+          <img src="{{usuarioLogueado.usuario.enlace}}" alt="" />
           <!--FOTO-->
-          <div class="file btn btn-lg btn-primary">
-            Change Photo
-            <input type="file" name="file" />
-          </div>
+          <!-- <div class="file btn btn-lg btn-primary">
+    Change Photo
+    <input type="file" name="file" />
+    
+        </div> -->
         </div>
       </div>
       <div class="col-md-6">
@@ -35,9 +37,9 @@
         </div>
       </div>
 
-      <!-- <div class="col-md-2">
+      <div class="col-md-2">
     <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
-  </div>-->
+  </div>
     </div>
     <div class="row">
       <div class="col-md-4">
@@ -93,13 +95,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let comercio of duenno.comercios">
+                <tr *ngFor="let comercio of comercios">
                   <td>{{ comercio.cedulaJuridica }}</td>
                   <td>{{ comercio.nombreLegal }}</td>
                   <td>{{ comercio.nombre }}</td>
                   <td>{{ comercio.categorias[0] }}</td>
                   <td>
-                    <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
+                    <a [routerLink]="['dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
                       <button type="button" class="btn btn-primary">Seleccionar comercio</button>
                     </a>
                   </td>
