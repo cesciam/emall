@@ -26,9 +26,11 @@ export class RolService {
     .toPromise().then(res=>this.list=res as Rol[]);
   }
 
-  fillRolComercio(){
-    this.http.get(this.BASE_URL+'Rol/RetrieveByIdComercio'+'?id=' +this.id_comercio)
-    .toPromise().then(res=>this.list=res as Rol[]);
+  fillRolComercio(id: number){
+    let endpointUrl = this.baseUrl + '/Rol/RetrieveByIdComercio'+'?id=' +id;
+     return this.http.get<Rol[]>(endpointUrl);
+    // this.http.get(this.BASE_URL+'Rol/RetrieveByIdComercio'+'?id=' +this.id_comercio)
+    // .toPromise().then(res=>this.list=res as Rol[]);
   }
 
   obtenerRolesPorComercio(comercio: number): Observable<Rol[]> {

@@ -76,6 +76,8 @@ import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-c
 import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
 import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
 import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
+import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
+import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
 
 
 
@@ -149,6 +151,8 @@ const maskConfig: Partial<IConfig> = {
     UsuarioTipoReporteComponent,
     UsuarioEstadoReporteComponent,
     AdminReportesComponent,
+    FiltroRolPipe,
+    FiltroEmpleadoPipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

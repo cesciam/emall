@@ -33,7 +33,10 @@
 
   <div class="row">
     <div class="col">
+      <input type="text" class="form-control" placeholder="Buscar" name="fitro" [(ngModel)]="filtro" />
+      <br>
       <table class="table table-striped table-responsive-sm">
+        
         <thead>
           <tr>
             <th>Id</th>
@@ -45,7 +48,7 @@
             <th></th>
           </tr>
         </thead>
-        <tr *ngFor="let empleado of empleados" [ngClass]="{ 'disabled': empleado.Estado == 0 }">
+        <tr *ngFor="let empleado of empleados | filtroEmpleado: filtro" [ngClass]="{ 'disabled': empleado.Estado == 0 }">
           <td>{{empleado.Id}}</td>
           <td>{{empleado.Correo}}</td>
           <td>{{empleado.UsuarioNombre}} {{empleado.Apellido}}</td>
