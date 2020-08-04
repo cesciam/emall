@@ -1,29 +1,34 @@
-<app-main-header></app-main-header>
-<div *ngIf="busqueda">
+<app-header></app-header>
+<div class="container" *ngIf="busqueda.length > 0; else NoResultado">
 
-  <div class="col-sm-auto d-flex justify-content-end">
-    <a [routerLink]="['/']">Volver atras</a>
+
+  <div class="pt-3 px-4">
+
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Resultados</h1>
+    </div>
 
   </div>
 
 
-  <h2 class="d-flex justify-content-center">Resultados</h2>
+
 
   <div class="row">
+
 
     <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let item of busqueda">
       <div class="product__item">
         <div class="product__item__pic set-bg img-container" data-setbg="item.id_foto">
           <img [src]="item.id_foto" alt="Foto">
           <ul class="product__item__pic__hover">
-            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+            <!--<li><a href="#"><i class="fa fa-heart"></i></a></li>
+            <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+            <li><a [routerLink]="['/item-perfil', item.id]"><i class="fa fa-shopping-cart"></i></a></li>
           </ul>
         </div>
         <div class="product__item__text">
-          <h6><a href="#">{{item.nombre}}</a></h6>
-          <h5>{{item.precio}}</h5>
+          <h6><a [routerLink]="['/item-perfil', item.id]">{{item.nombre}}</a></h6>
+          <h5>₡{{item.precio}}</h5>
           <h6>{{item.tipo}}</h6>
         </div>
       </div>
@@ -32,4 +37,21 @@
   </div>
 
 </div>
+
+<ng-template #NoResultado>
+  <div class="container">
+    <div class="pt-3 px-4">
+
+      <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">No hay resultados</h1>
+      </div>
+
+    </div>
+  </div>
+  
+
+
+</ng-template>
+
+
 <app-footer></app-footer>

@@ -48,7 +48,6 @@ export class RolService {
   }
 
   getById(id: number){
-    //TODO< QUE ESTA FUCKING LLAMADA FUNQUE
      return this.http.get(this.BASE_URL+'Rol/RetrieveById'+'?id=' +id)
       .toPromise().then(res=>this.formData =res as Rol)
   }

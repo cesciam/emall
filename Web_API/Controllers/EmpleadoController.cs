@@ -49,6 +49,18 @@ namespace Web_API.Controllers
 
             return em.RetrieveById(cuenta);
         }
+
+        [HttpGet]
+        public EmpleadoViewModel RetrieveByIdViewModel(int id)
+        {
+            var cuenta = new Empleado()
+            {
+                id = id
+            };
+
+            return em.RetrieveByIdViewModel(cuenta);
+        }
+
         [HttpPost]
         public IActionResult Create(RegistroEmpleadoViewModel registroEmpleado)
         {
@@ -77,10 +89,16 @@ namespace Web_API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(Empleado c)
+        public IActionResult Update(int id_empleado, int id_rol, int id_sucursal)
         {
             try
             {
+                var c = new Empleado
+                {
+                    id = id_empleado,
+                    id_rol = id_rol,
+                    id_sucursal = id_sucursal
+                };
                 em.Update(c);
                 return Ok();
             }

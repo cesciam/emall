@@ -149,6 +149,20 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        public Impuesto ImpuestoItem(int id_impuesto)
+        {
+            var cm = new ItemManagement();
+
+            var impuesto = new Impuesto()
+            {
+                Id = id_impuesto
+            };
+
+            return cm.ImpuestoItem(impuesto);
+        }
+
+
+        [HttpGet]
         public List<Item> ItemBusqueda(string busqueda)
         {
             var cm = new ItemManagement();

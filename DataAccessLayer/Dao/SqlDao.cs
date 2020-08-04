@@ -64,7 +64,7 @@ namespace DataAccessLayer.Dao
                 conn.Open();
                 return command.ExecuteScalar();
             }
-        }
+        }   
 
         public List<Dictionary<string, object>> ExecuteQueryProcedure(SqlOperation sqlOperation)
         {

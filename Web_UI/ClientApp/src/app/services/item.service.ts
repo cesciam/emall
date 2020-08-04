@@ -4,6 +4,7 @@ import { Observable, throwError as observableThrowError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Item } from '../models/item';
 import { Archivo } from '../models/Archivo';
+import { Impuesto } from '../models/impuesto.model';
 
 
 @Injectable({
@@ -87,6 +88,15 @@ export class ItemService {
     item = await this.http.get<Item>(this.appUrl + this.serviceApi).toPromise();
 
     return item;
+  }
+
+  async ObtenerImpuestoItem(id_impuesto: number) {
+    this.serviceApi = `/item/ImpuestoItem/?id_impuesto=${id_impuesto}`;
+    let impuesto: Impuesto;
+
+    impuesto = await this.http.get<Impuesto>(this.appUrl + this.serviceApi).toPromise();
+
+    return impuesto;
   }
 
   async ObtenerArchivo(id_foto: number) {

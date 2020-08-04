@@ -15,7 +15,7 @@
           <h5 class="card-title">{{ sucursal.nombre }}</h5>
           <p class="card-text">{{ sucursal.detallesDireccion }}</p>
           <a>
-            <button class="btn btn-primary">Ver productos</button>
+            <button class="btn btn-primary" [routerLink]="['/item-sucursal-cliente', sucursal.id]">Ver productos</button>
           </a>
         </div>
       </div>

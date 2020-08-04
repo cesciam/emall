@@ -16,6 +16,7 @@ import { VistaXRol } from 'src/app/models/vista-xrol.model';
 export class ModificarRolComponent implements OnInit {
 
   vistasSeleccionadas: Array<Number>;
+  vistasDeseleccionadas: Array<Number>;
   id_rol: number;
   private permisoSucursales: boolean;
   private permisoProductos: boolean;
@@ -24,6 +25,8 @@ export class ModificarRolComponent implements OnInit {
   private permisoPromociones: boolean;
   private permisoArchivos: boolean;
   private permisoEditarComercio: boolean;
+
+  private vistasXRol : VistaXRol[]
 
   constructor(private service: RolService,
     private serviceVista: VistaService,
@@ -44,6 +47,7 @@ export class ModificarRolComponent implements OnInit {
 
     this.getVistaXRol();
     this.vistasSeleccionadas = new Array<Number>();
+    this.vistasDeseleccionadas = new Array<Number>();
   }
 
   initializeForm() {
@@ -55,7 +59,7 @@ export class ModificarRolComponent implements OnInit {
     this.serviceVistaXRol.getByRol(this.id_rol).subscribe(
       (data) => {
         permisos = data;
-        console.log(permisos);
+        this.vistasXRol = data;
         this.fillCheckboxes(permisos);
       });
   }
@@ -99,15 +103,57 @@ export class ModificarRolComponent implements OnInit {
   };
 
   verArray(){
-  console.log(this.vistasSeleccionadas)}
+  console.log(this.vistasSeleccionadas)
+  console.log(this.vistasDeseleccionadas)
+}
 
   updateVistaXRol() {
-    //TODO:agregar elses y hacer que funcione el post
+    if (this.vistasDeseleccionadas.length > 0) {
+      this.vistasDeseleccionadas.forEach(element => {
+        switch (element) {
+          case 1:
+            if (this.permisoSucursales) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 1).subscribe();
+            }
+            break;
+          case 2:
+            if (this.permisoProductos) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 2).subscribe();
+            }
+            break;
+          case 3:
+            if (this.permisoEmpleados) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 3).subscribe();
+            }
+            break;
+          case 4:
+            if (this.permisoRoles) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 4).subscribe();
+            }
+            break;
+          case 5:
+            if (this.permisoPromociones) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 5).subscribe();
+            }
+            break;
+          case 6:
+            if (this.permisoArchivos) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 6).subscribe();
+            }
+            break;
+          case 7:
+            if (this.permisoEditarComercio) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 7).subscribe();
+            }
+            break;
+        }
+      });
+    }
     if (this.vistasSeleccionadas.length > 0) {
       this.vistasSeleccionadas.forEach(element => {
         switch (element) {
           case 1:
-            if (this.permisoSucursales = !true) {
+            if (!this.permisoSucursales) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -118,7 +164,7 @@ export class ModificarRolComponent implements OnInit {
             }
             break;
           case 2:
-            if (this.permisoProductos = !true) {
+            if (!this.permisoProductos) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -129,7 +175,7 @@ export class ModificarRolComponent implements OnInit {
             }
             break;
           case 3:
-            if (this.permisoEmpleados = !true) {
+            if (!this.permisoEmpleados) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -140,7 +186,7 @@ export class ModificarRolComponent implements OnInit {
             }
             break;
           case 4:
-            if (this.permisoRoles = !true) {
+            if (!this.permisoRoles) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -151,7 +197,7 @@ export class ModificarRolComponent implements OnInit {
             }
             break;
           case 5:
-            if (this.permisoPromociones = !true) {
+            if (!this.permisoPromociones) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -162,7 +208,7 @@ export class ModificarRolComponent implements OnInit {
             }
             break;
           case 6:
-            if (this.permisoArchivos = !true) {
+            if (!this.permisoArchivos) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -173,7 +219,7 @@ export class ModificarRolComponent implements OnInit {
             }
             break;
           case 7:
-            if (this.permisoEditarComercio = !true) {
+            if (!this.permisoEditarComercio) {
               let vistaxrol = new VistaXRol;
               vistaxrol = {
                 id: 0,
@@ -193,7 +239,10 @@ export class ModificarRolComponent implements OnInit {
       this.vistasSeleccionadas.push(id)
     } else {
       this.vistasSeleccionadas = this.vistasSeleccionadas.filter(m => m != id)
+      this.vistasDeseleccionadas.push(id)
     }
+    //TODO: Validar que si un numero esta en ambas listas, se elimine
+    
   }
 
 }
