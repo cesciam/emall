@@ -33,6 +33,16 @@ export class SucursalService {
     return this.http.get<Sucursal>(endpointUrl);
   }
 
+  async obtenerSucursalItem(id: number) {
+    let end = this.BASE_URL + '/sucursal/obtenersucursal?id=' + id;
+    let sucursal: Sucursal;
+
+    sucursal = await this.http.get<Sucursal>(end).toPromise();
+
+    return sucursal;
+  }
+
+
   obtenerSucursalPorEmpleado(idUsuario: number) {
     let endpointUrl = this.BASE_URL + '/sucursal/ObtenerSucursalPorEmpleado?id=' + idUsuario;
     return this.http.get<Sucursal>(endpointUrl);

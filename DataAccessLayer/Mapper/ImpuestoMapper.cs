@@ -39,6 +39,17 @@ namespace DataAccessLayer.Mapper
             return lstResults;
         }
 
+        public SqlOperation ImpuestoItem(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_IMPUESTO_ITEM" };
+            var a = (Impuesto)entity;
+
+            operation.AddIntParam(DB_COL_ID, a.Id);
+
+            return operation;
+        }
+
+
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "CREAR_IMPUESTO" };

@@ -15,6 +15,8 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { Sucursal } from '../../models/Sucursal';
 import { ActivatedRoute } from '@angular/router';
 import { parse } from 'ts-node';
+import { Impuesto } from '../../models/impuesto.model';
+import { ImpuestoService } from '../../services/impuesto.service';
 
 @Component({
   selector: 'app-item-editar',
@@ -25,19 +27,25 @@ export class ItemEditarComponent implements OnInit {
 
   item_seleccionado: Item;
   item_archivo: Archivo;
-  impuestos: number[];
+  impuestos: Impuesto[];
   uploader: CloudinaryUploader;
   error: any;
+  stringImpuesto: string;
 
 
-  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router) {
+  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router, private serviceImpuesto: ImpuestoService) {
     //this.item_seleccionado = new Item();
     //this.item_archivo = new Archivo();
-    this.impuestos = [1, 2, 3]
+    //this.impuestos = [1, 2, 3]
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
-
+    this.serviceImpuesto.ObtenerTodoImpuestoItem().subscribe(
+      (data: Impuesto[]) => this.impuestos = data,
+      (err: any) => console.log(err)
+    );
     this.obtenerItem(itemID);
     this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
+
+    
     //console.log(this.item_archivo.enlace);
 
     //this.service.getItemArchivo(this.item_seleccionado.id_foto)
@@ -55,11 +63,47 @@ export class ItemEditarComponent implements OnInit {
 
   async obtenerItem(itemId: number) {
     this.item_seleccionado = await this.service.ObtenerItem(itemId);
+    //let tmp_item = await this.service.ObtenerItem(itemId);
+
+    //this.impuestos.forEach(function (obj) {
+
+    //  if (obj.Id = tmp_item.id_impuesto) {
+    //    this.stringImpuesto = obj.Nombre + obj.Porcentaje;
+    //  }
+    //})
+
+    //this.item_seleccionado = tmp_item;
+
+    //let imp_tmp: Impuesto[];
+
+    //imp_tmp = this.impuestos;
+
+    //for (let imp of imp_tmp) {
+    //  if (imp.Id = this.item_seleccionado.id_impuesto) {
+    //    this.stringImpuesto = imp.Nombre + imp.Porcentaje;
+    //  }
+    //}
+
+
+
+
+    //var apps = ['WhatsApp', 'Instagram', 'Facebook'];
+    //var playStore = [];
+    //apps.forEach(function (item) {
+    //  playStore.push(item);
+    //});
+    //console.log(playStore);  
+
     //this.item_archivo = await this.service.ObtenerArchivo(this.item_seleccionado.id_foto);
   }
 
 
   ngOnInit() {
+
+    this.serviceImpuesto.ObtenerTodoImpuestoItem().subscribe(
+      (data: Impuesto[]) => this.impuestos = data,
+      (err: any) => console.log(err)
+    );
     
 
   }
@@ -87,7 +131,14 @@ export class ItemEditarComponent implements OnInit {
     //    (err: any) => console.log(err)
     //  );
 
-    this.item_seleccionado.id_impuesto = Number(this.item_seleccionado.id_impuesto)
+
+    var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
+    var sel = e.selectedIndex;
+    //var opt = e.options[sel];
+    //var CurValue = (<HTMLOptionElement>opt).value;
+    this.item_seleccionado.id_impuesto = this.impuestos[(sel - 1)].Id;
+    console.log(this.item_seleccionado.id_impuesto);
+    //this.item_seleccionado.id_impuesto = Number(this.item_seleccionado.id_impuesto)
 
     this.service.updateItem(this.item_seleccionado)
       .subscribe(

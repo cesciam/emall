@@ -1,6 +1,6 @@
 <app-main-header></app-main-header>
 
-<div class="container" *ngIf="item_seleccionado">
+<div class="container" *ngIf="item_seleccionado && impuestos">
 
   <div class="pt-3 px-4">
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -90,7 +90,8 @@
           <div class="col">
             <label for="id_impuesto">Impuesto</label>
             <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="item_seleccionado.id_impuesto" #id_impuesto="ngModel" type="number" required>
-              <option *ngFor="let imp of impuestos">{{imp}}</option>
+              <option value=""></option>
+              <option *ngFor="let imp of impuestos">{{imp.Nombre}} - {{imp.Porcentaje}}%</option>
             </select>
             <div *ngIf="id_impuesto.invalid && (id_impuesto.dirty || id_impuesto.touched)" class="alert alert-danger">
               <div *ngIf="id_impuesto.errors.required">
@@ -140,7 +141,7 @@
             </div>
 
             <ng-template #noValido>
-              <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Crear Item</button>
+              <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Actualizar Item</button>
             </ng-template>
 
           </div>
