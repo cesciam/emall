@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ListarEmpleadoComponent implements OnInit {
   private empleados: EmpleadoList[];
   private comercioId: number;
+  private filtro = '';
   id_empleado: number;
 
   constructor(

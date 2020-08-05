@@ -40,10 +40,8 @@
                   </span>
 
                   <span *ngIf="usuarioLogueado != null">
-                    <a class="dropdown-item" href="">
-                      {{ usuarioLogueado.usuario.Nombre }}
-                      {{ usuarioLogueado.usuario.Apellido }}
-                    </a>
+                    <a class="dropdown-item" [routerLink]="['perfil-usuario']">{{ usuarioLogueado.usuario.Nombre }}
+                      {{ usuarioLogueado.usuario.Apellido }}</a>
                     <a class="dropdown-item" href="#" (click)="logout()">Cerrar Sesión</a>
                   </span>
 

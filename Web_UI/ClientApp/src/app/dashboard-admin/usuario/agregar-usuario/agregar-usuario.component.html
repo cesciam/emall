@@ -24,7 +24,7 @@
 
         <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
           <strong>{{error.message}}</strong>
-          <ul>
+          <ul> 
             <li *ngFor="let detail of error.details">{{detail}}</li>
           </ul>
         </div>
@@ -173,6 +173,7 @@
                      ng2FileSelect
                      [ngClass]="{ 'is-invalid': f.Foto.errors?.pattern }"
                      (change)="validarFoto(fotoInput.files)">
+
               <div *ngIf="f.Foto.errors" class="invalid-feedback">
                 <div *ngIf="f.Foto.errors.pattern">Imagen no valida (Formatos permitidos: gif, jpg, jpeg, bmp, png, webp, tiff, eps)</div>
               </div>
