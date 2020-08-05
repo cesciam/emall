@@ -9,20 +9,28 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./listar-rol.component.css']
 })
 export class ListarRolComponent implements OnInit {
-  id_rol : number;
+  private id_rol : number;
+  private id_comercio : number;
+  private list : Rol[];
+  private filtro = ''; 
   constructor(private service: RolService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    let id= parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.service.id_comercio = id;
-    this.service.fillRolComercio();
+    this.fillList();
   }
   
+  fillList(){
+    this.id_comercio = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.service.fillRolComercio(this.id_comercio).subscribe(data=>{
+      this.list = data;
+    })
+  }
+
   onDelete(id: number){
     this.service.deleteRol(id).subscribe(res=>{
-      this.service.fillList();
+      this.fillList();
       
     })
   }
@@ -33,6 +41,10 @@ export class ListarRolComponent implements OnInit {
 
   rolToDelete(id:number){
     this.id_rol=id;
+  }
+  
+  agregarRol() {
+    this.router.navigate(['agregar-rol', this.service.id_comercio]);
   }
 
 }

@@ -42,6 +42,14 @@ namespace Web_API.Controllers
             var sucursal = new Sucursal { Id = id };
             return new SucursalManagement().ObtenerSucursal(sucursal);
         }
+
+        [HttpGet]
+        public Sucursal ObtenerSucursalPorEmpleado(int id)
+        {
+            var usuario = new Usuario { Id = id };
+            return new SucursalManagement().ObtenerSucursalPorEmpleado(usuario);
+        }
+
         [HttpPut]
         public IActionResult ModificarSucursal(Sucursal sucursal)
         {

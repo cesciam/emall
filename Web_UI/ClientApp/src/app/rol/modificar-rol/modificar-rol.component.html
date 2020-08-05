@@ -21,8 +21,9 @@
   </div>
 
 
-<app-header></app-header>
-<div class="container">
+<app-main-header></app-main-header>
+<br>
+<div class="container container-fluid">
     <h1 class="display-4 text-center">Modificar rol</h1>
     <hr>
     <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
@@ -62,9 +63,29 @@
         <div class="form-group">
             <h4>Marque los elementos sobre los que desea otorgar permisos al rol:</h4>
             <br>
-            <div *ngFor="let vista of serviceVista.list">
-                <input checked="permisos.includes(vista.id)" type="checkbox" name="{{vista.id}}" [value]="vista.id" (change)="getVistaId($event, vista.id)">
-                <label for="{{vista.id}}"> {{vista.nombre}}</label>
+            <div>
+                <input checked="{{permisoSucursales}}" type="checkbox" id="permisoSucursales" (change)="getVistaId($event, 1)">
+                <label for="permisoSucursales">Sucursales </label>
+                <br>
+                <input checked="{{permisoProductos}}" type="checkbox" id="permisoProductos"(change)="getVistaId($event, 2)" >
+                <label for="permisoProductos">Productos </label>
+                <br>
+                <input checked="{{permisoEmpleados}}" type="checkbox" id="permisoEmpleados" (change)="getVistaId($event, 3)">
+                <label for="permisoEmpleados">Empleados </label>
+                <br>
+                <input checked="{{permisoRoles}}" type="checkbox" id="permisoRoles" (change)="getVistaId($event, 4)">
+                <label for="permisoRoles">Roles</label>
+                <br>
+                <input checked="{{permisoPromociones}}" type="checkbox" id="permisoPromociones" (change)="getVistaId($event, 5)">
+                <label for="permisoPromociones">Promociones</label>
+                <br>
+                <input checked="{{permisoArchivos}}" type="checkbox" id="permisoArchivos" (change)="getVistaId($event, 6)">
+                <label for="permisoArchivos">Archivos</label>
+                <br>
+                <input checked="{{permisoEditarComercio}}" type="checkbox" id="permisoEditarComercio" (change)="getVistaId($event, 7)">
+                <label for="permisoEditarComercio">Editar el comercio</label>
+                <br>
+                <button type="button" (click)="verArray()">ver array</button> 
             </div>
         </div>
         <div class="form-group">
@@ -72,7 +93,6 @@
         </div>
     </form>
 
-    <div *ngFor="let permiso of permisos">{{permiso.id}}</div>
-
 </div>
+<br>
 <app-footer></app-footer>

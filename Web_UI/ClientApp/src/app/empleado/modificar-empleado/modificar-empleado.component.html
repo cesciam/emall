@@ -1,48 +1,65 @@
-<app-header></app-header>
-<div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4 text-center">Modificar empleado</h1>
-        <hr>
-        <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off" >
-            <div class="form-group" hidden>
-                <label for="id">ID</label>
-                <input type="number" name="id" #id="ngModel" [(ngModel)]=service.formData.id
-                    class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="id_usuario">Usuario</label>
-                <input type="number" name="id_usuario" #id_usuario="ngModel" [(ngModel)]=service.formData.id_usuario
-                    class="form-control" required>
-                    <div class="alert alert-danger" *ngIf="id_usuario.invalid && id_usuario.touched">
-                        El id del usuario es requerido
-                    </div>
-            </div>
-            <div class="form-group">
-                <label for="id_rol">Rol</label>
-                <select name="id_rol" id="id_rol" class="form-control" [(ngModel)]=service.formData.id_rol
-                    #id_rol="ngModel" >
-                    <option *ngFor="let rol of serviceRol.list" [ngValue]="rol.id" required>{{rol.id}}-{{rol.nombre}}</option>
-                        
-                </select>
-                <div class="alert alert-danger" *ngIf="id_rol.invalid && id_rol.touched">
-                    El rol es requerido
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label for="id_sucursal">Sucursal</label>
-                <input type="number" name="id_sucursal" #id_sucursal="ngModel" [(ngModel)]=service.formData.id_sucursal
-                    class="form-control" required>
-                    <div class="alert alert-danger" *ngIf="id_sucursal.invalid && id_sucursal.touched">
-                        La sucursal es requerida
-                    </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" [disabled]="form.untouched" class="btn btn-lg btn-block">Registrar</button>
-            </div>
-        </form>
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cambios guardados</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Los cambios en el empleado han sido guardados exitosamente
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"[routerLink]="['/listar-empleado']"
+          [queryParams]="{comercio: comercioId}">Entendido</button>
+        </div>
+      </div>
     </div>
+  </div>
+
+
+
+<app-main-header></app-main-header>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10">
+            <h1>Modificar empleado</h1>
+            <p>Ingrese los datos que desea modificar</p>
+        </div>
+
+        <div class="col-lg-2 col-md-2">
+            <a [routerLink]="['/listar-empleado']"
+            [queryParams]="{comercio: comercioId}">Volver atras</a>
+        </div>
+    </div>
+
+    <hr>
+    
+    <div class="row">
+       <form class="form-group col-lg-6 col-md-6" [formGroup]="sucursalForm">
+        <label >Sucursal</label>
+        <select formControlName="sucursalControl" class="form-control">
+            <option [ngValue]="sucursal" *ngFor="let sucursal of sucursales">{{sucursal.nombre}}</option>
+        </select>
+    </form>
+
+    <form class="form-group col-lg-6 col-md-6" [formGroup]="rolForm">
+        <label >Rol</label>
+        <select formControlName="rolControl" class="form-control">
+            <option [ngValue]="rol" *ngFor="let rol of roles">{{rol.nombre}}</option>
+        </select>
+    </form>
+    
+    </div>
+    <div class="form-group">
+        <button (click)="updateRecord()" class="btn btn-primary" data-toggle="modal" data-target="#Modal">Guardar Cambios</button>
+    </div> 
+    
+
 </div>
 
-
+<br>
 <app-footer></app-footer>

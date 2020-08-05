@@ -44,11 +44,21 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetCreateWRolStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "CREAR_VISTAXROL_UPDATE_ROL_PR" };
+            var vr = (VistaXRol)entity;
+            operation.AddIntParam(DB_COL_ID_VISTA, vr.id_vista);
+            operation.AddIntParam(DB_COL_ID_ROL, vr.id_rol);
+            return operation;
+        }
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "ELIMINAR_VISTAXROL_PR" };
             var vr = (VistaXRol)entity;
-            operation.AddIntParam(DB_COL_ID, vr.id);
+            operation.AddIntParam(DB_COL_ID_ROL, vr.id_rol);
+            operation.AddIntParam(DB_COL_ID_VISTA, vr.id_vista);
             return operation;
         }
 

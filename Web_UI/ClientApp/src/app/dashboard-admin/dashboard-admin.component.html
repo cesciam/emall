@@ -17,7 +17,7 @@
         <div class="card-body">
           <h5 class="card-title">Promociones</h5>
           <p class="card-text">Administrar promociones</p>
-          <a [routerLink]="['/promociones']" class="btn btn-primary">Seleccionar</a>
+          <a [routerLink]="['promocion']" class="btn btn-primary">Seleccionar</a>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
         <div class="card-body">
           <h5 class="card-title">Configuracion</h5>
           <p class="card-text">Parametros generales</p>
-          <a [routerLink]="['/configuracion']" class="btn btn-primary">Seleccionar</a>
+          <a [routerLink]="['configuracion']" class="btn btn-primary">Seleccionar</a>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div class="col-lg-3 col-md-3">s
+    <div class="col-lg-3 col-md-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Impuestos</h5>
@@ -70,6 +70,16 @@
           <h5 class="card-title">Categorias</h5>
           <p class="card-text">Administrar categorias</p>
           <a [routerLink]="['../listar-categoria']" href="#" class="btn btn-primary">Seleccionar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Comercios</h5>
+          <p class="card-text">Aprobar comercios</p>
+          <a [routerLink]="['../dashboard-admin/comercio/aprobar-comercios']" href="#" class="btn btn-primary">Seleccionar</a>
         </div>
       </div>
     </div>
