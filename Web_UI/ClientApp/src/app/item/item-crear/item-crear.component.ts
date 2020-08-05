@@ -77,6 +77,7 @@ export class ItemCrearComponent implements OnInit {
     //this.item.id_foto = 1;
 
     var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
+    console.log(e);
     var sel = e.selectedIndex;
     //var opt = e.options[sel];
     //var CurValue = (<HTMLOptionElement>opt).value;
@@ -89,7 +90,7 @@ export class ItemCrearComponent implements OnInit {
       .subscribe(
         (reponse) => this.router.navigate(['item-sucursal', this.sucursal]),
         (error) => {
-          this.error = error.error;
+          this.error = "Errores en el registro";
           window.scroll(0, 0);
         });
   }
