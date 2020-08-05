@@ -2,8 +2,9 @@
 
 <div class="container">
   <h1>Registro de categorias</h1>
-  <button class="btn btn-primary btn-categoria" type="button" router-link="['/listar-categoria']">Lista de categorias</button>
-
+  <a [routerLink]="['/listar-categoria']">
+    <button type="button" class="btn btn-primary">Listar categorias</button>
+  </a>
   <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()">
     <fieldset>
       <div class="form-group col-lg-6 col-md-6">

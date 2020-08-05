@@ -2,8 +2,9 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<app-main-header></app-main-header>
 
+<app-header></app-header>
+ <hr />
 <div class="container emp-profile">
   <form method="post">
     <div class="row">
@@ -15,7 +16,7 @@
           <!-- <div class="file btn btn-lg btn-primary">
     Change Photo
     <input type="file" name="file" />
-    
+
         </div> -->
         </div>
       </div>
@@ -44,79 +45,80 @@
     <div class="row">
       <div class="col-md-4">
         
-      </div>
-      <div class="col-md-8">
-        <div class="tab-content profile-tab" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Cédula</label>
+        </div>
+        <div class="col-md-8">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Cédula</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Cedula}} </p>
+                </div>
               </div>
-              <div class="col-md-6">
-                <p>{{usuarioLogueado.usuario.Cedula}} </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Nombre</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Nombre}} {{usuarioLogueado.usuario.Apellido}}</p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Nombre</label>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Correo Electrónico</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Correo}}</p>
+                </div>
               </div>
-              <div class="col-md-6">
-                <p>{{usuarioLogueado.usuario.Nombre}} {{usuarioLogueado.usuario.Apellido}}</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Teléfono</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Telefono}}</p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Correo Electrónico</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{usuarioLogueado.usuario.Correo}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Teléfono</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{usuarioLogueado.usuario.Telefono}}</p>
-              </div>
-            </div>
             </div>
 
-          <!--Inicio del timeline-->
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <!--Inicio del timeline-->
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-            <table class="table table-striped table-sm text-center" >
-              <thead>
-                <tr>
-                  <th class="text-center">Cédula jurídica</th>
-                  <th class="text-center">Nombre legal</th>
-                  <th class="text-center">Nombre</th>
-                  <th class="text-center">Categoría</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let comercio of comercios">
-                  <td>{{ comercio.cedulaJuridica }}</td>
-                  <td>{{ comercio.nombreLegal }}</td>
-                  <td>{{ comercio.nombre }}</td>
-                  <td>{{ comercio.categorias[0] }}</td>
-                  <td>
-                    <a [routerLink]="['dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
-                      <button type="button" class="btn btn-primary">Seleccionar comercio</button>
-                    </a>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger" (click)="eliminarComercio(comercio)">X</button>
-                  </td>
-                </tr>
+              <table class="table table-striped table-sm text-center">
+                <thead>
+                  <tr>
+                    <th class="text-center">Cédula jurídica</th>
+                    <th class="text-center">Nombre legal</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Categoría</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let comercio of comercios">
+                    <td>{{ comercio.cedulaJuridica }}</td>
+                    <td>{{ comercio.nombreLegal }}</td>
+                    <td>{{ comercio.nombre }}</td>
+                    <td>{{ comercio.categorias[0] }}</td>
+                    <td>
+                      <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
+                        <button type="button" class="btn btn-primary">Seleccionar comercio</button>
+                      </a>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-danger" (click)="eliminarComercio(comercio)">X</button>
+                    </td>
+                  </tr>
 
-              </tbody>
-            </table>
-            <!--final del timeline-->
+                </tbody>
+              </table>
+              <!--final del timeline-->
+            </div>
           </div>
         </div>
+        <!--final de todo el contenido del perfil-->
       </div>
-    </div>
   </form>
 </div>
 <app-footer></app-footer>
