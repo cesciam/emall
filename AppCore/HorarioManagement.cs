@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.CRUD;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,9 +14,10 @@ namespace AppCore
         {
             crud = new HorarioCrudFactory();
         }
-        public void Create(Horario h)
+        public void Create(HorarioViewModel h)
         {
-            crud.Create(h);
+            var horario = new Horario();
+            crud.Create(horario);
         }
         public List<Horario> RetrieveAll()
         {

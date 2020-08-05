@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AppCore;
 using Entities;
+using Entities.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace Web_API.Controllers
             return hm.RetrieveById(h);
         }
         [HttpPost]
-        public IActionResult Create(Horario c)
+        public IActionResult Create(HorarioViewModel c)
         {
             try
             {
