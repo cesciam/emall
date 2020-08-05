@@ -3,19 +3,24 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Promociones</h2>
+                    <h2>Promociones disponibles</h2>
                 </div>
                 
             </div>
         </div>
-        <div class="row featured__filter">
-
-            <!--Esto es un  producto listado, se deberian listar solamente 8-->
-
-           
-
-            <!-- Aqui termina un  producto listado-->
-            
+        <div class="row" *ngIf="promociones">
+            <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let promo of promociones" >
+                <div *ngIf="promo.cantidad > 0">
+                    <div class="product__item__text border border-success mb-4">
+                        <h3>{{promo.nombre}}</h3>
+                        <p>Código: {{promo.codigo}}</p>
+                        <p>Descuento del: {{promo.porcentaje}}%</p>
+                        <p>Disponibles: {{promo.cantidad}}</p>
+                      </div>
+                </div>
+                </div>
+            </div>
         </div>
-    </div>
 </section>
+
+
