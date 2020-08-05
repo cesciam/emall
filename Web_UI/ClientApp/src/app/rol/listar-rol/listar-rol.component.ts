@@ -18,11 +18,12 @@ export class ListarRolComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id_comercio = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.service.id_comercio = this.id_comercio;
     this.fillList();
   }
   
   fillList(){
-    this.id_comercio = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.service.fillRolComercio(this.id_comercio).subscribe(data=>{
       this.list = data;
     })
