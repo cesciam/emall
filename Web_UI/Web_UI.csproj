@@ -36,6 +36,8 @@
     <None Remove="ClientApp\src\app\models\registro-usuario.model.ts" />
     <None Remove="ClientApp\src\app\models\sesion-usuario.model.ts" />
     <None Remove="ClientApp\src\app\models\usuario.model.ts" />
+    <None Remove="ClientApp\src\app\pipes\filter-categoria.pipe.ts" />
+    <None Remove="ClientApp\src\app\pipes\filter-impuesto.pipe.ts" />
     <None Remove="ClientApp\src\app\services\usuario.service.ts" />
   </ItemGroup>
 
@@ -54,6 +56,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\registro-usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\sesion-usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\pipes\filter-categoria.pipe.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\pipes\filter-impuesto.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\usuario.service.ts" />
   </ItemGroup>
 
@@ -63,6 +67,10 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\categoria.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Comercio.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Sucursal.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\assets\css\landing-emall\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
