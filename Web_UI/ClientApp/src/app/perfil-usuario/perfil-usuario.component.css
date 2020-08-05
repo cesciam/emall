@@ -15,8 +15,8 @@ body {
 }
 
   .profile-img img {
-    width: 70%;
-    height: 100%;
+     width: 70%;
+    height: 150%;
   }
 
   .profile-img .file {
@@ -57,7 +57,7 @@ body {
 
 .proile-rating {
   font-size: 12px;
-  color: #818182;
+  color:  #7FAD39;
   margin-top: 5%;
 }
 
@@ -78,7 +78,7 @@ body {
 
     .profile-head .nav-tabs .nav-link.active {
       border: none;
-      border-bottom: 2px solid #0062cc;
+      border-bottom: 2px solid #7FAD39;
     }
 
 .profile-work {
@@ -88,7 +88,7 @@ body {
 
   .profile-work p {
     font-size: 12px;
-    color: #818182;
+    color:  #818182;
     font-weight: 600;
     margin-top: 10%;
   }
@@ -110,5 +110,6 @@ body {
 
 .profile-tab p {
   font-weight: 600;
-  color: #0062cc;
+  color: #7FAD39 ;
 }
+

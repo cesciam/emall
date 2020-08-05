@@ -52,7 +52,7 @@
                           [hidden]="usuario.Estado == 1">
                     Activar
                   </button>&nbsp;
-                  <button type="button" class="btn btn-primary btn-sm" routerLink="../../usuario/editar-usuario/{{usuario.Id}}">Editar</button>&nbsp;
+                  <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/dashboard-admin/usuario/editar-usuario/', usuario.Id]">Editar</button>&nbsp;
                   <button type="button" class="btn btn-primary btn-sm btn-danger" (click)="eliminarUsuario(usuario.Id)">X</button>&nbsp;
                 </td>
               </tr>

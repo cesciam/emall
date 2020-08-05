@@ -9,6 +9,7 @@ namespace Entities {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
+        public string Contrasena { get; set; }
         public Archivo Foto { get; set; }
         public string Telefono { get; set; }
         public int TelefonoConfirmado { get; set; }
