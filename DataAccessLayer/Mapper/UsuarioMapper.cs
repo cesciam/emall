@@ -71,6 +71,13 @@ namespace DataAccessLayer.Mapper {
             return operation;
         }
 
+        public SqlOperation GetByCorreo(string correo) {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_USUARIO_EMAIL" };
+            operation.AddVarcharParam(DB_COL_CORREO, correo);
+
+            return operation;
+        }
+
         public SqlOperation Login(string correo) {
             var operation = new SqlOperation { ProcedureName = "LOGIN_USUARIO" };
             operation.AddVarcharParam(DB_COL_CORREO, correo.Trim());
