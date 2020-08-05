@@ -21,29 +21,29 @@
 
 <app-main-header></app-main-header>
 <br>
-<div class="container-fluid container" >
-  <main role="main" >
+<div class="container-fluid container">
+  <main role="main">
     <h1 class="display-4 text-center">Lista de roles</h1>
     <br>
-    <button class="primary-btn btn-sm btn"><a [routerLink]="['/agregar-rol', service.id_comercio]">Nuevo rol
-        +</a></button>
+    <button type="button" class="btn btn-primary" (click)="agregarRol()">Nuevo rol + </button>
+    <br>
     <br>
     <div class="table-responsive">
+      <input type="text" class="form-control" placeholder="Buscar" name="fitro" [(ngModel)]="filtro" />
+      <br>
       <table class="table table-striped table-sm text-center">
         <thead>
           <tr>
             <th class="text-center">Id</th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Descripción</th>
-            <!-- <th>Comercio</th> -->
             <th></th>
           </tr>
         </thead>
-        <tr *ngFor="let rol of service.list">
+        <tr *ngFor="let rol of list | filtroRol: filtro">
           <td>{{rol.id}}</td>
           <td>{{rol.nombre}}</td>
           <td>{{rol.descripcion}}</td>
-          <!-- <td>{{rol.id_comercio}}</td> -->
           <td><button (click)="onUpdate(rol.id)" class="btn btn-primary">Editar</button></td>
           <td><button class="btn btn-danger" data-toggle="modal" data-target="#Modal"
               (click)="rolToDelete(rol.id)">X</button></td>

@@ -84,6 +84,8 @@ import { ItemSucursalClienteComponent } from './item/item-sucursal-cliente/item-
 import { LandingPageProductoComponent } from './landingPage/landing-page-producto/landing-page-producto.component';
 import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
 import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
+import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
+import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
 
 
 
@@ -165,6 +167,8 @@ const maskConfig: Partial<IConfig> = {
     LandingPageProductoComponent,
     FilterImpuestoPipe,
     FilterCategoriaPipe,
+    FiltroRolPipe,
+    FiltroEmpleadoPipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
