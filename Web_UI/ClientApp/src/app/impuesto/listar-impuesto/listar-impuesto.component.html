@@ -5,9 +5,10 @@
   <h1>Lista de impuestos</h1>
 
   <div>
-    <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." [(ngModel)]="buscarImpuesto"/>
-    <button class="btn btn-primary btn-categoria" type="button" router-link="['crear-impuesto']">Crear impuesto</button>
-
+    <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." [(ngModel)]="buscarImpuesto" />
+    <a [routerLink]="['/crear-impuesto']" >
+      <button type="button" class="btn btn-primary">Crear un impuesto</button>
+    </a>
 
   </div>
   <table class="table table-striped .table-responsive-sm"  *ngIf ="service.impuestos" >
