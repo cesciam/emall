@@ -6,7 +6,8 @@ export class Usuario {
   Nombre: string;
   Apellido: string;
   Correo: string;
-  Foto: string;
+  Contrasena: string;
+  Foto: Archivo;
   Telefono: string;
   TelefonoConfirmado: number;
   CorreoConfirmado: number;

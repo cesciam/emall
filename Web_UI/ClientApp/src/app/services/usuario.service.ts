@@ -47,7 +47,7 @@ export class UsuarioService {
   }
 
   editarUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(this.baseUrl + '/customer/', JSON.stringify(usuario), this.httpOptions)
+    return this.http.put<Usuario>(this.baseUrl + '/usuario/', JSON.stringify(usuario), this.httpOptions)
       .pipe(
         catchError((err) => {
           return throwError(err);
