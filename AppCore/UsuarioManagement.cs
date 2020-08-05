@@ -12,12 +12,14 @@ using Microsoft.Extensions.Configuration;
 namespace AppCore {
     public class UsuarioManagement {
         private UsuarioCrudFactory crudUsuario;
+        private ItemManagement itemManagement;
         private ContrasenaCrudFactory crudContrasena;
         private ErrorResultViewModel errorResult;
         private EmailService emailService;
 
         public UsuarioManagement() {
             this.crudUsuario = new UsuarioCrudFactory();
+            this.itemManagement = new ItemManagement();
             this.crudContrasena = new ContrasenaCrudFactory();
             this.errorResult = new ErrorResultViewModel();
             this.emailService = new EmailService();
@@ -50,16 +52,23 @@ namespace AppCore {
             int nuevoUsuarioId = this.crudUsuario.Insert(nuevoUsuario);
 
             if (nuevoUsuarioId != 0) {
+                string empleadoMensaje = "";
+
+                if (registro.Tipo == 4) {
+                    empleadoMensaje = "<p>Ingresa con los siguientes datos: </p>";
+                    empleadoMensaje += "Correo: " + registro.Correo + "<br>";
+                    empleadoMensaje += "Contrasena: " + registro.Contrasena + "<br>";
+                }
+
                 this.CrearContrasena(registro.Contrasena, nuevoUsuarioId);
 
-                var url = "http://[host]"; //HttpContext.Request.Host.Value;
+                //var url = "http://[host]"; //HttpContext.Request.Host.Value;
                 //Envia email de activacion de cuenta
                 this.emailService.Send(new EmailModel {
                     To = nuevoUsuario.Correo,
-                    Subject = "Activar cuenta",
-                    Message = "<p>Activar cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" +
-                              "<p><a href=\"" + url + "\">Activar cuenta</a></p>"
-                });
+                    Subject = "Activa tu cuenta en Emall",
+                    Message = "<p>Activa tu cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" + empleadoMensaje
+                }); ;
             } else {
                 this.errorResult.message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos.";
             }
@@ -130,11 +139,21 @@ namespace AppCore {
         }
 
         public Usuario RetrieveById(Usuario usuario) {
-            return crudUsuario.Retrieve<Usuario>(usuario);
+            Usuario usuarioActualizado = crudUsuario.Retrieve<Usuario>(usuario);
+            Archivo archivo = new Archivo() { 
+                Id = usuarioActualizado.Foto.Id
+            };
+
+            usuarioActualizado.Foto = this.itemManagement.RetrieveItemArchivo(archivo);
+
+            return usuarioActualizado;
         }
 
         public void Update(Usuario usuario) {
             crudUsuario.Update(usuario);
+
+            if (!String.IsNullOrEmpty(usuario.Contrasena))
+                this.CrearContrasena(usuario.Contrasena, usuario.Id);
         }
 
         public void Delete(int Id) {

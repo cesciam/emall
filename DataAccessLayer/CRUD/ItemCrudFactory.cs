@@ -16,7 +16,7 @@ namespace DataAccessLayer.Crud
 
         public ItemCrudFactory() : base()
         {
-            //foto = new ArchivoMapper();
+            foto = new ArchivoMapper();
             mapper = new ItemMapper();
             dao = SqlDao.GetInstance();
             impuestomapper = new ImpuestoMapper();

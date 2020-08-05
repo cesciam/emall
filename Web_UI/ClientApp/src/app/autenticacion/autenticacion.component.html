@@ -24,10 +24,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="contrasena">Password</label>
+            <label for="Password">Password</label>
             <input type="password"
                    class="form-control"
-                   id="contrasena"
+                   id="Password"
                    formControlName="Contrasena"
                    required
                    [ngClass]="{ 'is-invalid': submitted && f.Contrasena?.errors }">
@@ -69,6 +69,53 @@
     </div>
   </div>
 
+  <div id="activate" [hidden]="section != 'activate'">
+    <div class="row justify-content-lg-center justify-content-md-center">
+      <div class="col-lg-6 col-md-6">
+        <div *ngIf="submittedCodigo && error!=null" class="alert alert-danger" role="alert">
+          <strong>{{error.message}}</strong>
+        </div>
+
+        <p>Como parte del proceso de registro un codigo de 8 digitos fue enviado a su correo electronico</p>
+        <p>Digite el codigo enviado en el siguiente cuadro de texto</p>
+
+        <form [formGroup]="activateForm" name="activateForm" id="activateForm" (ngSubmit)="onActivate()">
+          <div class="form-group">
+            <label for="Codigo">Codigo de activacion:</label>
+            <input type="text"
+                   class="form-control"
+                   id="Codigo"
+                   formControlName="Codigo"
+                   required
+                   mask="AAAAAAAA"
+                   [ngClass]="{ 'is-invalid': submittedCodigo && fc.Codigo.errors }">
+            <div *ngIf="submittedCodigo && fc.Codigo.errors" class="invalid-feedback">
+              <div *ngIf="fc.Codigo.errors.required">El codigo es requerido</div>
+              <div *ngIf="fc.Codigo.errors.minlength">El codigo debe ser de 8 digitos</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="site-btn" [disabled]="processingActivateRequest">Activar Codigo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="fillData" [hidden]="section != 'fillData'">
+    <app-editar-usuario id="{{usuario.Id}}" integrarCon="pagina" *ngIf="usuario?.Id != null"></app-editar-usuario>
+  </div>
+
+  <div id="activated" [hidden]="section != 'activated'">
+    <div class="row justify-content-lg-center justify-content-md-center">
+      <div class="col-lg-6 col-md-6">
+        <h1>Bienvenido!</h1>
+        <p>Tu cuenta ha sido activada correctamente. Ya puedes usar nuestra plataforma por completo</p>
+        <p><a [routerLink]="['']">Haz click aqui para continuar</a></p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <app-footer></app-footer>

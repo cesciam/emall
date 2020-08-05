@@ -123,6 +123,17 @@ namespace DataAccessLayer.Crud {
 
         public override void Update(BaseEntity entity) {
             var usuario = (Usuario)entity;
+
+            if (usuario.Foto != null) {
+                usuario.Foto.Id = (int)dao.ExecuteProcedureAndReturnId(this.archivoMapper.GetCreateStatement(usuario.Foto));
+            } else {
+                Usuario usuarioActual = this.Retrieve<Usuario>(usuario);
+                Archivo foto = new Archivo() {
+                    Id = usuarioActual.Foto.Id
+                };
+                usuario.Foto = foto;
+            }
+
             dao.ExecuteProcedure(mapper.GetUpdateStatement(usuario));
         }
 
