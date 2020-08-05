@@ -1,60 +1,26 @@
 <app-main-header></app-main-header>
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
+    <div class="col-lg-2">
+      <app-sidebar-admin></app-sidebar-admin>
+    </div>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Opciones</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Mi perfil
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Mis reportes
-            </a>
-          </li>
-          <!--
-  <li class="nav-item">
-    <a class="nav-link" href="#">
-      <span data-feather="file-text"></span>
-      Social engagement
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">
-      <span data-feather="file-text"></span>
-      Year-end sale
-    </a>
-  </li>-->
-        </ul>
-      </div>
-    </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       <!-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="h2">Mis comercios</h1>
-  </div>-->
+      <h1 class="h2">Mis comercios</h1>
+    </div>-->
 
       <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
         <strong>{{error.message}}</strong>
         <!--<ul>
-        <li *ngFor="let detail of error.details">{{detail}}</li>
-        </ul>-->
+      <li *ngFor="let detail of error.details">{{detail}}</li>
+      </ul>-->
       </div>
 
       <h2>Mis comercios</h2>
       <div class="table-responsive">
-        <input type="text" class="form-control" placeholder="Buscar" name="filterComercio" [(ngModel)]="filterComercio"/>
+        <input type="text" class="form-control" placeholder="Buscar" name="filterComercio" [(ngModel)]="filterComercio" />
         <table class="table table-striped table-sm text-center">
           <thead>
             <tr>
