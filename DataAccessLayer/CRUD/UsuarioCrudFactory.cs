@@ -49,6 +49,19 @@ namespace DataAccessLayer.Crud {
             return default(T);
         }
 
+        public T RetrieveByCorreo<T>(string correo) {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetByCorreo(correo));
+            var dic = new Dictionary<string, object>();
+
+            if (lstResult.Count > 0) {
+                dic = lstResult[0];
+                var objs = mapper.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+
+            return default(T);
+        }
+
         public override List<T> RetrieveAll<T>() {
             var lstUsuarios = new List<T>();
 
