@@ -103,6 +103,10 @@
     </div>
   </div>
 
+  <div id="fillData" [hidden]="section != 'fillData'">
+    <app-editar-usuario id="{{usuario.Id}}" integrarCon="pagina" *ngIf="usuario?.Id != null"></app-editar-usuario>
+  </div>
+
   <div id="activated" [hidden]="section != 'activated'">
     <div class="row justify-content-lg-center justify-content-md-center">
       <div class="col-lg-6 col-md-6">
@@ -112,4 +116,6 @@
       </div>
     </div>
   </div>
-  <app-footer></app-footer>
+</div>
+
+<app-footer></app-footer>

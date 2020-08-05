@@ -8,12 +8,13 @@
                     </div>
                     <!-- Solamente listar 10-->
 
-                      <ul *ngFor="let categoria of servicio.categorias; let i=index" >
-                        <li *ngIf="i<=8"><a href="#">{{categoria.Nombre}}</a></li>
-                      </ul>
-                   
                     <ul>
-                        <li><a href="" [routerLink] = "['/']">Ver más</a></li>
+                      <li *ngFor="let categoria of servicio.categorias; let i=index">
+                        <a [hidden]="i>=8" href="#">{{categoria.Nombre}}</a>
+                      </li>
+                    </ul>
+                    <ul>
+                      <li><a href="" [routerLink]="['/']">Ver más</a></li>
                     </ul>
                 </div>
             </div>

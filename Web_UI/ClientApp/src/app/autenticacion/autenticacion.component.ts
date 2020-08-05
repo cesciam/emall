@@ -30,8 +30,8 @@ export class AutenticacionComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      Correo: new FormControl('mmartinezr@ucenfotec.ac.cr', [Validators.required, Validators.email]),
-      Contrasena: new FormControl('Michael123@', [Validators.required]),
+      Correo: new FormControl('', [Validators.required, Validators.email]),
+      Contrasena: new FormControl('', [Validators.required]),
     });
 
     this.activateForm = new FormGroup({
@@ -53,7 +53,7 @@ export class AutenticacionComponent implements OnInit {
   }
 
   refreshPage() {
-    this.router.navigateByUrl('/');
+    this.router.navigate(['']);
   }
 
   onActivate() {
@@ -66,12 +66,20 @@ export class AutenticacionComponent implements OnInit {
     this.usuarioService.activarUsuario(+this.usuario.Id, this.activateForm.controls['Codigo'].value)
       .subscribe(
         (response) => {
-          localStorage.setItem('usuario-logueado', JSON.stringify(this.response));
-          this.changeSection('activated');
+          this.processingActivateRequest = false;
+
+          console.log(this.usuario);
+
+          if (this.usuario.Tipo === 4 && this.usuario.Nombre == '' && this.usuario.Apellido == '') {
+            this.changeSection('fillData');
+          } else {
+            localStorage.setItem('usuario-logueado', JSON.stringify(this.response));
+            this.changeSection('activated');
+          }
         },
         (error) => {
-          this.error = error.error;
           this.processingActivateRequest = false;
+          this.error = error.error;
           window.scroll(0, 0);
         });
   }
@@ -92,14 +100,18 @@ export class AutenticacionComponent implements OnInit {
     this.usuarioService.login(this.loginForm.value)
       .subscribe(
         (response) => {
-          this.usuario = response.usuario;
+          this.usuario = response['usuario'];
           this.response = response;
 
           if (this.usuario.Estado === 0) {
             this.changeSection('activate');
           } else if (this.usuario.Estado === 1) {
-            localStorage.setItem('usuario-logueado', JSON.stringify(response));
-            this.router.navigate[''];
+            if (this.usuario.Tipo === 4 && this.usuario.Nombre == '' && this.usuario.Apellido == '') {
+              this.changeSection('fillData');
+            } else {
+              localStorage.setItem('usuario-logueado', JSON.stringify(response));
+              this.router.navigate(['']);
+            }
           }
         },
         (error) => {

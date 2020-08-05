@@ -17,6 +17,7 @@ import { Usuario } from '../../../models/usuario.model'
 })
 
 export class EditarUsuarioComponent implements OnInit {
+  @Input() id: number;
   @Input() integrarCon: string;
 
   private usuarioForm: FormGroup;
@@ -68,7 +69,12 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   obtenerDatosUsuario() {
-    let usuarioId: number = +this.route.snapshot.paramMap.get('id');
+    let usuarioId: number;
+
+    if (this.id != null)
+      usuarioId = this.id;
+    else
+      usuarioId = +this.route.snapshot.paramMap.get('id');
 
     const obtenerDatos = new Promise((resolve, reject) => {
       this.usuarioService.obtenerUsuarioPorId(usuarioId)
@@ -165,8 +171,6 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   editarUsuario() {
-    console.log(this.sanitizeData(this.usuarioForm));
-
     this.usuarioService.editarUsuario(this.sanitizeData(this.usuarioForm))
       .subscribe(
         (response) => {

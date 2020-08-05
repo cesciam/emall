@@ -207,7 +207,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
-      {path: 'perfil-usuario', component: PerfilUsuarioComponent },
+      { path: 'perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
