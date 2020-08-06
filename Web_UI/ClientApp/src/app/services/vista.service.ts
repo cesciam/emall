@@ -20,7 +20,7 @@ export class VistaService {
   }
 
   obtenerVistasPorUsuario(id : number) {
-    let endpointUrl = this.BASE_URL + '/Vista/RetrieveByUsuario?id='+ id;
+    let endpointUrl = this.BASE_URL + 'Vista/RetrieveByUsuario?id='+ id;
     return this.http.get<Vista[]>(endpointUrl);
   }
 
