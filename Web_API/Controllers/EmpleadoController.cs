@@ -69,6 +69,7 @@ namespace Web_API.Controllers
 
             RegistroViewModel registroUsuario = new RegistroViewModel {
                 Correo = registroEmpleado.Correo,
+                Contrasena = Utils.TokenGenerator.Generar(8),
                 Tipo = 4 // 4 = Empleado
             };
 

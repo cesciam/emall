@@ -43,7 +43,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": false
             }
           }
         },
@@ -55,7 +55,8 @@
           "configurations": {
             "production": {
               "browserTarget": "Web_UI:build:production"
-            }
+            },
+            "buildOptimizer": false
           }
         },
         "extract-i18n": {

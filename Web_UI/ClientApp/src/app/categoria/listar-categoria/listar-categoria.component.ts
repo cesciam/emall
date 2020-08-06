@@ -10,6 +10,7 @@ import { Categoria } from '../../models/categoria.model';
 export class ListarCategoriaComponent implements OnInit {
 
   public selectedCategoria: Categoria = { Id: null, Nombre: '' };
+   buscarCategoria= ''; 
 
   constructor(private service: CategoriaService) { }
 

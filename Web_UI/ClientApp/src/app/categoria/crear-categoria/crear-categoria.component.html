@@ -1,14 +1,20 @@
+<app-main-header></app-main-header>
 
 <div class="container">
   <h1>Registro de categorias</h1>
-  <form class="form-group">
+  <button class="btn btn-primary btn-categoria" type="button" router-link="['/listar-categoria']">Lista de categorias</button>
+
+  <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()">
     <fieldset>
       <div class="form-group col-lg-6 col-md-6">
-        <label for="exampleInputEmail1">Nombre</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearCategoria.Nombre">
+        <label for="Nombre">Nombre</label>
+        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearCategoria.Nombre" formControlName="Nombre" [ngClass]="{'is-invalid': submitted && f.Nombre.errors}">
+        <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+          <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
+        </div>
       </div>
 
-      <button class="btn btn-primary" (click)="crear(crearCategoria)">Guardar categoria</button>
+      <button class="btn btn-primary" type="submit">Crear categoria</button>
     </fieldset>
   </form>
 </div>

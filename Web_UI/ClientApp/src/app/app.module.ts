@@ -81,8 +81,14 @@ import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promocion
 import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
 import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
 import { ItemSucursalClienteComponent } from './item/item-sucursal-cliente/item-sucursal-cliente.component';
+import { LandingPageProductoComponent } from './landingPage/landing-page-producto/landing-page-producto.component';
+import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
+import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
+import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
+import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
 import { ListarHorarioComponent } from './horario/listar-horario/listar-horario.component';
 import { AgregarHorarioComponent } from './horario/agregar-horario/agregar-horario.component';
+
 
 
 const maskConfig: Partial<IConfig> = {
@@ -160,6 +166,11 @@ const maskConfig: Partial<IConfig> = {
     AdminPromocionesRegistrarComponent,
     AdminConfiguracionComponent,
     ItemSucursalClienteComponent,
+    LandingPageProductoComponent,
+    FilterImpuestoPipe,
+    FilterCategoriaPipe,
+    FiltroRolPipe,
+    FiltroEmpleadoPipe,
     ListarHorarioComponent,
     AgregarHorarioComponent,
   ],
@@ -211,7 +222,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-producto', component: ItemProductoComponent },
       { path: 'item-servicio', component: ItemServicioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
-      {path: 'perfil-usuario', component: PerfilUsuarioComponent },
+      { path: 'perfil-usuario', component: PerfilUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/usuario/editar-usuario/:id', component: EditarUsuarioComponent },
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
@@ -223,6 +234,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
+      { path: 'landing-producto', component: LandingPageProductoComponent },
       { path: 'agregar-horario', component: AgregarHorarioComponent },
     ])
   ],
