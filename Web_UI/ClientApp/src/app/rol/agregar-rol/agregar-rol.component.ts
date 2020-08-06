@@ -45,7 +45,7 @@ export class AgregarRolComponent implements OnInit {
 
   onSubmit(form:NgForm){
     this.insertRecord(form);
-    this.delay(3000);
+    
     this.insertVistaXRol();
     form.resetForm();
   }
