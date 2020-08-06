@@ -90,7 +90,6 @@ import { AdminImpuestoCrearComponent } from './dashboard-admin/admin-impuesto-cr
 import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-listar/admin-impuesto-listar.component';
 import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
 import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
-
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 
 const maskConfig: Partial<IConfig> = {

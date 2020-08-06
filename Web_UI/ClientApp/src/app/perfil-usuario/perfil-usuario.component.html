@@ -11,7 +11,7 @@
       <div class="col-md-4">
         <div class="profile-img">
           <img src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg" *ngIf="usuarioLogueado.usuario.Foto.enlace == null" alt="" />
-          <img src="{{usuarioLogueado.usuario.Foto.enlace}}" alt="" />
+          <img src="{{usuarioLogueado.usuario?.Foto?.enlace}}" alt="" />
           <!--FOTO-->
           <!-- <div class="file btn btn-lg btn-primary">
     Change Photo
