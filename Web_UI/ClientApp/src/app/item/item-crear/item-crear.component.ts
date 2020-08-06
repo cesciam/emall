@@ -79,9 +79,18 @@ export class ItemCrearComponent implements OnInit {
     var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
     console.log(e);
     var sel = e.selectedIndex;
+
+    if (sel == -1) {
+      this.error = "Errores en el impuesto";
+    } else {
+      this.item.id_impuesto = this.impuestos[(sel - 1)].Id;
+      console.log(this.item.id_impuesto);
+    }
+
+
     //var opt = e.options[sel];
     //var CurValue = (<HTMLOptionElement>opt).value;
-    this.item.id_impuesto = this.impuestos[(sel - 1)].Id;
+    //this.item.id_impuesto = this.impuestos[(sel - 1)].Id;
 
     this.item.id_sucursal = this.sucursal;
     this.item.id_foto = this.foto;

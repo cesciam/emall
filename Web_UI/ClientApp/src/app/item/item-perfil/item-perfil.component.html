@@ -48,8 +48,8 @@
                 </div>
               </div>
             </div>-->
-            <a href="#" class="primary-btn">AGREGAR</a>
-            <a href="#" class="heart-icon"><span class="icon_cart_alt"></span></a>
+            <a [routerLink]="['/']" class="primary-btn">AGREGAR</a>
+            <a [routerLink]="['/']" class="heart-icon"><span class="icon_cart_alt"></span></a>
             <ul>
               <li *ngIf="item_seleccionado.tipo === 'Servicio'" ><b>Duracion</b> <span>{{item_seleccionado.duracion}} minutos</span></li>
               <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>

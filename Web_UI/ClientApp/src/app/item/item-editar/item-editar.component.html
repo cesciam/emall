@@ -89,7 +89,7 @@
         <div class="form-row mb-4">
           <div class="col">
             <label for="id_impuesto">Impuesto</label>
-            <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="item_seleccionado.id_impuesto" #id_impuesto="ngModel" type="number" required>
+            <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="impuestoactual" #id_impuesto="ngModel" type="number" required>
               <option value=""></option>
               <option *ngFor="let imp of impuestos" value="imp.Id">{{imp.Nombre}} - {{imp.Porcentaje}}%</option>
             </select>

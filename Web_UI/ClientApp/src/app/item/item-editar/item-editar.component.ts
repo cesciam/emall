@@ -93,10 +93,16 @@ export class ItemEditarComponent implements OnInit {
 
     var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
     var sel = e.selectedIndex;
+    console.log(sel);
+    if (sel == -1) {
+      this.item_seleccionado.id_impuesto = this.item_seleccionado.id_impuesto;
+    } else {
+      this.item_seleccionado.id_impuesto = this.impuestos[(sel - 1)].Id;
+      console.log(this.item_seleccionado.id_impuesto);
+    }
     //var opt = e.options[sel];
     //var CurValue = (<HTMLOptionElement>opt).value;
-    this.item_seleccionado.id_impuesto = this.impuestos[(sel - 1)].Id;
-    console.log(this.item_seleccionado.id_impuesto);
+    
     //this.item_seleccionado.id_impuesto = Number(this.item_seleccionado.id_impuesto)
 
     this.service.updateItem(this.item_seleccionado)
