@@ -14,21 +14,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AgregarRolComponent implements OnInit {
 
-  vistasSeleccionadas : Array<Number>;
-  
-  constructor(private service: RolService, 
-    private serviceVista: VistaService, 
+  vistasSeleccionadas: Array<number>;
+
+  constructor(private service: RolService,
+    private serviceVista: VistaService,
     private serviceVistaXRol: VistaXRolService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
-      
-     }
+
+  }
 
   ngOnInit() {
-    let id= parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    let id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.service.id_comercio = id;
     this.resetForm();
-    this.vistasSeleccionadas = new Array<Number>();
+    this.vistasSeleccionadas = new Array<number>();
   }
 
   resetForm(form?: NgForm) {
@@ -43,42 +43,58 @@ export class AgregarRolComponent implements OnInit {
     }
   }
 
-  onSubmit(form:NgForm){
+
+  async onSubmit(form: NgForm) {
     this.insertRecord(form);
-    //this.delay(10000);
-    this.insertVistaXRol();
+    await new Promise(resolve => setTimeout(() => resolve(), 1000))
+    .then(() => this.insertVistaXRol());
+    
+    
     form.resetForm();
   }
 
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
-}
+    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
+  }
 
-  insertRecord(form:NgForm){
-    this.service.postRol(form.value).subscribe(res=>{
+  insertRecord(form: NgForm) {
+    this.service.postRol(form.value).subscribe(res => {
       this.resetForm();
     });
   }
 
-  insertVistaXRol(){
-    this.vistasSeleccionadas.forEach(element => {
-      //console.log(element.toString())
+  insertVistaXRol() {
+    var vistasSeleccionadasOrdenadas = this.vistasSeleccionadas.sort()
+
+    for(var i =0; i < vistasSeleccionadasOrdenadas.length; i++){
+      console.log(vistasSeleccionadasOrdenadas[i])
       let vistaxrol = new VistaXRol;
-      vistaxrol ={
-        id:0,
-        id_vista:element.valueOf(),
-        id_rol:0
-      }
-      this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
-    });
-    
+      vistaxrol = {
+        id: 0,
+         id_vista: vistasSeleccionadasOrdenadas[i],
+         id_rol: 0
+       }
+       
+       this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
+    }
+    // vistasSeleccionadasOrdenadas.forEach(element => {
+    //   console.log(element)
+    //   let vistaxrol = new VistaXRol;
+    //   vistaxrol = {
+    //     id: 0,
+    //     id_vista: element,
+    //     id_rol: 0
+    //   }
+    //   this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
+    // });
+
   }
 
-  getVistaId(e:any, id: number){
-    if(e.target.checked){
+  getVistaId(e: any, id: number) {
+    if (e.target.checked) {
       this.vistasSeleccionadas.push(id)
-    }else{
-      this.vistasSeleccionadas = this.vistasSeleccionadas.filter(m=>m!=id)
+    } else {
+      this.vistasSeleccionadas = this.vistasSeleccionadas.filter(m => m != id)
     }
   }
 
