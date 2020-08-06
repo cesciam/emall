@@ -9,20 +9,40 @@ import { Usuario } from 'src/app/models/usuario.model';
 })
 export class MainHeaderComponent implements OnInit {
   private usuarioLogueado: object = null;
+  private usuarioFromLS: {
+    token: string,
+    usuario: {
+      Apellido: string,
+      Cedula: string,
+      CodigoCorreo: string,
+      CodigoTelefono: string,
+      Correo: string,
+      CorreoConfirmado: number,
+      Estado: number,
+      Foto: { id: number, nombre: null, enlace: null, tipo: null, id_comercio: 0 },
+      Id: number,
+      Nombre: string,
+      Telefono: string,
+      TelefonoConfirmado: number,
+      Tipo: number
+    }
+
+  }
   private usuario: Usuario;
-  private id_comercio: number;
+  public id_comercio: number;
 
   constructor(private serviceSucursal: SucursalService) {
   }
 
   ngOnInit() {
     this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
+    this.usuarioFromLS = JSON.parse(localStorage.getItem('usuario-logueado'));
+    this.validarEmpleado();
   }
 
   validarEmpleado() {
     if (this.usuarioLogueado != null) {
-      this.usuario = JSON.parse(localStorage.getItem('usuario-logueado'));
-      if (this.usuario.Tipo == 4) {
+      if (this.usuarioFromLS.usuario.Tipo == 4) {
         this.obtenerComercio();
       }
     }
@@ -34,11 +54,10 @@ export class MainHeaderComponent implements OnInit {
   }
 
   obtenerComercio() {
-    let usuario: Usuario
-    usuario = JSON.parse(localStorage.getItem('usuario-logueado'));
 
-    this.serviceSucursal.obtenerSucursalPorEmpleado(parseInt(usuario.Id)).subscribe(data => {
+    this.serviceSucursal.obtenerSucursalPorEmpleado(this.usuarioFromLS.usuario.Id).subscribe(data => {
       this.id_comercio = data.idComercio;
     })
   }
+
 }
