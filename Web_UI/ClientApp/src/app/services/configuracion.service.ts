@@ -36,4 +36,10 @@ export class ConfiguracionService {
       })
     });
   }
+
+  ObtenerTodoConfiguracion(): Observable<Configuracion[]> {
+
+    return this.http.get<Configuracion[]>(this.baseURL + '/configuracion/RetrieveAll');
+
+  }
 }
