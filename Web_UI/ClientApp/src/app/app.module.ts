@@ -200,7 +200,6 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
       { path: 'dashboard-comercio/registrar-sucursal', component: RegistrarSucursalComponent },
       { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
-      { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },

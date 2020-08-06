@@ -50,9 +50,9 @@
                     <span *ngIf="usuarioLogueado.usuario.Tipo==1">
                       <a class="dropdown-item" [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
                     </span>
-                    <span *ngIf="usuarioLogueado.usuario.Tipo==3">
+                    <!-- <span *ngIf="usuarioLogueado.usuario.Tipo==3">
                       <a class="dropdown-item" [routerLink]="['/perfil-admin-comercio']">Administrar Comercios</a>
-                    </span>
+                    </span> -->
                     <span *ngIf="usuarioLogueado.usuario.Tipo==4">
                       <a class="dropdown-item" [routerLink]="['/dashboard-comercio']"
                          [queryParams]="{comercio: id_comercio}">Comercio</a>

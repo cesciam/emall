@@ -28,9 +28,13 @@
                 {{usuarioLogueado.usuario.Nombre }} {{usuarioLogueado.usuario.Apellido}}
               </h5>
             </div>
+
+            <div class="col" *ngIf="usuarioLogueado.usuario.Tipo != 4">
+               <a  [routerLink]= "['/registrar-comercio']"> <button class="profile-edit-btn">Registrar comercio</button> </a>
+            </div>
             
             <div class="col">
-              <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+              <button class="profile-edit-btn">Editar perfil</button>
             </div>
           </div>
 
