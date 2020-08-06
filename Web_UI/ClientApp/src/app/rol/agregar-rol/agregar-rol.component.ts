@@ -45,7 +45,7 @@ export class AgregarRolComponent implements OnInit {
 
   onSubmit(form:NgForm){
     this.insertRecord(form);
-    this.delay(3000);
+    //this.delay(10000);
     this.insertVistaXRol();
     form.resetForm();
   }
@@ -62,6 +62,7 @@ export class AgregarRolComponent implements OnInit {
 
   insertVistaXRol(){
     this.vistasSeleccionadas.forEach(element => {
+      //console.log(element.toString())
       let vistaxrol = new VistaXRol;
       vistaxrol ={
         id:0,

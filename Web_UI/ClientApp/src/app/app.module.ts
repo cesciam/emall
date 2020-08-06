@@ -86,6 +86,11 @@ import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
 import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
 import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
 import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
+import { AdminImpuestoCrearComponent } from './dashboard-admin/admin-impuesto-crear/admin-impuesto-crear.component';
+import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-listar/admin-impuesto-listar.component';
+import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
+import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
+
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 
 const maskConfig: Partial<IConfig> = {
@@ -168,6 +173,10 @@ const maskConfig: Partial<IConfig> = {
     FilterCategoriaPipe,
     FiltroRolPipe,
     FiltroEmpleadoPipe,
+    AdminImpuestoCrearComponent,
+    AdminImpuestoListarComponent,
+    AdminCategoriaListarComponent,
+    AdminCategoriaCrearComponent,
     FiltroUsuarioPipe, 
   ],
   imports: [
@@ -200,7 +209,6 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio/modificar', component: ModificarComercioComponent },
       { path: 'dashboard-comercio/registrar-sucursal', component: RegistrarSucursalComponent },
       { path: 'dashboard-comercio/modificar-sucursal', component: ModificarSucursalComponent },
-      { path: 'registrar-comercio', component: RegistrarComercioComponent },
       { path: 'perfil-admin-comercio', component: PerfilAdminComercioComponent },
       { path: 'item-crear/:id_sucursal', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
@@ -231,6 +239,10 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
       { path: 'landing-producto', component: LandingPageProductoComponent },
+      { path: 'dashboard-admin/impuesto/crear', component: AdminImpuestoCrearComponent },
+      { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
+      { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
+      { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
     ])
   ],
   exports: [

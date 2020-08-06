@@ -86,10 +86,7 @@ namespace DataAccessLayer.Mapper
             var c = (Configuracion)entity;
 
             operacion.AddIntParam(DB_COL_ID, c.id);
-            operacion.AddVarcharParam(DB_COL_NOMBRE, c.nombre);
             operacion.AddIntParam(DB_COL_VALOR, c.valor);
-            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
-            operacion.AddVarcharParam(DB_COL_DESCRIPCION, c.descripcion);
 
 
             return operacion;
