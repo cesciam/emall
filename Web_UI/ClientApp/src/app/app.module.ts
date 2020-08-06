@@ -86,8 +86,7 @@ import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
 import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
 import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
 import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
-
-
+import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -169,6 +168,7 @@ const maskConfig: Partial<IConfig> = {
     FilterCategoriaPipe,
     FiltroRolPipe,
     FiltroEmpleadoPipe,
+    FiltroUsuarioPipe, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

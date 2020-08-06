@@ -78,11 +78,14 @@ namespace AppCore {
 
         public Usuario Login(string correo, string contrasena) {
             Usuario usuario = this.crudUsuario.Login(correo.Trim(), contrasena.Trim());
-            Archivo archivo = new Archivo() {
-                Id = usuario.Foto.Id
-            };
 
-            usuario.Foto = this.itemManagement.RetrieveItemArchivo(archivo);
+            if (usuario.Foto != null) {
+                Archivo archivo = new Archivo() {
+                    Id = usuario.Foto.Id
+                };
+
+                usuario.Foto = this.itemManagement.RetrieveItemArchivo(archivo);
+            }
 
             return usuario;
         }

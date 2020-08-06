@@ -129,7 +129,6 @@
                    id="Codigo"
                    formControlName="Codigo"
                    required
-                   mask="AAAAAAAA"
                    [ngClass]="{ 'is-invalid': submittedCodigo && fc.Codigo.errors }">
             <div *ngIf="submittedCodigo && fc.Codigo.errors" class="invalid-feedback">
               <div *ngIf="fc.Codigo.errors.required">El codigo es requerido</div>

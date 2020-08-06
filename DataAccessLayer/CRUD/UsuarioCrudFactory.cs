@@ -141,10 +141,15 @@ namespace DataAccessLayer.Crud {
                 usuario.Foto.Id = (int)dao.ExecuteProcedureAndReturnId(this.archivoMapper.GetCreateStatement(usuario.Foto));
             } else {
                 Usuario usuarioActual = this.Retrieve<Usuario>(usuario);
-                Archivo foto = new Archivo() {
-                    Id = usuarioActual.Foto.Id
-                };
-                usuario.Foto = foto;
+
+                if (usuarioActual.Foto.Id == -1) {
+                    usuario.Foto = null;
+                } else {
+                    Archivo foto = new Archivo() {
+                        Id = usuarioActual.Foto.Id
+                    };
+                    usuario.Foto = foto;
+                }
             }
 
             dao.ExecuteProcedure(mapper.GetUpdateStatement(usuario));
