@@ -58,9 +58,7 @@ export class AgregarRolComponent implements OnInit {
   }
 
   insertRecord(form: NgForm) {
-    this.service.postRol(form.value).subscribe(res => {
-      this.resetForm();
-    });
+    this.service.postRol(form.value).subscribe();
   }
 
   insertVistaXRol() {
