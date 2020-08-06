@@ -47,7 +47,17 @@ namespace Web_API.Controllers {
             if (this.usuarioManagement.Activar(id, codigo)) {
                 return Ok();
             } else {
-                return BadRequest(new { message = "Ha ocurrido un error al activar el usuario." });
+                return BadRequest(new { message = "El codigo digitado es invalido." });
+            }
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/restablecer/{correo}")]
+        public IActionResult ResetPassword(string correo) {
+            if (this.usuarioManagement.RestablecerContraseña(correo)) {
+                return Ok();
+            } else {
+                return BadRequest(new { message = "No existe un usuario asociado al correo digitado" });
             }
         }
 

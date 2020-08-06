@@ -1,11 +1,14 @@
+<app-main-header></app-main-header>
 
 <div class="container">
 
   <h1>Lista de impuestos</h1>
 
   <div>
-    <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." />
-    <button class="btn btn-primary" type="button" onclick="window.location='crear-categoria.html'">Crear Impuesto</button>
+    <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." [(ngModel)]="buscarImpuesto" />
+    <a [routerLink]="['/crear-impuesto']" >
+      <button type="button" class="btn btn-primary">Crear un impuesto</button>
+    </a>
 
   </div>
   <table class="table table-striped .table-responsive-sm"  *ngIf ="service.impuestos" >
@@ -17,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let impuesto of service.impuestos" >
+      <tr *ngFor="let impuesto of service.impuestos | buscarImpuesto:buscarImpuesto" >
         <td>{{impuesto.Id}}</td>
         <td>{{impuesto.Nombre}}</td>
         <td>{{impuesto.Porcentaje}}</td>
@@ -28,6 +31,7 @@
   </table>
 
   <div>
+    <h2>Editar impuestos</h2>
     <form>
       <fieldset>
         <div class="form-group">
@@ -39,7 +43,7 @@
           <input type="text" class="form-control" name="nombre" [(ngModel)]="selectedImpuesto.Nombre">
         </div>
         <div class="form-group">
-          <label for="porcentaje">Apellido</label>
+          <label for="porcentaje">Porcentaje</label>
           <input type="number" class="form-control" name="porcentaje" [(ngModel)]="selectedImpuesto.Porcentaje">
         </div>
         <button class="btn btn-primary" (click)="completarModificar(selectedImpuesto)">Guardar cambios</button>

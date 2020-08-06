@@ -25,7 +25,7 @@
   <main role="main">
     <h1 class="display-4 text-center">Lista de roles</h1>
     <br>
-    <button type="button" class="btn btn-primary" (click)="agregarRol()">Nuevo rol + </button>
+    <button type="button" class="btn btn-primary" [routerLink]="['/agregar-rol', service.id_comercio]">Nuevo rol + </button>
     <br>
     <br>
     <div class="table-responsive">

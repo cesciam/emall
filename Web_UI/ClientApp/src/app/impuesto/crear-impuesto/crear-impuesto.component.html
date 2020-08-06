@@ -1,19 +1,37 @@
+<app-main-header></app-main-header>
 
 <div class="container">
   <h1>Registro de impuestos</h1>
-  <form class="form-group" >
+  
+  <a [routerLink]="['/listar-impuesto']">
+    <button type="button" class="btn btn-primary">Listar impuestos</button>
+  </a>
+  <form [formGroup]="impuestoForm" (ngSubmit)="onSubmit()">
     <fieldset>
-      <div  class="form-group col-lg-6 col-md-6">
-        <label for="exampleInputEmail1">Nombre</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearImpuesto.Nombre">
-      </div>
+
       <div class="form-group col-lg-6 col-md-6">
-        <label for="exampleInputEmail1">Porcentaje</label>
-        <input type="number" class="form-control" id="Porcentaje" name="Porcentaje" required [(ngModel)]="crearImpuesto.Porcentaje" >
+
+        <label for="Nombre">Nombre</label>
+
+        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearImpuesto.Nombre" formControlName="Nombre" [ngClass]="{'is-invalid': submitted && f.Nombre.errors}">
+        <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+          <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
+        </div>
       </div>
-      <button class="btn btn-primary" (click)="crear(crearImpuesto)">Guardar Impuesto</button>
+
+      <div class="form-group col-lg-6 col-md-6">
+
+        <label for="Porcentaje">Porcentaje</label>
+        <input type="number" class="form-control" id="Porcentaje" min="0.1" name="Porcentaje" formControlName="Porcentaje" required [(ngModel)]="crearImpuesto.Porcentaje" [ngClass]="{'is-invalid': submitted && f.Porcentaje.errors}">
+        <div *ngIf="submitted && f.Porcentaje.errors" class="invalid-feedback">
+          <div *ngIf="f.Porcentaje.errors.required">Porcentaje es requerido</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Crear impuesto</button>
     </fieldset>
   </form>
 </div>
+
+<app-footer></app-footer>
 
 

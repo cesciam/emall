@@ -25,7 +25,7 @@ export class PerfilAdminComercioComponent implements OnInit {
     this.llenarComercios();
   }
 
-  llenarComercios() {
+  public llenarComercios() {
     let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
     let usuarioLogueado: Usuario = usuarioLocal.usuario;
 
