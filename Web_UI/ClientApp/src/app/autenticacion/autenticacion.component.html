@@ -145,7 +145,12 @@
   </div>
 
   <div id="fillData" [hidden]="section != 'fillData'">
-    <app-editar-usuario id="{{usuario.Id}}" integrarCon="pagina" *ngIf="usuario?.Id != null"></app-editar-usuario>
+    <app-editar-usuario 
+      id="{{usuario.Id}}" 
+      integrarCon="pagina" 
+      titulo="Ya casi estamos listos" 
+      *ngIf="usuario?.Id != null">
+    </app-editar-usuario>
   </div>
 
   <div id="activated" [hidden]="section != 'activated'">
