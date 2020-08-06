@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 
-<div class="container" *ngIf="item_seleccionado && sucursal && impuesto">
+<div class="container" *ngIf="item_seleccionado && sucursal && impuesto && comercio">
 
 
 
@@ -31,7 +31,7 @@
           <div class="product__details__text">
             <h3>{{item_seleccionado.nombre}}</h3>
             <div class="product__details__rating">
-              <i class="">{{sucursal.nombre}}</i>
+              <i class="">{{comercio.nombre}}</i>
               <!--<i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -54,7 +54,7 @@
               <li *ngIf="item_seleccionado.tipo === 'Servicio'" ><b>Duracion</b> <span>{{item_seleccionado.duracion}} minutos</span></li>
               <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
               <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp>  {{impuesto.Porcentaje}}%</samp></span></li>
-              <li><b>Detalle sucursal</b> <span>{{sucursal.detallesDireccion}}</span></li>
+              <li><b>Detalle sucursal</b> <span>{{sucursal.nombre}} - {{sucursal.detallesDireccion}}</span></li>
               <!--<li>
     <b>Share on</b>
     <div class="share">
@@ -72,56 +72,6 @@
   </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-  <!--<div class="pt-3 px-4">
-    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-      <h1 class="h2"></h1>
-    </div>
-  </div>
-
-
-  <div class="container">
-
-    <div class="row mb-4">
-
-      <div class="col">
-        <h1 class="h1">{{item_seleccionado.nombre}}</h1>
-        <h1 class="h1">{{item_seleccionado.descripcion}}</h1>
-        <h1 class="h1">₡{{preciofinal}} ii</h1>
-        <h1 class="h1">{{item_seleccionado.tipo}}</h1>
-
-      </div>
-
-
-
-
-    </div>
-
-    <div class="row mb-4">
-
-      <div class="col">
-        <div class="d-flex justify-content-center img-container">
-          <img [src]="item_seleccionado.id_foto" class="img-fluid d-flex justify-content-center" alt="Foto" style="width: 550px; height: 400px;">
-        </div>
-      </div>
-
-
-
-
-    </div>
-
-
-  </div>-->
 
 
 
