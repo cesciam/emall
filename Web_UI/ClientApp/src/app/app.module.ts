@@ -233,7 +233,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
       { path: 'dashboard-admin/promocion', component: AdminPromocionesComponent },
       { path: 'dashboard-admin/promocion/:id', component: AdminPromocionesEditComponent },
-      { path: 'dashboard-admin/promocion/registro', component: AdminPromocionesRegistrarComponent },
+      { path: 'registrar', component: AdminPromocionesRegistrarComponent },
       { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
