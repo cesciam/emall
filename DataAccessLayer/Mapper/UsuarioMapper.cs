@@ -71,6 +71,13 @@ namespace DataAccessLayer.Mapper {
             return operation;
         }
 
+        public SqlOperation GetByCorreo(string correo) {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_USUARIO_EMAIL" };
+            operation.AddVarcharParam(DB_COL_CORREO, correo);
+
+            return operation;
+        }
+
         public SqlOperation Login(string correo) {
             var operation = new SqlOperation { ProcedureName = "LOGIN_USUARIO" };
             operation.AddVarcharParam(DB_COL_CORREO, correo.Trim());
@@ -173,7 +180,7 @@ namespace DataAccessLayer.Mapper {
             operation.AddVarcharParam(DB_COL_CORREO, u.Correo);
             operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
             
-            if (u.Foto.Id == 0)
+            if (u.Foto == null)
                 operation.AddNullParam(DB_COL_ID_FOTO);
             else
                 operation.AddIntParam(DB_COL_ID_FOTO, u.Foto.Id);

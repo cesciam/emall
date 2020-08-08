@@ -5,7 +5,7 @@ using System.Text;
 namespace Utils {
     public static class TokenGenerator {
         public static string Generar(int longitud) {
-            string caracteresDisponibles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            string caracteresDisponibles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-";
             StringBuilder builder = new StringBuilder("");
             System.Random random = new System.Random();
 

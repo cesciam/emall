@@ -51,6 +51,16 @@ namespace Web_API.Controllers {
             }
         }
 
+        [HttpGet]
+        [Route("api/[controller]/restablecer/{correo}")]
+        public IActionResult ResetPassword(string correo) {
+            if (this.usuarioManagement.RestablecerContraseña(correo)) {
+                return Ok();
+            } else {
+                return BadRequest(new { message = "No existe un usuario asociado al correo digitado" });
+            }
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("api/[controller]/registrar")]

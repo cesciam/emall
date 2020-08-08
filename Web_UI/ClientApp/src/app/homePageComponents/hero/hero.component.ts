@@ -26,7 +26,12 @@ export class HeroComponent implements OnInit {
   buscar() {
     let busqueda = (document.getElementById("busqueda") as HTMLInputElement).value;
     console.log(busqueda);
-    this.router.navigate(['item-busqueda', busqueda]);
+
+    if (busqueda === "") {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['item-busqueda', busqueda]);
+    }
   }
 
 }

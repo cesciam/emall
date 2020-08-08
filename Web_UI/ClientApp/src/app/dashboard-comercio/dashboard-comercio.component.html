@@ -113,16 +113,16 @@
               <td>{{ sucursal.detallesDireccion }}</td>
               <td>
                 <a [routerLink]="['/item-sucursal', sucursal.id]">
-                  <button type="button" class="btn btn-primary">Items de sucursal</button>
+                  <button type="button" class="btn btn-primary" *ngIf="permisoProductos">Items de sucursal</button>
                 </a>
               </td>
               <td>
                 <a style="text-decoration: none" [routerLink]="['/dashboard-comercio/modificar-sucursal']" [queryParams]="{sucursal: sucursal.id}">
-                  <button type="button" class="btn btn-primary">Editar</button>
+                  <button type="button" class="btn btn-primary" *ngIf="permisoSucursales">Editar</button>
                 </a>
               </td>
               <td>
-                <button type="button" class="btn btn-danger" (click)="eliminarSucursal(sucursal)">X</button>
+                <button type="button" class="btn btn-danger" (click)="eliminarSucursal(sucursal)" *ngIf="permisoSucursales">X</button>
               </td>
             </tr>
 

@@ -5,8 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterSucursalPipe implements PipeTransform {
 
-  transform(value: any, arg: any): any {
-    const resultSucursal = [];
+  transform(value?: any, arg?: any){
+    if(value!=null){
+      const resultSucursal = [];
     for (let sucursal of value) {
       if (sucursal.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
         resultSucursal.push(sucursal);
@@ -15,5 +16,7 @@ export class FilterSucursalPipe implements PipeTransform {
 
     return resultSucursal;
   }
+    }
+    
 
 }

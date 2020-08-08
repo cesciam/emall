@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Configuracion } from 'src/app/models/configuracion';
-import { ConfiguracionService } from 'src/app/services/configuracion.service';
+import { ConfiguracionService } from '../../services/configuracion.service';
+import { Configuracion } from '../../models/configuracion';
 
 @Component({
   selector: 'app-listar-configuracion',
@@ -12,28 +12,82 @@ export class ListarConfiguracionComponent implements OnInit {
   contrasennasAnt: Configuracion;
   pressed: boolean;
   value: number;
-  constructor(private service: ConfiguracionService) { }
+  configuraciones: Configuracion[];
+  tmp_config = new Configuracion();
+  selectedConfig: number;
+  error: any;
+
+
+  constructor(private service: ConfiguracionService) {
+    
+
+    this.tmp_config = new Configuracion();
+    this.selectedConfig = 0;
+  }
 
   ngOnInit() {
-  this.service.obtenerConfigContraseñaAntigua()
-  .subscribe(
-    (data: Configuracion) => this.contrasennasAnt = data,
-    (err: any) => console.log
-  );
+
+    this.llenarConfig();
+  //this.service.obtenerConfigContraseñaAntigua()
+  //.subscribe(
+  //  (data: Configuracion) => this.contrasennasAnt = data,
+  //  (err: any) => console.log
+  //);
+
+    //this.pressed = false;
+    //this.selectedConfig = 0;
+
   }
 
-  editar() {
-      this.pressed = true;
-      console.log(this.contrasennasAnt);
+
+
+  llenarConfig() {
+    this.service.ObtenerTodoConfiguracion()
+      .subscribe(
+        (data: Configuracion[]) => this.configuraciones = data,
+        (err: any) => console.log
+      );
   }
 
-  save() {
-    this.service.actualizarConfiguracion(this.contrasennasAnt)
+  editar(id: number) {
+    this.selectedConfig = id;
+      //this.pressed = true;
+      //console.log(this.contrasennasAnt);
+  }
+
+
+
+
+
+
+
+  save(): void {
+    this.tmp_config.id = this.selectedConfig;
+    console.log(this.tmp_config);
+    this.service.actualizarConfiguracion(this.tmp_config)
     .subscribe(
       (data: any) => console.log(data),
-      (err: any) => console.log(err)
+      (err: any) => console.log(err),
     );
-    this.pressed = false;
+    this.selectedConfig = 0;
+    this.llenarConfig();
   }
+
+  actualizar(): void {
+    this.tmp_config.id = this.selectedConfig;
+
+    this.service.actualizarConfiguracion(this.tmp_config)
+      .subscribe
+      (
+        (reponse) => this.llenarConfig(),
+        (error) => {
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
+    this.selectedConfig = 0;
+   
+  }
+
+
 
 }

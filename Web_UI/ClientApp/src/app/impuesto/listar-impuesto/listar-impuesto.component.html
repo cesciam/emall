@@ -4,12 +4,23 @@
 
   <h1>Lista de impuestos</h1>
 
-  <div>
-    <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." [(ngModel)]="buscarImpuesto"/>
-    <button class="btn btn-primary btn-categoria" type="button" router-link="['crear-impuesto']">Crear impuesto</button>
+  <div class="row">
 
+    <div class="col-sm-1">
+      <a [routerLink]="['/crear-impuesto']">
+        <button type="button" class="btn btn-primary">Registrar</button>
+      </a>
+    </div>
+
+    <div class="col">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="buscarImpuesto" placeholder="Buscar.." [(ngModel)]="buscarImpuesto" />
+      </div>
+      
+    </div>
 
   </div>
+
   <table class="table table-striped .table-responsive-sm"  *ngIf ="service.impuestos" >
     <thead>
       <tr>

@@ -31,12 +31,11 @@ export class ItemEditarComponent implements OnInit {
   uploader: CloudinaryUploader;
   error: any;
   stringImpuesto: string;
+  impuestoactual: Impuesto;
 
 
   constructor(private route: ActivatedRoute, private service: ItemService, private router: Router, private serviceImpuesto: ImpuestoService) {
-    //this.item_seleccionado = new Item();
-    //this.item_archivo = new Archivo();
-    //this.impuestos = [1, 2, 3]
+    
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
     this.serviceImpuesto.ObtenerTodoImpuestoItem().subscribe(
       (data: Impuesto[]) => this.impuestos = data,
@@ -46,16 +45,6 @@ export class ItemEditarComponent implements OnInit {
     this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
 
     
-    //console.log(this.item_archivo.enlace);
-
-    //this.service.getItemArchivo(this.item_seleccionado.id_foto)
-    //  .subscribe(
-    //    (data: Archivo) =>
-    //      this.item_foto = data,
-    //    (err: any) => console.log(err)
-    //);
-
-    //console.log(this.item_foto);
 
 
 
@@ -63,38 +52,13 @@ export class ItemEditarComponent implements OnInit {
 
   async obtenerItem(itemId: number) {
     this.item_seleccionado = await this.service.ObtenerItem(itemId);
-    //let tmp_item = await this.service.ObtenerItem(itemId);
+    this.impuestoactual = await this.service.ObtenerImpuestoItem(this.item_seleccionado.id_impuesto);
 
-    //this.impuestos.forEach(function (obj) {
-
-    //  if (obj.Id = tmp_item.id_impuesto) {
-    //    this.stringImpuesto = obj.Nombre + obj.Porcentaje;
-    //  }
-    //})
-
-    //this.item_seleccionado = tmp_item;
-
-    //let imp_tmp: Impuesto[];
-
-    //imp_tmp = this.impuestos;
-
-    //for (let imp of imp_tmp) {
-    //  if (imp.Id = this.item_seleccionado.id_impuesto) {
-    //    this.stringImpuesto = imp.Nombre + imp.Porcentaje;
-    //  }
-    //}
+    //this.e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
+    
+    //this.e.selectedIndex = 1;
 
 
-
-
-    //var apps = ['WhatsApp', 'Instagram', 'Facebook'];
-    //var playStore = [];
-    //apps.forEach(function (item) {
-    //  playStore.push(item);
-    //});
-    //console.log(playStore);  
-
-    //this.item_archivo = await this.service.ObtenerArchivo(this.item_seleccionado.id_foto);
   }
 
 
@@ -125,26 +89,27 @@ export class ItemEditarComponent implements OnInit {
   save(): void {
 
 
-    //this.service.updateArchivo(this.item_archivo)
-    //  .subscribe(
-    //    (data: any) => console.log('Archivo was updated'),
-    //    (err: any) => console.log(err)
-    //  );
 
 
     var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
     var sel = e.selectedIndex;
+    console.log(sel);
+    if (sel == -1) {
+      this.item_seleccionado.id_impuesto = this.item_seleccionado.id_impuesto;
+    } else {
+      this.item_seleccionado.id_impuesto = this.impuestos[(sel - 1)].Id;
+      console.log(this.item_seleccionado.id_impuesto);
+    }
     //var opt = e.options[sel];
     //var CurValue = (<HTMLOptionElement>opt).value;
-    this.item_seleccionado.id_impuesto = this.impuestos[(sel - 1)].Id;
-    console.log(this.item_seleccionado.id_impuesto);
+    
     //this.item_seleccionado.id_impuesto = Number(this.item_seleccionado.id_impuesto)
 
     this.service.updateItem(this.item_seleccionado)
       .subscribe(
         (reponse) => this.router.navigate(['item-sucursal', this.item_seleccionado.id_sucursal]),
         (error) => {
-          this.error = error.error;
+          this.error = "Errores en el registro";
           window.scroll(0, 0);
         });
   }

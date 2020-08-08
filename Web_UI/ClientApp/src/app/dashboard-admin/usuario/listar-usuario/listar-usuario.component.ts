@@ -12,6 +12,7 @@ export class ListarUsuarioComponent implements OnInit {
   private usuarios: Usuario[];
   private submitted: boolean = false;
   private error: object = null;
+  private filtroUsuarios = '';
 
   constructor(
     private usuarioService: UsuarioService,

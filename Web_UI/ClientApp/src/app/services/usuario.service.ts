@@ -55,6 +55,10 @@ export class UsuarioService {
       )
   }
 
+  restablecerContrasena(correo: string): Observable<{}> {
+    return this.http.get<Usuario>(this.baseUrl + '/usuario/restablecer/' + correo);
+  }
+
   activarUsuario(id: number, codigo: string): Observable<{}> {
     return this.http.get(this.baseUrl + '/usuario/' + id + '/activar/' + codigo, this.httpOptions)
       .pipe(

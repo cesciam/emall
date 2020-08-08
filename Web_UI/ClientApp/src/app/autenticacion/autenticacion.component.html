@@ -10,7 +10,7 @@
 
         <form [formGroup]="loginForm" name="login" id="login" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="Correo">Email</label>
+            <label for="Correo">Correo</label>
             <input type="email"
                    class="form-control"
                    id="Correo"
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="Password">Password</label>
+            <label for="Password">Contraseña</label>
             <input type="password"
                    class="form-control"
                    id="Password"
@@ -62,9 +62,51 @@
 
   <div id="Reset" [hidden]="section != 'reset'">
     <div class="row justify-content-lg-center justify-content-md-center">
-      <div class="col-lg-12">
-        Reset password
-        <p>¿No tienes una cuenta aun? <a (click)="changeSection('register')">Registrate aqui</a></p>
+      <div class="col-lg-6 col-md-6">
+        <div *ngIf="submittedReset && error!=null" class="alert alert-danger" role="alert">
+          <strong>{{error.message}}</strong>
+        </div>
+
+        <p>Introduzca el correo electronico asociado a la cuenta que desea recuperar:</p>
+
+        <form [formGroup]="resetForm" name="resetForm" id="resetForm" (ngSubmit)="onRestablecerContrasena()">
+          <div class="form-group">
+            <label for="CorreoReset">Correo</label>
+            <input type="email"
+                   class="form-control"
+                   id="CorreoReset"
+                   placeholder="usuario@dominio.com"
+                   formControlName="CorreoReset"
+                   required
+                   [ngClass]="{ 'is-invalid': submittedReset && fr.CorreoReset.errors }">
+            <div *ngIf="submittedReset && fr.CorreoReset.errors" class="invalid-feedback">
+              <div *ngIf="fr.CorreoReset.errors.required">Correo es requerido</div>
+              <div *ngIf="fr.CorreoReset.errors.email">Correo invalido</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="site-btn" [disabled]="processingResetRequest">Restablecer Contraseña</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row justify-content-lg-center justify-content-md-center">
+      <p>¿No tienes una cuenta aun? <a (click)="changeSection('register')">Registrate aqui</a></p>
+    </div>
+
+    <div class="row justify-content-lg-center justify-content-md-center">
+      <p>¿Ya tienes una cuenta? <a (click)="changeSection('login')">Inicia sesion aqui</a></p>
+    </div>
+  </div>
+
+  <div id="reseted" [hidden]="section != 'reseted'">
+    <div class="row justify-content-lg-center justify-content-md-center">
+      <div class="col-lg-6 col-md-6">
+        <h1>Listo!</h1>
+        <p>Un correo fue enviado a tu cuenta para proceder con el reestablecimeinto de la contraseña.</p>
+        <p><a [routerLink]="['']">Haz click aqui para volver a la pagina principal</a></p>
       </div>
     </div>
   </div>
@@ -87,7 +129,6 @@
                    id="Codigo"
                    formControlName="Codigo"
                    required
-                   mask="AAAAAAAA"
                    [ngClass]="{ 'is-invalid': submittedCodigo && fc.Codigo.errors }">
             <div *ngIf="submittedCodigo && fc.Codigo.errors" class="invalid-feedback">
               <div *ngIf="fc.Codigo.errors.required">El codigo es requerido</div>
@@ -104,7 +145,12 @@
   </div>
 
   <div id="fillData" [hidden]="section != 'fillData'">
-    <app-editar-usuario id="{{usuario.Id}}" integrarCon="pagina" *ngIf="usuario?.Id != null"></app-editar-usuario>
+    <app-editar-usuario 
+      id="{{usuario.Id}}" 
+      integrarCon="pagina" 
+      titulo="Ya casi estamos listos" 
+      *ngIf="usuario?.Id != null">
+    </app-editar-usuario>
   </div>
 
   <div id="activated" [hidden]="section != 'activated'">

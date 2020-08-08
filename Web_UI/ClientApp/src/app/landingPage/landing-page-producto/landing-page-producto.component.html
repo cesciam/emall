@@ -7,30 +7,29 @@
   <meta name="author" content="" />
   <title>Emall</title>
   <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="" />
+  <link rel="icon" type="image/x-icon" href="../../../assets/img/logo/Logo_IconVerde.png" />
   <!-- Font Awesome icons (free version)-->
-  
   <!-- Google fonts-->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
   <!-- Third party plugin CSS-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
-  
+
 </head>
 <body id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" >
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">Emall</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
 
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
-          <p>#QuédateEnCasa</p>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Nuestro objetivo</a></li>
+          <p class="mt-0">#QuédateEnCasa</p>
+          <!--<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Nuestro objetivo</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Servicios</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Desarrolladores</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Desarrolladores</a></li>-->
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Inicio</a></li>
 
         </ul>
@@ -50,7 +49,7 @@
             Emall es una plataforma que agiliza la venta de servicios y
             productos que ofrecen distintos comercios.
           </p>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Conocer más</a>
+          <!--<a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Conocer más</a>-->
         </div>
       </div>
     </div>
@@ -66,7 +65,7 @@
             Nuestro objetivo consiste en facilitar el consumo de los servicios que ofrecen
             los comercios dentro de la plataforma de una manera comoda y segura para el consumidor.
           </p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Conocer sobre los servicios</a>
+          <!--<a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Conocer sobre los servicios</a>-->
         </div>
       </div>
     </div>
@@ -125,7 +124,7 @@
       <div class="row">
         <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
           <i class="fas fa-pager fa-3x mb-3 text-muted"></i>
-          <div><a class="d-block" href="./landingPage/landing-pulsar/landing-pulsar.component.html">Pulsar Labs</a></div>
+          <div><a class="d-block" [routerLink]="['/landing-pulsar']">Pulsar Labs</a></div>
         </div>
         <div class="col-lg-4 mr-auto text-center">
           <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
@@ -137,7 +136,7 @@
   </section>
   <!-- Footer-->
   <footer class="bg-light py-5">
-    <div class="container"><div class="small text-center text-muted">Copyright © 2020</div></div>
+    <div class="container"><div class="small text-center text-muted">Emall © 2020</div></div>
   </footer>
   <!-- Bootstrap core JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -145,7 +144,10 @@
   <!-- Third party plugin JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
   <!-- Core theme JS-->
-  
+ 
+  <script src="./js/scripts.js"></script>
+
 </body>
 </html>

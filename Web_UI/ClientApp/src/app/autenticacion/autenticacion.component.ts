@@ -13,11 +13,14 @@ import { Usuario } from '../models/usuario.model';
 export class AutenticacionComponent implements OnInit {
   private loginForm: FormGroup;
   private activateForm: FormGroup;
+  private resetForm: FormGroup;
   private submitted: boolean = false;
   private submittedCodigo: boolean = false;
+  private submittedReset: boolean = false;
   private error: object = null;
   private processingRequest: boolean = false;
   private processingActivateRequest: boolean = false;
+  private processingResetRequest: boolean = false;
   private section: string = 'login';
   private usuario: Usuario;
   private response: any;
@@ -37,6 +40,10 @@ export class AutenticacionComponent implements OnInit {
     this.activateForm = new FormGroup({
       Codigo: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
+
+    this.resetForm = new FormGroup({
+      CorreoReset: new FormControl('', [Validators.required, Validators.email]),
+    });
   }
 
   get f() {
@@ -45,6 +52,10 @@ export class AutenticacionComponent implements OnInit {
 
   get fc() {
     return this.activateForm.controls;
+  }
+
+  get fr() {
+    return this.resetForm.controls;
   }
 
   changeSection(section: string): void {
@@ -84,8 +95,24 @@ export class AutenticacionComponent implements OnInit {
         });
   }
 
-  completarDatos(usuarioId: number) {
+  onRestablecerContrasena() {
+    this.submittedReset = true;
 
+    if (this.resetForm.invalid)
+      return;
+
+    this.processingResetRequest = true;
+
+    this.usuarioService.restablecerContrasena(this.resetForm.controls['CorreoReset'].value)
+      .subscribe(
+        (response) => {
+          this.changeSection('reseted');
+        },
+        (error) => {
+          this.processingResetRequest = false;
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
   }
 
   onSubmit() {
