@@ -21,6 +21,12 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(mapper.GetCreateStatement(h));
         }
 
+        public void CreateWithUser(BaseEntity entity)
+        {
+            var h = (Horario)entity;
+            dao.ExecuteProcedure(mapper.GetCreateStatementWithUser(h));
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var h = (Horario)entity;

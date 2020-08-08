@@ -16,8 +16,26 @@ namespace AppCore
         }
         public void Create(HorarioViewModel h)
         {
-            var horario = new Horario();
-            crud.Create(horario);
+            //TODO: traducir fechas y horas para poder consumirlas
+            //TODO: si el usuario es cero, no llevarlo hasta la bd
+            var horario = new Horario
+            {
+                id = h.id,
+                fecha = DateTime.Parse(h.fecha+ "T00:00:00"),
+                tipo_horario = h.tipo_horario,
+                hora_inicio = DateTime.Parse("0000-00-00T"+h.hora_inicio+ ":00"),
+                hora_fin = DateTime.Parse("0000-00-00T" + h.hora_fin + ":00"),
+                id_usuario = h.id_usuario
+            };
+            if (horario.id_usuario != 0)
+            {
+                crud.CreateWithUser(horario);
+            }
+            else
+            {
+                crud.Create(horario);
+            }
+            
         }
         public List<Horario> RetrieveAll()
         {

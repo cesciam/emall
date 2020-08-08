@@ -32,7 +32,7 @@ export class AgregarHorarioComponent implements OnInit {
       tipo_horario:'',
       hora_inicio:'',
       hora_fin:'',
-      id_usuario:0
+      id_usuario:10
     }
   }
 }
