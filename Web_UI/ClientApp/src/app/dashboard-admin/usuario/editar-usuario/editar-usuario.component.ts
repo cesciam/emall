@@ -19,6 +19,7 @@ import { Usuario } from '../../../models/usuario.model'
 export class EditarUsuarioComponent implements OnInit {
   @Input() id: number;
   @Input() integrarCon: string;
+  @Input() titulo: string;
 
   private usuarioForm: FormGroup;
   private submitted: boolean = false;
@@ -29,6 +30,7 @@ export class EditarUsuarioComponent implements OnInit {
   private foto: Archivo;
   private isSendingData: boolean = false;
   private usuario: Usuario;
+  private tituloAMostrar: string;
 
   constructor(
     private router: Router,
@@ -59,12 +61,29 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.obtenerDatosUsuario().then(() => {
-      this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
+      let esCedulaValida = /^\d+$/.test(this.usuario.Cedula);
+
+      if (esCedulaValida)
+        this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
+        
       this.usuarioForm.controls['Nombre'].setValue(this.usuario.Nombre);
       this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
       this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
       this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
       this.usuarioForm.controls['Tipo'].setValue(this.usuario.Tipo);
+
+      if (this.integrarCon == null) {
+        this.tituloAMostrar = 'Usuarios';
+      } else if (this.integrarCon == 'pagina') {
+          this.tituloAMostrar = this.titulo;
+      } else {
+        this.tituloAMostrar = 'Usuarios';
+      }
+
+      if (this.titulo != '' || this.titulo != null)
+        this.tituloAMostrar = this.titulo;
+      else
+      this.tituloAMostrar = null;
     });
   }
 
