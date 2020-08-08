@@ -4,20 +4,18 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <app-header></app-header>
- <hr />
-<div class="container emp-profile">
+
+<hr />
+
+<div class="container emp-profile" [hidden]="section != 'info'">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg" *ngIf="usuarioLogueado.usuario.Foto.enlace == null" alt="" />
-          <img src="{{usuarioLogueado.usuario.Foto.enlace}}" alt="" />
-          <!--FOTO-->
-          <!-- <div class="file btn btn-lg btn-primary">
-    Change Photo
-    <input type="file" name="file" />
-
-        </div> -->
+          <img
+            src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg"
+            *ngIf="image == null" alt="" />
+          <img src="{{image}}" alt="" />
         </div>
       </div>
       <div class="col-lg">
@@ -30,103 +28,113 @@
             </div>
 
             <div class="col" *ngIf="usuarioLogueado.usuario.Tipo != 4">
-               <a  [routerLink]= "['/registrar-comercio']"> <button class="profile-edit-btn">Registrar comercio</button> </a>
+              <a [routerLink]="['/registrar-comercio']"> <button class="profile-edit-btn">Registrar comercio</button>
+              </a>
             </div>
-            
+
             <div class="col">
-              <button class="profile-edit-btn">Editar perfil</button>
+              <button class="profile-edit-btn" (click)="changeSection('edit-profile')">Editar perfil</button>
             </div>
           </div>
 
-
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Información personal</a>
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Información personal</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" *ngIf="usuarioLogueado.usuario.Tipo == 3">Comercios</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false" *ngIf="usuarioLogueado.usuario.Tipo == 3">Comercios</a>
             </li>
           </ul>
         </div>
 
-        <div class="col-md" >
-            <div class="tab-content profile-tab" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Cédula</label>
-                  </div>
-                  <div class="col-md-6">
-                    <p>{{usuarioLogueado.usuario.Cedula}} </p>
-                  </div>
+        <div class="col-md">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Cédula</label>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Nombre</label>
-                  </div>
-                  <div class="col-md-6">
-                    <p>{{usuarioLogueado.usuario.Nombre}} {{usuarioLogueado.usuario.Apellido}}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Correo Electrónico</label>
-                  </div>
-                  <div class="col-md-6">
-                    <p>{{usuarioLogueado.usuario.Correo}}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Teléfono</label>
-                  </div>
-                  <div class="col-md-6">
-                    <p>{{usuarioLogueado.usuario.Telefono}}</p>
-                  </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Cedula}} </p>
                 </div>
               </div>
-  
-              <!--Inicio del timeline-->
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-  
-                <table class="table table-striped text-center">
-                  <thead>
-                    <tr>
-                      <th class="text-center">Cédula jurídica</th>
-                      <th class="text-center">Nombre legal</th>
-                      <th class="text-center">Nombre</th>
-                      <th class="text-center">Categoría</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let comercio of comercios">
-                      <td>{{ comercio.cedulaJuridica }}</td>
-                      <td>{{ comercio.nombreLegal }}</td>
-                      <td>{{ comercio.nombre }}</td>
-                      <td>{{ comercio.categorias[0] }}</td>
-                      <td>
-                        <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
-                          <button type="button" class="btn btn-primary">Seleccionar</button>
-                        </a>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger" (click)="eliminarComercio(comercio)">X</button>
-                      </td>
-                    </tr>
-  
-                  </tbody>
-                </table>
-                <!--final del timeline-->
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Nombre</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Nombre}} {{usuarioLogueado.usuario.Apellido}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Correo Electrónico</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Correo}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Teléfono</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{usuarioLogueado.usuario.Telefono}}</p>
+                </div>
               </div>
             </div>
+
+            <!--Inicio del timeline-->
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+              <table class="table table-striped text-center">
+                <thead>
+                  <tr>
+                    <th class="text-center">Cédula jurídica</th>
+                    <th class="text-center">Nombre legal</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Categoría</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let comercio of comercios">
+                    <td>{{ comercio.cedulaJuridica }}</td>
+                    <td>{{ comercio.nombreLegal }}</td>
+                    <td>{{ comercio.nombre }}</td>
+                    <td>{{ comercio.categorias[0] }}</td>
+                    <td>
+                      <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
+                        <button type="button" class="btn btn-primary">Seleccionar</button>
+                      </a>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-danger" (click)="eliminarComercio(comercio)">X</button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+              <!--final del timeline-->
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
     <div class="row">
-      
-        <!--final de todo el contenido del perfil-->
-      </div>
+      <!--final de todo el contenido del perfil-->
+    </div>
   </form>
 </div>
+
+<div class="container emp-profile" [hidden]="section != 'edit-profile'">
+  <app-editar-usuario 
+    integrarCon="pagina" 
+    titulo="Editar informacion de usuario"
+    id="{{usuarioLogueado.usuario.Id}}">
+  </app-editar-usuario>
+</div>
+
 <app-footer></app-footer>

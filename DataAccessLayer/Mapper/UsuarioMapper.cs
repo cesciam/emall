@@ -180,7 +180,7 @@ namespace DataAccessLayer.Mapper {
             operation.AddVarcharParam(DB_COL_CORREO, u.Correo);
             operation.AddVarcharParam(DB_COL_TELEFONO, u.Telefono);
             
-            if (u.Foto.Id == 0)
+            if (u.Foto == null)
                 operation.AddNullParam(DB_COL_ID_FOTO);
             else
                 operation.AddIntParam(DB_COL_ID_FOTO, u.Foto.Id);

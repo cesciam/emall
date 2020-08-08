@@ -20,8 +20,14 @@
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-lg-12 col-md-12">
           <button type="button" class="btn btn-primary" (click)="agregarUsuario()">Registrar nuevo</button><br><br>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." name="filtroUsuarios" [(ngModel)]="filtroUsuarios"><br>
         </div>
       </div>
 
@@ -39,7 +45,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let usuario of usuarios" [ngClass]="{ 'disabled': usuario.Estado == 0 }">
+              <tr *ngFor="let usuario of usuarios | filtroUsuario:filtroUsuarios" [ngClass]="{ 'disabled': usuario.Estado == 0 }">
                 <td>{{usuario.Id}}</td>
                 <td class="d-none d-sm-block">{{usuario.Cedula}}</td>
                 <td>{{usuario.Nombre}} {{ usuario.Apellido }}</td>
@@ -61,7 +67,7 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+      </div>
+    </div>
 
 <app-footer></app-footer>

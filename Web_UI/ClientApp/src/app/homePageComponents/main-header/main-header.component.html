@@ -6,7 +6,7 @@
           <div class="header__top__left">
             <ul>
               <li *ngIf="usuarioLogueado != null">
-                <i class="fa fa-envelope"></i>{{ usuarioLogueado.usuario.Correo }}
+                <i class="fa fa-envelope"></i> {{ usuarioLogueado.usuario.Correo }}
               </li>
               <li>#QuédateEnCasa</li>
             </ul>
@@ -63,17 +63,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="header__top__right__auth">
-              <a [routerLink]="['/dashboard-comercio']">Dashboard Comercio</a>
-              <a [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
-
-              <a [routerLink]="['/autenticacion']" *ngIf="usuarioLogueado == null"><i class="fa fa-user"></i> Iniciar sesión</a>
-              <span *ngIf="usuarioLogueado != null">
-                <i class="fa fa-user"></i> {{ usuarioLogueado.usuario.Nombre }} {{ usuarioLogueado.usuario.Apellido }}
-                <a href="#" (click)="logout()">Cerrar Sesión</a>
-              </span>
-            </div> -->
           </div>
         </div>
       </div>

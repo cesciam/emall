@@ -10,10 +10,9 @@
       <div id="register" *ngIf="!editComplete">
         <div class="row">
           <div class="col-lg-10 col-md-10">
-            <h1 *ngIf="integrarCon == null">Usuario</h1>
-            <h1 *ngIf="integrarCon == 'pagina'">Ya casi estamos listos</h1>
+            <h1>{{tituloAMostrar}}</h1>
             <p *ngIf="integrarCon == null">Editar los datos del usuario</p>
-            <p *ngIf="integrarCon == 'pagina'">Por favor, completa el siguiente formulario con sus datos personales</p>
+            <p *ngIf="integrarCon == 'pagina'">Completa el siguiente formulario con sus datos personales</p>
           </div>
           <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
             <a [routerLink]="['../../listar-usuario']">Volver atras</a>
@@ -197,10 +196,11 @@
 
       <div class="row justify-content-lg-center justify-content-md-center" *ngIf="editComplete">
         <div class="form-group col-lg-12 col-md-12 register-complete">
-          <h1>Bienvenido!</h1>
-          <p>Tus datos han sido guardados.</p>
-          <p>Tu cuenta ha sido activada correctamente. Ya puedes usar nuestra plataforma por completo</p>
-          <p><a [routerLink]="['']">Haz click aqui para continuar</a></p>
+          <h1 *ngIf="titulo == 'Ya casi estamos listos'">Bienvenido!</h1>
+          <h1 *ngIf="titulo != null && titulo != 'Ya casi estamos listos'">Completado</h1>
+          <p>Tus datos han sido guardados exitosamente.</p>
+          <p *ngIf="titulo == 'Ya casi estamos listos'">Tu cuenta ha sido activada correctamente. Ya puedes usar nuestra plataforma por completo</p>
+          <p *ngIf="titulo == 'Ya casi estamos listos'"><a [routerLink]="['']">Haz click aqui para continuar</a></p>
         </div>
       </div>
     </div>
