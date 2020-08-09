@@ -128,7 +128,7 @@
           <input class="col-4" type="checkbox" name="{{sucursal.id}}" [value]="sucursal.id" (change)="marcar($event, sucursal.id)">
           <div *ngIf="tipo.value=='Producto' && sucursalesSeleccionadas.includes(sucursal.id)">
             <label class="col-4" for="inventario{{sucursal.id}}">Inventario</label>
-            <input class="col-4" type="number" name="inventario{{sucursal.id}}">
+            <input id="inventario{{sucursal.id}}" class="col-4" type="number" name="inventario{{sucursal.id}}">
           </div>
 
 
@@ -171,12 +171,12 @@
               <div class="btn btn-mdb-color btn-rounded float-left">
                 <div>
                   <label for="file-upload" style="cursor: pointer" class="btn btn-outline-secondary">
-                    <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
+                    <input style="display:none;" id="file-upload" type="file" ng2FileSelect [uploader]="uploader" (change)="upload()"/>
                     Elegir foto
                   </label>
                 </div>
 
-                <button class="btn btn-primary" [disabled]="loading" (click)="upload()">Cargar</button>
+                <!--<button class="btn btn-primary" [disabled]="loading" (click)="upload()">Cargar</button>-->
               </div>
             </div>
 

@@ -57,6 +57,19 @@ export class ItemCrearComponent implements OnInit {
     this.item = new Item();
   }
 
+  upload() {
+    this.uploader.uploadAll();
+
+    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
+      let res;
+      res = JSON.parse(response);
+     
+      this.foto = res.url;
+      console.log(this.foto);
+      return res;
+    };
+  }
+
 
   llenar() {
     this.serviceSucursal.ObtenerTodoSucursales(this.comercio)
@@ -80,56 +93,49 @@ export class ItemCrearComponent implements OnInit {
 
   ngOnInit() {
     this.llenar();
-
-
   }
 
 
   crearItem() {
-    //this.item.id_impuesto = Number((document.getElementById("id_impuesto") as HTMLInputElement).value)
-    //this.item.id_impuesto = Number(this.item.id_impuesto)
-    //this.item.id_foto = 1;
 
-    var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
-    console.log(e);
-    var sel = e.selectedIndex;
+    
 
-    if (sel == -1) {
-      this.error = "Errores en el impuesto";
-    } else {
-      this.item.id_impuesto = this.impuestos[(sel - 1)].Id;
-      console.log(this.item.id_impuesto);
+    for (let i = 0; i < this.sucursalesSeleccionadas.length; i++) {
+
+      let value = this.sucursalesSeleccionadas[i];
+      var tmp_inventario = (document.getElementById("inventario" + value)) as HTMLInputElement;
+      this.item.inventario = Number(tmp_inventario.value);
+      this.item.id_sucursal = this.sucursalesSeleccionadas[i];
+      this.item.id_foto = this.foto;
+      var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
+      var sel = e.selectedIndex;
+
+      if (sel == -1) {
+        this.error = "Errores en el impuesto";
+      } else {
+        this.item.id_impuesto = this.impuestos[(sel)].Id;
+      }
+
+
+      console.log(this.item);
+      this.service.crearItem(this.item)
+        .subscribe(
+          (reponse) => {
+            this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
+          },
+          (error) => {
+            this.error = "Errores en el registro";
+            window.scroll(0, 0);
+          });
+
     }
 
 
-    //var opt = e.options[sel];
-    //var CurValue = (<HTMLOptionElement>opt).value;
-    //this.item.id_impuesto = this.impuestos[(sel - 1)].Id;
 
-    this.item.id_sucursal = this.sucursal;
-    this.item.id_foto = this.foto;
-    console.log(this.item.id_impuesto);
-    this.service.crearItem(this.item)
-      .subscribe(
-        (reponse) => this.router.navigate(['item-sucursal', this.sucursal]),
-        (error) => {
-          this.error = "Errores en el registro";
-          window.scroll(0, 0);
-        });
+    
   }
 
-  upload() {
-    this.uploader.uploadAll();
-
-    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
-      let res;
-      res = JSON.parse(response);
-      console.log(res);
-      this.foto = res.url;
-      
-      return res;
-    };
-  }
+  
 
 
 
