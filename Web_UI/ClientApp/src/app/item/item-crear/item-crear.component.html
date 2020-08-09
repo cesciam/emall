@@ -8,7 +8,7 @@
 
   <div class="pt-3 px-4">
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-      <h1 class="h2">Agregar Item</h1>
+      <h1 class="h2">Agregar ítem</h1>
     </div>
 
 
@@ -35,11 +35,11 @@
 
         <div class="form-row mb-4">
           <div class="col">
-            <label for="descripcion">Descripcion</label>
+            <label for="descripcion">Descripción</label>
             <input id="descripcion" name="descripcion" class="form-control" [(ngModel)]="item.descripcion" #descripcion="ngModel" type="text" required>
             <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
               <div *ngIf="descripcion.errors.required">
-                La descripcion es requerida.
+                La descripción es requerida.
               </div>
             </div>
           </div>
@@ -81,11 +81,11 @@
             </div>
           </div>
           <div class="col" *ngIf="tipo.value!='Producto'; else ItemProducto">
-            <label for="duracion">Duracion en minutos</label>
+            <label for="duracion">Duración en minutos</label>
             <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" required>
             <div *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)" class="alert alert-danger">
               <div *ngIf="duracion.errors.required">
-                La duracion es requerida para el servicio.
+                La duración es requerida para el servicio.
               </div>
             </div>
           </div>
@@ -142,11 +142,11 @@
 
           <div>
             <div *ngIf="(nombre.valid && descripcion.valid && precio.valid && inventario.valid && tipo.valid && id_impuesto.valid); else noValido">
-              <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()">Crear Item</button>
+              <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()">Crear ítem</button>
             </div>
 
             <ng-template #noValido>
-              <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Crear Item</button>
+              <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Crear ítem</button>
             </ng-template>
 
           </div>
@@ -163,7 +163,7 @@
 
 <ng-template #ItemProducto>
   <div class="col">
-    <label for="duracion">Duracion en minutos</label>
+    <label for="duracion">Duración en minutos</label>
     <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" value="0" required readonly>
 
   </div>
