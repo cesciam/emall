@@ -33,6 +33,8 @@ namespace AppCore {
                     return 0;
             }
 
+            string token = TokenGenerator.Generar(8);
+
             Usuario nuevoUsuario = new Usuario {
                 Id = 0,
                 Cedula = registro.Cedula,
@@ -45,8 +47,8 @@ namespace AppCore {
                 Foto = registro.Foto,
                 CorreoConfirmado = 0,
                 TelefonoConfirmado = 0,
-                CodigoTelefono = TokenGenerator.Generar(8),
-                CodigoCorreo = TokenGenerator.Generar(8),
+                CodigoTelefono = token,
+                CodigoCorreo = token,
             };
 
             int nuevoUsuarioId = this.crudUsuario.Insert(nuevoUsuario);
@@ -69,6 +71,9 @@ namespace AppCore {
                     Subject = "Activa tu cuenta en Emall",
                     Message = "<p>Activa tu cuenta con el codigo: <strong>" + nuevoUsuario.CodigoCorreo + "</strong></p>" + empleadoMensaje
                 });
+
+                if (!String.IsNullOrEmpty(nuevoUsuario.Telefono))
+                    Utils.Sms.Enviar(nuevoUsuario.Telefono, "Activa tu cuenta en Emall con el codigo: " + nuevoUsuario.CodigoCorreo);
             } else {
                 this.errorResult.message = "Error general al registrar el usuario. Vuelva a intertarlo en unos minutos.";
             }
@@ -103,6 +108,9 @@ namespace AppCore {
                     Message = "<p>Tu contraseña ha sido reestablecida, ingresa en el sitio con la siguiente contraseña:</p>" +
                               "<p>" + nuevaContrasena + "</p>"
                 });
+
+                if (!String.IsNullOrEmpty(usuario.Telefono))
+                    Utils.Sms.Enviar(usuario.Telefono, "Tu nueva contraseña en Emall: " + nuevaContrasena);
 
                 return true;
             } else {
