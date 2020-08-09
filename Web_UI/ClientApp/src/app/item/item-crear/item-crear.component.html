@@ -1,5 +1,5 @@
 <app-main-header></app-main-header>
-<div class="container" *ngIf="sucursal">
+<div class="container" *ngIf="comercio">
 
   <!--<div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/item-sucursal', sucursal]">Volver atras</a>
@@ -55,12 +55,24 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <!--<div class="col">
             <label for="inventario">Inventario</label>
             <input id="inventario" name="inventario" class="form-control" [(ngModel)]="item.inventario" #inventario="ngModel" type="number" required>
             <div *ngIf="inventario.invalid && (inventario.dirty || inventario.touched)" class="alert alert-danger">
               <div *ngIf="inventario.errors.required">
                 El inventario es requerido.
+              </div>
+            </div>
+          </div>-->
+          <div class="col">
+            <label for="id_impuesto">Impuesto</label>
+            <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="item.id_impuesto" #id_impuesto="ngModel" type="number" required>
+              <!--<option value=""></option>-->
+              <option *ngFor="let imp of impuestos" value="imp.Id">{{imp.Nombre}} - {{imp.Porcentaje}}%</option>
+            </select>
+            <div *ngIf="id_impuesto.invalid && (id_impuesto.dirty || id_impuesto.touched)" class="alert alert-danger">
+              <div *ngIf="id_impuesto.errors.required">
+                El impuesto es requerido.
               </div>
             </div>
           </div>
@@ -70,7 +82,7 @@
           <div class="col">
             <label for="tipo">Tipo</label>
             <select id="tipo" name="tipo" class="form-control" [(ngModel)]="item.tipo" #tipo="ngModel" type="text" required>
-              <option value=""></option>
+              <!--<option value=""></option>-->
               <option value="Producto">Producto</option>
               <option value="Servicio">Servicio</option>
             </select>
@@ -80,7 +92,20 @@
               </div>
             </div>
           </div>
-          <div class="col" *ngIf="tipo.value!='Producto'; else ItemProducto">
+          <!--<div class="col" *ngIf="tipo.value!='Producto'; else ItemProducto">
+            <label for="duracion">Duracion en minutos</label>
+            <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" required>
+            <div *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)" class="alert alert-danger">
+              <div *ngIf="duracion.errors.required">
+                La duracion es requerida para el servicio.
+              </div>
+            </div>
+          </div>-->
+        </div>
+
+
+        <div class="form-row mb-4" *ngIf="tipo.value=='Servicio'">
+          <div class="col">
             <label for="duracion">Duracion en minutos</label>
             <input id="duracion" name="duracion" class="form-control" [(ngModel)]="item.duracion" #duracion="ngModel" type="number" required>
             <div *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)" class="alert alert-danger">
@@ -91,8 +116,26 @@
           </div>
         </div>
 
+
+
+
+        <div class="col">
+            <h3>Sucursales</h3>
+          </div>
+
+        <div class="form-row mb-4" *ngFor="let sucursal of sucursales">
+          <label class="col-4" for="{{sucursal.id}}">{{sucursal.nombre}}</label>
+          <input class="col-4" type="checkbox" name="{{sucursal.id}}" [value]="sucursal.id" (change)="marcar($event, sucursal.id)">
+          <div *ngIf="tipo.value=='Producto' && sucursalesSeleccionadas.includes(sucursal.id)">
+            <label class="col-4" for="inventario{{sucursal.id}}">Inventario</label>
+            <input class="col-4" type="number" name="inventario{{sucursal.id}}">
+          </div>
+
+
+        </div>
+
         <div class="form-row mb-4">
-          <div class="col">
+          <!--<div class="col">
             <label for="id_impuesto">Impuesto</label>
             <select id="id_impuesto" name="id_impuesto" class="form-control" [(ngModel)]="item.id_impuesto" #id_impuesto="ngModel" type="number" required>
               <option value=""></option>
@@ -103,12 +146,17 @@
                 El impuesto es requerido.
               </div>
             </div>
-          </div>
+          </div>-->
 
-          <div class="col">
+          <!--<div class="col">
             <label for="id_sucursal">Sucursal</label>
             <input id="id_sucursal" name="id_sucursal" class="form-control" [(ngModel)]="sucursal" #id_sucursal="ngModel" type="number" value="{{sucursal}}" required readonly>
-          </div>
+          </div>-->
+
+          
+
+
+          
 
         </div>
 
@@ -141,7 +189,7 @@
         <div class="container-fluid">
 
           <div>
-            <div *ngIf="(nombre.valid && descripcion.valid && precio.valid && inventario.valid && tipo.valid && id_impuesto.valid); else noValido">
+            <div *ngIf="(nombre.valid && descripcion.valid && precio.valid && tipo.valid && id_impuesto.valid); else noValido">
               <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()">Crear Item</button>
             </div>
 
