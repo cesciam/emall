@@ -52,7 +52,7 @@
             <td>{{ item.inventario }} uds</td>
             <!--<td><button class="btn btn-primary" [routerLink]="['/transaction-create', account.id_account, 'Debit']"> Debit </button></td>-->
             <td><button class="btn btn-primary" [routerLink]="['/item-editar', item.id]"> Editar </button></td>
-            <td><button class="btn btn-danger" (click)="delete(item.id)">X</button></td>
+            <td><button class="btn btn-danger" (click)="delete(item.id)"><i class="fas fa-trash-alt"></i></button></td>
           </tr>
         </tbody>
       </table>
