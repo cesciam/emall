@@ -41,6 +41,8 @@ export class ItemCrearComponent implements OnInit {
   sucursalesSeleccionadas: Array<number>;
 
 
+
+
   uploader: CloudinaryUploader;
   private foto: string;
 
@@ -65,7 +67,6 @@ export class ItemCrearComponent implements OnInit {
       res = JSON.parse(response);
      
       this.foto = res.url;
-      console.log(this.foto);
       return res;
     };
   }
@@ -81,13 +82,11 @@ export class ItemCrearComponent implements OnInit {
   }
 
   marcar(e: any, id: number) {
-    console.log(id);
     if (e.target.checked) {
       this.sucursalesSeleccionadas.push(id)
     } else {
       this.sucursalesSeleccionadas = this.sucursalesSeleccionadas.filter(m => m != id)
     }
-    console.log(this.sucursalesSeleccionadas);
   }
 
 
@@ -98,41 +97,71 @@ export class ItemCrearComponent implements OnInit {
 
   crearItem() {
 
-    
+    if (this.item.tipo == 'Producto') {
+      for (let i = 0; i < this.sucursalesSeleccionadas.length; i++) {
 
-    for (let i = 0; i < this.sucursalesSeleccionadas.length; i++) {
+        let value = this.sucursalesSeleccionadas[i];
+        var tmp_inventario = (document.getElementById("inventario" + value)) as HTMLInputElement;
+        this.item.inventario = Number(tmp_inventario.value);
+        this.item.id_sucursal = this.sucursalesSeleccionadas[i];
+        this.item.id_foto = this.foto;
+        var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
+        var sel = e.selectedIndex;
 
-      let value = this.sucursalesSeleccionadas[i];
-      var tmp_inventario = (document.getElementById("inventario" + value)) as HTMLInputElement;
-      this.item.inventario = Number(tmp_inventario.value);
-      this.item.id_sucursal = this.sucursalesSeleccionadas[i];
-      this.item.id_foto = this.foto;
-      var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
-      var sel = e.selectedIndex;
+        if (sel == -1) {
+          this.error = "Errores en el impuesto";
+        } else {
+          this.item.id_impuesto = this.impuestos[(sel)].Id;
+        }
 
-      if (sel == -1) {
-        this.error = "Errores en el impuesto";
-      } else {
-        this.item.id_impuesto = this.impuestos[(sel)].Id;
+
+        
+        this.service.crearItem(this.item)
+          .subscribe(
+            (reponse) => {
+              this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
+            },
+            (error) => {
+              this.error = "Errores en el registro";
+              window.scroll(0, 0);
+            });
+
       }
 
+    } else if (this.item.tipo == 'Servicio') {
+      for (let i = 0; i < this.sucursalesSeleccionadas.length; i++) {
+        
+        this.item.inventario = 0;
+        this.item.id_sucursal = this.sucursalesSeleccionadas[i];
+        this.item.id_foto = this.foto;
+        var e = (document.getElementById("id_impuesto")) as HTMLSelectElement;
+        var sel = e.selectedIndex;
 
-      console.log(this.item);
-      this.service.crearItem(this.item)
-        .subscribe(
-          (reponse) => {
-            this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
-          },
-          (error) => {
-            this.error = "Errores en el registro";
-            window.scroll(0, 0);
-          });
+        if (sel == -1) {
+          this.error = "Errores en el impuesto";
+        } else {
+          this.item.id_impuesto = this.impuestos[(sel)].Id;
+        }
+
+
+        
+        this.service.crearItem(this.item)
+          .subscribe(
+            (reponse) => {
+              this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
+            },
+            (error) => {
+              this.error = "Errores en el registro";
+              window.scroll(0, 0);
+            });
+
+      }
 
     }
 
 
 
-    
+
   }
 
   
