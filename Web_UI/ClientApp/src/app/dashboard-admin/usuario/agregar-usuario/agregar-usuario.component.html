@@ -14,12 +14,12 @@
             <p>Ingrese los siguientes datos</p>
           </div>
           <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
-            <a [routerLink]="['../listar-usuario']">Volver atras</a>
+            <a [routerLink]="['../listar-usuario']">Volver atrás</a>
           </div>
         </div>
 
         <div *ngIf="submitted && usuarioForm.invalid" class="alert alert-danger col-lg-12" role="alert">
-          * Existen algunos datos invalidos. Por favor corrija los datos de los controles marcados en rojo
+          * Existen algunos datos inválidos. Por favor corrija los datos de los controles marcados en rojo
         </div>
 
         <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
@@ -112,7 +112,7 @@
 
           <div class="row">
             <div class="form-group col-lg-4 col-md-4">
-              <label for="cedula">Cedula</label>
+              <label for="cedula">Cédula</label>
               <input type="text"
                      class="form-control"
                      name="cedula"
@@ -122,12 +122,12 @@
                      mask="0 0000 0000"
                      [ngClass]="{ 'is-invalid': submitted && f.Cedula.errors }">
               <div *ngIf="submitted && f.Cedula.errors" class="invalid-feedback">
-                <div *ngIf="f.Cedula.errors.required">Cedula es requerida</div>
+                <div *ngIf="f.Cedula.errors.required">Cédula es requerida</div>
               </div>
             </div>
 
             <div class="form-group col-lg-4 col-md-4">
-              <label for="telefono">Telefono</label>
+              <label for="telefono">Teléfono</label>
               <input type="text"
                      class="form-control"
                      name="telefono"
@@ -136,12 +136,12 @@
                      required mask="0000-0000"
                      [ngClass]="{ 'is-invalid': submitted && f.Telefono.errors }">
               <div *ngIf="submitted && f.Telefono.errors" class="invalid-feedback">
-                <div *ngIf="f.Telefono.errors.required">Telefono es requerido</div>
+                <div *ngIf="f.Telefono.errors.required">Teléfono es requerido</div>
               </div>
             </div>
 
             <div [hidden]="integrarCon == 'pagina'" class="form-group col-lg-4 col-md-4">
-              <label for="tipo">Tipo de Usuario</label>
+              <label for="tipo">Tipo de usuario</label>
               <select class="form-control"
                       name="tipo"
                       id="tipo"
@@ -151,7 +151,7 @@
                 <option value=""></option>
                 <option value="1">Administrador</option>
                 <option value="2" [selected]="integrarCon == 'pagina'">Cliente</option>
-                <option value="3">Administrador de Comercio</option>
+                <option value="3">Administrador de comercio</option>
                 <option value="4">Empleado</option>
               </select>
               <div *ngIf="submitted && f.Tipo.errors" class="invalid-feedback">
@@ -175,11 +175,11 @@
                      (change)="validarFoto(fotoInput.files)">
 
               <div *ngIf="f.Foto.errors" class="invalid-feedback">
-                <div *ngIf="f.Foto.errors.pattern">Imagen no valida (Formatos permitidos: gif, jpg, jpeg, bmp, png, webp, tiff, eps)</div>
+                <div *ngIf="f.Foto.errors.pattern">Imagen no válida (Formatos permitidos: gif, jpg, jpeg, bmp, png, webp, tiff, eps)</div>
               </div>
             </div>
             <div class="form-group col-lg-3 col-md-3" *ngIf="imgUrl">
-              <label for="foto">Foto Preview</label><br>
+              <label for="foto">Previsualización de la foto</label><br>
               <img [src]="imgUrl" alt="Foto" id="foto-preview" title="Foto" class="rounded" height="100">
             </div>
           </div>
@@ -196,8 +196,8 @@
       <div class="row justify-content-lg-center justify-content-md-center" *ngIf="registerComplete">
         <div class="form-group col-lg-12 col-md-12 register-complete">
           <h1>Registro Completado</h1>
-          <p>Gracias por registrarte en nuestro sitio!!!</p>
-          <p>Un mensaje fue enviado a la cuenta de correo proporcionada con los pasos necesarios para la activacion de tu cuenta.</p>
+          <p>¡Gracias por registrarte en nuestro sitio!</p>
+          <p>Un mensaje fue enviado a la cuenta de correo proporcionada con los pasos necesarios para la activación de tu cuenta.</p>
         </div>
       </div>
     </div>
