@@ -14,4 +14,8 @@ export class HorarioService {
     crearHorario(formData: Horario){
       return this.http.post(this.baseUrl+'/Horario/Create', formData);
     }
+
+    obtenerTodoHorario(){
+      return this.http.get(this.baseUrl+'Horario/RetrieveAll');
+    }
 }

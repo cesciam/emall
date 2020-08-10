@@ -18,7 +18,6 @@ export class AgregarHorarioComponent implements OnInit {
   }
 
   onSubmit(formData : NgForm){
-    this.service.crearHorario(formData.value).subscribe()
     console.log(formData.value)
   }
 
@@ -32,7 +31,7 @@ export class AgregarHorarioComponent implements OnInit {
       tipo_horario:'',
       hora_inicio:'',
       hora_fin:'',
-      id_usuario:10
+      id_usuario:-1
     }
   }
 }

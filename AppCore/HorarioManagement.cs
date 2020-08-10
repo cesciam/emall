@@ -23,11 +23,12 @@ namespace AppCore
                 id = h.id,
                 fecha = DateTime.Parse(h.fecha+ "T00:00:00"),
                 tipo_horario = h.tipo_horario,
-                hora_inicio = DateTime.Parse("0000-00-00T"+h.hora_inicio+ ":00"),
-                hora_fin = DateTime.Parse("0000-00-00T" + h.hora_fin + ":00"),
+                hora_inicio = DateTime.Parse("2020-12-12T"+h.hora_inicio+ ":00"),
+                hora_fin = DateTime.Parse("2020-12-12T" + h.hora_fin + ":00"),
                 id_usuario = h.id_usuario
             };
-            if (horario.id_usuario != 0)
+            Console.WriteLine(horario.GetEntityInformation());
+            if (horario.id_usuario != -1)
             {
                 crud.CreateWithUser(horario);
             }
