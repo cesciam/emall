@@ -11,7 +11,7 @@
         </div>
 
         <div *ngIf="submitted && promocionForm.invalid" class="alert alert-danger col-lg-12" role="alert">
-            * Existen algunos datos invalidos. Por favor corrija los datos de los controles marcados en rojo
+            * Existen algunos datos inválidos. Por favor corrija los datos de los controles marcados en rojo.
         </div>
 
         <form [formGroup]="promocionForm" (ngSubmit)="onSubmit()">
@@ -33,7 +33,7 @@
                 
 
                 <div class="form-group col-sm">
-                    <label for="codigo">Codigo</label>
+                    <label for="codigo">Código</label>
                     <input type="text"
                             class="form-control"
                             name="codigo"
@@ -43,7 +43,7 @@
                             required
                             [ngClass]="{'is-invalid': submitted && f.codigo.errors}">
                         <div *ngIf="submitted && f.codigo.errors" class="invalid-feedback">
-                            <div *ngIf="f.codigo.errors.required">Codigo es requerido</div>
+                            <div *ngIf="f.codigo.errors.required">Código es requerido</div>
                         </div>
                 </div>
             </div>

@@ -11,13 +11,13 @@
   </div>-->
   <div class="pt-3 px-4">
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-      <h1 class="h2">Items de sucursal</h1>
+      <h1 class="h2">Ítems de sucursal</h1>
     </div>
 
     <div class="col-xl-3 col-md-6" style="cursor: pointer">
       <a style="text-decoration: none" [routerLink]="['/item-crear', sucursal_id]">
         <div class="card text-white mb-4">
-          <div class="card-body btn-primary">Agregar Item</div>
+          <div class="card-body btn-primary">Agregar ítem</div>
         </div>
         
       </a>
@@ -30,12 +30,12 @@
       <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="items_sucursal">
         <thead>
           <tr>
-            <th>Id Item</th>
+            <th>Id ítem</th>
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Precio</th>
             <th>Tipo</th>
-            <th>Duracion</th>
+            <th>Duración</th>
             <th>Impuesto</th>
             <th>Inventario</th>
           </tr>
