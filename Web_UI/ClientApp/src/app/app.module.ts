@@ -93,7 +93,8 @@ import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 import { ListarHorarioComponent } from './horario/listar-horario/listar-horario.component';
 import { AgregarHorarioComponent } from './horario/agregar-horario/agregar-horario.component';
-import { FiltroHorarioPipe } from './filtro-horario.pipe';
+import { FiltroHorarioPipe } from './pipes/filtro-horario.pipe';
+import { AgregarHorarioSucursalComponent } from './horario/agregar-horario-sucursal/agregar-horario-sucursal.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -183,6 +184,7 @@ const maskConfig: Partial<IConfig> = {
     ListarHorarioComponent,
     AgregarHorarioComponent,
     FiltroHorarioPipe,
+    AgregarHorarioSucursalComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -250,6 +252,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
       { path: 'agregar-horario', component: AgregarHorarioComponent },
       { path: 'listar-horario', component: ListarHorarioComponent },
+      { path: 'agregar-horario-sucursal/:id_comercio', component: AgregarHorarioSucursalComponent },
     ])
   ],
   exports: [

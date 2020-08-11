@@ -14,7 +14,8 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_HORA_INICIO = "HORA_INICIO";
         private const string DB_COL_HORA_FIN = "HORA_FIN";
         private const string DB_COL_ID_USUARIO = "ID_USUARIO";
-        
+        private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
+
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var horario = new Horario
@@ -24,7 +25,8 @@ namespace DataAccessLayer.Mapper
                 tipo_horario = GetStringValue(row, DB_COL_TIPO_HORARIO),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
                 hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
-                id_usuario = GetIntValue(row, DB_COL_ID_USUARIO)
+                id_usuario = GetIntValue(row, DB_COL_ID_USUARIO),
+                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
             };
             return horario;
         }
@@ -62,6 +64,7 @@ namespace DataAccessLayer.Mapper
             operation.AddVarcharParam(DB_COL_TIPO_HORARIO, h.tipo_horario);
             operation.AddDateParam(DB_COL_HORA_INICIO, h.hora_inicio);
             operation.AddDateParam(DB_COL_HORA_FIN, h.hora_fin);
+            operation.AddIntParam(DB_COL_ID_SUCURSAL, h.id_sucursal);
             return operation;
         }
 
@@ -97,6 +100,7 @@ namespace DataAccessLayer.Mapper
             operation.AddDateParam(DB_COL_HORA_INICIO, h.hora_inicio);
             operation.AddDateParam(DB_COL_HORA_FIN, h.hora_fin);
             operation.AddIntParam(DB_COL_ID_USUARIO, h.id_usuario);
+            operation.AddIntParam(DB_COL_ID_SUCURSAL, h.id_sucursal);
             return operation;
         }
     }

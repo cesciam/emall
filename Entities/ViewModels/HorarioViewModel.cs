@@ -12,6 +12,7 @@ namespace Entities.ViewModels
         public string hora_inicio { get; set; }
         public string hora_fin { get; set; }
         public int id_usuario { get; set; }
+        public int id_sucursal { get; set; }
 
     }
 }

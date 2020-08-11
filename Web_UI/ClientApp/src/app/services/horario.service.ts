@@ -16,6 +16,7 @@ export class HorarioService {
     }
 
     obtenerTodoHorario(){
-      return this.http.get(this.baseUrl+'Horario/RetrieveAll');
+      let endpointUrl = this.baseUrl + '/Horario/RetrieveAll';
+      return this.http.get<Horario[]>(endpointUrl);
     }
 }

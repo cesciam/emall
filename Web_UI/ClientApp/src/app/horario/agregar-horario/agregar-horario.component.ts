@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Horario } from 'src/app/models/horario.model';
-import { HorarioService } from 'src/app/services/horario.service';
 import { NgForm } from '@angular/forms';
+import { HorarioService } from 'src/app/services/horario.service';
 
 @Component({
   selector: 'app-agregar-horario',
@@ -31,7 +31,8 @@ export class AgregarHorarioComponent implements OnInit {
       tipo_horario:'',
       hora_inicio:'',
       hora_fin:'',
-      id_usuario:-1
+      id_usuario:-1,
+      id_sucursal:0
     }
   }
 }
