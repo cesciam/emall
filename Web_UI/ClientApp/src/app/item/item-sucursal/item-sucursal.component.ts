@@ -19,12 +19,12 @@ export class ItemSucursalComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private itemservice: ItemService, private router: Router) {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
-    //this.sucursal_id = 1;
+    
   }
 
   ngOnInit() {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
-    //this.sucursal_id = 1;
+    
     this.llenarItems();
     
   }
@@ -36,17 +36,7 @@ export class ItemSucursalComponent implements OnInit {
     );
   }
 
-  //delete(id: number): void {
-  //  this.itemservice.deleteItem(id)
-  //    .subscribe(
-  //      (data: void) => {
-  //        let index: number = this.items_sucursal.findIndex(item => item.id === id);
-  //        this.items_sucursal.splice(index, 1);
-  //      },
-  //      (err: any) => console.log(err)
-  //    );
-  //  //window.location.reload();
-  //}
+  
 
   delete(id: number): void {
     this.itemservice.deleteItem(id)
@@ -58,13 +48,7 @@ export class ItemSucursalComponent implements OnInit {
           window.scroll(0, 0);
         });
 
-      //(
-      //  (data: void) => {
-      //    let index: number = this.items_sucursal.findIndex(item => item.id === id);
-      //    this.items_sucursal.splice(index, 1);
-      //  },
-      //  (err: any) => console.log(err)
-      //);
+     
   }
 
 

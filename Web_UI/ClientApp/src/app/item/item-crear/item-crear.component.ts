@@ -1,23 +1,14 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Item } from '../../models/item';
-import { getBaseUrl } from '../../../main';
 import { ItemService } from '../../services/item.service';
 import { ImpuestoService } from '../../services/impuesto.service';
 import { SucursalService } from '../../services/sucursal.service';
-import { async } from '@angular/core/testing';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../../config';
-import { Archivo } from '../../models/Archivo';
 import { Router } from "@angular/router";
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Sucursal } from '../../models/Sucursal';
 import { ActivatedRoute } from '@angular/router';
-import { parse } from 'ts-node';
 import { Impuesto } from '../../models/impuesto.model';
-import { Comercio } from '../../models/Comercio';
 
 @Component({
   selector: 'app-item-crear',
@@ -95,7 +86,6 @@ export class ItemCrearComponent implements OnInit {
       let numero = Number(tmp_inventario.value);
       this.inventarios.splice(tmp_num2, 1)
       this.inventarios.splice(tmp_num2, 1)
-      console.log(this.inventarios)
     }
   }
 
@@ -104,12 +94,10 @@ export class ItemCrearComponent implements OnInit {
     
     var tmp_inventario = (document.getElementById("inventario" + id)) as HTMLInputElement;
     let numero = Number(tmp_inventario.value);
-    console.log(numero)
-    console.log(id)
 
     let tmp_num2 = this.inventarios.indexOf(id)
 
-    console.log(tmp_num2)
+   
 
     if (tmp_num2 != -1 && numero > 0) {
       this.inventarios[tmp_num2 + 1] = numero;
@@ -119,14 +107,11 @@ export class ItemCrearComponent implements OnInit {
       this.inventarios.push(numero)
       console.log(this.inventarios)
     } else if (tmp_num2 != -1 && numero <= 0) {
-      //let tmp_num = this.inventarios.indexOf(id)
+      
       this.inventarios.splice(tmp_num2, 1)
       this.inventarios.splice(tmp_num2, 1)
       console.log(this.inventarios)
-      //if (tmp_num > -1) {
-      //  this.inventarios.splice(tmp_num, 1)
-      //  console.log(this.inventarios)
-      //}
+      
     }
 
 
@@ -139,7 +124,7 @@ export class ItemCrearComponent implements OnInit {
 
     var tmp_duracion = (document.getElementById("duracion")) as HTMLInputElement;
     this.dura = Number(tmp_duracion.value);
-    console.log(this.dura)
+    
   }
 
   precioadd(e: any) {
@@ -147,7 +132,7 @@ export class ItemCrearComponent implements OnInit {
 
     var tmp_precio = (document.getElementById("precio")) as HTMLInputElement;
     this.precio = Number(tmp_precio.value);
-    console.log(this.precio)
+    
   }
 
 
