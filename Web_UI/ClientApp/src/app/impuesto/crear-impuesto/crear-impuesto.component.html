@@ -3,9 +3,7 @@
 <div class="container">
   <h1>Registro de impuestos</h1>
   
-  <a [routerLink]="['/listar-impuesto']">
-    <button type="button" class="btn btn-primary">Listar impuestos</button>
-  </a>
+ 
   <form [formGroup]="impuestoForm" (ngSubmit)="onSubmit()">
     <fieldset>
 
@@ -27,7 +25,8 @@
           <div *ngIf="f.Porcentaje.errors.required">Porcentaje es requerido</div>
         </div>
       </div>
-      <button class="btn btn-primary" type="submit">Crear impuesto</button>
+      <button class="btn btn-primary" type="submit" data-toggle="modal"
+                data-target="#Modal">Crear impuesto</button>
     </fieldset>
   </form>
 </div>

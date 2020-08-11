@@ -7,7 +7,7 @@
   <div class="row">
 
     <div class="col-sm-1">
-      <a [routerLink]="['/crear-impuesto']">
+      <a [routerLink]="['/dashboard-admin/impuesto/crear']">
         <button type="button" class="btn btn-primary">Registrar</button>
       </a>
     </div>
@@ -35,7 +35,7 @@
         <td>{{impuesto.Nombre}}</td>
         <td>{{impuesto.Porcentaje}}</td>
         <td><button (click)="editar(impuesto)" class="btn btn-secondary">Editar</button></td>
-        <td><button (click)="eliminar(impuesto.Id)" class="btn btn-secondary">X</button></td>
+        <td><button (click)="eliminar(impuesto.Id)" class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button></td>
       </tr>
     </tbody>
   </table>
