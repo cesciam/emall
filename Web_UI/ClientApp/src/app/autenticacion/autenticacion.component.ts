@@ -31,7 +31,7 @@ export class AutenticacionComponent implements OnInit {
     private route: ActivatedRoute,
     private usuarioService: UsuarioService
   ) {
-    this.seccionParam = this.route.snapshot.paramMap.get('seccion');
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {

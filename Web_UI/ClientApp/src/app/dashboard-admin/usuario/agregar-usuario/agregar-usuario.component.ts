@@ -50,13 +50,13 @@ export class AgregarUsuarioComponent implements OnInit {
       ContrasenaConfirmar: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       Telefono: new FormControl('', [Validators.required]),
       Tipo: new FormControl(this.integrarCon == 'pagina' ? '2' : '', [Validators.required]),
-      Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpe?g|bmp|png|webp|tiff|eps)$/igm)])
+      Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpeg|jpg|bmp|png|webp|tiff|eps)$/igm)])
     }, {
         validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
     });
   }
 
-  validarFoto(files) {
+  validarFoto(files: any) {
     this.imgUrl = '';
 
     if (!this.usuarioForm.controls['Foto'].errors) {
@@ -68,7 +68,7 @@ export class AgregarUsuarioComponent implements OnInit {
 
       reader.onload = (_event) => {
         this.imgUrl = reader.result;
-      }
+      };
     }
   }
 
