@@ -49,8 +49,7 @@
             <td *ngIf="promocion.id_comercio > 0; else sinComercio">{{promocion.id_comercio}}</td>
             <td class="d-none d-sm-block" *ngIf="promocion.id_sucursal > 0; else sinSucursal">{{ promocion.id_sucursal }}</td>
             <td>
-              <button class="btn btn-secondary" [routerLink]="['/dashboard-admin/promocion/editar/', promocion.id]">Editar</button>&nbsp;
-              <button class="btn btn-secondary" (click)="eliminar(promocion.id)">X</button>
+              <button class="btn btn-secondary" (click)="eliminar(promocion.id)"><i class="fas fa-trash-alt"></i></button>
             </td>
           </tr>
         </tbody>
