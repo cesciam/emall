@@ -76,9 +76,6 @@ import { EmpleadosPorComercioReporteComponent } from './reportes/empleados-por-c
 import { UsuarioTipoReporteComponent } from './reportes/usuario-tipo-reporte/usuario-tipo-reporte.component';
 import { UsuarioEstadoReporteComponent } from './reportes/usuario-estado-reporte/usuario-estado-reporte.component';
 import { AdminReportesComponent } from './dashboard-admin/admin-reportes/admin-reportes.component';
-import { AdminPromocionesComponent } from './dashboard-admin/admin-promociones/admin-promociones.component';
-import { AdminPromocionesEditComponent } from './dashboard-admin/admin-promociones-edit/admin-promociones-edit.component';
-import { AdminPromocionesRegistrarComponent } from './dashboard-admin/admin-promociones-registrar/admin-promociones-registrar.component';
 import { AdminConfiguracionComponent } from './dashboard-admin/admin-configuracion/admin-configuracion.component';
 import { ItemSucursalClienteComponent } from './item/item-sucursal-cliente/item-sucursal-cliente.component';
 import { LandingPageProductoComponent } from './landingPage/landing-page-producto/landing-page-producto.component';
@@ -162,9 +159,6 @@ const maskConfig: Partial<IConfig> = {
     UsuarioTipoReporteComponent,
     UsuarioEstadoReporteComponent,
     AdminReportesComponent,
-    AdminPromocionesComponent,
-    AdminPromocionesEditComponent,
-    AdminPromocionesRegistrarComponent,
     AdminConfiguracionComponent,
     ItemSucursalClienteComponent,
     LandingPageProductoComponent,
@@ -192,6 +186,7 @@ const maskConfig: Partial<IConfig> = {
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
+      { path: 'autenticacion/:seccion', component: AutenticacionComponent },
       { path: 'agregar-empleado/:comercio', component: AgregarEmpleadoComponent },
       { path: 'listar-empleado/:id_comercio/modificar-empleado/:id', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },
@@ -231,9 +226,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-busqueda/:busqueda', component: ItemBusquedaComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
       { path: 'dashboard-admin/reportes', component: AdminReportesComponent },
-      { path: 'dashboard-admin/promocion', component: AdminPromocionesComponent },
-      { path: 'dashboard-admin/promocion/:id', component: AdminPromocionesEditComponent },
-      { path: 'registrar', component: AdminPromocionesRegistrarComponent },
+      { path: 'dashboard-admin/promocion', component: ListarPromocionComponent },
+      { path: 'dashboard-admin/promocion/editar/:id', component: EditarPromocionComponent },
+      { path: 'dashboard-admin/promocion/agregar', component: RegistrarPromocionComponent },
       { path: 'dashboard-admin/configuracion', component: AdminConfiguracionComponent },
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
