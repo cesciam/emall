@@ -87,7 +87,7 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operacion = new SqlOperation { ProcedureName = "MODIFICAR_PROMOCION" };
+            var operacion = new SqlOperation { ProcedureName = "MODIFICAR_CITA" };
 
             var c = (Cita)entity;
 
