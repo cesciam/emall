@@ -12,7 +12,9 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_ID_ITEM = "ID_ITEM";
         private const string DB_COL_ID_CLIENTE = "ID_CLIENTE";
         private const string DB_COL_ID_EMPLEADO = "ID_EMPLEADO";
-        private const string DB_COL_ID_HORARIO = "ID_HORARIO";
+        private const string DB_COL_FECHA = "FECHA";
+        private const string DB_COL_HORA_INICIO = "HORA_INICIO";
+        private const string DB_COL_HORA_FIN = "HORA_FIN";
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var cita = new Cita
@@ -21,7 +23,9 @@ namespace DataAccessLayer.Mapper
                 id_item = GetIntValue(row, DB_COL_ID_ITEM),
                 id_cliente = GetIntValue(row, DB_COL_ID_CLIENTE),
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
-                id_horario = GetIntValue(row, DB_COL_ID_HORARIO),
+                fecha= GetDateValue(row, DB_COL_FECHA),
+                hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
+                hora_fin= GetDateValue(row, DB_COL_HORA_FIN)
             };
 
             return cita;
@@ -47,8 +51,10 @@ namespace DataAccessLayer.Mapper
 
             operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
             operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
-            operacion.AddIntParam(DB_COL_ID_HORARIO, c.id_horario);
             operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
 
             return operacion;
         }
@@ -81,7 +87,19 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operacion = new SqlOperation { ProcedureName = "MODIFICAR_PROMOCION" };
+
+            var c = (Cita)entity;
+
+            operacion.AddIntParam(DB_COL_ID, c.id);
+            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
+            operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+
+            return operacion;
         }
     }
 }
