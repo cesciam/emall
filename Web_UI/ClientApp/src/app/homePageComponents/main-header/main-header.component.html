@@ -1,3 +1,63 @@
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+  <div class="humberger__menu__logo">
+    <a href="#"><!--<img src="img/logo.png" alt="">--></a>
+  </div>
+  <div class="humberger__menu__cart">
+    <ul>
+      <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+      <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+    </ul>
+    <div class="header__cart__price">item: <span>$150.00</span></div>
+  </div>
+  <div class="humberger__menu__widget">
+    <div class="header__top__right__language">
+      <!--<img src="img/language.png" alt="">-->
+      <div>English</div>
+      <span class="arrow_carrot-down"></span>
+      <ul>
+        <li><a href="#">Spanish</a></li>
+        <li><a href="#">English</a></li>
+      </ul>
+    </div>
+    <div class="header__top__right__auth">
+      <a href="#"><i class="fa fa-user"></i> Login</a>
+    </div>
+  </div>
+  <nav class="humberger__menu__nav mobile-menu">
+    <ul>
+      <li class="active"><a href="./index.html">Home</a></li>
+      <li><a href="./shop-grid.html">Shop</a></li>
+      <li><a href="#">Pages</a>
+        <ul class="header__menu__dropdown">
+          <li><a href="./shop-details.html">Shop Details</a></li>
+          <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+          <li><a href="./checkout.html">Check Out</a></li>
+          <li><a href="./blog-details.html">Blog Details</a></li>
+        </ul>
+      </li>
+      <li><a href="./blog.html">Blog</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="mobile-menu-wrap"></div>
+  <div class="header__top__right__social">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-pinterest-p"></i></a>
+  </div>
+  <div class="humberger__menu__contact">
+    <ul>
+      <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+      <li>Free Shipping for all Order of $99</li>
+    </ul>
+  </div>
+</div>
+<!-- Humberger End -->
+
+<!-- Header Section Begin -->
 <header class="header">
   <div class="header__top">
     <div class="container">
@@ -9,9 +69,6 @@
                 <i class="fa fa-envelope"></i> {{ usuarioLogueado.usuario.Correo }}
               </li>
               <li>#QuédateEnCasa</li>
-              <!--<li *ngIf="usuarioLogueado == null">
-                <a routerLink="['/autenticacion']">Registrarse</a>
-              </li>-->
             </ul>
           </div>
         </div>
@@ -19,52 +76,34 @@
         <!--Acá está el inicio de sesión-->
         <div class="col-lg-6 col-md-6">
           <div class="header__top__right">
-            <div class="header__top__right__auth">
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                  <i class="fa fa-user"></i>
-                  <span *ngIf="usuarioLogueado == null"> Iniciar sesión</span>
-                  <span *ngIf="usuarioLogueado != null">
-                    {{ usuarioLogueado.usuario.Nombre }} 
-                    {{ usuarioLogueado.usuario.Apellido }}
-                  </span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <span *ngIf="usuarioLogueado == null">
-                    <a class="dropdown-item" [routerLink]="['/autenticacion']">
-                      <i class="fa fa-user"></i>
-                      Iniciar sesión
-                    </a>
-                  </span>
-
-                  <span *ngIf="usuarioLogueado != null">
-                    <a class="dropdown-item" [routerLink]="['/perfil-usuario']">{{ usuarioLogueado.usuario.Nombre }}
-                      {{ usuarioLogueado.usuario.Apellido }}</a>
-                    <a class="dropdown-item" href="#" (click)="logout()">Cerrar Sesión</a>
-                  </span>
-
-                  <div class="dropdown-divider"></div>
-                  <div *ngIf="usuarioLogueado">
-                    <span *ngIf="usuarioLogueado.usuario.Tipo==1">
-                      <a class="dropdown-item" [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
-                    </span>
-                    <!-- <span *ngIf="usuarioLogueado.usuario.Tipo==3">
-                      <a class="dropdown-item" [routerLink]="['/perfil-admin-comercio']">Administrar Comercios</a>
-                    </span> -->
-                    <span *ngIf="usuarioLogueado.usuario.Tipo==4">
-                      <a class="dropdown-item" [routerLink]="['/dashboard-comercio']"
-                         [queryParams]="{comercio: id_comercio}" >Comercio</a>
-                    </span>
-                  </div>
-
-
-                </div>
-              </div>
+            <div class="header__top__right__language">
+              <i class="fa fa-user"></i> &nbsp;
+              <div *ngIf="usuarioLogueado == null">Iniciar Sesión</div>
+              <div *ngIf="usuarioLogueado != null">{{ usuarioLogueado.usuario.Nombre }} {{ usuarioLogueado.usuario.Apellido }}</div>
+              <span class="arrow_carrot-down"></span>
+              <ul>
+                <li *ngIf="usuarioLogueado == null">
+                  <a [routerLink]="['/autenticacion/login']">Iniciar sesión</a>
+                </li>
+                <li *ngIf="usuarioLogueado != null">
+                  <a [routerLink]="['/perfil-usuario']">Ver mi perfil</a>
+                </li>
+                <li *ngIf="usuarioLogueado?.usuario?.Tipo==1">
+                  <a [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
+                </li>
+                <li *ngIf="usuarioLogueado?.usuario?.Tipo==3">
+                  <a [routerLink]="['/perfil-admin-comercio']">Administrar Comercios</a>
+                </li>
+                <li *ngIf="usuarioLogueado?.usuario?.Tipo==4">
+                  <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">Comercio</a>
+                </li>
+                <li *ngIf="usuarioLogueado != null">
+                  <a [routerLink]="['/autenticacion']" (click)="logout()">Cerrar Sesión</a>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="usuarioLogueado == null" class="header__top__right__auth">
+              <a [routerLink]="['/autenticacion/register']">Registarse</a>
             </div>
           </div>
         </div>

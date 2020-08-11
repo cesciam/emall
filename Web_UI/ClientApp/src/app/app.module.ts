@@ -186,6 +186,7 @@ const maskConfig: Partial<IConfig> = {
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
       { path: 'autenticacion', component: AutenticacionComponent },
+      { path: 'autenticacion/:seccion', component: AutenticacionComponent },
       { path: 'agregar-empleado/:comercio', component: AgregarEmpleadoComponent },
       { path: 'listar-empleado/:id_comercio/modificar-empleado/:id', component: ModificarEmpleadoComponent },
       { path: 'listar-empleado', component: ListarEmpleadoComponent },

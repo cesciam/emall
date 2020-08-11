@@ -75,14 +75,14 @@
                 <td class="d-none d-sm-block">{{usuario.Correo}}</td>
                 <td>{{usuario.Estado == 0 ? 'Pendiente de activar' : 'Activo'}}</td>
                 <td class="text-right">
-                  <button type="button" class="btn btn-primary btn-sm" (click)="activarUsuario(usuario.Id)"
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="activarUsuario(usuario.Id)"
                     [hidden]="usuario.Estado == 1">
                     Activar
                   </button>&nbsp;
-                  <button type="button" class="btn btn-primary btn-sm"
+                  <button type="button" class="btn btn-secondary btn-sm"
                     [routerLink]="['/dashboard-admin/usuario/editar-usuario/', usuario.Id]">Editar</button>&nbsp;
-                  <button type="button" class="btn btn-primary btn-sm btn-danger" data-toggle="modal"
-                    data-target="#Modal" (click)="setUsuarioAEliminar(usuario.Id)">X</button>
+                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                    data-target="#Modal" (click)="setUsuarioAEliminar(usuario.Id)"><i class="fas fa-trash-alt"></i></button>
                 </td>
               </tr>
             </tbody>

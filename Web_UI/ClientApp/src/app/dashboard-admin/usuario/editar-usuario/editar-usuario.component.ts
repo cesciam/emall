@@ -30,7 +30,7 @@ export class EditarUsuarioComponent implements OnInit {
   private foto: Archivo;
   private isSendingData: boolean = false;
   private usuario: Usuario;
-  private tituloAMostrar: string;
+  private tituloAMostrar: string = 'Usuarios';
 
   constructor(
     private router: Router,
@@ -83,7 +83,7 @@ export class EditarUsuarioComponent implements OnInit {
       if (this.titulo != '' || this.titulo != null)
         this.tituloAMostrar = this.titulo;
       else
-      this.tituloAMostrar = null;
+        this.tituloAMostrar = 'Usuarios';
     });
   }
 

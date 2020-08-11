@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "echo Starting... && ng serve",
+    "start": "ng serve",
     "build": "ng build",
     "build:ssr": "ng run Web_UI:server:dev",
     "test": "ng test",
@@ -27,7 +27,6 @@
     "@popperjs/core": "^2.4.4",
     "@types/googlemaps": "^3.39.11",
     "aspnet-prerendering": "^3.0.1",
-    "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "cloudinary-angular": "^1.0.1",
     "cloudinary-core": "^2.11.1",
