@@ -24,7 +24,7 @@ namespace AppCore
                     status = false;
                 } 
             }
-            else if (item.precio <= 0 || item.inventario <= 0 || item.duracion <= 0)
+            else if (item.precio <= 0 || item.duracion <= 0)
             {
                 status = false;
             }

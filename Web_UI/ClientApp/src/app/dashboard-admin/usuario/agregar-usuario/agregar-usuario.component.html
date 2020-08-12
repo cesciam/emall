@@ -14,17 +14,17 @@
             <p>Ingrese los siguientes datos</p>
           </div>
           <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
-            <a [routerLink]="['../listar-usuario']">Volver atras</a>
+            <a [routerLink]="['../listar-usuario']">Volver atrás</a>
           </div>
         </div>
 
         <div *ngIf="submitted && usuarioForm.invalid" class="alert alert-danger col-lg-12" role="alert">
-          * Existen algunos datos invalidos. Por favor corrija los datos de los controles marcados en rojo
+          * Existen algunos datos inválidos. Por favor corrija los datos de los controles marcados en rojo
         </div>
 
         <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
           <strong>{{error.message}}</strong>
-          <ul> 
+          <ul>
             <li *ngFor="let detail of error.details">{{detail}}</li>
           </ul>
         </div>
@@ -33,13 +33,8 @@
           <div class="row">
             <div class="form-group col-lg-6 col-md-6">
               <label for="nombre">Nombre</label>
-              <input type="text"
-                     class="form-control"
-                     name="nombre"
-                     id="nombre"
-                     formControlName="Nombre"
-                     required
-                     [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }">
+              <input type="text" class="form-control" name="nombre" id="nombre" formControlName="Nombre" required
+                [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }">
               <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
                 <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
               </div>
@@ -47,13 +42,8 @@
 
             <div class="form-group col-lg-6 col-md-6">
               <label for="apellido">Apellidos</label>
-              <input type="text"
-                     class="form-control"
-                     name="apellido"
-                     id="apellido"
-                     formControlName="Apellido"
-                     required
-                     [ngClass]="{ 'is-invalid': submitted && f.Apellido.errors }">
+              <input type="text" class="form-control" name="apellido" id="apellido" formControlName="Apellido" required
+                [ngClass]="{ 'is-invalid': submitted && f.Apellido.errors }">
               <div *ngIf="submitted && f.Apellido.errors" class="invalid-feedback">
                 <div *ngIf="f.Apellido.errors.required">Apellido es requerido</div>
               </div>
@@ -63,14 +53,8 @@
           <div class="row">
             <div class="form-group col-lg-12 col-md-12">
               <label for="Correo">Email</label>
-              <input type="email"
-                     class="form-control"
-                     name="correo"
-                     id="correo"
-                     placeholder="usuario@example.com"
-                     formControlName="Correo"
-                     required
-                     [ngClass]="{ 'is-invalid': submitted && f.Correo.errors }">
+              <input type="email" class="form-control" name="correo" id="correo" placeholder="usuario@example.com"
+                formControlName="Correo" required [ngClass]="{ 'is-invalid': submitted && f.Correo.errors }">
               <div *ngIf="submitted && f.Correo.errors" class="invalid-feedback">
                 <div *ngIf="f.Correo.errors.required">Email es requerido</div>
               </div>
@@ -80,31 +64,24 @@
           <div class="row">
             <div class="form-group col-lg-6 col-md-6">
               <label for="contrasena">Contraseña</label>
-              <input type="password"
-                     class="form-control"
-                     name="contrasena"
-                     id="contrasena"
-                     formControlName="Contrasena"
-                     required
-                     [ngClass]="{ 'is-invalid': submitted && f.Contrasena?.errors }">
+              <input type="password" class="form-control" name="contrasena" id="contrasena" formControlName="Contrasena"
+                required [ngClass]="{ 'is-invalid': submitted && f.Contrasena?.errors }">
               <div *ngIf="submitted && f.Contrasena?.errors" class="invalid-feedback">
                 <div *ngIf="f.Contrasena?.errors.required">Contraseña es requerida</div>
-                <div *ngIf="f.Contrasena.errors.pattern">Contraseña con formato requerido (Debe incluir: al menos 8 caracteres, letras, numeros y al menos un caracter especial)</div>
+                <div *ngIf="f.Contrasena.errors.pattern">Contraseña con formato requerido (Debe incluir: al menos 8
+                  caracteres, letras, numeros y al menos un caracter especial)</div>
               </div>
             </div>
 
             <div class="form-group col-lg-6 col-md-6">
               <label for="contrasena-confirmar">Confirmar Contraseña</label>
-              <input type="password"
-                     class="form-control"
-                     name="contrasena-confirmar"
-                     id="contrasena-confirmar"
-                     formControlName="ContrasenaConfirmar"
-                     required
-                     [ngClass]="{ 'is-invalid': submitted && f.ContrasenaConfirmar?.errors }">
+              <input type="password" class="form-control" name="contrasena-confirmar" id="contrasena-confirmar"
+                formControlName="ContrasenaConfirmar" required
+                [ngClass]="{ 'is-invalid': submitted && f.ContrasenaConfirmar?.errors }">
               <div *ngIf="submitted && f.ContrasenaConfirmar?.errors" class="invalid-feedback">
                 <div *ngIf="f.ContrasenaConfirmar.errors.required">Confirmar Contraseña es requerido</div>
-                <div *ngIf="f.ContrasenaConfirmar.errors.pattern">Contraseña con formato requerido (Debe incluir: al menos 8 caracteres, letras, numeros y al menos un caracter especial)</div>
+                <div *ngIf="f.ContrasenaConfirmar.errors.pattern">Contraseña con formato requerido (Debe incluir: al
+                  menos 8 caracteres, letras, numeros y al menos un caracter especial)</div>
                 <div *ngIf="f.ContrasenaConfirmar.errors.DoNotMatch">Las contraseñas no coinciden</div>
               </div>
             </div>
@@ -112,46 +89,31 @@
 
           <div class="row">
             <div class="form-group col-lg-4 col-md-4">
-              <label for="cedula">Cedula</label>
-              <input type="text"
-                     class="form-control"
-                     name="cedula"
-                     id="cedula"
-                     formControlName="Cedula"
-                     required
-                     mask="0 0000 0000"
-                     [ngClass]="{ 'is-invalid': submitted && f.Cedula.errors }">
+              <label for="cedula">Cédula</label>
+              <input type="text" class="form-control" name="cedula" id="cedula" formControlName="Cedula" required
+                mask="0 0000 0000" [ngClass]="{ 'is-invalid': submitted && f.Cedula.errors }">
               <div *ngIf="submitted && f.Cedula.errors" class="invalid-feedback">
-                <div *ngIf="f.Cedula.errors.required">Cedula es requerida</div>
+                <div *ngIf="f.Cedula.errors.required">Cédula es requerida</div>
               </div>
             </div>
 
             <div class="form-group col-lg-4 col-md-4">
-              <label for="telefono">Telefono</label>
-              <input type="text"
-                     class="form-control"
-                     name="telefono"
-                     id="telefono"
-                     formControlName="Telefono"
-                     required mask="0000-0000"
-                     [ngClass]="{ 'is-invalid': submitted && f.Telefono.errors }">
+              <label for="telefono">Teléfono</label>
+              <input type="text" class="form-control" name="telefono" id="telefono" formControlName="Telefono" required
+                mask="0000-0000" [ngClass]="{ 'is-invalid': submitted && f.Telefono.errors }">
               <div *ngIf="submitted && f.Telefono.errors" class="invalid-feedback">
-                <div *ngIf="f.Telefono.errors.required">Telefono es requerido</div>
+                <div *ngIf="f.Telefono.errors.required">Teléfono es requerido</div>
               </div>
             </div>
 
             <div [hidden]="integrarCon == 'pagina'" class="form-group col-lg-4 col-md-4">
-              <label for="tipo">Tipo de Usuario</label>
-              <select class="form-control"
-                      name="tipo"
-                      id="tipo"
-                      formControlName="Tipo"
-                      required
-                      [ngClass]="{ 'is-invalid': submitted && f.Tipo.errors }">
+              <label for="tipo">Tipo de usuario</label>
+              <select class="form-control" name="tipo" id="tipo" formControlName="Tipo" required
+                [ngClass]="{ 'is-invalid': submitted && f.Tipo.errors }">
                 <option value=""></option>
                 <option value="1">Administrador</option>
                 <option value="2" [selected]="integrarCon == 'pagina'">Cliente</option>
-                <option value="3">Administrador de Comercio</option>
+                <option value="3">Administrador de comercio</option>
                 <option value="4">Empleado</option>
               </select>
               <div *ngIf="submitted && f.Tipo.errors" class="invalid-feedback">
@@ -163,30 +125,24 @@
           <div class="row">
             <div class="form-group col-lg-3 col-md-3">
               <label for="foto">Foto</label>
-              <input #fotoInput
-                     type="file"
-                     class="form-control-file"
-                     name="foto"
-                     id="foto"
-                     formControlName="Foto"
-                     [uploader]="uploader"
-                     ng2FileSelect
-                     [ngClass]="{ 'is-invalid': f.Foto.errors?.pattern }"
-                     (change)="validarFoto(fotoInput.files)">
+              <input #fotoInput type="file" class="form-control-file" name="foto" id="foto" formControlName="Foto"
+                [uploader]="uploader" ng2FileSelect [ngClass]="{ 'is-invalid': f.Foto.errors?.pattern }"
+                (change)="validarFoto(fotoInput.files)">
 
               <div *ngIf="f.Foto.errors" class="invalid-feedback">
-                <div *ngIf="f.Foto.errors.pattern">Imagen no valida (Formatos permitidos: gif, jpg, jpeg, bmp, png, webp, tiff, eps)</div>
+                <div *ngIf="f.Foto.errors.pattern">Imagen no válida (Formatos permitidos: gif, jpg, jpeg, bmp, png,
+                  webp, tiff, eps)</div>
               </div>
             </div>
             <div class="form-group col-lg-3 col-md-3" *ngIf="imgUrl">
-              <label for="foto">Foto Preview</label><br>
+              <label for="foto">Previsualización de la foto</label><br>
               <img [src]="imgUrl" alt="Foto" id="foto-preview" title="Foto" class="rounded" height="100">
             </div>
           </div>
 
           <button type="submit"
-                  [ngClass]="{ 'btn btn-primary': integrarCon == null, 'site-btn': integrarCon == 'pagina' }"
-                  [disabled]="isSendingData">
+            [ngClass]="{ 'btn btn-primary': integrarCon == null, 'site-btn': integrarCon == 'pagina' }"
+            [disabled]="isSendingData">
             Registrar
           </button>
           <p>&nbsp;</p>
@@ -196,8 +152,9 @@
       <div class="row justify-content-lg-center justify-content-md-center" *ngIf="registerComplete">
         <div class="form-group col-lg-12 col-md-12 register-complete">
           <h1>Registro Completado</h1>
-          <p>Gracias por registrarte en nuestro sitio!!!</p>
-          <p>Un mensaje fue enviado a la cuenta de correo proporcionada con los pasos necesarios para la activacion de tu cuenta.</p>
+          <p>¡Gracias por registrarte en nuestro sitio!</p>
+          <p>Un mensaje fue enviado a la cuenta de correo proporcionada con los pasos necesarios para la activación de
+            tu cuenta.</p>
         </div>
       </div>
     </div>

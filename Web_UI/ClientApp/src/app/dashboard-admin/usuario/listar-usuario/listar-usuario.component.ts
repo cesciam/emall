@@ -13,6 +13,7 @@ export class ListarUsuarioComponent implements OnInit {
   private submitted: boolean = false;
   private error: object = null;
   private filtroUsuarios = '';
+  private usuarioAEliminar: number;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -46,26 +47,28 @@ export class ListarUsuarioComponent implements OnInit {
         });
   }
 
-  eliminarUsuario(id: number): void {
+  setUsuarioAEliminar(id: number) {
+    this.usuarioAEliminar = id;
+  }
+
+  eliminarUsuario(): void {
     this.submitted = true;
 
-    if (confirm('¿Esta seguro que desea eliminar este usuario?')) {
-      this.usuarioService.eliminarUsuario(id)
-        .subscribe(
-          (response) => {
-            this.obtenerUsuarios();
-            this.submitted = false;
-          },
-          (error) => {
-            this.error = error.error;
+    this.usuarioService.eliminarUsuario(this.usuarioAEliminar)
+      .subscribe(
+        (response) => {
+          this.obtenerUsuarios();
+          this.submitted = false;
+        },
+        (error) => {
+          this.error = error.error;
 
-            if (!this.error.hasOwnProperty('message')) {
-              this.error = { message: 'Error general al eliminar el usuario. Vuelva a intertarlo en unos minutos' };
-            }
-
-            window.scroll(0, 0);
+          if (!this.error.hasOwnProperty('message')) {
+            this.error = { message: 'Error general al eliminar el usuario. Vuelva a intertarlo en unos minutos' };
           }
-        );
-    }
+
+          window.scroll(0, 0);
+        }
+      );
   }
 }

@@ -1,51 +1,38 @@
 <section class="hero">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <span>Categorias</span>
-                    </div>
-                    <!-- Solamente listar 10-->
-
-                    <ul>
-                      <li *ngFor="let categoria of servicio.categorias; let i=index">
-                        <a [hidden]="i>=8" href="#">{{categoria.Nombre}}</a>
-                      </li>
-                    </ul>
-                    <ul>
-                      <!--<li><a href="" [routerLink]="['/']">Ver más</a></li>-->
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                      <form>
-
-                        <!--<input id="busqueda" name="busqueda" class="form-control" [(ngModel)]="busqueda" #busqueda="ngModel" type="text" required>
-                        <div *ngIf="busqueda.invalid && (busqueda.dirty || busqueda.touched)" class="alert alert-danger">
-                          <div *ngIf="busqueda.errors.required">
-                            El nombre es requerido.
-                          </div>
-                        </div>-->
-
-
-                        <input id="busqueda" name="busqueda" type="text" value="" placeholder="¿Qué buscas?">
-                        <button type="submit" class="site-btn" (click)="buscar()">Buscar</button>
-                      </form>
-                    </div>
-                    <div class="hero__search__phone">
-                    </div>
-                </div>
-                <div class="hero__item image" >
-                    <div class="hero__text">
-                        <span>eMall</span>
-                        <h2>Productos<br />Hasta su casa</h2>
-                        <p>Recoger en sucursal y entrega en casa disponibles</p>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="hero__categories">
+          <div class="hero__categories__all">
+            <i class="fa fa-bars" style="color: #ffffff"></i>&nbsp;
+            <span>Categorías</span>
+          </div>
+          <ul>
+            <li *ngFor="let categoria of servicio.categorias; let i=index">
+              <a [hidden]="i>=8" href="#">{{categoria.Nombre}}</a>
+            </li>
+          </ul>
         </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="hero__search">
+          <div class="hero__search__form">
+            <form>
+              <input id="busqueda" name="busqueda" type="text" value="" placeholder="¿Qué buscas?">
+              <button type="submit" class="site-btn" (click)="buscar()">Buscar</button>
+            </form>
+          </div>
+          <div class="hero__search__phone">
+          </div>
+        </div>
+        <div class="hero__item image">
+          <div class="hero__text">
+            <span>eMall</span>
+            <h2>Productos<br />Hasta su casa</h2>
+            <p>Recoger en sucursal y entrega en casa disponibles</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
