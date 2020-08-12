@@ -45,6 +45,10 @@ namespace AppCore
         {
             return crud.Retrieve<Horario>(h);
         }
+        public List<Horario> RetrieveBySucursal(Horario h)
+        {
+            return crud.RetrieveBySucursal<Horario>(h);
+        }
         public void Update(Horario h)
         {
             crud.Update(h);

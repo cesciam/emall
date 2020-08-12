@@ -20,17 +20,20 @@ export class AgregarHorarioSucursalComponent implements OnInit {
   public sabadoFormData: Horario;
   public domingoFormData: Horario;
 
-  public lunesDisabled: boolean = true;
-  public martesDisabled: boolean = true;
-  public miercolesDisabled: boolean = true;
-  public juevesDisabled: boolean = true;
-  public viernesDisabled: boolean = true;
-  public sabadoDisabled: boolean = true;
-  public domingoDisabled: boolean = true;
+  public lunesChecked: boolean;
+  public martesDisabled: boolean;
+  public miercolesDisabled: boolean;
+  public juevesDisabled: boolean;
+  public viernesDisabled: boolean;
+  public sabadoDisabled: boolean;
+  public domingoDisabled: boolean;
 
   private sucursales: Sucursal[];
   private id_comercio: number;
   private sucursal: number;
+  private horariosDeSucursal: Horario[]
+
+  public formLunes : NgForm;
 
 
   constructor(private service: HorarioService,
@@ -41,6 +44,40 @@ export class AgregarHorarioSucursalComponent implements OnInit {
     this.id_comercio = parseInt(this.activatedRoute.snapshot.paramMap.get('id_comercio'));
     this.inicializarHorarios()
     this.obtenerSucursales()
+  }
+
+  cambiarSucursal() {
+    this.formLunes.reset()
+    this.lunesChecked= false;
+    console.log(this.sucursal)
+    this.service.obtenerHorarioPorSucursal(this.sucursal).subscribe(data => {
+      this.horariosDeSucursal = data;
+      console.log(this.horariosDeSucursal)
+      this.llenarHorarios();
+    })
+  }
+
+  llenarHorarios() {
+    this.horariosDeSucursal.forEach(element => {
+      switch (element.tipo_horario) {
+        case "Lunes":
+          console.log("abre lunes")
+          this.lunesChecked=true;
+          break;
+        case "Martes":
+          break;
+        case "Miercoles":
+          break;
+        case "Jueves":
+          break;
+        case "Viernes":
+          break;
+        case "Sabado":
+          break;
+        case "Domingo":
+          break;
+      }
+    });
   }
 
   inicializarHorarios() {
@@ -72,7 +109,7 @@ export class AgregarHorarioSucursalComponent implements OnInit {
   }
 
   horarioLunes() {
-    if (!this.lunesDisabled) {
+    if (!this.lunesChecked) {
       let horarioLunes: Horario = {
         id: 0,
         fecha: "1900-12-12",
@@ -177,9 +214,9 @@ export class AgregarHorarioSucursalComponent implements OnInit {
     }
   }
 
-  estadoLunes($event) {
-    $event.target.checked === true ? this.lunesDisabled = false : this.lunesDisabled = true;
-  }
+   estadoLunes($event) {
+     $event.target.checked === true ? this.lunesChecked = true : this.lunesChecked = false;
+   }
   estadoMartes($event) {
     $event.target.checked === true ? this.martesDisabled = false : this.martesDisabled = true;
   }

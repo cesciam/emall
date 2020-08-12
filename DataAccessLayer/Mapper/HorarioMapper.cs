@@ -90,6 +90,14 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveBySucursalStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_HORARIO_SUCURSAL_PR" };
+            var h = (Horario)entity;
+            operation.AddIntParam(DB_COL_ID_SUCURSAL, h.id_sucursal);
+            return operation;
+        }
+
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "MODIFICAR_HORARIO_PR" };

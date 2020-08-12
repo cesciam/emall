@@ -32,6 +32,17 @@ namespace Web_API.Controllers
 
             return hm.RetrieveById(h);
         }
+        [HttpGet]
+        public List<Horario> RetrieveBySucursal(int sucursal)
+        {
+            var hm = new HorarioManagement();
+            var h = new Horario()
+            {
+                id_sucursal = sucursal
+            };
+
+            return hm.RetrieveBySucursal(h);
+        }
         [HttpPost]
         public IActionResult Create(HorarioViewModel c)
         {

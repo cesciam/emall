@@ -19,4 +19,9 @@ export class HorarioService {
       let endpointUrl = this.baseUrl + '/Horario/RetrieveAll';
       return this.http.get<Horario[]>(endpointUrl);
     }
+
+    obtenerHorarioPorSucursal(sucursal:number){
+      let endpointUrl = this.baseUrl + '/Horario/RetrieveBySucursal/?sucursal='+sucursal;
+      return this.http.get<Horario[]>(endpointUrl);
+    }
 }
