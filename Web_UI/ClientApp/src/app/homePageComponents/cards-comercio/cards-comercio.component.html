@@ -1,32 +1,19 @@
 <section class="main-section">
-  <!--<div class="row">
-
-    <div class="col-sm-3" *ngFor="let comercio of comercios">
-        <div class="card w-100" style="margin-bottom: 2%">
-          <div class="img-container">
-            <img class="img mx-auto d-block" [src]="comercio.archivos[0].enlace" alt="Logo de comercio">
-          </div>
-          <div class="card-body text-center">
-            <hr />
-            <h4>{{ comercio.nombre }}</h4>
-            <p>{{ comercio.categorias[0] }}</p>
-            <a [routerLink]="['/perfil-comercio']" [queryParams]="{comercio: comercio.id}">
-              <button class="btn btn-primary">Ver comercio</button>
-            </a>
-          </div>
-        </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="section-title">
+        <h2>Nuestros Comercios</h2>
       </div>
     </div>
-  </div>-->
-
+  </div>
   <div class="row">
-
     <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let comercio of comercios">
       <div class="product__item">
         <div class="product__item__pic set-bg img-container" data-setbg="item.id_foto">
           <img [src]="comercio.archivos[0].enlace" alt="Logo de comercio" class="img mx-auto d-block">
           <ul class="product__item__pic__hover">
-            <li><a [routerLink]="['/perfil-comercio']" [queryParams]="{comercio: comercio.id}"><i class="fas fa-arrow-right"></i></a></li>
+            <li><a [routerLink]="['/perfil-comercio']" [queryParams]="{comercio: comercio.id}"><i
+                  class="fas fa-arrow-right"></i></a></li>
           </ul>
         </div>
         <div class="product__item__text">
@@ -35,7 +22,5 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </section>

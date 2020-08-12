@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario.model';
@@ -24,14 +24,23 @@ export class AutenticacionComponent implements OnInit {
   private section: string = 'login';
   private usuario: Usuario;
   private response: any;
+  private seccionParam: string;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private usuarioService: UsuarioService
   ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {
+    this.seccionParam = this.route.snapshot.paramMap.get('seccion');
+
+    if (this.seccionParam != null || this.seccionParam != '') {
+      this.changeSection(this.seccionParam);
+    }
+
     this.loginForm = new FormGroup({
       Correo: new FormControl('', [Validators.required, Validators.email]),
       Contrasena: new FormControl('', [Validators.required]),

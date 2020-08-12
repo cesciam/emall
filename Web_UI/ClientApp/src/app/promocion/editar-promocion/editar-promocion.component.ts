@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Promocion } from 'src/app/models/promocion';
-import { PromocionService } from 'src/app/services/promocion.service';
+import { Promocion } from '../../models/promocion';
+import { PromocionService } from '../../services/promocion.service';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 
@@ -27,20 +27,16 @@ export class EditarPromocionComponent implements OnInit {
       (data: Promocion) => this.promocionSeleccionada = data,
       (err: any) => console.log(err)
     );
-
-    /*this.promocionForm = new FormGroup({
-      nombre: new FormControl( this.promocionSeleccionada.nombre, Validators.required)
-    });*/
   }
 
   save() {
     this.service.editar(this.promocionSeleccionada)
     .subscribe(
-      (data: any) => console.log(data),
+      (data: any) => { 
+        console.log('editado');
+        this.router.navigate(['/dashboard-admin/promocion']);
+      },
       (err: any) => console.log(err)
     );
-    
-    this.router.navigate['../../promociones'];
   }
-
 }

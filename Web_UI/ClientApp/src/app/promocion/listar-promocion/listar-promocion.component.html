@@ -1,49 +1,55 @@
-<div class="container">
+<app-main-header></app-main-header>
+
+<div class="container-fluid">
   <div class="row">
+    <div class="col-lg-2">
+      <app-sidebar-admin></app-sidebar-admin>
+    </div>
+
+    <div class="col-lg-10">
     <h1>Promociones</h1>
-  </div>
+    <p>Listado de promociones registradas</p>
+  
   <div class="row">
-    <div class="col-sm-1">
-      <a [routerLink]="['/registrar']">
-        <button class="btn btn-primary" >Registrar</button>
-      </a>
-     
-    </div>
-    <div class="col">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." name="filtroPromociones" [(ngModel)]="filtroPromociones">
-      </div>
+    <div class="col-lg-12 col-md-12">
+      <a [routerLink]="['/dashboard-admin/promocion/agregar']">
+        <button class="btn btn-primary">Registrar nueva</button>
+      </a><br><br>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." name="filtroPromociones" [(ngModel)]="filtroPromociones"><br>
+    </div>
+  </div>
+  
   <div class="row">
     <div class="col">
       <table class="table table-striped .table-responsive-sm" *ngIf="promociones">
         <thead>
           <tr>
+            <th>#</th>
             <th>Nombre</th>
-            <th>Porcentaje de descuento</th>
-            <th>Código</th>
-            <th>Cantidad disponible</th>
+            <th>Descuento</th>
+            <th class="d-none d-sm-block">Código</th>
+            <th>Disponibles</th>
             <th>Comercio</th>
-            <th>Surcusal</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-
+            <th class="d-none d-sm-block">Surcusal</th>
+            <th colspan="2">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let promocion of promociones | filtroPromocion:filtroPromociones">
+            <td>{{ promocion.id }}</td>
             <td>{{ promocion.nombre }}</td>
             <td>{{ promocion.porcentaje }}%</td>
-            <td>{{ promocion.codigo }}</td>
-            <td>{{ promocion.cantidad }}</td>
+            <td class="d-none d-sm-block">{{ promocion.codigo }}</td>
+            <td >{{ promocion.cantidad }}</td>
             <td *ngIf="promocion.id_comercio > 0; else sinComercio">{{promocion.id_comercio}}</td>
-            <td *ngIf="promocion.id_sucursal > 0; else sinSucursal">{{ promocion.id_sucursal }}</td>
+            <td class="d-none d-sm-block" *ngIf="promocion.id_sucursal > 0; else sinSucursal">{{ promocion.id_sucursal }}</td>
             <td>
-              <button class="btn btn-secondary" [routerLink]="['/dashboard-admin/promocion', promocion.id]">Editar</button>
-            </td>
-            <td>
-              <button class="btn btn-secondary" (click)="eliminar(promocion.id)">X</button>
+              <button class="btn btn-secondary" (click)="eliminar(promocion.id)"><i class="fas fa-trash-alt"></i></button>
             </td>
           </tr>
         </tbody>
@@ -51,6 +57,7 @@
     </div>
   </div>
 </div>
+
 <ng-template #sinComercio>
   <td>Sin comercio asociado</td>
 </ng-template>
