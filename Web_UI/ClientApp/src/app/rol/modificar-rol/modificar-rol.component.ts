@@ -241,7 +241,6 @@ export class ModificarRolComponent implements OnInit {
       this.vistasSeleccionadas = this.vistasSeleccionadas.filter(m => m != id)
       this.vistasDeseleccionadas.push(id)
     }
-    //TODO: Validar que si un numero esta en ambas listas, se elimine
     
   }
 
