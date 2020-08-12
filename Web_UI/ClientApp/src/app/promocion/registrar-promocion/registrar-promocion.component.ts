@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PromocionService } from 'src/app/services/promocion.service';
+import { PromocionService } from '../../services/promocion.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -36,17 +36,16 @@ export class RegistrarPromocionComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if(this.promocionForm.invalid)
+    if (this.promocionForm.invalid)
       return;
 
-      this.service.registrarPromocion(this.promocionForm.value)
+    this.service.registrarPromocion(this.promocionForm.value)
       .subscribe(
-        (reponse) => this.router.navigate(['promociones']),
+        (reponse) => this.router.navigate(['/dashboard-admin/promocion']),
         (error) => {
           this.error = error.error;
           window.scroll(0, 0);
-      }
+        }
       );
   }
-
 }
