@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.CRUD;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,17 +10,24 @@ namespace AppCore
     public class CitaManagement
     {
         private CitaCrudFactory crud;
-        private CitaManagement()
+        public CitaManagement()
         {
             crud = new CitaCrudFactory();
         }
 
-        public void Create(BaseEntity entity)
+        public int Create(BaseEntity entity)
         {
+            var errores = ComprobarErrores(entity);
+
+            if (errores != null)
+            {
+                return 0;
+            }
 
 
+           // crud.Create(entity);
 
-            crud.Create(entity);
+            return 1;
         }
 
 
@@ -41,6 +49,29 @@ namespace AppCore
         public void Update(BaseEntity entity)
         {
             crud.Update(entity);
+        }
+
+        public ErrorResultViewModel ComprobarErrores(BaseEntity entity)
+        {
+            ErrorResultViewModel errorResult = new ErrorResultViewModel();
+            errorResult.details = new List<string>();
+
+            
+
+            if (crud.VerificarHorario<Cita>(entity).id_sucursal < 0)
+            {
+                errorResult.details.Add("Cita fuera del horario de la sucursal");
+            }
+
+            if(errorResult.details.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                errorResult.message = "Han ocurrido errores generales al registrar la cita";
+                return errorResult;
+            }
         }
     }
 }

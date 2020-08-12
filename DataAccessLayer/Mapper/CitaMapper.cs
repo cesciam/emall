@@ -29,7 +29,17 @@ namespace DataAccessLayer.Mapper
                 fecha= GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
                 hora_fin= GetDateValue(row, DB_COL_HORA_FIN),
-                id_sucursal_validacion = GetIntValue(row, DB_COL_ID_SUCURSAL)
+                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
+            };
+
+            return cita;
+        }
+
+        public BaseEntity BuildValidacion(Dictionary<string, object> row)
+        {
+            var cita = new Cita
+            {
+                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
             };
 
             return cita;
@@ -109,11 +119,11 @@ namespace DataAccessLayer.Mapper
         public SqlOperation GetCompareStatament(BaseEntity entity)
         {
             var c = (Cita)entity;
-            var operacion = new SqlOperation { ProcedureName = "MODIFICAR_CITA" };
+            var operacion = new SqlOperation { ProcedureName = "COMPARAR_HORARIO_SUCURSAL" };
 
             operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
-            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal_validacion);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
 
 
             return operacion;
