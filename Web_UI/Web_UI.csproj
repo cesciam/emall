@@ -39,6 +39,7 @@
     <None Remove="ClientApp\src\app\pipes\filter-categoria.pipe.ts" />
     <None Remove="ClientApp\src\app\pipes\filter-impuesto.pipe.ts" />
     <None Remove="ClientApp\src\app\pipes\filtro-usuario.pipe.ts" />
+    <None Remove="ClientApp\src\app\services\bitacora.ts" />
     <None Remove="ClientApp\src\app\services\usuario.service.ts" />
   </ItemGroup>
 
@@ -60,6 +61,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\pipes\filter-categoria.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\pipes\filter-impuesto.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\pipes\filtro-usuario.pipe.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\bitacora.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\usuario.service.ts" />
   </ItemGroup>
 
@@ -72,6 +74,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\bitacora\" />
     <Folder Include="ClientApp\src\assets\css\landing-emall\" />
   </ItemGroup>
 
