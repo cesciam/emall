@@ -15,6 +15,9 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_FECHA = "FECHA";
         private const string DB_COL_HORA_INICIO = "HORA_INICIO";
         private const string DB_COL_HORA_FIN = "HORA_FIN";
+
+        //Parametro que se utiliza solamente para validar que la cita esté dentro del horario de la sucursal
+        private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var cita = new Cita
@@ -25,7 +28,8 @@ namespace DataAccessLayer.Mapper
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
                 fecha= GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
-                hora_fin= GetDateValue(row, DB_COL_HORA_FIN)
+                hora_fin= GetDateValue(row, DB_COL_HORA_FIN),
+                id_sucursal_validacion = GetIntValue(row, DB_COL_ID_SUCURSAL)
             };
 
             return cita;
@@ -98,6 +102,19 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+
+            return operacion;
+        }
+
+        public SqlOperation GetCompareStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "MODIFICAR_CITA" };
+
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal_validacion);
+
 
             return operacion;
         }

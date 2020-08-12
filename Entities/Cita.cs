@@ -13,5 +13,7 @@ namespace Entities
         public DateTime fecha { get; set; }
         public DateTime hora_inicio { get; set; }
         public DateTime hora_fin { get; set; }
+
+        public int id_sucursal_validacion { get; set; }
     }
 }
