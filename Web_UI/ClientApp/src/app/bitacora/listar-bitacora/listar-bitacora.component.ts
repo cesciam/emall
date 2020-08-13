@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BitacoraService } from 'src/app/services/bitacora.service';
 
 @Component({
   selector: 'app-listar-bitacora',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarBitacoraComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: BitacoraService) { }
 
   ngOnInit() {
+    this.obtenerTodo(); 
+  }
+
+  public obtenerTodo(): void {
+    this.service.ObtenerTodoBitacora()
+    console.log(this.service.ObtenerTodoBitacora())
   }
 
 }

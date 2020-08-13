@@ -83,12 +83,9 @@ import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
 import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
 import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
 import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
-import { AdminImpuestoCrearComponent } from './dashboard-admin/admin-impuesto-crear/admin-impuesto-crear.component';
-import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-listar/admin-impuesto-listar.component';
-import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
-import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
+import { DatePipe } from '@angular/common';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -167,10 +164,6 @@ const maskConfig: Partial<IConfig> = {
     FilterCategoriaPipe,
     FiltroRolPipe,
     FiltroEmpleadoPipe,
-    AdminImpuestoCrearComponent,
-    AdminImpuestoListarComponent,
-    AdminCategoriaListarComponent,
-    AdminCategoriaCrearComponent,
     FiltroUsuarioPipe,
     ListarBitacoraComponent, 
   ],
@@ -209,9 +202,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-crear/:id_comercio', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'listar-impuesto', component: ListarImpuestoComponent },
+      { path: 'dashboard-admin/impuesto', component: ListarImpuestoComponent },
       { path: 'crear-impuesto', component: CrearImpuestoComponent },
-      { path: 'listar-categoria', component: ListarCategoriaComponent },
+      { path: 'dashboard-admin/categoria', component: ListarCategoriaComponent },
       { path: 'crear-categoria', component: CrearCategoriaComponent },
       { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
@@ -235,10 +228,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
       { path: 'landing-producto', component: LandingPageProductoComponent },
-      { path: 'dashboard-admin/impuesto/crear', component: AdminImpuestoCrearComponent },
-      { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
-      { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
-      { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
+      { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
     ])
   ],
   exports: [
@@ -255,7 +245,8 @@ const maskConfig: Partial<IConfig> = {
     VistaService,
     HorarioService,
     VistaXRolService,
-    ItemService
+    ItemService,
+    DatePipe,
   ],
   bootstrap: [
     AppComponent
