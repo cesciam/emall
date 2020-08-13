@@ -14,7 +14,7 @@ import { AgmCoreModule } from '@agm/core';
 export class PerfilComercioComponent implements OnInit {
   private comercioSeleccionado: Comercio;
   private sucursales: Sucursal[];
-
+  private comercioId: number = this.activatedRoute.snapshot.queryParams['comercio'];
 
   constructor(private comercioService: ComercioService, private sucursalService: SucursalService, private activatedRoute: ActivatedRoute) {
     this.comercioSeleccionado = new Comercio();

@@ -88,6 +88,7 @@ import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-l
 import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
 import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
+import { CalificacionComponent } from './calificacion/calificacion.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -170,7 +171,8 @@ const maskConfig: Partial<IConfig> = {
     AdminImpuestoListarComponent,
     AdminCategoriaListarComponent,
     AdminCategoriaCrearComponent,
-    FiltroUsuarioPipe, 
+    FiltroUsuarioPipe,
+    CalificacionComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -243,6 +245,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    CalificacionComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
