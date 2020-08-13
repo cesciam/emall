@@ -5,7 +5,6 @@ import { Horario } from '../../models/horario.model';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { Sucursal } from 'src/app/models/Sucursal';
 import { ActivatedRoute } from '@angular/router';
-import { timeStamp } from 'console';
 import { throttleTime } from 'rxjs/operators';
 
 @Component({
@@ -42,6 +41,10 @@ export class AgregarHorarioSucursalComponent implements OnInit {
   private id_comercio: number;
   private sucursal: number;
   private horariosDeSucursal: Horario[]
+
+  public alertaError: boolean = false;
+  public mensajeError : string =
+  "Por favor ingrese una hora válida e intente guardar de nuevo"
 
 
   constructor(private service: HorarioService,
@@ -163,6 +166,7 @@ export class AgregarHorarioSucursalComponent implements OnInit {
   
 
   async onSubmit() {
+    this.alertaError = false
     this.horarioLunes();
     this.horarioMartes();
     this.horarioMiercoles();
@@ -186,7 +190,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.lunesFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.lunesFormData).subscribe()
+          this.service.modificarHorario(this.lunesFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioLunes: Horario = {
             id: 0,
@@ -197,7 +205,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioLunes).subscribe()
+          this.service.crearHorario(horarioLunes).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioLunes: Horario = {
@@ -209,7 +221,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioLunes).subscribe()
+        this.service.crearHorario(horarioLunes).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {
@@ -232,7 +248,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.martesFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.martesFormData).subscribe()
+          this.service.modificarHorario(this.martesFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioMartes: Horario = {
             id: 0,
@@ -243,7 +263,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioMartes).subscribe()
+          this.service.crearHorario(horarioMartes).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioMartes: Horario = {
@@ -255,7 +279,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioMartes).subscribe()
+        this.service.crearHorario(horarioMartes).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {
@@ -279,7 +307,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.miercolesFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.miercolesFormData).subscribe()
+          this.service.modificarHorario(this.miercolesFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioMiercoles: Horario = {
             id: 0,
@@ -290,7 +322,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioMiercoles).subscribe()
+          this.service.crearHorario(horarioMiercoles).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioMiercoles: Horario = {
@@ -302,7 +338,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioMiercoles).subscribe()
+        this.service.crearHorario(horarioMiercoles).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {
@@ -326,7 +366,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.juevesFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.juevesFormData).subscribe()
+          this.service.modificarHorario(this.juevesFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioJueves: Horario = {
             id: 0,
@@ -337,7 +381,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioJueves).subscribe()
+          this.service.crearHorario(horarioJueves).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioJueves: Horario = {
@@ -349,7 +397,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioJueves).subscribe()
+        this.service.crearHorario(horarioJueves).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {
@@ -372,7 +424,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.viernesFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.viernesFormData).subscribe()
+          this.service.modificarHorario(this.viernesFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioViernes: Horario = {
             id: 0,
@@ -383,7 +439,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioViernes).subscribe()
+          this.service.crearHorario(horarioViernes).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioViernes: Horario = {
@@ -395,7 +455,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioViernes).subscribe()
+        this.service.crearHorario(horarioViernes).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {
@@ -419,7 +483,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.sabadoFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.sabadoFormData).subscribe()
+          this.service.modificarHorario(this.sabadoFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioSabado: Horario = {
             id: 0,
@@ -430,7 +498,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioSabado).subscribe()
+          this.service.crearHorario(horarioSabado).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioSabado: Horario = {
@@ -442,7 +514,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioSabado).subscribe()
+        this.service.crearHorario(horarioSabado).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {
@@ -466,7 +542,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       if (this.horariosDeSucursal.length > 0) {
         if (registrado) {
           this.domingoFormData.fecha = "1900-12-12"
-          this.service.modificarHorario(this.domingoFormData).subscribe()
+          this.service.modificarHorario(this.domingoFormData).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         } else {
           let horarioDomingo: Horario = {
             id: 0,
@@ -477,7 +557,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
             id_usuario: -1,
             id_sucursal: Number(this.sucursal)
           }
-          this.service.crearHorario(horarioDomingo).subscribe()
+          this.service.crearHorario(horarioDomingo).subscribe((response) => {},
+          (error) => {
+            console.log(error)
+            this.alertaError = true;
+          });
         }
       } else {
         let horarioDomingo: Horario = {
@@ -489,7 +573,11 @@ export class AgregarHorarioSucursalComponent implements OnInit {
           id_usuario: -1,
           id_sucursal: Number(this.sucursal)
         }
-        this.service.crearHorario(horarioDomingo).subscribe()
+        this.service.crearHorario(horarioDomingo).subscribe((response) => {},
+        (error) => {
+          console.log(error)
+          this.alertaError = true;
+        });
       }
     } else {
       this.horariosDeSucursal.forEach(element => {

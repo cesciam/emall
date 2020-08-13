@@ -183,6 +183,12 @@
     </div>
   </form>
   <br>
+  <div *ngIf="alertaError" class="alert alert-danger" role="alert">
+    <strong>Ups!</strong> {{mensajeError}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
   <button [disabled]="sucursal==0" type="submit" class="btn btn-primary" (click)="onSubmit()"> Guardar cambios </button>
 </div>
 <br>
