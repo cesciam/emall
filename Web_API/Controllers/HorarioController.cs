@@ -59,7 +59,7 @@ namespace Web_API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(Horario c)
+        public IActionResult Update(HorarioViewModel c)
         {
             try
             {
@@ -73,9 +73,10 @@ namespace Web_API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Delete(Horario c)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
+            var c = new Horario { id = id };
             try
             {
                 var hm = new HorarioManagement();

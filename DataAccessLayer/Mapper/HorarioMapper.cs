@@ -107,7 +107,6 @@ namespace DataAccessLayer.Mapper
             operation.AddVarcharParam(DB_COL_TIPO_HORARIO, h.tipo_horario);
             operation.AddDateParam(DB_COL_HORA_INICIO, h.hora_inicio);
             operation.AddDateParam(DB_COL_HORA_FIN, h.hora_fin);
-            operation.AddIntParam(DB_COL_ID_USUARIO, h.id_usuario);
             operation.AddIntParam(DB_COL_ID_SUCURSAL, h.id_sucursal);
             return operation;
         }

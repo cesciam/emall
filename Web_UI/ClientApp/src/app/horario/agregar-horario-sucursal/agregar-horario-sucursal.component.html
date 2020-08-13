@@ -20,6 +20,8 @@
 
 <app-main-header></app-main-header>
 <br>
+<a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">
+  &nbsp; &nbsp;&nbsp;Volver al comercio</a>
 <br>
 <h3 class="text-center">Horarios comerciales</h3>
 <br>
@@ -45,15 +47,14 @@
   <form #formLunes="ngForm">
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
-        <input type="checkbox" class="form-check-input" [(ngModel)]="lunesChecked" name="lunesChecked"
-        checked="{{lunesChecked}}" (change)="estadoLunes($event)" id="lunesChecked" >
+        <input type="checkbox" class="form-check-input" [(ngModel)]="lunesChecked" name="lunesChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Lunes</h5>
       </div>
       <div class="form-group col-sm-2">
         <input type="time" class="form-control" [disabled]="!lunesChecked" name="hora_inicio" #hora_inicio="ngModel"
-          [(ngModel)]="lunesFormData.hora_inicio">
+          [(ngModel)]="lunesFormData.hora_inicio" >
       </div>
       <div class="form-group col-sm-2">
         <input type="time" class="form-control" [disabled]="!lunesChecked" name="hora_fin" #hora_fin="ngModel"
@@ -66,8 +67,7 @@
   <form #formLunes="ngForm">
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
-        <input type="checkbox" class="form-check-input" [(ngModel)]="martesChecked" name="martesChecked"
-        checked="{{martesChecked}}" (change)="estadoMartes($event)" id="martesChecked" >
+        <input type="checkbox" class="form-check-input" [(ngModel)]="martesChecked" name="martesChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Martes</h5>
@@ -87,9 +87,7 @@
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
         <input type="checkbox" class="form-check-input"
-        [(ngModel)]="miercolesChecked" name="miercolesChecked"
-        checked="{{miercolesChecked}}"  id="miercolesChecked"
-        (change)="estadoMiercoles($event)">
+        [(ngModel)]="miercolesChecked" name="miercolesChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Miércoles</h5>
@@ -109,9 +107,7 @@
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
         <input type="checkbox" class="form-check-input"
-        [(ngModel)]="juevesChecked" name="juevesChecked"
-        checked="{{juevesChecked}}"  id="juevesChecked"
-        (change)="estadoJueves($event)">
+        [(ngModel)]="juevesChecked" name="juevesChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Jueves</h5>
@@ -131,9 +127,7 @@
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
         <input type="checkbox" class="form-check-input"
-        [(ngModel)]="viernesChecked" name="viernesChecked"
-        checked="{{viernesChecked}}"  id="viernesChecked"
-         (change)="estadoViernes($event)">
+        [(ngModel)]="viernesChecked" name="viernesChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Viernes</h5>
@@ -153,9 +147,7 @@
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
         <input type="checkbox" class="form-check-input"
-        [(ngModel)]="sabadoChecked" name="sabadoChecked"
-        checked="{{sabadoChecked}}"  id="sabadoChecked"
-         (change)="estadoSabado($event)">
+        [(ngModel)]="sabadoChecked" name="sabadoChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Sábado</h5>
@@ -175,9 +167,7 @@
     <div class="row justify-content-md-center">
       <div class="form-group" class="col-sm-1">
         <input type="checkbox" class="form-check-input"
-        [(ngModel)]="domingoChecked" name="domingoChecked"
-        checked="{{domingoChecked}}"  id="domingoChecked"
-         (change)="estadoDomingo($event)">
+        [(ngModel)]="domingoChecked" name="domingoChecked">
       </div>
       <div class="form-group col-sm-2">
         <h5>Domingo</h5>
@@ -192,7 +182,7 @@
       </div>
     </div>
   </form>
-
+  <br>
   <button [disabled]="sucursal==0" type="submit" class="btn btn-primary" (click)="onSubmit()"> Guardar cambios </button>
 </div>
 <br>

@@ -25,6 +25,7 @@ export class ModificarRolComponent implements OnInit {
   private permisoPromociones: boolean;
   private permisoArchivos: boolean;
   private permisoEditarComercio: boolean;
+  private permisoHorario: boolean;
 
   private vistasXRol : VistaXRol[]
 
@@ -88,6 +89,9 @@ export class ModificarRolComponent implements OnInit {
         case 7:
           this.permisoEditarComercio = true;
           break;
+          case 8:
+          this.permisoHorario = true;
+          break;
       };
     }
   }
@@ -144,6 +148,11 @@ export class ModificarRolComponent implements OnInit {
           case 7:
             if (this.permisoEditarComercio) {
               this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 7).subscribe();
+            }
+            break;
+            case 8:
+            if (this.permisoHorario) {
+              this.serviceVistaXRol.deleteVistaXRol(this.id_rol, 8).subscribe();
             }
             break;
         }
@@ -224,6 +233,17 @@ export class ModificarRolComponent implements OnInit {
               vistaxrol = {
                 id: 0,
                 id_vista: 7,
+                id_rol: this.id_rol,
+              }
+              this.serviceVistaXRol.postVistaXRolUpdate(vistaxrol).subscribe();
+            }
+            break;
+            case 8:
+            if (!this.permisoHorario) {
+              let vistaxrol = new VistaXRol;
+              vistaxrol = {
+                id: 0,
+                id_vista: 8,
                 id_rol: this.id_rol,
               }
               this.serviceVistaXRol.postVistaXRolUpdate(vistaxrol).subscribe();

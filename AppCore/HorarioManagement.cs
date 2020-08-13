@@ -26,7 +26,6 @@ namespace AppCore
                 id_usuario = h.id_usuario,
                 id_sucursal = h.id_sucursal
             };
-            Console.WriteLine(horario.GetEntityInformation());
             if (horario.id_usuario == -1)
             {
                 crud.Create(horario);
@@ -49,9 +48,27 @@ namespace AppCore
         {
             return crud.RetrieveBySucursal<Horario>(h);
         }
-        public void Update(Horario h)
+        public void Update(HorarioViewModel h)
         {
-            crud.Update(h);
+            var horario = new Horario
+            {
+                id = h.id,
+                fecha = DateTime.Parse(h.fecha + "T00:00:00"),
+                tipo_horario = h.tipo_horario,
+                hora_inicio = DateTime.Parse("2020-12-12T" + h.hora_inicio + ":00"),
+                hora_fin = DateTime.Parse("2020-12-12T" + h.hora_fin + ":00"),
+                id_usuario = h.id_usuario,
+                id_sucursal = h.id_sucursal
+            };
+            if (horario.id_usuario == -1)
+            {
+                crud.Update(horario);
+            }
+            else
+            {
+                //crud.UpdateWithUser(horario);
+            }
+            
         }
         public void Delete(Horario h)
         {

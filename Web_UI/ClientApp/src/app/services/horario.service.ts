@@ -24,4 +24,12 @@ export class HorarioService {
       let endpointUrl = this.baseUrl + '/Horario/RetrieveBySucursal/?sucursal='+sucursal;
       return this.http.get<Horario[]>(endpointUrl);
     }
+
+    modificarHorario(horario:Horario){
+      return this.http.put(this.baseUrl+'/Horario/Update', horario);
+    }
+
+    borrarHorario(id:number){
+      return this.http.delete(this.baseUrl+'/Horario/Delete?id='+id);
+    }
 }
