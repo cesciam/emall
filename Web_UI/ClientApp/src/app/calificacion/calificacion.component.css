@@ -1,0 +1,7 @@
+.estrella {
+    color: #F8B129;
+}
+
+.estrella:hover{
+    cursor: pointer;
+}

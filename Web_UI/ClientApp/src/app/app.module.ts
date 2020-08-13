@@ -88,6 +88,7 @@ import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-l
 import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
 import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
+import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
 
 const maskConfig: Partial<IConfig> = {
@@ -172,6 +173,7 @@ const maskConfig: Partial<IConfig> = {
     AdminCategoriaListarComponent,
     AdminCategoriaCrearComponent,
     FiltroUsuarioPipe,
+    CalificacionComponent,
     ItemEmpleadoComponent, 
   ],
   imports: [
@@ -245,6 +247,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    CalificacionComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
