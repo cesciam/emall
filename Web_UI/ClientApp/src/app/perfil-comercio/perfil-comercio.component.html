@@ -1,9 +1,10 @@
 <app-header></app-header>
+
 <section class="main-section">
   <h1>{{comercioSeleccionado.nombre}}</h1>
-  <h2>Lista de sucursales</h2>
+  <h2>Lista de sucursales</h2> 
+  <p><app-calificacion comercio="{{comercioId}}"></app-calificacion></p>
   <div class="row">
-
     <div class="col-sm-3" *ngFor="let sucursal of sucursales">
       <div class="card w-100" style="margin-bottom: 2%">
 
@@ -15,11 +16,15 @@
           <h5 class="card-title">{{ sucursal.nombre }}</h5>
           <p class="card-text">{{ sucursal.detallesDireccion }}</p>
           <a>
-            <button class="btn btn-primary" [routerLink]="['/item-sucursal-cliente', sucursal.id]">Ver productos</button>
+            <button class="btn btn-primary" [routerLink]="['/item-sucursal-cliente', sucursal.id]">Ver
+              productos</button>
           </a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <app-footer></app-footer>
+
+{{comercioSeleccionado | json}}
