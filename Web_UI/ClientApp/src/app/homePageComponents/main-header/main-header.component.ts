@@ -49,7 +49,7 @@ export class MainHeaderComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('usuario-logueado');
+    localStorage.clear();
     window.location.reload();
   }
 

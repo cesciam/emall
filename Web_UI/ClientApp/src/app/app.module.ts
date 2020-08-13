@@ -91,6 +91,7 @@ import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-l
 import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
 import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -176,7 +177,8 @@ const maskConfig: Partial<IConfig> = {
     AdminImpuestoListarComponent,
     AdminCategoriaListarComponent,
     AdminCategoriaCrearComponent,
-    FiltroUsuarioPipe, 
+    FiltroUsuarioPipe,
+    CarritoComprasComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -242,6 +244,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
       { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
       { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
+      { path: 'carrito-compras', component: CarritoComprasComponent },
     ])
   ],
   exports: [
