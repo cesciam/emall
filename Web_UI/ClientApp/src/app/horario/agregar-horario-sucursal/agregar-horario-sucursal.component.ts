@@ -29,14 +29,6 @@ export class AgregarHorarioSucursalComponent implements OnInit {
   public sabadoChecked: boolean;
   public domingoChecked: boolean;
 
-  public lunesModificado: boolean;
-  public martesModificado: boolean;
-  public miercolesModificado: boolean;
-  public juevesModificado: boolean;
-  public viernesModificado: boolean;
-  public sabadoModificado: boolean;
-  public domingoModificado: boolean;
-
   private sucursales: Sucursal[];
   private id_comercio: number;
   private sucursal: number;
@@ -587,8 +579,6 @@ export class AgregarHorarioSucursalComponent implements OnInit {
       });
     }
 
-
   }
-
 
 }
