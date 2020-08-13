@@ -1,1 +1,63 @@
-<p>item-empleado works!</p>
+<app-main-header></app-main-header>
+<div class="container" *ngIf="item && sucursal && empleados_sucursal">
+
+  <div class="col-sm-auto d-flex justify-content-end">
+    <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: sucursal.idComercio}">Volver atras</a>
+
+  </div>
+
+  <div class="pt-3 px-4">
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Asociar empleado a servicio</h1>
+    </div>
+
+    <!--<div class="form-row mb-4">
+      <div class="col">
+        <label for="nombre_item">{{item.nombre}} </label>
+      </div>
+      <div class="col">
+        <div class="d-flex justify-content-center img-container">
+          <img [src]="item.id_foto" class="img-fluid d-flex justify-content-center" alt="foto" style="width: 350px; height: 200px;">
+        </div>
+        
+
+      </div>
+    </div>-->
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__pic">
+            <div class="product__details__pic__item">
+              <img class="product__details__pic__item--large" [src]="item.id_foto" alt="Foto" style="width: 350px; height: 200px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__text pt-3 px-4">
+            <h3>{{item.nombre}}</h3>
+            <div class="product__details__rating">
+              <i class="">{{sucursal.nombre}}</i>
+              <h4><b>{{item.descripcion}}</b></h4>
+              <h4>Duracion: <b>{{item.duracion}}</b></h4>
+            
+            </div>
+
+
+            <!--<div class="product__details__price">₡{{preciofinal | number}} ii</div>
+            <p>
+              {{item_seleccionado.descripcion}}
+            </p>
+            <a [routerLink]="['/']" class="primary-btn">AGREGAR</a>
+            <a [routerLink]="['/']" class="heart-icon"><span class="icon_cart_alt"></span></a>-->
+            
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

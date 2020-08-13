@@ -1,7 +1,11 @@
 <app-main-header></app-main-header>
-<div class="container" *ngIf="sucursal_id">
+<div class="container" *ngIf="sucursal_id && sucursal">
+  <div class="col-sm-auto d-flex justify-content-end">
+    <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: sucursal.idComercio}">Volver atras</a>
 
- 
+  </div>
+
+
   <div class="pt-3 px-4">
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
       <h1 class="h2">Ítems de sucursal</h1>
@@ -15,26 +19,28 @@
       <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="items_sucursal">
         <thead>
           <tr>
-            <th>Id ítem</th>
+            <!--<th>Id ítem</th>-->
             <th>Nombre</th>
-            <th>Descripcion</th>
+            <!--<th>Descripcion</th>-->
             <th>Precio</th>
             <th>Tipo</th>
-            <th>Duración</th>
-            <th>Impuesto</th>
-            <th>Inventario</th>
+            <th>Detalle</th>
+            <!--<th>Impuesto</th>-->
+            <!--<th>Inventario</th>-->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of items_sucursal | filtroItem:filtroItem">
-            <td>{{ item.id }}</td>
+            <!--<td>{{ item.id }}</td>-->
             <td>{{ item.nombre }}</td>
-            <td>{{ item.descripcion }}</td>
+            <!--<td>{{ item.descripcion }}</td>-->
             <td>₡ {{ item.precio }}</td>
             <td>{{ item.tipo }}</td>
-            <td>{{ item.duracion }} min</td>
-            <td>{{ item.id_impuesto }}</td>
-            <td>{{ item.inventario }} uds</td>
+            <td *ngIf="item.tipo=='Servicio'">{{ item.duracion }} min</td>
+            <td *ngIf="item.tipo=='Producto'">{{ item.inventario }} uds</td>
+            <!--<td>{{ item.id_impuesto }}</td>-->
+
+            <td *ngIf="item.tipo=='Servicio'; else noEmpleado"><button class="btn btn-primary" [routerLink]="['/item-empleado', item.id, sucursal_id]"> Empleados </button></td>
             <td><button class="btn btn-primary" [routerLink]="['/item-editar', item.id]"> Editar </button></td>
             <td><button class="btn btn-danger" (click)="delete(item.id)"><i class="fas fa-trash-alt"></i></button></td>
           </tr>
@@ -47,3 +53,7 @@
 
 </div>
 <app-footer></app-footer>
+
+<ng-template #noEmpleado>
+  <td></td>
+</ng-template>

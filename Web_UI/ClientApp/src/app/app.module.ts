@@ -241,6 +241,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
       { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
       { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
+      { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
     ])
   ],
   exports: [

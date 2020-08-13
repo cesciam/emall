@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Item } from '../models/item';
 import { Archivo } from '../models/Archivo';
 import { Impuesto } from '../models/impuesto.model';
+import { EmpleadoList } from '../models/empleado-list.model';
 
 
 @Injectable({
@@ -89,6 +90,16 @@ export class ItemService {
 
     return item;
   }
+
+  async ObtenerEmpleados(id_comercio: number) {
+    this.serviceApi = `/Empleado/RetrieveByComercioId?comercio=${id_comercio}`;
+    let empleados: EmpleadoList[];
+
+    empleados = await this.http.get<EmpleadoList[]>(this.appUrl + this.serviceApi).toPromise();
+
+    return empleados;
+  }
+
 
   async ObtenerImpuestoItem(id_impuesto: number) {
     this.serviceApi = `/item/ImpuestoItem/?id_impuesto=${id_impuesto}`;
