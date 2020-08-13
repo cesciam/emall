@@ -45,6 +45,13 @@ namespace DataAccessLayer.Mapper
             return cita;
         }
 
+        public int BuildIdEmpleado(Dictionary<string, object> row)
+        {
+            int id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO);
+
+            return id_empleado;
+        }
+
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {
             var lstResult = new List<BaseEntity>();
@@ -126,6 +133,32 @@ namespace DataAccessLayer.Mapper
             operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
 
 
+            return operacion;
+        }
+
+        public SqlOperation GetCompareCitaStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "COMPARAR_HORARIO_CITA" };
+
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
+
+
+            return operacion;
+        }
+
+        public SqlOperation GetEmpleadoDisponibleStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_EMPLEADO_DISPONIBLE" };
+
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
             return operacion;
         }
     }

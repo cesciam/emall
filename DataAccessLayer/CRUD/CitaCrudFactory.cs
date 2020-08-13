@@ -80,5 +80,33 @@ namespace DataAccessLayer.CRUD
 
             return default(T);
         }
+
+        public Boolean VerificarCita(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetCompareCitaStatament(entity));
+
+            if (lstResult.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public int ObtenerEmpleadoDisponible(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetEmpleadoDisponibleStatament(entity));
+            
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var id_empleado = mapper.BuildIdEmpleado(dic);
+                return id_empleado;
+            }
+
+            return -1;
+        }
+
     }
 }

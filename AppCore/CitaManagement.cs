@@ -24,8 +24,11 @@ namespace AppCore
                 return 0;
             }
 
+            var cita = (Cita)entity;
+            cita.id_empleado = crud.ObtenerEmpleadoDisponible(entity);
 
-           // crud.Create(entity);
+            
+           crud.Create(cita);
 
             return 1;
         }
@@ -55,12 +58,24 @@ namespace AppCore
         {
             ErrorResultViewModel errorResult = new ErrorResultViewModel();
             errorResult.details = new List<string>();
+            var citaError = crud.VerificarHorario<Cita>(entity);
 
+
+            if (citaError != null)
+            {
+                if (citaError.id_sucursal < 0)
+                {
+                    errorResult.details.Add("Cita fuera del horario de la sucursal");
+                }
+            }
             
 
-            if (crud.VerificarHorario<Cita>(entity).id_sucursal < 0)
+            if (crud.VerificarCita(entity))
             {
-                errorResult.details.Add("Cita fuera del horario de la sucursal");
+                if (crud.ObtenerEmpleadoDisponible(entity) < 0)
+                {
+                    errorResult.details.Add("No hay empleados disponibles en este horario");
+                }
             }
 
             if(errorResult.details.Count == 0)
