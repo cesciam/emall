@@ -92,6 +92,7 @@ import { ListarHorarioComponent } from './horario/listar-horario/listar-horario.
 import { AgregarHorarioComponent } from './horario/agregar-horario/agregar-horario.component';
 import { FiltroHorarioPipe } from './pipes/filtro-horario.pipe';
 import { AgregarHorarioSucursalComponent } from './horario/agregar-horario-sucursal/agregar-horario-sucursal.component';
+import { CalificacionComponent } from './calificacion/calificacion.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -179,6 +180,8 @@ const maskConfig: Partial<IConfig> = {
     AgregarHorarioComponent,
     FiltroHorarioPipe,
     AgregarHorarioSucursalComponent,
+    FiltroUsuarioPipe,
+    CalificacionComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -254,6 +257,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    CalificacionComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
