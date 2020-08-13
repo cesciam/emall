@@ -1,12 +1,6 @@
 <app-header></app-header>
 
-
 <div class="container" *ngIf="item_seleccionado && sucursal && impuesto && comercio">
-
-
-
-
-
   <section class="product-details spad">
     <div class="container">
       <div class="row">
@@ -15,52 +9,33 @@
             <div class="product__details__pic__item">
               <img class="product__details__pic__item--large" [src]="item_seleccionado.id_foto" alt="Foto">
             </div>
-            
           </div>
         </div>
         <div class="col-lg-6 col-md-6">
           <div class="product__details__text">
             <h3>{{item_seleccionado.nombre}}</h3>
+            <p><app-calificacion item="{{item_seleccionado.id}}"></app-calificacion></p>
             <div class="product__details__rating">
               <i class="">{{comercio.nombre}}</i>
-              
             </div>
-            <div class="product__details__price">₡{{preciofinal}} ii</div>
+            <div class="product__details__price">₡{{preciofinal | number}} ii</div>
             <p>
               {{item_seleccionado.descripcion}}
             </p>
-            
             <a [routerLink]="['/']" class="primary-btn">AGREGAR</a>
             <a [routerLink]="['/']" class="heart-icon"><span class="icon_cart_alt"></span></a>
             <ul>
-              <li *ngIf="item_seleccionado.tipo === 'Servicio'" ><b>Duración</b> <span>{{item_seleccionado.duracion}} minutos</span></li>
+              <li *ngIf="item_seleccionado.tipo === 'Servicio'"><b>Duración</b> <span>{{item_seleccionado.duracion}}
+                  minutos</span></li>
               <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
-              <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp>  {{impuesto.Porcentaje}}%</samp></span></li>
+              <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp> {{impuesto.Porcentaje}}%</samp></span></li>
               <li><b>Detalle sucursal</b> <span>{{sucursal.nombre}} - {{sucursal.detallesDireccion}}</span></li>
-              
             </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-
-
-
-
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-      <app-footer></app-footer>
-
+<app-footer></app-footer>
