@@ -137,7 +137,7 @@
           <h3>Sucursales</h3>
         </div>
 
-        <div class="form-row mb-4" *ngFor="let sucursal of sucursales">
+        <div class="form-row mb-4 mt-4" *ngFor="let sucursal of sucursales">
           <label class="col-4" for="{{sucursal.id}}">{{sucursal.nombre}}</label>
           <input class="col-4" type="checkbox" name="{{sucursal.id}}" [value]="sucursal.id" (change)="marcar($event, sucursal.id)">
           <div *ngIf="tipo.value=='Producto' && sucursalesSeleccionadas.includes(sucursal.id)">

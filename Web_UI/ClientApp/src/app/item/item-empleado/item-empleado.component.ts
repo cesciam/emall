@@ -3,6 +3,7 @@ import { Item } from '../../models/item';
 import { ItemService } from '../../services/item.service';
 import { SucursalService } from '../../services/sucursal.service';
 import { UsuarioService } from '../../services/usuario.service';
+import { ComercioService } from '../../services/comercio.service';
 import { EmpleadoService } from '../../services/empleado.service';
 import { Router } from "@angular/router";
 import { Sucursal } from '../../models/Sucursal';
@@ -10,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Empleado } from '../../models/empleado.model';
 import { Usuario } from '../../models/usuario.model';
 import { EmpleadoList } from '../../models/empleado-list.model';
+import { Comercio } from '../../models/Comercio';
 
 @Component({
   selector: 'app-item-empleado',
@@ -23,17 +25,19 @@ export class ItemEmpleadoComponent implements OnInit {
   id_sucursal: number;
   item: Item;
   sucursal: Sucursal;
+  comercio: Comercio;
   empleados_sucursal: Array<EmpleadoList>;
   empleados_comercio: EmpleadoList[];
   usuarios: Array<Usuario>;
 
 
 
-  constructor(private route: ActivatedRoute, private itemService: ItemService, private router: Router, private sucursalService: SucursalService, private usuarioService: UsuarioService, private empleadoService: EmpleadoService) {
+  constructor(private route: ActivatedRoute, private itemService: ItemService, private router: Router, private sucursalService: SucursalService, private comercioService: ComercioService) {
 
     this.id_item = parseInt(this.route.snapshot.params['id_item']);
     this.id_sucursal = parseInt(this.route.snapshot.params['id_sucursal']);
     this.empleados_sucursal = new Array<EmpleadoList>();
+    this.item = new Item();
 
     
 
@@ -55,9 +59,15 @@ export class ItemEmpleadoComponent implements OnInit {
       }
 
     }
-    
 
-    console.log(this.item.id_foto)
+    let tmp_comercio = new Comercio();
+    tmp_comercio.id = this.sucursal.idComercio;
+
+    this.comercioService.obtenerComercio(tmp_comercio)
+      .subscribe(data => {
+        this.comercio = data;
+      });
+
   }
 
 

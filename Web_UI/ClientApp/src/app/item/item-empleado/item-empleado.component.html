@@ -1,8 +1,8 @@
 <app-main-header></app-main-header>
-<div class="container" *ngIf="item && sucursal && empleados_sucursal">
+<div class="container" *ngIf="item && sucursal && empleados_sucursal && comercio">
 
   <div class="col-sm-auto d-flex justify-content-end">
-    <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: sucursal.idComercio}">Volver atras</a>
+    <a [routerLink]="['/item-sucursal', sucursal.id]">Volver atras</a>
 
   </div>
 
@@ -11,48 +11,62 @@
       <h1 class="h2">Asociar empleado a servicio</h1>
     </div>
 
-    <!--<div class="form-row mb-4">
-      <div class="col">
-        <label for="nombre_item">{{item.nombre}} </label>
-      </div>
-      <div class="col">
-        <div class="d-flex justify-content-center img-container">
-          <img [src]="item.id_foto" class="img-fluid d-flex justify-content-center" alt="foto" style="width: 350px; height: 200px;">
-        </div>
-        
-
-      </div>
-    </div>-->
-
-    <div class="row">
-        <div class="col-lg-6 col-md-6">
-          <div class="product__details__pic">
-            <div class="product__details__pic__item">
-              <img class="product__details__pic__item--large" [src]="item.id_foto" alt="Foto" style="width: 350px; height: 200px;">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <div class="product__details__text pt-3 px-4">
-            <h3>{{item.nombre}}</h3>
-            <div class="product__details__rating">
-              <i class="">{{sucursal.nombre}}</i>
-              <h4><b>{{item.descripcion}}</b></h4>
-              <h4>Duracion: <b>{{item.duracion}}</b></h4>
-            
-            </div>
 
 
-            <!--<div class="product__details__price">₡{{preciofinal | number}} ii</div>
-            <p>
-              {{item_seleccionado.descripcion}}
+    <div class="d-flex flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <p class="h5">Marque los empleados a los cuales desea asociar el servicio</p>
+    </div>
+
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="empleados_sucursal">
+      <thead>
+        <tr>
+          <th>Correo</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of empleados_sucursal">
+          <td>{{ emp.Correo }}</td>
+          <td>{{ emp.UsuarioNombre }} {{ emp.Apellido }}</td>
+          <td>{{ emp.RolNombre }}</td>
+          <td><input class="form-check-input" type="checkbox" name="{{emp.Id}}" [value]="emp.Id" (change)="marcar($event, emp.Id)"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-primary btn-lg btn-block primary-btn mt-3" (click)="asociar()">Guardar</button>
+
+    <div class="row border-bottom mt-5" *ngIf="item">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text pt-3 px-4">
+          <h2>{{item.nombre}}</h2>
+          <br>
+          <div class="product__details__rating">
+            {{comercio.nombre}}<i class="h3 mb-5"> {{sucursal.nombre}}</i>
+            <p class="mt-2">
+              <b>{{item.descripcion}}</b>
+              <br>Duración: <b>{{item.duracion}} minutos</b>
             </p>
-            <a [routerLink]="['/']" class="primary-btn">AGREGAR</a>
-            <a [routerLink]="['/']" class="heart-icon"><span class="icon_cart_alt"></span></a>-->
-            
+
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__pic">
+          <div class="product__details__pic__item">
+            <img class="product__details__pic__item--large" [src]="item.id_foto" alt="Foto" style="width: 350px; height: 200px;">
           </div>
         </div>
       </div>
+
+    </div>
+
+
+
+
 
 
   </div>
