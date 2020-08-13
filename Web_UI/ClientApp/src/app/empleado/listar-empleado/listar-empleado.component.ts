@@ -50,5 +50,4 @@ export class ListarEmpleadoComponent implements OnInit {
   empleadoToDelete(id:number){
     this.id_empleado=id;
   }
-
 }

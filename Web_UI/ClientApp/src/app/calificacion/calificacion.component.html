@@ -1,0 +1,10 @@
+<span *ngIf="!calificacionEnviada">
+    <ng-container *ngFor="let i of estrellas;  let posicion = index">
+        <a (click)="calificar(posicion + 1)" class="estrella"><i *ngIf="i==1" class="fas fa-star"></i></a>
+        <a (click)="calificar(posicion + 1)" class="estrella"><i *ngIf="i==0" class="far fa-star"></i></a>
+    </ng-container>
+</span>
+
+<span *ngIf="calificacionEnviada">
+    <small>Gracias por tu puntaje!</small>
+</span>

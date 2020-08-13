@@ -1,30 +1,23 @@
 <app-header></app-header>
+
 <div class="container" *ngIf="productos">
-
-
   <div class="pt-3 px-4">
-
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-      <h1 class="h2">Productos</h1>
+      <div class="section-title product__discount__title">
+        <h2>Productos</h2>
+      </div>
     </div>
     <div class="mb-4 col">
       <input type="text" class="form-control" placeholder="Buscar" name="filtroItem" [(ngModel)]="filtroItem" />
     </div>
-
   </div>
-  
-
-
 
   <div class="row">
-
-
     <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let item of productos | filtroItem:filtroItem">
       <div class="product__item">
         <div class="product__item__pic set-bg img-container" data-setbg="item.id_foto">
           <img [src]="item.id_foto" alt="Foto">
           <ul class="product__item__pic__hover">
-            
             <li><a [routerLink]="['/item-perfil', item.id]"><i class="fa fa-shopping-cart"></i></a></li>
           </ul>
         </div>
@@ -34,8 +27,7 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
+
 <app-footer></app-footer>
