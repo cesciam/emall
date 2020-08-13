@@ -173,7 +173,8 @@ const maskConfig: Partial<IConfig> = {
     AdminCategoriaListarComponent,
     AdminCategoriaCrearComponent,
     FiltroUsuarioPipe,
-    CalificacionComponent, 
+    CalificacionComponent,
+    CarritoComprasComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

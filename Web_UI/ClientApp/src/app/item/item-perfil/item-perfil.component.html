@@ -46,9 +46,7 @@
             <p>
               {{item_seleccionado.descripcion}}
             </p>
-            <div *ngIf="usuarioLogueado != null">
               <button class="primary-btn" style="border: none" (click)="agregarItemCarrito()" data-toggle="modal" data-target="#Modal" [disabled]="agregarProductoCarrito">Agregar a carrito</button>
-            </div>
             <ul>
               <li *ngIf="item_seleccionado.tipo === 'Servicio'"><b>Duración</b> <span>{{item_seleccionado.duracion}}
                   minutos</span></li>

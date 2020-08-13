@@ -14,25 +14,40 @@ export class CarritoComprasComponent implements OnInit {
   private tipoCarrito: string;
   private total: number = 0;
   @Input() txtLogistica: string;
+  usuarioLogueado: object = null;
+  error: any;
  
   constructor(private serviceItem: ItemService) {
-    this.llenarCarrito();
     this.tipoCarrito = localStorage.getItem('tipoCarrito');
   }
 
   ngOnInit() {
+    this.llenarCarrito();
+    this.validarUsuarioLogueado();
+  }
+
+
+  validarUsuarioLogueado() {
+    this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
+
+    if (this.usuarioLogueado == null) {
+      this.error = 'Debe iniciar sesión para agregar items a tu carrito de compras.';
+    }
   }
 
   async llenarCarrito() {
     this.carritoLocalStorage = JSON.parse(localStorage.getItem('carrito'));
 
-    let carrito: Item[] = this.carritoLocalStorage;
+    if (this.carritoLocalStorage != null) {
+      let carrito: Item[] = this.carritoLocalStorage;
 
-    for (let item of carrito) {
-      let impuesto: Impuesto = await this.serviceItem.ObtenerImpuestoItem(item.id_impuesto);
-      item.precio = item.precio + (item.precio / 100 * impuesto.Porcentaje);
-      this.total = this.total + item.precio;
+      for (let item of carrito) {
+        let impuesto: Impuesto = await this.serviceItem.ObtenerImpuestoItem(item.id_impuesto);
+        item.precio = item.precio + (item.precio / 100 * impuesto.Porcentaje);
+        this.total = this.total + item.precio;
+      }
     }
+
   }
 
   eliminarItem(item: Item) {

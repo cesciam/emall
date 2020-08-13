@@ -22,7 +22,7 @@ export class ItemPerfilComponent implements OnInit {
   comercio: Comercio;
   error: any;
   preciofinal = 0;
-  usuarioLogueado: object = null;
+
   agregarProductoCarrito = false;
 
 
@@ -33,20 +33,10 @@ export class ItemPerfilComponent implements OnInit {
 
 
     this.obtenerItem(itemID);
-    this.validarUsuarioLogueado();
-    
   }
 
   ngOnInit() {
     
-  }
-
-  validarUsuarioLogueado() {
-    this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
-
-    if (this.usuarioLogueado == null) {
-      this.error = 'Debe iniciar sesión para agregar items a tu carrito de compras.';
-    }
   }
 
   async obtenerItem(itemId: number) {
