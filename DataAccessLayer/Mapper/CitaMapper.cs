@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Dao;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,6 +19,13 @@ namespace DataAccessLayer.Mapper
 
         //Parametro que se utiliza solamente para validar que la cita esté dentro del horario de la sucursal
         private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
+
+        //Columnas creadas para la vista UI
+        private const string DB_COL_SUCURSAL = "SUCURSAL";
+        private const string DB_COL_COMERCIO = "COMERCIO";
+        private const string DB_COL_EMPLEADO = "EMPLEADO";
+        private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
+
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var cita = new Cita
@@ -26,13 +34,31 @@ namespace DataAccessLayer.Mapper
                 id_item = GetIntValue(row, DB_COL_ID_ITEM),
                 id_cliente = GetIntValue(row, DB_COL_ID_CLIENTE),
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
-                fecha= GetDateValue(row, DB_COL_FECHA),
+                fecha = GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
-                hora_fin= GetDateValue(row, DB_COL_HORA_FIN),
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
                 id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
             };
 
             return cita;
+        }
+
+        public CitaViewModel BuildView(Dictionary<string, object> row)
+        {
+            var citaView = new CitaViewModel
+            {
+                id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
+                fecha = GetDateValue(row, DB_COL_FECHA),
+                hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL),
+                id_comercio = GetIntValue(row, DB_COL_ID_COMERCIO),
+                nombre_comercio = GetStringValue(row, DB_COL_COMERCIO),
+                nombre_empleado= GetStringValue(row, DB_COL_EMPLEADO),
+                nombre_sucursal = GetStringValue(row, DB_COL_SUCURSAL)
+            };
+
+            return citaView;
         }
 
         public BaseEntity BuildValidacion(Dictionary<string, object> row)
@@ -161,5 +187,18 @@ namespace DataAccessLayer.Mapper
             operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
             return operacion;
         }
+
+        public SqlOperation GetCitasClienteStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITAS_CLIENTE" };
+
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+
+            return operacion;
+        }
+
+
     }
 }

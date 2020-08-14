@@ -27,10 +27,16 @@ namespace AppCore
             var cita = (Cita)entity;
             cita.id_empleado = crud.ObtenerEmpleadoDisponible(entity);
 
-            
-           crud.Create(cita);
+
+            crud.Create(cita);
 
             return 1;
+        }
+
+        public List<CitaViewModel> RetrieveCitasCliente(BaseEntity entity)
+        {
+            return crud.ObtenerCitasCliente<CitaViewModel>(entity);
+
         }
 
 

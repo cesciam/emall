@@ -108,5 +108,21 @@ namespace DataAccessLayer.CRUD
             return -1;
         }
 
+        public List<T> ObtenerCitasCliente<T>(BaseEntity entity)
+        {
+            var lstCita = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetCitasClienteStatament(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                foreach(var row in lstResult)
+                {
+                    var obj = mapper.BuildView(row);
+                    lstCita.Add((T)Convert.ChangeType(obj, typeof(T)));
+                }
+            }
+            return lstCita;
+        }
+
     }
 }
