@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { ImpuestoService } from 'src/app/services/impuesto.service';
 import { Impuesto } from 'src/app/models/impuesto.model'; 
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-listar-impuesto',
@@ -11,10 +12,18 @@ import { Impuesto } from 'src/app/models/impuesto.model';
 
 export class ListarImpuestoComponent implements OnInit {
 
+  private usuarioLogueado: string;
   public selectedImpuesto: Impuesto = { Id: null, Nombre: '', Porcentaje: null };
-  buscarImpuesto = ''; 
+  buscarImpuesto = '';
+  private error: object = null;
+  public accionEditar: string = "Edición impuesto";
+  public accion: string = "Eliminación impuesto";
 
-  constructor(private service: ImpuestoService) { }
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+  constructor(private service: ImpuestoService, private bitacora: BitacoraService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+    console.log(this.id_usuario);}
 
   ngOnInit() {
     this.obtenerTodo(); 
@@ -38,12 +47,24 @@ export class ListarImpuestoComponent implements OnInit {
   public completarModificar(selectedImpuesto: Impuesto): void {
     this.service.modificarImpuesto(selectedImpuesto).subscribe(res => {
       this.obtenerTodo();
-    })
+    });
+
+    this.bitacora.llenarBitacora(this.accionEditar, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
   }
 
    public eliminar(id: number) {
-    this.service.eliminarImpuesto(id).subscribe(res => {
-      this.service.ObtenerTodoImpuesto();
-    })
+     this.service.eliminarImpuesto(id).subscribe(res => {
+       this.service.ObtenerTodoImpuesto();
+     });
+
+     this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+       (error) => {
+         this.error = error.error;
+         window.scroll(0, 0);
+       });
   }
 }
