@@ -93,6 +93,7 @@ import { AgregarHorarioComponent } from './horario/agregar-horario/agregar-horar
 import { FiltroHorarioPipe } from './pipes/filtro-horario.pipe';
 import { AgregarHorarioSucursalComponent } from './horario/agregar-horario-sucursal/agregar-horario-sucursal.component';
 import { CalificacionComponent } from './calificacion/calificacion.component';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -180,7 +181,8 @@ const maskConfig: Partial<IConfig> = {
     FiltroHorarioPipe,
     AgregarHorarioSucursalComponent,
     FiltroUsuarioPipe,
-    CalificacionComponent, 
+    CalificacionComponent,
+    CarritoComprasComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -250,6 +252,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'agregar-horario', component: AgregarHorarioComponent },
       { path: 'listar-horario', component: ListarHorarioComponent },
       { path: 'agregar-horario-sucursal/:id_comercio', component: AgregarHorarioSucursalComponent },
+      { path: 'carrito-compras', component: CarritoComprasComponent },
     ])
   ],
   exports: [

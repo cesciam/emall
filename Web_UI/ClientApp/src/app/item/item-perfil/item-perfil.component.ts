@@ -23,16 +23,20 @@ export class ItemPerfilComponent implements OnInit {
   error: any;
   preciofinal = 0;
 
+  agregarProductoCarrito = false;
+
 
   constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router, private serviceSucursal: SucursalService, private serviceComercio: ComercioService,) {
 
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
+    this.item_seleccionado = new Item();
+
 
     this.obtenerItem(itemID);
-    
   }
 
   ngOnInit() {
+    
   }
 
   async obtenerItem(itemId: number) {
@@ -50,6 +54,41 @@ export class ItemPerfilComponent implements OnInit {
     console.log(this.comercio)
 
     this.preciofinal = this.item_seleccionado.precio + (this.item_seleccionado.precio / 100 * this.impuesto.Porcentaje);
+    this.validarTipoCarrito();
+  }
+
+  agregarItemCarrito() {
+    if (localStorage.getItem("carrito") === null) {
+      var producto: Item[] = new Array();
+      producto[0] = this.item_seleccionado;
+      localStorage.setItem('carrito', JSON.stringify(producto));
+      localStorage.setItem('tipoCarrito', this.item_seleccionado.tipo);
+    } else {
+
+      if (this.item_seleccionado.tipo == localStorage.getItem('tipoCarrito')) {
+        var productos: Item[] = JSON.parse(localStorage.getItem('carrito'));
+        let i = productos.length;
+        productos[i] = this.item_seleccionado;
+        localStorage.setItem('carrito', JSON.stringify(productos));
+      } else {
+        this.error = 'No puede tener productos y servicios en su carrito de compra.';
+      }
+
+      
+    }
+  }
+
+  validarTipoCarrito() {
+    if (localStorage.getItem("tipoCarrito") != null) {
+
+      if (localStorage.getItem("tipoCarrito") != this.item_seleccionado.tipo) {
+        this.agregarProductoCarrito = true;
+        this.error = 'No puede tener productos y servicios en su carrito de compra.';
+      } else {
+        this.agregarProductoCarrito = false;
+      }
+      
+    }
   }
 
 }
