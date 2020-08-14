@@ -1,0 +1,195 @@
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo horario creado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        El horario ha sido registrado exitosamente
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" [routerLink]="[]">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-main-header></app-main-header>
+<br>
+<a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">
+  &nbsp; &nbsp;&nbsp;Volver al comercio</a>
+<br>
+<h3 class="text-center">Horarios comerciales</h3>
+<br>
+<div class="container text-center">
+
+  <div class="form-group row justify-content-center">
+    <label for="sucursal">Seleccione una sucursal: &nbsp;</label>
+    <select class="form-control col-4 " [(ngModel)]="sucursal" name="sucursal" id="sucursal" 
+    (change)="cambiarSucursal()">
+      <option value="0"></option>
+      <option *ngFor="let sucursal of sucursales" value="{{sucursal.id}}">{{sucursal.nombre}}</option>
+    </select>
+  </div>
+  <br>
+
+  <div class="row justify-content-md-center">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-2"><label>Día</label></div>
+    <div class="col-sm-2"><label>Hora de inicio</label></div>
+    <div class="col-sm-2"><label>Hora de cierre</label></div>
+  </div>
+  <br>
+  <form #formLunes="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input" [(ngModel)]="lunesChecked" name="lunesChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Lunes</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!lunesChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="lunesFormData.hora_inicio" >
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!lunesChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="lunesFormData.hora_fin">
+      </div>
+    </div>
+    
+  </form>
+
+  <form #formLunes="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input" [(ngModel)]="martesChecked" name="martesChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Martes</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!martesChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="martesFormData.hora_inicio">
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!martesChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="martesFormData.hora_fin">
+      </div>
+    </div>
+  </form>
+
+  <form #formMiercoles="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input"
+        [(ngModel)]="miercolesChecked" name="miercolesChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Miércoles</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!miercolesChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="miercolesFormData.hora_inicio">
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!miercolesChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="miercolesFormData.hora_fin">
+      </div>
+    </div>
+  </form>
+
+  <form #formJueves="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input"
+        [(ngModel)]="juevesChecked" name="juevesChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Jueves</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!juevesChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="juevesFormData.hora_inicio">
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!juevesChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="juevesFormData.hora_fin">
+      </div>
+    </div>
+  </form>
+
+  <form #formViernes="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input"
+        [(ngModel)]="viernesChecked" name="viernesChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Viernes</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!viernesChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="viernesFormData.hora_inicio">
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!viernesChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="viernesFormData.hora_fin">
+      </div>
+    </div>
+  </form>
+
+  <form #formSabado="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input"
+        [(ngModel)]="sabadoChecked" name="sabadoChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Sábado</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!sabadoChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="sabadoFormData.hora_inicio">
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!sabadoChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="sabadoFormData.hora_fin">
+      </div>
+    </div>
+  </form>
+
+  <form #formDomingo="ngForm">
+    <div class="row justify-content-md-center">
+      <div class="form-group" class="col-sm-1">
+        <input type="checkbox" class="form-check-input"
+        [(ngModel)]="domingoChecked" name="domingoChecked">
+      </div>
+      <div class="form-group col-sm-2">
+        <h5>Domingo</h5>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!domingoChecked" name="hora_inicio" #hora_inicio="ngModel"
+          [(ngModel)]="domingoFormData.hora_inicio">
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="time" class="form-control" [disabled]="!domingoChecked" name="hora_fin" #hora_fin="ngModel"
+          [(ngModel)]="domingoFormData.hora_fin">
+      </div>
+    </div>
+  </form>
+  <br>
+  <div *ngIf="alertaError" class="alert alert-danger" role="alert">
+    <strong>Ups!</strong> {{mensajeError}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <button [disabled]="sucursal==0" type="submit" class="btn btn-primary" (click)="onSubmit()"> Guardar cambios </button>
+</div>
+<br>
+<app-footer></app-footer>
