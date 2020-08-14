@@ -1,6 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Carrito de compras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Has agregado el item al carrito de compras.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
 <app-header></app-header>
 
 <div class="container" *ngIf="item_seleccionado && sucursal && impuesto && comercio">
+
+  <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+    <strong>{{error}}</strong>
+  </div>
+
   <section class="product-details spad">
     <div class="container">
       <div class="row">
@@ -22,8 +46,7 @@
             <p>
               {{item_seleccionado.descripcion}}
             </p>
-            <a [routerLink]="['/']" class="primary-btn">AGREGAR</a>
-            <a [routerLink]="['/']" class="heart-icon"><span class="icon_cart_alt"></span></a>
+              <button class="primary-btn" style="border: none" (click)="agregarItemCarrito()" data-toggle="modal" data-target="#Modal" [disabled]="agregarProductoCarrito">Agregar a carrito</button>
             <ul>
               <li *ngIf="item_seleccionado.tipo === 'Servicio'"><b>Duración</b> <span>{{item_seleccionado.duracion}}
                   minutos</span></li>
