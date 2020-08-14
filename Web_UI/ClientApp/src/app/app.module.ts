@@ -88,6 +88,10 @@ import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-l
 import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
 import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
+import { ListarHorarioComponent } from './horario/listar-horario/listar-horario.component';
+import { AgregarHorarioComponent } from './horario/agregar-horario/agregar-horario.component';
+import { FiltroHorarioPipe } from './pipes/filtro-horario.pipe';
+import { AgregarHorarioSucursalComponent } from './horario/agregar-horario-sucursal/agregar-horario-sucursal.component';
 import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
 
@@ -171,7 +175,11 @@ const maskConfig: Partial<IConfig> = {
     AdminImpuestoCrearComponent,
     AdminImpuestoListarComponent,
     AdminCategoriaListarComponent,
-    AdminCategoriaCrearComponent,
+    AdminCategoriaCrearComponent, 
+    ListarHorarioComponent,
+    AgregarHorarioComponent,
+    FiltroHorarioPipe,
+    AgregarHorarioSucursalComponent,
     FiltroUsuarioPipe,
     CalificacionComponent,
     ItemEmpleadoComponent, 
@@ -241,6 +249,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
       { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
       { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
+      { path: 'agregar-horario', component: AgregarHorarioComponent },
+      { path: 'listar-horario', component: ListarHorarioComponent },
+      { path: 'agregar-horario-sucursal/:id_comercio', component: AgregarHorarioSucursalComponent },
       { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
     ])
   ],

@@ -5,4 +5,5 @@ export class Horario {
     hora_inicio: string;
     hora_fin: string;
     id_usuario: number;
+    id_sucursal:number;
 }

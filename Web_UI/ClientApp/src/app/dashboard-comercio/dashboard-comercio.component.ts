@@ -28,6 +28,7 @@ export class DashboardComercioComponent implements OnInit {
   private permisoPromociones: boolean;
   private permisoArchivos: boolean;
   private permisoEditarComercio: boolean;
+  private permisoHorario: boolean;
 
 
   constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
@@ -62,6 +63,7 @@ export class DashboardComercioComponent implements OnInit {
       this.permisoPromociones = true;
       this.permisoArchivos = true;
       this.permisoEditarComercio = true;
+      this.permisoHorario = true;
     }
   }
 
@@ -87,6 +89,9 @@ export class DashboardComercioComponent implements OnInit {
             this.permisoArchivos = true;
           break;
           case "editar comercio":
+            this.permisoEditarComercio = true;
+          break;
+          case "horarios":
             this.permisoEditarComercio = true;
           break;
         };
