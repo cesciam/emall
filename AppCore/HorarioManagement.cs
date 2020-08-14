@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.CRUD;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,9 +14,27 @@ namespace AppCore
         {
             crud = new HorarioCrudFactory();
         }
-        public void Create(Horario h)
+        public void Create(HorarioViewModel h)
         {
-            crud.Create(h);
+            var horario = new Horario
+            {
+                id = h.id,
+                fecha = DateTime.Parse(h.fecha+ "T00:00:00"),
+                tipo_horario = h.tipo_horario,
+                hora_inicio = DateTime.Parse("2020-12-12T"+h.hora_inicio+ ":00"),
+                hora_fin = DateTime.Parse("2020-12-12T" + h.hora_fin + ":00"),
+                id_usuario = h.id_usuario,
+                id_sucursal = h.id_sucursal
+            };
+            if (horario.id_usuario == -1)
+            {
+                crud.Create(horario);
+            }
+            else
+            {
+                crud.CreateWithUser(horario);
+            }
+            
         }
         public List<Horario> RetrieveAll()
         {
@@ -25,9 +44,31 @@ namespace AppCore
         {
             return crud.Retrieve<Horario>(h);
         }
-        public void Update(Horario h)
+        public List<Horario> RetrieveBySucursal(Horario h)
         {
-            crud.Update(h);
+            return crud.RetrieveBySucursal<Horario>(h);
+        }
+        public void Update(HorarioViewModel h)
+        {
+            var horario = new Horario
+            {
+                id = h.id,
+                fecha = DateTime.Parse(h.fecha + "T00:00:00"),
+                tipo_horario = h.tipo_horario,
+                hora_inicio = DateTime.Parse("2020-12-12T" + h.hora_inicio + ":00"),
+                hora_fin = DateTime.Parse("2020-12-12T" + h.hora_fin + ":00"),
+                id_usuario = h.id_usuario,
+                id_sucursal = h.id_sucursal
+            };
+            if (horario.id_usuario == -1)
+            {
+                crud.Update(horario);
+            }
+            else
+            {
+                //crud.UpdateWithUser(horario);
+            }
+            
         }
         public void Delete(Horario h)
         {

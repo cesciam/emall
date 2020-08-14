@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AppCore;
 using Entities;
+using Entities.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,8 +32,19 @@ namespace Web_API.Controllers
 
             return hm.RetrieveById(h);
         }
+        [HttpGet]
+        public List<Horario> RetrieveBySucursal(int sucursal)
+        {
+            var hm = new HorarioManagement();
+            var h = new Horario()
+            {
+                id_sucursal = sucursal
+            };
+
+            return hm.RetrieveBySucursal(h);
+        }
         [HttpPost]
-        public IActionResult Create(Horario c)
+        public IActionResult Create(HorarioViewModel c)
         {
             try
             {
@@ -47,7 +59,7 @@ namespace Web_API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(Horario c)
+        public IActionResult Update(HorarioViewModel c)
         {
             try
             {
@@ -61,9 +73,10 @@ namespace Web_API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Delete(Horario c)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
+            var c = new Horario { id = id };
             try
             {
                 var hm = new HorarioManagement();

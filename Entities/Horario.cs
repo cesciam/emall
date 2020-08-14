@@ -12,6 +12,7 @@ namespace Entities
         public DateTime hora_inicio { get; set; }
         public DateTime hora_fin { get; set; }
         public int id_usuario { get; set; }
+        public int id_sucursal { get; set; }
         public Horario()
         {
 
@@ -42,7 +43,15 @@ namespace Entities
                 {
                     throw new Exception("El id de usuario debe ser numérico");
                 }
-
+                var input_id_sucursal = 0;
+                if (int.TryParse(infoArray[6], out input_id_sucursal))
+                {
+                    id_sucursal = input_id_sucursal;
+                }
+                else
+                {
+                    throw new Exception("El id de sucursal debe ser numérico");
+                }
             }
             else
             {
