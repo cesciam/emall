@@ -37,12 +37,5 @@ export class ListarHorarioComponent implements OnInit {
     });
   }
 
-  onUpdate(id:number){
-
-  }
-
-  horarioToDelete(id:number){
-
-  }
 
 }
