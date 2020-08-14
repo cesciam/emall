@@ -19,36 +19,56 @@
         <!--Acá está el inicio de sesión-->
         <div class="col-lg-6 col-md-6">
           <div class="header__top__right">
-            <div class="header__top__right__language">
-              <i class="fa fa-user"></i> &nbsp;
-              <div *ngIf="usuarioLogueado == null">Iniciar Sesión</div>
-              <div *ngIf="usuarioLogueado != null">{{ usuarioLogueado.usuario.Nombre }} {{ usuarioLogueado.usuario.Apellido }}</div>
-              <span class="arrow_carrot-down"></span>
-              <ul>
-                <li *ngIf="usuarioLogueado == null">
-                  <a [routerLink]="['/autenticacion/login']">Iniciar sesión</a>
-                </li>
-                <li *ngIf="usuarioLogueado != null">
-                  <a [routerLink]="['/perfil-usuario']">Ver mi perfil</a>
-                </li>
-                <li *ngIf="usuarioLogueado?.usuario?.Tipo==1">
-                  <a [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
-                </li>
-                <li *ngIf="usuarioLogueado?.usuario?.Tipo==3">
-                  <a [routerLink]="['/perfil-admin-comercio']">Administrar Comercios</a>
-                </li>
-                <li *ngIf="usuarioLogueado?.usuario?.Tipo==4">
-                  <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">Comercio</a>
-                </li>
-                <li *ngIf="usuarioLogueado != null">
-                  <a [routerLink]="['/autenticacion']" (click)="logout()">Cerrar Sesión</a>
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="usuarioLogueado == null" class="header__top__right__auth">
-              <a [routerLink]="['/autenticacion/register']">Registarse</a>
+            <div class="header__top__right__auth">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                  <span *ngIf="usuarioLogueado == null"> Iniciar sesión</span>
+                  <span *ngIf="usuarioLogueado != null">
+                    {{ usuarioLogueado.usuario.Nombre }}
+                    {{ usuarioLogueado.usuario.Apellido }}
+                  </span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <span *ngIf="usuarioLogueado == null">
+                    <a class="dropdown-item" [routerLink]="['/autenticacion']">
+                      <i class="fa fa-user"></i>
+                      Iniciar sesión
+                    </a>
+                  </span>
+
+                  <span *ngIf="usuarioLogueado != null">
+                    <a class="dropdown-item" [routerLink]="['/perfil-usuario']">
+                      {{ usuarioLogueado.usuario.Nombre }}
+                      {{ usuarioLogueado.usuario.Apellido }}
+                    </a>
+                    <a class="dropdown-item" href="#" (click)="logout()">Cerrar Sesión</a>
+                  </span>
+
+                  <div class="dropdown-divider"></div>
+                  <div *ngIf="usuarioLogueado">
+                    <span *ngIf="usuarioLogueado.usuario.Tipo==1">
+                      <a class="dropdown-item" [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
+                    </span>
+                    <span *ngIf="usuarioLogueado.usuario.Tipo==4">
+                      <a class="dropdown-item" [routerLink]="['/dashboard-comercio']"
+                         [queryParams]="{comercio: id_comercio}">Comercio</a>
+                    </span>
+                  </div>
+
+
+                </div>
+              </div>
+                <a [routerLink]="['/carrito-compras']" class="heart-icon"><span class="icon_cart_alt"></span></a>
+              
             </div>
           </div>
+            
         </div>
       </div>
     </div>
