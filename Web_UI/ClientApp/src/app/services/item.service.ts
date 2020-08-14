@@ -6,6 +6,7 @@ import { Item } from '../models/item';
 import { Archivo } from '../models/Archivo';
 import { Impuesto } from '../models/impuesto.model';
 import { EmpleadoList } from '../models/empleado-list.model';
+import { EmpleadosXItem } from '../models/empleados-xitem';
 
 
 @Injectable({
@@ -45,6 +46,23 @@ export class ItemService {
       .pipe(catchError(this.errorHandler)
       );
   }
+
+
+  AsociarItemEmpleado(empleados: EmpleadosXItem): Observable<any> {
+    this.serviceApi = `/item/AsociarItemEmpleado`;
+    return this.http
+      .post<void>(this.appUrl + this.serviceApi, empleados, this.httpOptions)
+      .pipe(catchError(this.errorHandler)
+      );
+  }
+
+
+  obtenerEmpleadosItem(id_item: number): Observable<EmpleadosXItem[]> {
+    this.serviceApi = `/item/obtenerEmpleadosItem/?id_item=${id_item}`;
+    return this.http
+      .get<EmpleadosXItem[]>(this.appUrl + this.serviceApi);
+  }
+
 
   getItemSucursal(id_sucursal: number): Observable<Item[]> {
     this.serviceApi = `/item/RetrieveAllBySucursal/?id_sucursal=${id_sucursal}`;
@@ -139,4 +157,7 @@ export class ItemService {
         })
       });
   }
+
+
+  
 }

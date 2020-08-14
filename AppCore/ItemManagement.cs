@@ -2,16 +2,20 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security;
 
 namespace AppCore
 {
     public class ItemManagement
     {
         private ItemCrudFactory crudItem;
+        private EmpleadoXItemCrudFactory crudEmpleadoXItem;
 
         public ItemManagement()
         {
             crudItem = new ItemCrudFactory();
+            crudEmpleadoXItem = new EmpleadoXItemCrudFactory();
         }
 
         public Boolean validarItem(Item item)
@@ -46,6 +50,22 @@ namespace AppCore
             {
                 throw new Exception("Valores numericos deben ser positivos");
             }
+        }
+
+        public void AsociarItemEmpleado(EmpleadosXItem tmp_empleado)
+        {
+
+            for(int i = 0; i < tmp_empleado.empleados.Length; i++)
+            {
+                var asociar = new EmpleadosXItem();
+                asociar.id_item = tmp_empleado.id_item;
+                asociar.id_empleado = tmp_empleado.empleados[i];
+                crudEmpleadoXItem.Create(asociar);
+                System.Threading.Thread.Sleep(1000);
+            }
+
+
+            
         }
 
         public List<Item> RetrieveAllItem()
@@ -107,6 +127,11 @@ namespace AppCore
         public Impuesto ImpuestoItem(Impuesto impuesto)
         {
             return crudItem.ImpuestoItem<Impuesto>(impuesto);
+        }
+
+        public List<EmpleadosXItem> obtenerEmpleadosItem(int id_item)
+        {
+            return crudEmpleadoXItem.RetrieveAllByItem<EmpleadosXItem>(id_item);
         }
 
     }

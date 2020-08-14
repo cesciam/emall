@@ -1,5 +1,7 @@
 <app-main-header></app-main-header>
-<div class="container" *ngIf="item && sucursal && empleados_sucursal && comercio">
+<div class="container" *ngIf="item && sucursal && empleados_sucursal && comercio && empleados_actuales">
+  {{ empleados_actuales[0].id }}
+
 
   <div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/item-sucursal', sucursal.id]">Volver atras</a>
