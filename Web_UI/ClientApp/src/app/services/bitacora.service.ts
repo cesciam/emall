@@ -12,24 +12,20 @@ import { Observable } from 'rxjs';
 export class BitacoraService {
 
   formData: Bitacora;
-  public bitacora: Bitacora[];
+  
   public fecha: Date = new Date();
-  
-  
   
   readonly BaseURL = 'http://localhost:5000/api/'; //inject
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
-  
-  ObtenerTodoBitacora() {
-   return this.http.get<Bitacora[]>(this.BaseURL + 'bitacora/obtenertodobitacora')
-      .toPromise().then(res => this.bitacora = res as Bitacora[])
+  public ObtenerTodoBitacora() :Observable<Bitacora[]>  {
+    // let bitacora: Bitacora
+    return this.http.get<Bitacora[]>(this.BaseURL + 'bitacora/obtenertodobitacora')
+      //.toPromise().then(res => this.bitacoras = res as Bitacora[])
   }
 
   public crearBitacora(bitacora: Bitacora) {
-
-
     return this.http.post(this.BaseURL + "bitacora/crearbitacora", bitacora)
 
   }

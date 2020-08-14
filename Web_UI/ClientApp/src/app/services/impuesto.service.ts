@@ -24,13 +24,9 @@ export class ImpuestoService {
 
   ObtenerTodoImpuestoItem(): Observable<Impuesto[]>{
     let impuesto: Impuesto;
-
     return this.http.get<Impuesto[]>(this.BaseURL + 'impuesto/obtenertodoimpuesto');
 
 }
-
-
-
 
   public ObtenerImpuesto(nombre: string) {
     this.http.get(this.BaseURL + 'impuesto/obtenerimpuesto?nombre=' + nombre)
@@ -42,7 +38,6 @@ export class ImpuestoService {
     return this.http.post(this.BaseURL + "impuesto/crearimpuesto", impuesto)
       
   }
-   
 
   public modificarImpuesto(impuesto: Impuesto): Observable<any> {
     return this.http.put(this.BaseURL + 'impuesto/modificarimpuesto/', impuesto)
