@@ -55,7 +55,8 @@ namespace DataAccessLayer.Mapper
             var operation = new SqlOperation { ProcedureName = "ELIMINAR_EMPLEADOXITEM" };
 
             var c = (EmpleadosXItem)entity;
-            operation.AddIntParam(DB_COL_ID, c.id);
+            operation.AddIntParam(DB_COL_ID_ITEM, c.id_item);
+            operation.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
             return operation;
         }
 

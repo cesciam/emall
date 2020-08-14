@@ -59,15 +59,15 @@ namespace DataAccessLayer.Crud
 
         public override void Update(BaseEntity entity)
         {
-            var item = (Item)entity;
-            dao.ExecuteProcedure(mapper.GetUpdateStatement(item));
+            var emp = (EmpleadosXItem)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateStatement(emp));
         }
 
 
         public override void Delete(BaseEntity entity)
         {
-            var item = (Item)entity;
-            dao.ExecuteProcedure(mapper.GetDeleteStatement(item));
+            var emp = (EmpleadosXItem)entity;
+            dao.ExecuteProcedure(mapper.GetDeleteStatement(emp));
         }
 
         public List<T> RetrieveAllByItem<T>(int id_item)
@@ -86,6 +86,12 @@ namespace DataAccessLayer.Crud
             }
 
             return lista;
+        }
+
+        public void DeleteEmpleadosItem(BaseEntity entity)
+        {
+            var emp = (EmpleadosXItem)entity;
+            dao.ExecuteProcedure(mapper.GetDeleteEmpleadosItem(emp));
         }
 
     }

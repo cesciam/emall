@@ -44,7 +44,6 @@ export class ItemEmpleadoComponent implements OnInit {
     this.item = new Item();
     this.selecciones = new Array<number>();
     this.empleadosxitem = new EmpleadosXItem();
-    //this.empleados_actuales = new Array<EmpleadosXItem>();
 
     
 
@@ -58,7 +57,8 @@ export class ItemEmpleadoComponent implements OnInit {
   async llenar() {
     this.item = await this.itemService.ObtenerItem(this.id_item);
     this.sucursal = await this.sucursalService.obtenerSucursalItem(this.id_sucursal);
-    this.empleados_comercio = await this.itemService.ObtenerEmpleados(this.sucursal.idComercio)
+    this.empleados_comercio = await this.itemService.ObtenerEmpleados(this.sucursal.idComercio);
+    this.empleados_actuales = await this.itemService.obtenerEmpleadosItem(this.id_item);
 
     for (let i = 0; i < this.empleados_comercio.length; i++) {
       if (this.empleados_comercio[i].IdSucursal == this.id_sucursal) {
@@ -75,12 +75,9 @@ export class ItemEmpleadoComponent implements OnInit {
         this.comercio = data;
       });
 
-    this.itemService.obtenerEmpleadosItem(this.id_item).subscribe(
-      (data: EmpleadosXItem[]) => this.empleados_actuales = data,
-      (err: any) => console.log(err)
-    );
-
-    console.log(this.empleados_actuales);
+    for (let e = 0; e < this.empleados_actuales.length; e++) {
+      this.selecciones.push(this.empleados_actuales[e].id_empleado)
+    }
 
   }
 
@@ -91,6 +88,7 @@ export class ItemEmpleadoComponent implements OnInit {
     } else {
       this.selecciones = this.selecciones.filter(m => m != id_empleado)
     }
+    console.log(this.selecciones)
   }
 
   asociar() {
@@ -100,21 +98,14 @@ export class ItemEmpleadoComponent implements OnInit {
 
     console.log(this.empleadosxitem)
 
-    //this.itemService.AsociarItemEmpleado(this.empleadosxitem);
-
     this.itemService.AsociarItemEmpleado(this.empleadosxitem)
       .subscribe(
         (reponse) => {
-          //this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
         },
         (error) => {
           this.error = "Errores en el registro";
           window.scroll(0, 0);
         });
-
-
-
-
 
   }
 

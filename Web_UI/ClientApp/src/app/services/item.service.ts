@@ -7,6 +7,7 @@ import { Archivo } from '../models/Archivo';
 import { Impuesto } from '../models/impuesto.model';
 import { EmpleadoList } from '../models/empleado-list.model';
 import { EmpleadosXItem } from '../models/empleados-xitem';
+import { Empleado } from '../models/empleado.model';
 
 
 @Injectable({
@@ -55,14 +56,6 @@ export class ItemService {
       .pipe(catchError(this.errorHandler)
       );
   }
-
-
-  obtenerEmpleadosItem(id_item: number): Observable<EmpleadosXItem[]> {
-    this.serviceApi = `/item/obtenerEmpleadosItem/?id_item=${id_item}`;
-    return this.http
-      .get<EmpleadosXItem[]>(this.appUrl + this.serviceApi);
-  }
-
 
   getItemSucursal(id_sucursal: number): Observable<Item[]> {
     this.serviceApi = `/item/RetrieveAllBySucursal/?id_sucursal=${id_sucursal}`;
@@ -117,6 +110,17 @@ export class ItemService {
 
     return empleados;
   }
+
+
+  async obtenerEmpleadosItem(id_item: number){
+    this.serviceApi = `/item/obtenerEmpleadosItem/?id_item=${id_item}`;
+
+    let empleados: EmpleadosXItem[];
+    empleados = await this.http.get<EmpleadosXItem[]>(this.appUrl + this.serviceApi).toPromise();
+
+    return empleados;
+  }
+
 
 
   async ObtenerImpuestoItem(id_impuesto: number) {

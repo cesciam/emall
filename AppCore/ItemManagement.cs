@@ -55,7 +55,8 @@ namespace AppCore
         public void AsociarItemEmpleado(EmpleadosXItem tmp_empleado)
         {
 
-            for(int i = 0; i < tmp_empleado.empleados.Length; i++)
+            DeleteEmpleadosItem(tmp_empleado.id_item);
+            for (int i = 0; i < tmp_empleado.empleados.Length; i++)
             {
                 var asociar = new EmpleadosXItem();
                 asociar.id_item = tmp_empleado.id_item;
@@ -64,8 +65,6 @@ namespace AppCore
                 System.Threading.Thread.Sleep(1000);
             }
 
-
-            
         }
 
         public List<Item> RetrieveAllItem()
@@ -132,6 +131,21 @@ namespace AppCore
         public List<EmpleadosXItem> obtenerEmpleadosItem(int id_item)
         {
             return crudEmpleadoXItem.RetrieveAllByItem<EmpleadosXItem>(id_item);
+        }
+
+        public void DeleteEmpleadosItem(int id_item)
+        {
+            var empleados = new EmpleadosXItem();
+            empleados.id_item = id_item;
+            crudEmpleadoXItem.DeleteEmpleadosItem(empleados);
+        }
+
+        public void DeleteEmpleadoActual(int id_item, int id_empleado)
+        {
+            var empleados = new EmpleadosXItem();
+            empleados.id_item = id_item;
+            empleados.id_empleado = id_empleado;
+            crudEmpleadoXItem.Delete(empleados);
         }
 
     }
