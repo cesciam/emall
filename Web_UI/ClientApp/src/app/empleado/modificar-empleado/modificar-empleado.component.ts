@@ -9,6 +9,7 @@ import { SucursalService } from 'src/app/services/sucursal.service';
 import { Sucursal } from 'src/app/models/Sucursal';
 import { Rol } from 'src/app/models/rol.model';
 import { EmpleadoList } from 'src/app/models/empleado-list.model';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-modificar-empleado',
@@ -25,15 +26,20 @@ export class ModificarEmpleadoComponent implements OnInit {
   private rolSeleccionado: Rol;
 
   public sucursalForm : FormGroup;
-  public rolForm : FormGroup;
+  public rolForm: FormGroup;
+  private usuarioLogueado: string;
+  public accion: string = "Edición usuario";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado);
 
   constructor(private service: EmpleadoService,
     private serviceRol: RolService,
     private router: Router,
     private route: ActivatedRoute,
     private serviceSucursal: SucursalService,
-    private fb: FormBuilder) {
-
+    private fb: FormBuilder,
+    private bitacora: BitacoraService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
   }
 
   ngOnInit() {

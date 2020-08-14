@@ -2,3 +2,7 @@ button:disabled,
 button[disabled] {
   opacity: 0.5;
 }
+
+button {
+    border: none;
+}
