@@ -36,7 +36,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
     this.comerciosDuenno(usuarioActivado);
 
-    this.citaService.obtenerCitasPorEmpleado(usuarioActivado.Id)
+    this.citaService.obtenerCitasPorCliente(parseInt(usuarioActivado.Id))
     .subscribe(
       (data: CitaList[]) => {
         for(let i = 0; i < data.length; i++){

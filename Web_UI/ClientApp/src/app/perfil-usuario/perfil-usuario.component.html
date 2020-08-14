@@ -7,7 +7,7 @@
 
 <hr />
 
-<div class="container emp-profile" [hidden]="section != 'info'">
+<div class="container" [hidden]="section != 'info'">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
@@ -109,6 +109,9 @@
                       <td>{{cita.hora_f}}</td>
                       <td>{{cita.nombre_comercio}} {{cita.nombre_sucursal}}</td>
                       <td>{{cita.nombre_empleado}}</td>
+                      <td>
+                        <button class="btn btn-danger">Cancelar cita</button>
+                      </td>
                     </tr>
   
                   </tbody>

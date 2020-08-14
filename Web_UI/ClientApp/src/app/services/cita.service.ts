@@ -22,7 +22,7 @@ export class CitaService {
     return this.http.get<Cita[]>(this.baseURL + this.serviceEndPoint);
   }
 
-  obtenerCitasPorEmpleado(idUsuario: number): Observable<CitaList[]>{
+  obtenerCitasPorCliente(idUsuario: number): Observable<CitaList[]>{
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
     var day = dateObj.getDate();
