@@ -77,7 +77,7 @@ export class CarritoComprasComponent implements OnInit {
     let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
 
     envio.estado = 0;
-    envio.idCliente = parseInt(this.usuarioLogueado.usuario.Id);
+    envio.idCliente = parseInt(usuarioLogeado.usuario.Id);
     envio.items = this.carritoLocalStorage;
 
     this.carritoComprasService.registrarEnvio(envio)
