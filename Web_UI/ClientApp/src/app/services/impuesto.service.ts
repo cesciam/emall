@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Inject } from '@angular/core';
 import { Impuesto } from '../models/impuesto.model';
 //import { HttpClient } from '@angular/common/http';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -13,9 +14,11 @@ export class ImpuestoService {
   formData: Impuesto;
   public impuestos: Impuesto[];
 
-  readonly BaseURL = 'http://localhost:5000/api/';
+  public BaseURL: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string) {
+    this.BaseURL = baseUrl;}
 
   public ObtenerTodoImpuesto() {
     this.http.get(this.BaseURL + 'impuesto/obtenertodoimpuesto')

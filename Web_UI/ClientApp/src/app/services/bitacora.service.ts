@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Bitacora } from '../models/bitacora.model';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { Inject } from '@angular/core';
+
 
 
 
@@ -15,9 +17,10 @@ export class BitacoraService {
   
   public fecha: Date = new Date();
   
-  readonly BaseURL = 'http://localhost:5000/api/'; //inject
+  public BaseURL: string;
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe, @Inject('BASE_URL') baseUrl: string) {
+    this.BaseURL = baseUrl;}
 
   public ObtenerTodoBitacora() :Observable<Bitacora[]>  {
     // let bitacora: Bitacora
