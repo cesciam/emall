@@ -84,6 +84,7 @@ import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
 import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
 import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
+import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
 import { DatePipe } from '@angular/common';
 
@@ -164,6 +165,12 @@ const maskConfig: Partial<IConfig> = {
     FilterCategoriaPipe,
     FiltroRolPipe,
     FiltroEmpleadoPipe,
+    AdminImpuestoCrearComponent,
+    AdminImpuestoListarComponent,
+    AdminCategoriaListarComponent,
+    AdminCategoriaCrearComponent,
+    FiltroUsuarioPipe,
+    CalificacionComponent, 
     FiltroUsuarioPipe,
     ListarBitacoraComponent, 
   ],
@@ -235,6 +242,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     SidebarAdminComponent,
+    CalificacionComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
