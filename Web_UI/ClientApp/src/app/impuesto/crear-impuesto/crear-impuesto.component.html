@@ -1,36 +1,71 @@
+<app-main-header></app-main-header>
+<div class="container-fluid">
 
+  <div class="row">
+    <div class="col-lg-2">
+      <app-sidebar-admin></app-sidebar-admin>
+    </div>
 
-<div class="container">
-  <h1>Registro de impuestos</h1>
-  
- 
-  <form [formGroup]="impuestoForm" (ngSubmit)="onSubmit()">
-    <fieldset>
+    <div class="col">
 
-      <div class="form-group col-lg-6 col-md-6">
-
-        <label for="Nombre">Nombre</label>
-
-        <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearImpuesto.Nombre" formControlName="Nombre" [ngClass]="{'is-invalid': submitted && f.Nombre.errors}">
-        <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
-          <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
+      <!-- Modal -->
+      <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Nuevo impuesto creado</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              El impuesto ha sido registrado
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal"
+                      [routerLink]="['/dashboard-admin/impuesto']">
+                Entendido
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="form-group col-lg-6 col-md-6">
+      <div class="container">
+        <h1>Registro de impuestos</h1>
 
-        <label for="Porcentaje">Porcentaje</label>
-        <input type="number" class="form-control" id="Porcentaje" min="0.1" name="Porcentaje" formControlName="Porcentaje" required [(ngModel)]="crearImpuesto.Porcentaje" [ngClass]="{'is-invalid': submitted && f.Porcentaje.errors}">
-        <div *ngIf="submitted && f.Porcentaje.errors" class="invalid-feedback">
-          <div *ngIf="f.Porcentaje.errors.required">Porcentaje es requerido</div>
-        </div>
+
+        <form [formGroup]="impuestoForm" (ngSubmit)="onSubmit()">
+          <fieldset>
+
+            <div class="form-group col-lg-6 col-md-6">
+
+              <label for="Nombre">Nombre</label>
+
+              <input type="text" class="form-control" id="Nombre" name="Nombre" required [(ngModel)]="crearImpuesto.Nombre" formControlName="Nombre" [ngClass]="{'is-invalid': submitted && f.Nombre.errors}">
+              <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+                <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6">
+
+              <label for="Porcentaje">Porcentaje</label>
+              <input type="number" class="form-control" id="Porcentaje" min="0.1" name="Porcentaje" formControlName="Porcentaje" required [(ngModel)]="crearImpuesto.Porcentaje" [ngClass]="{'is-invalid': submitted && f.Porcentaje.errors}">
+              <div *ngIf="submitted && f.Porcentaje.errors" class="invalid-feedback">
+                <div *ngIf="f.Porcentaje.errors.required">Porcentaje es requerido</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit" data-toggle="modal"
+                    data-target="#Modal">
+              Crear impuesto
+            </button>
+          </fieldset>
+        </form>
       </div>
-      <button class="btn btn-primary" type="submit" data-toggle="modal"
-                data-target="#Modal">Crear impuesto</button>
-    </fieldset>
-  </form>
-</div>
 
-<app-footer></app-footer>
+      <app-footer></app-footer>
 
-
+    </div>
+  </div>
+  </div>

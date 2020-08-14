@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../models/categoria.model';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Inject } from '@angular/core';
 
 
 @Injectable({
@@ -13,9 +14,12 @@ export class CategoriaService {
   formData: Categoria;
   private categorias: Categoria[];
 
-  readonly BaseURL = 'http://localhost:5000/api/'; //inject 
+  public BaseURL: string; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string) {
+    this.BaseURL = baseUrl;
+  }
 
   ObtenerTodoCategoria() {
     this.http.get(this.BaseURL + 'categoria/obtenertodocategoria')
