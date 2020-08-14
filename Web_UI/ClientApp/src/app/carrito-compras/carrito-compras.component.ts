@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../models/item';
 import { ItemService } from '../services/item.service';
 import { Impuesto } from '../models/impuesto.model';
+import { CarritoComprasService } from '../services/carrito-compras.service';
+import { Envio } from '../models/envio.model';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -16,8 +18,8 @@ export class CarritoComprasComponent implements OnInit {
   @Input() txtLogistica: string;
   usuarioLogueado: object = null;
   error: any;
- 
-  constructor(private serviceItem: ItemService) {
+
+  constructor(private serviceItem: ItemService, private carritoComprasService: CarritoComprasService) {
     this.tipoCarrito = localStorage.getItem('tipoCarrito');
   }
 
@@ -63,7 +65,30 @@ export class CarritoComprasComponent implements OnInit {
   }
 
   pagar() {
-    console.log(this.txtLogistica);
+    if (this.txtLogistica == 'Recibirlo por envío') {
+      this.enviarItems();
+    } else {
+
+    }
+  }
+
+  enviarItems() {
+    let envio: Envio = new Envio();
+    let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
+
+    envio.estado = 0;
+    envio.idCliente = parseInt(this.usuarioLogueado.usuario.Id);
+    envio.items = this.carritoLocalStorage;
+
+    this.carritoComprasService.registrarEnvio(envio)
+      .subscribe(
+        (response) => {
+          
+        },
+        (error) => {
+          this.error = 'Algo salió mal al registar su envío. Inténtelo más tarde.';
+          window.scroll(0, 0);
+        });
   }
 
 }
