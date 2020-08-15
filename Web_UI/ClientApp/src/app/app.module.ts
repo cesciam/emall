@@ -94,6 +94,7 @@ import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
 import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
+import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
 import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agregar-direccion.component';
 import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
@@ -186,6 +187,8 @@ const maskConfig: Partial<IConfig> = {
     CalificacionComponent,
     CarritoComprasComponent,
     ListarEnvioSucursalComponent,
+    EnvioDetalleComponent,
+    ItemEmpleadoComponent, 
     EnvioDetalleComponent, 
     CalificacionComponent,
     AgregarDireccionComponent,
@@ -261,6 +264,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'carrito-compras', component: CarritoComprasComponent },
       { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
       { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },

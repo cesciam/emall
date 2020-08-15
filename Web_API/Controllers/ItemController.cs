@@ -57,6 +57,28 @@ namespace WebAPI.Controllers
             }
         }
 
+
+        [HttpPost]
+        public IActionResult AsociarItemEmpleado(EmpleadosXItem empleados)
+        {
+            try
+            {
+                var cm = new ItemManagement();
+
+                cm.AsociarItemEmpleado(empleados);
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+
+
         [HttpPut]
         public IActionResult UpdateItem(Item c)
         {
@@ -168,6 +190,15 @@ namespace WebAPI.Controllers
             var cm = new ItemManagement();
 
             return cm.ItemBusqueda(busqueda);
+
+        }
+
+        [HttpGet]
+        public List<EmpleadosXItem> obtenerEmpleadosItem(int id_item)
+        {
+            var cm = new ItemManagement();
+
+            return cm.obtenerEmpleadosItem(id_item);
 
         }
 
