@@ -92,6 +92,8 @@ import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
 import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
+import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
 import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
 
 const maskConfig: Partial<IConfig> = {
@@ -171,10 +173,6 @@ const maskConfig: Partial<IConfig> = {
     FilterCategoriaPipe,
     FiltroRolPipe,
     FiltroEmpleadoPipe,
-    AdminImpuestoCrearComponent,
-    AdminImpuestoListarComponent,
-    AdminCategoriaListarComponent,
-    AdminCategoriaCrearComponent, 
     ListarHorarioComponent,
     AgregarHorarioComponent,
     FiltroHorarioPipe,
@@ -185,6 +183,8 @@ const maskConfig: Partial<IConfig> = {
     ListarBitacoraComponent, 
     CalificacionComponent,
     CarritoComprasComponent,
+    ListarEnvioSucursalComponent,
+    EnvioDetalleComponent,
     ItemEmpleadoComponent, 
   ],
   imports: [
@@ -248,15 +248,13 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
       { path: 'landing-producto', component: LandingPageProductoComponent },
-      { path: 'dashboard-admin/impuesto/crear', component: AdminImpuestoCrearComponent },
-      { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
-      { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
-      { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
       { path: 'agregar-horario', component: AgregarHorarioComponent },
       { path: 'listar-horario', component: ListarHorarioComponent },
       { path: 'agregar-horario-sucursal/:id_comercio', component: AgregarHorarioSucursalComponent },
       { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
       { path: 'carrito-compras', component: CarritoComprasComponent },
+      { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
+      { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
       { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
     ])
   ],
