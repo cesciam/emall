@@ -18,14 +18,18 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
   private lng = -84.0310371;
   private error: any;
 
-  constructor(sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    sucursalService: SucursalService, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router
+  ) {
     this.sucursalService = sucursalService;
     this.sucursal = new Sucursal();
-
   }
+
   ngAfterViewInit(): void {
     this.mapa();
-    }
+  }
 
   ngOnInit() {
     this.inicializarSucursal();
@@ -37,8 +41,7 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
     let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.sucursal.idPersona = usuarioLogeado.usuario.Id;
-
-    }
+  }
 
   mapa() {
     let me = this;
@@ -47,7 +50,7 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
       center: new google.maps.LatLng(this.lat, this.lng),
       zoom: 8,
       scrollwheel: true,
-  };
+    };
 
     let map = new google.maps.Map(this.gmap.nativeElement,
       mapProp);
@@ -62,10 +65,10 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
     google.maps.event.addListener(map, 'click', function (event) {
       placeMarker(event.latLng);
-      
+
       me.sucursal.latitud = String(event.latLng.lat());
       me.sucursal.longitud = String(event.latLng.lng());
-      
+
     });
 
     function placeMarker(location) {

@@ -1,0 +1,122 @@
+<app-main-header></app-main-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-lg-10">
+      <div id="register" *ngIf="!registerComplete">
+        <div class="row">
+          <div class="col-lg-10 col-md-10">
+            <h1>Crear nueva dirección</h1>
+            <p>Ingrese los siguientes datos</p>
+          </div>
+          <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
+            <a [routerLink]="['/direcciones/listar-direccion']">Volver atrás</a>
+          </div>
+        </div>
+
+        <div *ngIf="submitted && direccionForm.invalid" class="alert alert-danger col-lg-12" role="alert">
+          * Existen algunos datos inválidos. Por favor corrija los datos de los controles marcados en rojo
+        </div>
+
+        <div *ngIf="submitted && error!=null" class="alert alert-danger col-lg-12" role="alert">
+          <strong>{{error.message}}</strong>
+          <ul>
+            <li *ngFor="let detail of error.details">{{detail}}</li>
+          </ul>
+        </div>
+
+        <form [formGroup]="direccionForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="form-group col-lg-12 col-md-12">
+              <label for="alias">Alias <small>(Por ejemplo: Casa, Trabajo, Oficina, Taller, Casa de mis padres)</small></label>
+              <input type="text" class="form-control" name="alias" id="alias" formControlName="Alias" required
+                [ngClass]="{ 'is-invalid': submitted && f.Alias.errors }">
+              <div *ngIf="submitted && f.Alias.errors" class="invalid-feedback">
+                <div *ngIf="f.Alias.errors.required">Alias es requerido</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-4 col-md-4">
+              <label for="cedula">Provincia</label>
+              <select class="form-control" name="provincia" id="provincia" formControlName="Provincia" required (change)="obtenerCantones()"
+                [ngClass]="{ 'is-invalid': submitted && f.Provincia.errors }">
+                <option value=""></option>
+                <option 
+                  *ngFor="let provincia of provincias" 
+                  value="{{provincia.Codigo}}" 
+                  >{{provincia.Nombre}}
+                </option>
+              </select>
+              <div *ngIf="submitted && f.Provincia.errors" class="invalid-feedback">
+                <div *ngIf="f.Provincia.errors.required">Provincia es requerida</div>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-4 col-md-4">
+              <label for="telefono">Canton</label>
+              <select class="form-control" name="canton" id="canton" formControlName="Canton" required (change)="obtenerDistritos()"
+                [ngClass]="{ 'is-invalid': submitted && f.Canton.errors }">
+                <option value=""></option>
+                <option *ngFor="let canton of cantones" value="{{canton.Codigo}}">{{canton.Nombre}}</option>
+              </select>
+              <div *ngIf="submitted && f.Canton.errors" class="invalid-feedback">
+                <div *ngIf="f.Canton.errors.required">Canton es requerido</div>
+              </div>
+            </div>
+
+            <div [hidden]="integrarCon == 'pagina'" class="form-group col-lg-4 col-md-4">
+              <label for="tipo">Distrito</label>
+              <select class="form-control" name="distrito" id="distrito" formControlName="Distrito" required
+                [ngClass]="{ 'is-invalid': submitted && f.Distrito.errors }">
+                <option value=""></option>
+                <option *ngFor="let distrito of distritos" value="{{distrito.Codigo}}">{{distrito.Nombre}}</option>
+              </select>
+              <div *ngIf="submitted && f.Distrito.errors" class="invalid-feedback">
+                <div *ngIf="f.Distrito.errors.required">Distrito es requerido</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12 col-md-12">
+              <label for="alias">Señas Exactas <small>(Por ejemplo: Frente a los bombreros, 100 sur del supermercado, 2do piso)</small></label>
+              <textarea 
+                class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.Alias.errors }"
+                required 
+                name="detalles" 
+                id="detalles" 
+                rows="4" 
+                formControlName="Detalles" 
+                maxlength="250">
+              </textarea>
+              
+               <div *ngIf="submitted && f.Detalles.errors" class="invalid-feedback">
+                <div *ngIf="f.Detalles.errors.required">Señas Exactas es requerido</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12 col-md-12">
+              <label for="alias">Posicion exacta </label>
+              <div #mapContainer id="map"></div>
+            </div>
+          </div>
+
+          <button type="submit" class="site-btn" [disabled]="isSendingData"> 
+            <span>Registrar </span> &nbsp;
+            <span 
+            [hidden]="!isSendingData"
+            class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
+          <p>&nbsp;</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

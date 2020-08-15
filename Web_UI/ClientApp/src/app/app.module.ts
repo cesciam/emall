@@ -89,6 +89,10 @@ import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria
 import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 import { CalificacionComponent } from './calificacion/calificacion.component';
+import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agregar-direccion.component';
+import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
+import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
+import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -172,7 +176,11 @@ const maskConfig: Partial<IConfig> = {
     AdminCategoriaListarComponent,
     AdminCategoriaCrearComponent,
     FiltroUsuarioPipe,
-    CalificacionComponent, 
+    CalificacionComponent,
+    AgregarDireccionComponent,
+    ListarDireccionComponent,
+    EditarDireccionComponent, 
+    FiltroDireccionPipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -239,6 +247,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
       { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
       { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
+      { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
+      { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
+      { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
     ])
   ],
   exports: [

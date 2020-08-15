@@ -8,6 +8,7 @@ import { Usuario } from '../../../models/usuario.model';
   templateUrl: './listar-usuario.component.html',
   styleUrls: ['./listar-usuario.component.css']
 })
+
 export class ListarUsuarioComponent implements OnInit {
   private usuarios: Usuario[];
   private submitted: boolean = false;

@@ -7,9 +7,15 @@ using Entities;
 namespace AppCore {
     public class DireccionManagement {
         private DireccionCrudFactory crudDireccion;
+        private ProvinciaCrudFactory crudProvincia;
+        private CantonCrudFactory crudCanton;
+        private DistritoCrudFactory crudDistrito;
 
         public DireccionManagement() {
             this.crudDireccion = new DireccionCrudFactory();
+            this.crudProvincia = new ProvinciaCrudFactory();
+            this.crudCanton = new CantonCrudFactory();
+            this.crudDistrito = new DistritoCrudFactory();
         }
 
         public int Registrar(Direccion Direccion) {
@@ -34,6 +40,18 @@ namespace AppCore {
 
         public void Delete(Direccion Direccion) {
             this.crudDireccion.Delete(Direccion);
+        }
+
+        public List<Provincia> RetrieveProvincias() {
+            return this.crudProvincia.RetrieveAll<Provincia>();
+        }
+
+        public List<Canton> RetrieveCantones(int provincia) {
+            return this.crudCanton.RetrieveByProvincia<Canton>(provincia);
+        }
+
+        public List<Distrito> RetrieveDistritos(int provincia, int canton) {
+            return this.crudDistrito.RetrieveByProvinciaCanton<Distrito>(provincia, canton);
         }
     }
 }

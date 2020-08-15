@@ -9,12 +9,18 @@ using Entities;
 namespace DataAccessLayer.CRUD {
     public class DireccionCrudFactory : CrudFactory {
         DireccionMapper mapper;
+        
+        CantonMapper cantonMapper;
+        DistritoMapper distritoMapper;
 
         public DireccionCrudFactory() {
-            mapper = new DireccionMapper();
-            dao = SqlDao.GetInstance();
+            this.mapper = new DireccionMapper();
+            this.cantonMapper = new CantonMapper();
+            this.distritoMapper = new DistritoMapper();
 
+            dao = SqlDao.GetInstance();
         }
+
         public int Registrar(BaseEntity entity) {
             var direccion = (Direccion)entity;
             var sqlOperation = mapper.GetCreateStatement(direccion);
@@ -42,6 +48,7 @@ namespace DataAccessLayer.CRUD {
 
             return default(T);
         }
+
         public List<T> RetrieveByUsuario<T>(int usuarioId) {
             var lstDireccion = new List<T>();
 

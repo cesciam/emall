@@ -30,7 +30,7 @@ namespace Web_API.Controllers {
         }
 
         [HttpGet]
-        [Route("api/[controller]/{id}")]
+        [Route("api/[controller]/usuario/{id}")]
         public List<Direccion> GetByUser(int id) {
             return this.direccionManagement.RetrieveByUserId(id);
         }
@@ -77,6 +77,24 @@ namespace Web_API.Controllers {
             this.direccionManagement.Delete(direccion);
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/provincia")]
+        public List<Provincia> GetProvincias() {
+            return this.direccionManagement.RetrieveProvincias();
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/canton/{provincia}")]
+        public List<Canton> GetCantones(int provincia) {
+            return this.direccionManagement.RetrieveCantones(provincia);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/provincia/{provincia}/canton/{canton}/distrito")]
+        public List<Distrito> GetDistritos(int provincia, int canton) {
+            return this.direccionManagement.RetrieveDistritos(provincia, canton);
         }
     }
 }
