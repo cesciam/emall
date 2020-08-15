@@ -1,13 +1,8 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <app-header></app-header>
 
 <hr />
 
-<div class="container emp-profile" [hidden]="section != 'info'">
+<div class="container" [hidden]="section != 'info'">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
@@ -41,6 +36,10 @@
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                 aria-selected="true">Información personal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="cita-tab" data-toggle="tab" href="#cita" role="tab" aria-controls="cita"
+                aria-selected="false">Citas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
@@ -86,6 +85,35 @@
               </div>
             </div>
 
+            <div class="tab-pane fade" id="cita" role="tabpanel" aria-labelledby="cita-tab">
+              <div *ngIf="citas; else noDisponible">
+                <table class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Fecha</th>
+                      <th class="text-center">Hora inicio</th>
+                      <th class="text-center">Hora Fin</th>
+                      <th class="text-center">Sucursal</th>
+                      <th class="text-center">Empleado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let cita of citas">
+                      <td>{{cita.fecha_s}}</td>
+                      <td>{{cita.hora_i}}</td>
+                      <td>{{cita.hora_f}}</td>
+                      <td>{{cita.nombre_comercio}} {{cita.nombre_sucursal}}</td>
+                      <td>{{cita.nombre_empleado}}</td>
+                      <td>
+                        <button class="btn btn-danger">Cancelar cita</button>
+                      </td>
+                    </tr>
+  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <!--Inicio del timeline-->
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
@@ -124,7 +152,7 @@
 
     </div>
     <div class="row">
-      <!--final de todo el contenido del perfil-->
+      
     </div>
   </form>
 </div>
@@ -138,3 +166,10 @@
 </div>
 
 <app-footer></app-footer>
+
+<ng-template #noDisponible>
+
+    <p>Sin citas registradas</p>
+  
+
+</ng-template>
