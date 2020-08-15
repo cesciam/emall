@@ -2,6 +2,8 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '
 import { Sucursal } from '../models/Sucursal';
 import { SucursalService } from '../services/sucursal.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Horario } from '../models/horario.model';
+import { HorarioService } from 'src/app/services/horario.service';
 
 @Component({
   selector: 'app-registrar-sucursal',
@@ -76,6 +78,8 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
     }
   }
 
+  
+
   registrarSucursal() {
     this.sucursalService.registrarSucursal(this.sucursal)
       .subscribe(
@@ -87,6 +91,5 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
           window.scroll(0, 0);
         });
   }
-
 
 }

@@ -1,5 +1,3 @@
-
-
 <!-- Header Section Begin -->
 <header class="header">
   <div class="header__top">
@@ -48,6 +46,7 @@
             <div *ngIf="usuarioLogueado == null" class="header__top__right__auth">
               <a [routerLink]="['/autenticacion/register']">Registarse</a>
             </div>
+            <a [routerLink]="['/carrito-compras']" class="heart-icon"><span class="icon_cart_alt"></span></a>
           </div>
         </div>
       </div>

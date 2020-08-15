@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
 import { VistaService } from '../services/vista.service';
 import { Vista } from '../models/vista.model';
+import { BitacoraService } from '../services/bitacora.service';
 
 @Component({
   selector: 'app-dashboard-comercio',
@@ -28,9 +29,14 @@ export class DashboardComercioComponent implements OnInit {
   private permisoPromociones: boolean;
   private permisoArchivos: boolean;
   private permisoEditarComercio: boolean;
+  private permisoHorario: boolean;
+  private usuarioLogueado: string;
+  public accion: string = "Eliminación sucursal";
 
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado);
 
-  constructor(comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
+  constructor(private bitacora: BitacoraService,comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
     this.comercioService = comercioService;
     this.sucursalService = sucursalService;
     this.error = null;
@@ -62,6 +68,7 @@ export class DashboardComercioComponent implements OnInit {
       this.permisoPromociones = true;
       this.permisoArchivos = true;
       this.permisoEditarComercio = true;
+      this.permisoHorario = true;
     }
   }
 
@@ -87,6 +94,9 @@ export class DashboardComercioComponent implements OnInit {
             this.permisoArchivos = true;
           break;
           case "editar comercio":
+            this.permisoEditarComercio = true;
+          break;
+          case "horarios":
             this.permisoEditarComercio = true;
           break;
         };
@@ -120,6 +130,11 @@ export class DashboardComercioComponent implements OnInit {
           this.error = error.error;
           window.scroll(0, 0);
         });
+    this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
   }
 
 
