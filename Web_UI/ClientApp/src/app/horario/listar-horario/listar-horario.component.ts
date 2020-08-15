@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Horario } from 'src/app/models/horario.model';
-import { HorarioService } from 'src/app/services/horario.service';
+import { Horario } from '../../models/horario.model';
+import { HorarioService } from '../../services/horario.service';
 
 @Component({
   selector: 'app-listar-horario',
@@ -36,6 +36,4 @@ export class ListarHorarioComponent implements OnInit {
       element.hora_fin = horaFinSplit[1]
     });
   }
-
-
 }

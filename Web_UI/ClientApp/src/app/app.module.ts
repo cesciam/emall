@@ -261,10 +261,6 @@ const maskConfig: Partial<IConfig> = {
       { path: 'carrito-compras', component: CarritoComprasComponent },
       { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
       { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
-      { path: 'dashboard-admin/impuesto/crear', component: AdminImpuestoCrearComponent },
-      { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
-      { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
-      { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
@@ -292,4 +288,5 @@ const maskConfig: Partial<IConfig> = {
     AppComponent
   ]
 })
+
 export class AppModule { }
