@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Envio } from 'src/app/models/envio.model';
+import { EnvioList } from 'src/app/models/envio-list.model';
 
 @Component({
   selector: 'app-listar-envio-sucursal',
@@ -8,7 +8,7 @@ import { Envio } from 'src/app/models/envio.model';
 })
 export class ListarEnvioSucursalComponent implements OnInit {
 
-  public envios: Envio[]
+  public envios: EnvioList[]
   public estado: string;
 
   constructor() { }
