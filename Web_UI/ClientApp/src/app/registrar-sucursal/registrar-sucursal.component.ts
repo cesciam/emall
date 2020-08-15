@@ -68,7 +68,6 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
       me.sucursal.latitud = String(event.latLng.lat());
       me.sucursal.longitud = String(event.latLng.lng());
-
     });
 
     function placeMarker(location) {

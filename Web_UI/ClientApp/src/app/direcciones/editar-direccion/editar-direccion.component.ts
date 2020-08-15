@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { DireccionService } from '../../services/direccion.service';
-import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Direccion } from 'src/app/models/direccion.model';
+import { Router, ActivatedRoute } from "@angular/router";
+import { DireccionService } from '../../services/direccion.service';
 import { Provincia } from 'src/app/models/provincia.model';
 import { Canton } from 'src/app/models/canton.model';
 import { Distrito } from 'src/app/models/distrito.model';
 import { Usuario } from 'src/app/models/usuario.model';
-import { Direccion } from 'src/app/models/direccion.model';
 
 @Component({
   selector: 'app-editar-direccion',
@@ -20,18 +20,21 @@ export class EditarDireccionComponent implements OnInit {
   private provincias: Provincia[];
   private cantones: Canton[];
   private distritos: Distrito[];
-  private lat = 9.9323298;
-  private lng = -84.0310371;
+  private lat;
+  private lng;
   private isSendingData: boolean = false;
   private submitted: boolean = false;
   private error: object = null;
   private usuarioLogueado: Usuario = null;
+  private direccion: Direccion;
 
   constructor( 
     private router: Router,
     private route: ActivatedRoute,
     private direccionService: DireccionService
-    ) { }
+  ) { 
+    this.direccion = new Direccion();
+  }
 
   ngOnInit() {
     this.direccionForm = new FormGroup({
@@ -41,6 +44,25 @@ export class EditarDireccionComponent implements OnInit {
       Canton: new FormControl('', [Validators.required]), 
       Distrito: new FormControl('', [Validators.required]), 
     });
+
+    this.obtenerDireccion()  
+      .then(() => {
+        this.direccionForm.controls['Alias'].setValue(this.direccion.Alias);
+        this.direccionForm.controls['Detalles'].setValue(this.direccion.Detalles);
+        this.lat = +this.direccion.Latitud;
+        this.lng = +this.direccion.Longitud;
+        this.direccionForm.controls['Provincia'].setValue(this.direccion.ProvinciaId);
+
+        this.obtenerCantones();
+        this.mapa();
+      })
+      .then(() => {
+        this.direccionForm.controls['Canton'].setValue(this.direccion.CantonId);
+        this.obtenerDistritos();
+      })
+      .then(() => {
+        this.direccionForm.controls['Distrito'].setValue(this.direccion.DistritoId);
+      });
 
     this.obtenerProvincias();
   }
@@ -54,7 +76,8 @@ export class EditarDireccionComponent implements OnInit {
       scrollwheel: true,
     };
 
-    let map = new google.maps.Map(this.gmap.nativeElement, mapProp);
+    let map = new google.maps.Map(this.gmap.nativeElement,
+      mapProp);
 
     let marker = new google.maps.Marker({
       map: map,
@@ -67,8 +90,9 @@ export class EditarDireccionComponent implements OnInit {
     google.maps.event.addListener(map, 'click', function (event) {
       placeMarker(event.latLng);
 
-      this.lat = event.latLng.lat();
-      this.lng = event.latLng.lng();
+      me.direccion.Latitud = String(event.latLng.lat());
+      me.direccion.Longitud = String(event.latLng.lng());
+
     });
 
     function placeMarker(location) {
@@ -81,21 +105,20 @@ export class EditarDireccionComponent implements OnInit {
     return this.direccionForm.controls;
   }
 
-  sanitizeData(data: FormGroup): Direccion {
-    let storageData = JSON.parse(localStorage.getItem('usuario-logueado'));
-    this.usuarioLogueado = storageData['usuario'];
-    let direccion: Direccion = new Direccion();
+  obtenerDireccion() {
+    let id: number = +this.route.snapshot.paramMap.get('id');
 
-    direccion.Alias = this.direccionForm.controls['Alias'].value;
-    direccion.ProvinciaId = +this.direccionForm.controls['Provincia'].value;
-    direccion.CantonId = +this.direccionForm.controls['Canton'].value;
-    direccion.DistritoId = +this.direccionForm.controls['Distrito'].value;
-    direccion.Detalles = this.direccionForm.controls['Detalles'].value;
-    direccion.Latitud = String(this.lat);
-    direccion.Longitud = String(this.lng);
-    direccion.UsuarioId = +this.usuarioLogueado.Id;
+    const obtenerDatos = new Promise((resolve, reject) => {
+      this.direccionService.obtenerDireccionPorId(id)
+        .subscribe(data => {
+          this.direccion = data;
+          resolve();
+        }, (error) => {
+            reject();
+        });
+    });
 
-    return direccion;
+    return obtenerDatos;
   }
 
   obtenerProvincias() {
@@ -120,4 +143,49 @@ export class EditarDireccionComponent implements OnInit {
     .subscribe(data => this.distritos = data);
   }
 
+  sanitizeData(data: FormGroup): Direccion {
+    let direccionEditada: Direccion = new Direccion();
+
+    direccionEditada.Id = this.direccion.Id;
+    direccionEditada.Alias = this.direccionForm.controls['Alias'].value;
+    direccionEditada.ProvinciaId = +this.direccionForm.controls['Provincia'].value;
+    direccionEditada.CantonId = +this.direccionForm.controls['Canton'].value;
+    direccionEditada.DistritoId = +this.direccionForm.controls['Distrito'].value;
+    direccionEditada.Detalles = this.direccionForm.controls['Detalles'].value;
+    direccionEditada.Latitud = String(this.direccion.Latitud);
+    direccionEditada.Longitud = String(this.direccion.Longitud);
+    direccionEditada.UsuarioId = this.direccion.UsuarioId;
+
+    return direccionEditada;
+  }
+
+  editarDireccion() {
+    this.direccionService.editarDireccion(this.sanitizeData(this.direccionForm))
+      .subscribe(
+        (response) => {
+          this.isSendingData = false;
+          this.router.navigate(['/direcciones/listar-direccion']);
+        },
+        (error) => {
+          this.isSendingData = false;
+          this.error = error.error;
+
+          if (!this.error.hasOwnProperty('message')) {
+            this.error = { message: 'Error general al editar la direccion. Vuelva a intertarlo en unos minutos' };
+          }
+
+          window.scroll(0, 0);
+        });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.direccionForm.invalid) {
+      window.scroll(0, 0);
+      return;
+    }
+    
+    this.editarDireccion();
+  }
 }

@@ -42,6 +42,10 @@ export class DireccionService {
     return this.http.get<Direccion[]>(this.baseUrl + '/direccion');
   }
 
+  obtenerDireccionPorId(id: number): Observable<Direccion> {
+    return this.http.get<Direccion>(this.baseUrl + '/direccion/' + id);
+  }
+
   obtenerDireccionesPorUsuarioId(usuarioId: number): Observable<Direccion[]> {
     return this.http.get<Direccion[]>(this.baseUrl + '/direccion/usuario/' + usuarioId);
   }

@@ -7,11 +7,11 @@
       <div id="register" *ngIf="!editComplete">
         <div class="row">
           <div class="col-lg-10 col-md-10">
-            <h1>Editar Direccion</h1>
-            <p *ngIf="integrarCon == null">Editar los datos de la direccion</p>
-            <p *ngIf="integrarCon == 'pagina'">Completa el siguiente formulario con sus datos personales</p>
+            <h1>Editar Dirección</h1>
+            <p>Editar los datos de la direccion</p>
+            <p>Completa el siguiente formulario con sus datos personales</p>
           </div>
-          <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
+          <div class="col-lg-2 col-md-2">
             <a [routerLink]="['/direcciones/listar-direccion']">Volver atrás</a>
           </div>
         </div>
@@ -109,10 +109,8 @@
             </div>
   
             <button type="submit" class="site-btn" [disabled]="isSendingData"> 
-              <span>Registrar </span> &nbsp;
-              <span 
-              [hidden]="!isSendingData"
-              class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span>Guardar Cambios </span> &nbsp;
+              <span [hidden]="!isSendingData" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </button>
             <p>&nbsp;</p>
           </form>

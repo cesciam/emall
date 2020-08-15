@@ -18,6 +18,7 @@ export class AgregarDireccionComponent implements OnInit, AfterViewInit {
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
   private direccionForm: FormGroup;
+  private direccion: Direccion;
   private provincias: Provincia[];
   private cantones: Canton[];
   private distritos: Distrito[];
@@ -31,7 +32,9 @@ export class AgregarDireccionComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private direccionService: DireccionService,
-  ) { }
+  ) { 
+    this.direccion = new Direccion();
+  }
 
   ngAfterViewInit(): void {
     this.mapa();
@@ -71,8 +74,8 @@ export class AgregarDireccionComponent implements OnInit, AfterViewInit {
     google.maps.event.addListener(map, 'click', function (event) {
       placeMarker(event.latLng);
 
-      this.lat = event.latLng.lat();
-      this.lng = event.latLng.lng();
+      me.direccion.Latitud = String(event.latLng.lat());
+      me.direccion.Longitud = String(event.latLng.lng());
     });
 
     function placeMarker(location) {
@@ -88,18 +91,15 @@ export class AgregarDireccionComponent implements OnInit, AfterViewInit {
   sanitizeData(data: FormGroup): Direccion {
     let storageData = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.usuarioLogueado = storageData['usuario'];
-    let direccion: Direccion = new Direccion();
 
-    direccion.Alias = this.direccionForm.controls['Alias'].value;
-    direccion.ProvinciaId = +this.direccionForm.controls['Provincia'].value;
-    direccion.CantonId = +this.direccionForm.controls['Canton'].value;
-    direccion.DistritoId = +this.direccionForm.controls['Distrito'].value;
-    direccion.Detalles = this.direccionForm.controls['Detalles'].value;
-    direccion.Latitud = String(this.lat);
-    direccion.Longitud = String(this.lng);
-    direccion.UsuarioId = +this.usuarioLogueado.Id;
+    this.direccion.Alias = this.direccionForm.controls['Alias'].value;
+    this.direccion.ProvinciaId = +this.direccionForm.controls['Provincia'].value;
+    this.direccion.CantonId = +this.direccionForm.controls['Canton'].value;
+    this.direccion.DistritoId = +this.direccionForm.controls['Distrito'].value;
+    this.direccion.Detalles = this.direccionForm.controls['Detalles'].value;
+    this.direccion.UsuarioId = +this.usuarioLogueado.Id;
 
-    return direccion;
+    return this.direccion;
   }
 
   obtenerProvincias() {
@@ -126,7 +126,7 @@ export class AgregarDireccionComponent implements OnInit, AfterViewInit {
 
   registrarDireccion() {
     this.isSendingData = true;
-    
+
     this.direccionService.registrarDireccion(this.sanitizeData(this.direccionForm))
       .subscribe(
         (response) => {
