@@ -94,6 +94,7 @@ import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
 import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
+import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -183,7 +184,8 @@ const maskConfig: Partial<IConfig> = {
     CalificacionComponent,
     CarritoComprasComponent,
     ListarEnvioSucursalComponent,
-    EnvioDetalleComponent, 
+    EnvioDetalleComponent,
+    ItemEmpleadoComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -253,6 +255,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'carrito-compras', component: CarritoComprasComponent },
       { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
       { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
     ])
   ],
   exports: [
