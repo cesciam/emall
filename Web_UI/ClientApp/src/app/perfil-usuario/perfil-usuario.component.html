@@ -10,7 +10,7 @@
           <img
             src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg"
             *ngIf="image == null" alt="" />
-          <img src="{{image}}" alt="" />
+          <img src="{{image}}" alt="" class="rounded" />
         </div>
       </div>
       <div class="col-lg">
@@ -29,6 +29,10 @@
 
             <div class="col">
               <button class="profile-edit-btn" (click)="changeSection('edit-profile')">Editar perfil</button>
+            </div>
+
+            <div class="col">
+              <a [routerLink]="['/direcciones/listar-direccion']"> <button class="profile-edit-btn">Mis direcciones</button></a>
             </div>
           </div>
 
@@ -158,10 +162,7 @@
 </div>
 
 <div class="container emp-profile" [hidden]="section != 'edit-profile'">
-  <app-editar-usuario 
-    integrarCon="pagina" 
-    titulo="Editar informacion de usuario"
-    id="{{usuarioLogueado.usuario.Id}}">
+  <app-editar-usuario integrarCon="pagina" titulo="Editar informacion de usuario" id="{{usuarioLogueado.usuario.Id}}">
   </app-editar-usuario>
 </div>
 

@@ -12,7 +12,7 @@ import { CitaList } from '../models/CitaList';
   styleUrls: ['./perfil-usuario.component.css']
 })
 export class PerfilUsuarioComponent implements OnInit {
- private usuarioLogueado: Usuario = null;
+  private usuarioLogueado: Usuario = null;
   private id: number;
   private comercios: Comercio[];
   private section: string = 'info';

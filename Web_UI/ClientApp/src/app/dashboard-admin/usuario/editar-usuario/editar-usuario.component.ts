@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -60,31 +60,32 @@ export class EditarUsuarioComponent implements OnInit {
       validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
     });
 
-    this.obtenerDatosUsuario().then(() => {
-      let esCedulaValida = /^\d+$/.test(this.usuario.Cedula);
+    this.obtenerDatosUsuario()
+      .then(() => {
+        let esCedulaValida = /^\d+$/.test(this.usuario.Cedula);
 
-      if (esCedulaValida)
-        this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
-        
-      this.usuarioForm.controls['Nombre'].setValue(this.usuario.Nombre);
-      this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
-      this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
-      this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
-      this.usuarioForm.controls['Tipo'].setValue(this.usuario.Tipo);
+        if (esCedulaValida)
+          this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
+          
+        this.usuarioForm.controls['Nombre'].setValue(this.usuario.Nombre);
+        this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
+        this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
+        this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
+        this.usuarioForm.controls['Tipo'].setValue(this.usuario.Tipo);
 
-      if (this.integrarCon == null) {
-        this.tituloAMostrar = 'Usuarios';
-      } else if (this.integrarCon == 'pagina') {
+        if (this.integrarCon == null) {
+          this.tituloAMostrar = 'Usuarios';
+        } else if (this.integrarCon == 'pagina') {
+            this.tituloAMostrar = this.titulo;
+        } else {
+          this.tituloAMostrar = 'Usuarios';
+        }
+
+        if (this.titulo != '' || this.titulo != null)
           this.tituloAMostrar = this.titulo;
-      } else {
-        this.tituloAMostrar = 'Usuarios';
-      }
-
-      if (this.titulo != '' || this.titulo != null)
-        this.tituloAMostrar = this.titulo;
-      else
-        this.tituloAMostrar = 'Usuarios';
-    });
+        else
+          this.tituloAMostrar = 'Usuarios';
+      });
   }
 
   obtenerDatosUsuario() {
