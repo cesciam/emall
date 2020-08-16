@@ -93,5 +93,9 @@ namespace DataAccessLayer.CRUD {
         public override void Create(BaseEntity entity) {
             throw new NotImplementedException();
         }
+
+        public void MakeDefault(int id, int usuarioId) {
+            dao.ExecuteQueryProcedure(this.mapper.MakeDefault(id, usuarioId));
+        }
     }
 }

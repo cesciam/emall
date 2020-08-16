@@ -19,7 +19,7 @@
     </div>
   </div>
   
-  <app-main-header></app-main-header>
+  <app-header></app-header>
   
   <div class="container">
     <div class="row">
@@ -60,8 +60,8 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th class="d-none d-sm-block">Alias</th>
-                  <th>Detalles</th>
+                  <th>Alias</th>
+                  <th class="d-none d-sm-block">Detalles</th>
                   <th colspan="2">&nbsp;</th>
                 </tr>
               </thead>
@@ -72,10 +72,20 @@
                 <tr *ngFor="let direccion of direcciones  | filtroDireccion:filtroDirecciones">
                   <td>{{direccion.Id}}</td>
                   <td>{{direccion.Alias}}</td>
-                  <td>{{ (direccion.Detalles.length > 60) ? (direccion.Detalles | slice:0:60) + '...' : (direccion.Detalles) }}</td>
+                  <td class="d-none d-sm-block">{{ (direccion.Detalles.length > 60) ? (direccion.Detalles | slice:0:60) + '...' : (direccion.Detalles) }}</td>
                   <td class="text-right">
+                    <button 
+                      *ngIf="direccion.Activa == 0" 
+                      class="btn btn-secondary btn-sm" 
+                      (click)="predeterminada(direccion.Id)">
+                      Predeterminar
+                    </button> 
+                    <small *ngIf="direccion.Activa == 1" >Dirección predeterminada</small>
+                    &nbsp;
+                    
                     <button type="button" class="btn btn-secondary btn-sm"
                       [routerLink]="['/direcciones/editar-direccion/', direccion.Id]">Editar</button>&nbsp;
+                    
                     <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
                       data-target="#Modal" (click)="setDireccionAEliminar(direccion.Id)"><i class="fas fa-trash-alt"></i></button>
                   </td>

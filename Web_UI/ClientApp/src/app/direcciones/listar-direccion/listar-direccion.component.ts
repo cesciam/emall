@@ -42,6 +42,13 @@ export class ListarDireccionComponent implements OnInit {
     this.direccionAEliminar = id;
   }
 
+  predeterminada(id: number) {
+    this.direccionService.predeterminada(id)
+    .subscribe((response) => { 
+      this.obtenerDirecciones();
+     });
+  }
+
   eliminarDireccion(): void {
     this.submitted = true;
 

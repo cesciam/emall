@@ -68,6 +68,15 @@ export class DireccionService {
       );
   }
 
+  predeterminada(id: number): Observable<Direccion> {
+    return this.http.get<Direccion>(this.baseUrl + '/direccion/' + id + '/predeterminada', this.httpOptions)
+      .pipe(
+        catchError((err) => {
+          return throwError(err);
+        })
+      );
+  }
+
   obtenerProvincias(): Observable<Provincia[]>{
     return this.http.get<Provincia[]>(this.baseUrl + '/direccion/provincia');
   }

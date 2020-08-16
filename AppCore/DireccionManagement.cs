@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using DataAccessLayer.CRUD;
 using Entities;
@@ -52,6 +53,18 @@ namespace AppCore {
 
         public List<Distrito> RetrieveDistritos(int provincia, int canton) {
             return this.crudDistrito.RetrieveByProvinciaCanton<Distrito>(provincia, canton);
+        }
+
+        public void MakeDefault(int id) {
+            Direccion direccion = new Direccion() { 
+                Id = id
+            };
+
+            Direccion direccionAEditar = this.RetrieveById(direccion);
+
+            if (direccionAEditar != null) {
+                this.crudDireccion.MakeDefault(id, direccionAEditar.UsuarioId);
+            }
         }
     }
 }

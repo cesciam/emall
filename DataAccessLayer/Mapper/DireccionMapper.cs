@@ -15,7 +15,7 @@ namespace DataAccessLayer.Mapper {
         private const string DB_LATITUD = "LATITUD";
         private const string DB_LONGITUD = "LONGITUD";
         private const string DB_ALIAS = "ALIAS";
-
+        private const string DB_ACTIVA = "ACTIVA";
 
         public BaseEntity BuildObject(Dictionary<string, object> row) {
             var direccion = new Direccion {
@@ -28,6 +28,7 @@ namespace DataAccessLayer.Mapper {
                 Latitud = GetStringValue(row, DB_LATITUD),
                 Longitud = GetStringValue(row, DB_LONGITUD),
                 Alias = GetStringValue(row, DB_ALIAS),
+                Activa = GetIntValue(row, DB_ACTIVA),
             };
 
             return direccion;
@@ -86,6 +87,15 @@ namespace DataAccessLayer.Mapper {
         public SqlOperation GetRetriveByUsuarioStatement(int usuarioId) {
             var operation = new SqlOperation { ProcedureName = "OBTENER_DIRECCION_USUARIO" };
 
+            operation.AddIntParam(DB_ID_USUARIO, usuarioId);
+
+            return operation;
+        }
+
+        public SqlOperation MakeDefault(int id, int usuarioId) {
+            var operation = new SqlOperation { ProcedureName = "PREDETERMINADA_DIRECCION" };
+
+            operation.AddIntParam(DB_COL_ID, id);
             operation.AddIntParam(DB_ID_USUARIO, usuarioId);
 
             return operation;

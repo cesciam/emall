@@ -96,5 +96,12 @@ namespace Web_API.Controllers {
         public List<Distrito> GetDistritos(int provincia, int canton) {
             return this.direccionManagement.RetrieveDistritos(provincia, canton);
         }
+
+        [HttpGet]
+        [Route("api/[controller]/{id}/predeterminada")]
+        public IActionResult Predeterminada(int id) {
+            this.direccionManagement.MakeDefault(id);
+            return Ok();
+        }
     }
 }

@@ -8,4 +8,5 @@ export class Direccion {
   Detalles: string;
   Latitud: string;
   Longitud: string;
+  Activa: string;
 }
