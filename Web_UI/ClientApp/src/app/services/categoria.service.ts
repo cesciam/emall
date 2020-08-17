@@ -22,18 +22,18 @@ export class CategoriaService {
   }
 
   ObtenerTodoCategoria() {
-    this.http.get(this.BaseURL + 'categoria/obtenertodocategoria')
+    this.http.get(this.BaseURL + '/categoria/obtenertodocategoria')
       .toPromise().then(res => this.categorias = res as Categoria[])
   }
 
   ObtenerCategoria(nombre: string) {
-    this.http.get(this.BaseURL + 'categoria/obtenercategoria' + nombre)
+    this.http.get(this.BaseURL + '/categoria/obtenercategoria' + nombre)
 
   }
 
   crearCategoria(categoria: Categoria) {
 
-    return this.http.post(this.BaseURL + "categoria/crearcategoria", categoria)
+    return this.http.post(this.BaseURL + "/categoria/crearcategoria", categoria)
       
   }
    

@@ -1,17 +1,22 @@
 ﻿ using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using AppCore;
+using Entities;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Twilio.Rest.Preview.TrustedComms;
 
 namespace TelegramChatBot
 {
     class Program
     {
         private static readonly TelegramBotClient Bot = new TelegramBotClient("1384676494:AAHLTrjqgxRNOV1gfKXcOxKZjbn_4oR6fWI");
-
+        public static ComercioManagement comercios = new ComercioManagement(); 
         static void Main(string[] args)
         {
             //Método que se ejecuta cuando se recibe un mensaje
@@ -39,7 +44,7 @@ namespace TelegramChatBot
             switch (message.Text.Split(' ').First())
             {
                 //Enviar un inline keyboard con callback
-                case "/parte1":
+                case "/comercios":
 
                     //Simula que el bot está escribiendo
                     await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
@@ -51,30 +56,12 @@ namespace TelegramChatBot
                     new []
                     {
                         InlineKeyboardButton.WithCallbackData(
-                            text:"Imagen",
-                            callbackData: "imagen"),
+                            text:"Comercios",
+                            callbackData: "comercios"),//lo que se manda al case
                         InlineKeyboardButton.WithCallbackData(
-                            text:"Ubicación",
-                            callbackData: "ubicacion"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Ubicación + info",
-                            callbackData: "venue"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Contacto",
-                            callbackData: "contacto"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Animación",
-                            callbackData: "animation"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text: "Documento",
-                            callbackData: "document"),
-                    }
+                            text:"Keyboard",
+                            callbackData: "keyboard")//lo que se manda al case
+                    } 
                 });
 
                     await Bot.SendTextMessageAsync(
@@ -82,52 +69,14 @@ namespace TelegramChatBot
                         "Elija una opción",
                         replyMarkup: keyboardEjemplo1);
                     break;
-
-                case "/parte2":
-
-                    var keyboardEjemplo2 = new InlineKeyboardMarkup(new[]
-                    {
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Keyboard",
-                            callbackData: "keyboard"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Reply",
-                            callbackData: "reply"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Reenviar",
-                            callbackData: "reenviar"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Force reply",
-                            callbackData: "forceReply"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Texto con formato",
-                            callbackData: "formato"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Video",
-                            callbackData: "video"),
-                    }
-                });
-
-                    await Bot.SendTextMessageAsync(
-                        message.Chat.Id,
-                        "Elija una opción",
-                        replyMarkup: keyboardEjemplo2);
-                    break;
+                
 
                 //Mensaje por default
                 default:
                     const string usage = @"
                 Comandos:
-                /parte1 - ejemplos parte 1
-                /parte2 - ejemplos parte 2";
+                /comercios - Se muestra la lista de comercios
+                ";
 
                     await Bot.SendTextMessageAsync(
                         message.Chat.Id,
@@ -138,6 +87,7 @@ namespace TelegramChatBot
             }
         }
 
+        //SE MUESTRA LA INFROMACION QUE HA PEDIDO EL USUARIO
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)
         {
             var callbackQuery = callbackQueryEventArgs.CallbackQuery;
@@ -157,12 +107,18 @@ namespace TelegramChatBot
                         replyMarkup: tipoContacto);
                     break;
 
-                case "ubicacion":
-                    await Bot.SendLocationAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        latitude: 9.932551f,
-                        longitude: -84.031086f
-                        );
+                case "comercios": //MUESTRA LA LISTA DE LOS COMERCIOS 
+
+                    List<Comercio> listaComercios= new List<Comercio>();
+                    listaComercios = comercios.ObtenerTodoComercio();
+
+                    foreach (Comercio lista in listaComercios)
+                    {
+                        InlineKeyboardButton.WithCallbackData(
+                            text: lista.Nombre,
+                            callbackData: "Prueba");
+                    }
+
                     break;
 
                 case "venue":
