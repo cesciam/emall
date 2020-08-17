@@ -30,6 +30,7 @@ export class DashboardComercioComponent implements OnInit {
   private permisoArchivos: boolean;
   private permisoEditarComercio: boolean;
   private permisoHorario: boolean;
+  private permisoEnvios: boolean;
   private usuarioLogueado: string;
   public accion: string = "Eliminación sucursal";
 
@@ -69,6 +70,7 @@ export class DashboardComercioComponent implements OnInit {
       this.permisoArchivos = true;
       this.permisoEditarComercio = true;
       this.permisoHorario = true;
+      this.permisoEnvios = true;
     }
   }
 
@@ -97,7 +99,10 @@ export class DashboardComercioComponent implements OnInit {
             this.permisoEditarComercio = true;
           break;
           case "horarios":
-            this.permisoEditarComercio = true;
+            this.permisoHorario = true;
+          break;
+          case "envios":
+            this.permisoEnvios = true;
           break;
         };
     }

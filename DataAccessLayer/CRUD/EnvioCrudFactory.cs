@@ -51,6 +51,24 @@ namespace DataAccessLayer.CRUD
             throw new NotImplementedException();
         }
 
+        public List<T> RetrieveBySucursal<T>(int id_sucursal)
+        {
+            var list = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveBySucursalStatement(id_sucursal));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = envioMapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    list.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return list;
+        }
+
         public override void Update(BaseEntity entity)
         {
             throw new NotImplementedException();

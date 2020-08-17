@@ -6,6 +6,7 @@ using AppCore;
 using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Entities.ViewModels;
 
 namespace Web_API.Controllers
 {
@@ -31,6 +32,20 @@ namespace Web_API.Controllers
             {
                 return BadRequest(new { message = "Algo salió mal al registrar su envío" });
             }
+        }
+
+        [HttpGet]
+        public List<Envio> RetrieveBySucursal(int sucursal)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveBySucursal(sucursal);
+        }
+
+        [HttpGet]
+        public List<EnvioListViewModel> RetrieveEnvioListBySucursal(int sucursal)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveEnvioListBySucursal(sucursal);
         }
     }
 }

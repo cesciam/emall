@@ -99,6 +99,7 @@ import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agreg
 import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
+import { EnvioService } from './services/envio.service';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -287,6 +288,7 @@ const maskConfig: Partial<IConfig> = {
     VistaXRolService,
     ItemService,
     DatePipe,
+    EnvioService,
   ],
   bootstrap: [
     AppComponent

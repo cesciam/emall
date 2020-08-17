@@ -73,6 +73,13 @@ namespace DataAccessLayer.Mapper
             throw new NotImplementedException();
         }
 
+        public SqlOperation GetRetriveBySucursalStatement(int id_sucursal)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO_SUCURSAL" };
+            operation.AddIntParam("ID_SUCURSAL", id_sucursal);
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             throw new NotImplementedException();

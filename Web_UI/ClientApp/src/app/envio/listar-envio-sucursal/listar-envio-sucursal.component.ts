@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnvioList } from 'src/app/models/envio-list.model';
+import { EnvioService } from 'src/app/services/envio.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listar-envio-sucursal',
@@ -10,10 +12,13 @@ export class ListarEnvioSucursalComponent implements OnInit {
 
   public envios: EnvioList[]
   public estado: string;
+  public id_sucursal
 
-  constructor() { }
+  constructor(private service : EnvioService,
+    private activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
+    this.id_sucursal = parseInt(this.activatedRoute.snapshot.paramMap.get('id_sucursal'));
     this.obtenerEnvios()
   }
 
@@ -29,36 +34,9 @@ export class ListarEnvioSucursalComponent implements OnInit {
   }
 
   obtenerEnvios() {
-    this.envios = [
-      {
-        id: 1,
-        id_cliente: 2,
-        nombre_cliente: 'cliente 1',
-        provincia: 'san jose',
-        canton: 'mata redonda',
-        distrito: 'estadio',
-        latitud: '0,0,0',
-        longitud: '0,0,0',
-        estado: 0,
-        id_empleado: 12,
-        nombre_empleado: 'empleado 1',
-        codigo: '123Dwe'
-      },
-      {
-        id: 2,
-        id_cliente: 2,
-        nombre_cliente: 'cliente 2',
-        provincia: 'san jose',
-        canton: 'mata redonda',
-        distrito: 'estadio',
-        latitud: '0,0,0',
-        longitud: '0,0,0',
-        estado: 1,
-        id_empleado: 12,
-        nombre_empleado: 'empleado 2',
-        codigo: '934D!23'
-      }
-    ]
+    this.service.obtenerEnvioListPorSucursal(this.id_sucursal).subscribe(data=>{
+      this.envios=data;
+    })
   }
 
 }
