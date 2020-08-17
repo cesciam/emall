@@ -92,6 +92,10 @@ import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
 import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { VentasComponent } from '../app/reportes/ventas/ventas.component';
+import { TransaccionesComponent } from './reportes/transacciones/transacciones.component';
+import { CitasComponent } from './reportes/citas/citas.component';
+import { MetodosPagosComponent } from './reportes/metodos-pagos/metodos-pagos.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -179,7 +183,11 @@ const maskConfig: Partial<IConfig> = {
     FiltroUsuarioPipe,
     ListarBitacoraComponent, 
     CalificacionComponent,
-    CarritoComprasComponent
+    CarritoComprasComponent,
+    VentasComponent,
+    TransaccionesComponent,
+    CitasComponent,
+    MetodosPagosComponent
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

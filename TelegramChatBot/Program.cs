@@ -10,13 +10,16 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using Twilio.Rest.Preview.TrustedComms;
+using Web_API.Controllers;
 
 namespace TelegramChatBot
 {
     class Program
     {
         private static readonly TelegramBotClient Bot = new TelegramBotClient("1384676494:AAHLTrjqgxRNOV1gfKXcOxKZjbn_4oR6fWI");
-        public static ComercioManagement comercios = new ComercioManagement(); 
+        private static ComercioManagement comercios = new ComercioManagement();
+        private static SucursalManagement sucursales = new SucursalManagement(); 
+       // private static  ComercioController comercioController = new ComercioController();
         static void Main(string[] args)
         {
             //Método que se ejecuta cuando se recibe un mensaje
@@ -58,9 +61,7 @@ namespace TelegramChatBot
                         InlineKeyboardButton.WithCallbackData(
                             text:"Comercios",
                             callbackData: "comercios"),//lo que se manda al case
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Keyboard",
-                            callbackData: "keyboard")//lo que se manda al case
+                       
                     } 
                 });
 
@@ -76,7 +77,7 @@ namespace TelegramChatBot
                     const string usage = @"
                 Comandos:
                 /comercios - Se muestra la lista de comercios
-                ";
+                /start - muestra el menú";
 
                     await Bot.SendTextMessageAsync(
                         message.Chat.Id,
@@ -90,125 +91,69 @@ namespace TelegramChatBot
         //SE MUESTRA LA INFROMACION QUE HA PEDIDO EL USUARIO
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)
         {
+            //var message = messageEventArgs.Message;
             var callbackQuery = callbackQueryEventArgs.CallbackQuery;
 
             switch (callbackQuery.Data)
             {
-                case "keyboard":
-                    ReplyKeyboardMarkup tipoContacto = new[]
-                    {
-                        new[] { "Opción 1", "Opción 2" },
-                        new[] { "Opción 3", "Opción 4" },
-                    };
-
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "Keyboard personalizado",
-                        replyMarkup: tipoContacto);
-                    break;
-
                 case "comercios": //MUESTRA LA LISTA DE LOS COMERCIOS 
 
-                    List<Comercio> listaComercios= new List<Comercio>();
+                    List<Comercio> listaComercios = new List<Comercio>();
                     listaComercios = comercios.ObtenerTodoComercio();
+                    /*var BotComercios = new InlineKeyboardButton[]; 
 
                     foreach (Comercio lista in listaComercios)
                     {
+
+                         BotComercios = new InlineKeyboardMarkup(new[]
+                   {
+                     new []
+                     {
                         InlineKeyboardButton.WithCallbackData(
-                            text: lista.Nombre,
-                            callbackData: "Prueba");
+                            lista.Nombre, "Id: "+ lista.Id),//lo que se manda al case
+
+                     }
+                     });
+                        
+                    }*/
+                    var Botcomercios = new InlineKeyboardButton[listaComercios.Count()][];
+                    int counter = 0;
+                    foreach (var lista in listaComercios)
+                    {
+                        var row = new[]
+                        {
+                    InlineKeyboardButton.WithCallbackData(text: lista.Nombre,callbackData: "comercio:"+lista.Id)
+                };
+                        Botcomercios[counter] = row;
+                        counter++;
                     }
 
-                    break;
-
-                case "venue":
-                    await Bot.SendVenueAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        latitude: 9.932551f,
-                        longitude: -84.031086f,
-                        title: "Cenfotec",
-                        address: "San José, Montes de Oca"
-                        );
-                    break;
-
-                case "imagen":
-                    await Bot.SendPhotoAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        photo: "https://www.google.co.cr/imgres?imgurl=https%3A%2F%2Fwww.pcactual.com%2Fmedio%2F2017%2F07%2F05%2Ftelegram_960x540_0aa1aeac.jpg&imgrefurl=https%3A%2F%2Fwww.pcactual.com%2Fnoticias%2Factualidad%2Fsoy-fan-telegram_13549&docid=UZhcuJ9275t8zM&tbnid=otB1G_5L3DD0sM%3A&vet=10ahUKEwjR0ouWotDiAhUiqlkKHdi6D8gQMwhLKAEwAQ..i&w=960&h=540&bih=722&biw=1536&q=telegram%20image&ved=0ahUKEwjR0ouWotDiAhUiqlkKHdi6D8gQMwhLKAEwAQ&iact=mrc&uact=8"
-                        );
-                    break;
-
-                case "animation":
-                    await Bot.SendAnimationAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        animation: "https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif?w=730&crop=1"
-                        );
-                    break;
-
-                case "video":
-                    await Bot.SendVideoAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        video: "https://res.cloudinary.com/dherrerap/video/upload/v1560039252/WhatsApp_Video_2019-06-08_at_6.10.54_PM.mp4"
-                        );
-                    break;
-
-                case "document":
-                    await Bot.SendDocumentAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        document: "https://cenfotec.s3-us-west-2.amazonaws.com/prod/wpattchs/2013/04/web-tec-virtual.pdf"
-                        );
-                    break;
-
-                case "formato":
                     await Bot.SendTextMessageAsync(
                         chatId: callbackQuery.Message.Chat.Id,
-                        text: "<b>bold</b>, <strong>bold</strong>",
-                        parseMode: ParseMode.Html
-                        );
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "<i>italic</i>, <em>italic</em>",
-                        parseMode: ParseMode.Html
-                        );
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "<a href='http://www.example.com/'>inline URL</a>",
-                        parseMode: ParseMode.Html
-                        );
+                        text: "Lista de comercios:",
+                        replyMarkup: new InlineKeyboardMarkup(Botcomercios));
+
                     break;
 
-                case "reply":
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "ID: " + callbackQuery.Message.MessageId + " - " + callbackQuery.Message.Text,
-                        replyToMessageId: callbackQuery.Message.MessageId);
+                case "comercio:lista.Id":
+
+                    string dato = "comercio:lista.Id"; 
+                    char[] sep = { ':'};
+                    Int32 count = 2;
+                    String[] strlist = dato.Split(sep,
+                    count, StringSplitOptions.None);
+
+                    var sucursal = new Sucursal { Id = Int32.Parse(strlist[2])};
+
+                    List<Sucursal> listaSucursales = new List<Sucursal>();
+                    listaSucursales = sucursales.ObtenerTodoSucursal(sucursal); 
                     break;
 
-                case "contacto":
-                    await Bot.SendContactAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        phoneNumber: "2222-2222",
-                        firstName: "Jane",
-                        lastName: "Doe"
-                        );
-                    break;
 
-                case "forceReply":
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "Forzar respuesta a este mensaje",
-                        replyMarkup: new ForceReplyMarkup());
-                    break;
-
-                case "reenviar":
-                    await Bot.ForwardMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        fromChatId: callbackQuery.Message.Chat.Id,
-                        messageId: callbackQuery.Message.MessageId
-                        );
-                    break;
             }
         }
+
+      
 
         private static void BotOnReceiveError(object sender, ReceiveErrorEventArgs receiveErrorEventArgs)
         {

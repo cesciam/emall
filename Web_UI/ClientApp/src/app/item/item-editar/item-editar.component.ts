@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
 import { Impuesto } from '../../models/impuesto.model';
 import { ImpuestoService } from '../../services/impuesto.service';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-item-editar',
@@ -24,9 +25,15 @@ export class ItemEditarComponent implements OnInit {
   stringImpuesto: string;
   impuestoactual: Impuesto;
 
+  private usuarioLogueado: string;
+  public accion: string = "Edición Item";
 
-  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router, private serviceImpuesto: ImpuestoService) {
-    
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+
+  constructor(private bitacora: BitacoraService,private route: ActivatedRoute, private service: ItemService, private router: Router, private serviceImpuesto: ImpuestoService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
     this.serviceImpuesto.ObtenerTodoImpuestoItem().subscribe(
       (data: Impuesto[]) => this.impuestos = data,
@@ -98,6 +105,11 @@ export class ItemEditarComponent implements OnInit {
           this.error = "Errores en el registro";
           window.scroll(0, 0);
         });
+    this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
   }
 
 

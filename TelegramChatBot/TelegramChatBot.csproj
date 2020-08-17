@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AppCore\AppCore.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Web_API\Web_API.csproj" />
   </ItemGroup>
 
 </Project>

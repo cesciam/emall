@@ -4,6 +4,7 @@ import { SucursalService } from '../services/sucursal.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Horario } from '../models/horario.model';
 import { HorarioService } from 'src/app/services/horario.service';
+import { BitacoraService } from '../services/bitacora.service';
 
 @Component({
   selector: 'app-registrar-sucursal',
@@ -19,13 +20,21 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
   private lat = 9.9323298;
   private lng = -84.0310371;
   private error: any;
+
+  private usuarioLogueado: string;
+  public accion: string = "Creación Comercio";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado);
  
 
-  constructor(sucursalService: SucursalService,
+  constructor(private bitacora: BitacoraService,sucursalService: SucursalService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
     this.sucursalService = sucursalService;
     this.sucursal = new Sucursal();
+
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
 
   }
   ngAfterViewInit(): void {
@@ -86,6 +95,11 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
       .subscribe(
         (response) => {
           this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.sucursal.idComercio } });
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.error = error.error;
