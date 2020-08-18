@@ -99,6 +99,7 @@ import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agreg
 import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
+import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -195,6 +196,7 @@ const maskConfig: Partial<IConfig> = {
     ListarDireccionComponent,
     EditarDireccionComponent, 
     FiltroDireccionPipe,
+    ListaDeseoComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -268,6 +270,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
+      { path: 'lista-deseo', component: ListaDeseoComponent },
     ])
   ],
   exports: [
