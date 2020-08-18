@@ -100,42 +100,44 @@ namespace TelegramChatBot
 
                     List<Comercio> listaComercios = new List<Comercio>();
                     listaComercios = comercios.ObtenerTodoComercio();
-                    /*var BotComercios = new InlineKeyboardButton[]; 
+                    //var BotComercios = new InlineKeyboardButton[];
 
-                    foreach (Comercio lista in listaComercios)
-                    {
-
-                         BotComercios = new InlineKeyboardMarkup(new[]
-                   {
-                     new []
+                    /* foreach (Comercio lista in listaComercios)
                      {
-                        InlineKeyboardButton.WithCallbackData(
-                            lista.Nombre, "Id: "+ lista.Id),//lo que se manda al case
 
-                     }
-                     });
+                        var BotComercios = new InlineKeyboardMarkup(new[]
+                   {
+                      new []
+                      {
+                         InlineKeyboardButton.WithCallbackData(text:
+                             lista.Nombre, callbackData: "Id:"+ lista.Id),//lo que se manda al case
+
+                      }
+                      });
                         
-                    }*/
+                     }*/
                     var Botcomercios = new InlineKeyboardButton[listaComercios.Count()][];
                     int counter = 0;
                     foreach (var lista in listaComercios)
                     {
                         var row = new[]
                         {
-                    InlineKeyboardButton.WithCallbackData(text: lista.Nombre,callbackData: "comercio:"+lista.Id)
-                };
+                     InlineKeyboardButton.WithCallbackData(text: lista.Nombre,callbackData: "id:"+lista.Id)
+                 };
                         Botcomercios[counter] = row;
                         counter++;
-                    }
+                        
+                     }
 
                     await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "Lista de comercios:",
-                        replyMarkup: new InlineKeyboardMarkup(Botcomercios));
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Lista de comercios:",
+                       replyMarkup: new InlineKeyboardMarkup(Botcomercios));
+
 
                     break;
 
-                case "comercio:lista.Id":
+                case "id:lista.Id":
 
                     string dato = "comercio:lista.Id"; 
                     char[] sep = { ':'};
