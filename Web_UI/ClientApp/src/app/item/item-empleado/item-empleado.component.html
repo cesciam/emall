@@ -1,0 +1,100 @@
+
+
+
+<app-main-header></app-main-header>
+<div class="container" *ngIf="item && sucursal && empleados_sucursal && comercio && empleados_actuales">
+
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Empleados asociados</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Los empleados marcados fueron asociados al servicio
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" [routerLink]="['/item-sucursal', sucursal.id]">
+            Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-auto d-flex justify-content-end">
+    <a [routerLink]="['/item-sucursal', sucursal.id]">Volver atras</a>
+
+  </div>
+
+  <div class="pt-3 px-4">
+    <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Asociar empleado a servicio</h1>
+    </div>
+
+
+
+    <div class="d-flex flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <p class="h5">Marque los empleados a los cuales desea asociar el servicio</p>
+    </div>
+
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="empleados_sucursal">
+      <thead>
+        <tr>
+          <th>Correo</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of empleados_sucursal">
+          <td>{{ emp.Correo }}</td>
+          <td>{{ emp.UsuarioNombre }} {{ emp.Apellido }}</td>
+          <td>{{ emp.RolNombre }}</td>
+          <td *ngIf="selecciones.includes(emp.Id); else noSeleccionado"><input class="form-check-input" type="checkbox" name="{{emp.Id}}" [value]="emp.Id" id="emp.Id" checked (change)="marcar($event, emp.Id)"></td>
+
+          <ng-template #noSeleccionado>
+            <td><input class="form-check-input" type="checkbox" name="{{emp.Id}}" [value]="emp.Id" id="emp.Id" (change)="marcar($event, emp.Id)"></td>
+          </ng-template>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-primary btn-lg btn-block primary-btn mt-3" data-toggle="modal" data-target="#Modal" (click)="asociar()">Guardar</button>
+
+    <div class="row border-bottom mt-5" *ngIf="item">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text pt-3 px-4">
+          <h2>{{item.nombre}}</h2>
+          <br>
+          <div class="product__details__rating">
+            {{comercio.nombre}}<i class="h3 mb-5"> {{sucursal.nombre}}</i>
+            <p class="mt-2">
+              <b>{{item.descripcion}}</b>
+              <br>Duración: <b>{{item.duracion}} minutos</b>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+      
+
+    </div>
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

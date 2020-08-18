@@ -83,17 +83,22 @@ import { FilterImpuestoPipe } from './pipes/filter-impuesto.pipe';
 import { FilterCategoriaPipe } from './pipes/filter-categoria.pipe';
 import { FiltroRolPipe } from './pipes/filtro-rol.pipe';
 import { FiltroEmpleadoPipe } from './pipes/filtro-empleado.pipe';
-import { AdminImpuestoCrearComponent } from './dashboard-admin/admin-impuesto-crear/admin-impuesto-crear.component';
-import { AdminImpuestoListarComponent } from './dashboard-admin/admin-impuesto-listar/admin-impuesto-listar.component';
-import { AdminCategoriaListarComponent } from './dashboard-admin/admin-categoria-listar/admin-categoria-listar.component';
-import { AdminCategoriaCrearComponent } from './dashboard-admin/admin-categoria-crear/admin-categoria-crear.component';
 import { FiltroUsuarioPipe } from './pipes/filtro-usuario.pipe';
 import { ListarHorarioComponent } from './horario/listar-horario/listar-horario.component';
 import { AgregarHorarioComponent } from './horario/agregar-horario/agregar-horario.component';
 import { FiltroHorarioPipe } from './pipes/filtro-horario.pipe';
 import { AgregarHorarioSucursalComponent } from './horario/agregar-horario-sucursal/agregar-horario-sucursal.component';
 import { CalificacionComponent } from './calificacion/calificacion.component';
+import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
+import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
+import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
+import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
+import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agregar-direccion.component';
+import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
+import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
+import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
 
 const maskConfig: Partial<IConfig> = {
@@ -173,16 +178,24 @@ const maskConfig: Partial<IConfig> = {
     FilterCategoriaPipe,
     FiltroRolPipe,
     FiltroEmpleadoPipe,
-    AdminImpuestoCrearComponent,
-    AdminImpuestoListarComponent,
-    AdminCategoriaListarComponent,
-    AdminCategoriaCrearComponent, 
     ListarHorarioComponent,
     AgregarHorarioComponent,
     FiltroHorarioPipe,
     AgregarHorarioSucursalComponent,
+    CalificacionComponent, 
     FiltroUsuarioPipe,
+    ListarBitacoraComponent, 
     CalificacionComponent,
+    CarritoComprasComponent,
+    ListarEnvioSucursalComponent,
+    EnvioDetalleComponent,
+    ItemEmpleadoComponent, 
+    EnvioDetalleComponent, 
+    CalificacionComponent,
+    AgregarDireccionComponent,
+    ListarDireccionComponent,
+    EditarDireccionComponent, 
+    FiltroDireccionPipe,
     CarritoComprasComponent,
     RealizarCompraComponent
   ],
@@ -221,9 +234,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-crear/:id_comercio', component: ItemCrearComponent },
       { path: 'item-sucursal/:id_sucursal', component: ItemSucursalComponent },
       { path: 'item-editar/:id_item', component: ItemEditarComponent },
-      { path: 'listar-impuesto', component: ListarImpuestoComponent },
+      { path: 'dashboard-admin/impuesto', component: ListarImpuestoComponent },
       { path: 'crear-impuesto', component: CrearImpuestoComponent },
-      { path: 'listar-categoria', component: ListarCategoriaComponent },
+      { path: 'dashboard-admin/categoria', component: ListarCategoriaComponent },
       { path: 'crear-categoria', component: CrearCategoriaComponent },
       { path: 'configuracion', component: ListarConfiguracionComponent },
       { path: 'dashboard-admin/comercio/aprobar-comercios', component: AprobarComercioComponent },
@@ -247,14 +260,17 @@ const maskConfig: Partial<IConfig> = {
       { path: 'item-perfil/:id_item', component: ItemPerfilComponent },
       { path: 'item-sucursal-cliente/:id_sucursal', component: ItemSucursalClienteComponent },
       { path: 'landing-producto', component: LandingPageProductoComponent },
-      { path: 'dashboard-admin/impuesto/crear', component: AdminImpuestoCrearComponent },
-      { path: 'dashboard-admin/categoria/crear', component: AdminCategoriaCrearComponent },
-      { path: 'dashboard-admin/impuesto', component: AdminImpuestoListarComponent },
-      { path: 'dashboard-admin/categoria', component: AdminCategoriaListarComponent },
       { path: 'agregar-horario', component: AgregarHorarioComponent },
       { path: 'listar-horario', component: ListarHorarioComponent },
       { path: 'agregar-horario-sucursal/:id_comercio', component: AgregarHorarioSucursalComponent },
+      { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
       { path: 'carrito-compras', component: CarritoComprasComponent },
+      { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
+      { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
+      { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
+      { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
+      { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
       { path: 'realizar-pago', component: RealizarCompraComponent },
     ])
   ],
@@ -273,10 +289,12 @@ const maskConfig: Partial<IConfig> = {
     VistaService,
     HorarioService,
     VistaXRolService,
-    ItemService
+    ItemService,
+    DatePipe,
   ],
   bootstrap: [
     AppComponent
   ]
 })
+
 export class AppModule { }

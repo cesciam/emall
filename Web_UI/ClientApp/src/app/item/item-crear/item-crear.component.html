@@ -1,3 +1,47 @@
+<div class="modal fade" id="ModalServicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Servicio agregado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Ingrese a "Items de sucursal" para administrar su servicio
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" [routerLink]="['/dashboard-comercio']"
+                [queryParams]="{comercio: comercio}">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ModalProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Producto agregado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Ingrese a "Items de sucursal" para administrar su producto
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" [routerLink]="['/dashboard-comercio']"
+                [queryParams]="{comercio: comercio}">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-main-header></app-main-header>
 <div class="container" *ngIf="comercio">
 
@@ -93,7 +137,7 @@
           <h3>Sucursales</h3>
         </div>
 
-        <div class="form-row mb-4" *ngFor="let sucursal of sucursales">
+        <div class="form-row mb-4 mt-4" *ngFor="let sucursal of sucursales">
           <label class="col-4" for="{{sucursal.id}}">{{sucursal.nombre}}</label>
           <input class="col-4" type="checkbox" name="{{sucursal.id}}" [value]="sucursal.id" (change)="marcar($event, sucursal.id)">
           <div *ngIf="tipo.value=='Producto' && sucursalesSeleccionadas.includes(sucursal.id)">
@@ -134,12 +178,12 @@
 
           <div style="margin-bottom: 10px;">
             <div *ngIf="(this.foto!='https://mdbootstrap.com/img/Photos/Others/placeholder.jpg' && nombre.valid && descripcion.valid && precio > 0 && id_impuesto.valid && tipo.value=='Producto' && (sucursalesSeleccionadas.length == (inventarios.length/2))); else servicio">
-              <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()">Crear Item</button>
+              <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()" data-toggle="modal" data-target="#ModalProducto">Crear Item</button>
             </div>
 
             <ng-template #servicio>
               <div *ngIf="(this.foto!='https://mdbootstrap.com/img/Photos/Others/placeholder.jpg' && nombre.valid && descripcion.valid && precio > 0 && id_impuesto.valid && tipo.value=='Servicio' && (this.dura > 0)); else noValido">
-                <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()">Crear Item</button>
+                <button class="btn btn-primary btn-lg btn-block primary-btn" (click)="crearItem()" data-toggle="modal" data-target="#ModalServicio">Crear Item</button>
               </div>
             </ng-template>
 

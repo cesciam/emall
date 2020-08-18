@@ -26,8 +26,6 @@
           El nombre de la sucursal debe tener al menos 3 caracteres.
         </div>
       </div>
-
-
     </div>
 
     <div class="col">
@@ -45,7 +43,6 @@
           Los detalles de la dirección deben tener al menos 5 caracteres.
         </div>
       </div>
-
     </div>
   </div>
 
@@ -57,8 +54,8 @@
     </div>
 
   </div>
-  <div class="container-fluid">
 
+  <div class="container-fluid">
     <div class="row">
       <div *ngIf="(nombre.valid && detalles.valid); else noValido">
         <button class="btn btn-primary btn-lg btn-block" (click)="registrarSucursal()">Registrar sucursal</button>
@@ -66,12 +63,9 @@
       <ng-template #noValido>
         <button class="btn btn-primary btn-lg btn-block" type="button" disabled>Registrar sucursal</button>
       </ng-template>
-
     </div>
-
   </div>
-
-
   <hr>
 </form>
+
 <app-footer></app-footer>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Comercio } from '../models/Comercio';
 import { ComercioService } from '../services/comercio.service';
+import { BitacoraService } from '../services/bitacora.service';
 
 @Component({
   selector: 'app-aprobar-comercio',
@@ -8,12 +9,18 @@ import { ComercioService } from '../services/comercio.service';
   styleUrls: ['./aprobar-comercio.component.css']
 })
 export class AprobarComercioComponent implements OnInit {
+
+  private usuarioLogueado: string;
   private comercios: Comercio[];
   private error: any;
   private filterComercio = '';
+  public accionAprobar: string = "Aprobación comercio";
+  public accionRechazar: string = "Rechazo comercio";
 
-  constructor(private comercioService: ComercioService) {
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado);
 
+  constructor(private comercioService: ComercioService, private bitacora: BitacoraService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
   }
 
   ngOnInit() {
@@ -36,6 +43,11 @@ export class AprobarComercioComponent implements OnInit {
           this.error = error.error;
           window.scroll(0, 0);
         });
+    this.bitacora.llenarBitacora(this.accionAprobar, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
   }
 
   rechazar(comercio: Comercio) {
@@ -49,6 +61,11 @@ export class AprobarComercioComponent implements OnInit {
           this.error = error.error;
           window.scroll(0, 0);
         });
+    this.bitacora.llenarBitacora(this.accionRechazar, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
   }
 
   abrirLink(url) {

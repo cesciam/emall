@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { Rol } from '../../models/rol.model';
 import { Empleado } from '../../models/empleado.model';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -23,13 +24,19 @@ export class AgregarEmpleadoComponent implements OnInit {
   private sucursales: Sucursal[];
   private roles: Rol[];
   private comercioId: number;
+  private usuarioLogueado: string;
+  public accion: string = "Creación usuario";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
 
   constructor(
     private serviceEmpleado: EmpleadoService,
     private serviceRol: RolService,
     private router: Router,
     private route: ActivatedRoute,
-    private serviceSucursal: SucursalService) {
+    private serviceSucursal: SucursalService,
+    private bitacora: BitacoraService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
   }
 
   ngOnInit() {
@@ -93,6 +100,12 @@ export class AgregarEmpleadoComponent implements OnInit {
           }
 
           window.scroll(0, 0);
+
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         });
   }
 

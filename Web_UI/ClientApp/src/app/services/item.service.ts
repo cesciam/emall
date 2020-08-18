@@ -5,6 +5,9 @@ import { catchError, map } from 'rxjs/operators';
 import { Item } from '../models/item';
 import { Archivo } from '../models/Archivo';
 import { Impuesto } from '../models/impuesto.model';
+import { EmpleadoList } from '../models/empleado-list.model';
+import { EmpleadosXItem } from '../models/empleados-xitem';
+import { Empleado } from '../models/empleado.model';
 
 
 @Injectable({
@@ -41,6 +44,15 @@ export class ItemService {
     this.serviceApi = `/item/CreateItem`;
     return this.http
       .post<void>(this.appUrl + this.serviceApi, item, this.httpOptions)
+      .pipe(catchError(this.errorHandler)
+      );
+  }
+
+
+  AsociarItemEmpleado(empleados: EmpleadosXItem): Observable<any> {
+    this.serviceApi = `/item/AsociarItemEmpleado`;
+    return this.http
+      .post<void>(this.appUrl + this.serviceApi, empleados, this.httpOptions)
       .pipe(catchError(this.errorHandler)
       );
   }
@@ -90,6 +102,27 @@ export class ItemService {
     return item;
   }
 
+  async ObtenerEmpleados(id_comercio: number) {
+    this.serviceApi = `/Empleado/RetrieveByComercioId?comercio=${id_comercio}`;
+    let empleados: EmpleadoList[];
+
+    empleados = await this.http.get<EmpleadoList[]>(this.appUrl + this.serviceApi).toPromise();
+
+    return empleados;
+  }
+
+
+  async obtenerEmpleadosItem(id_item: number){
+    this.serviceApi = `/item/obtenerEmpleadosItem/?id_item=${id_item}`;
+
+    let empleados: EmpleadosXItem[];
+    empleados = await this.http.get<EmpleadosXItem[]>(this.appUrl + this.serviceApi).toPromise();
+
+    return empleados;
+  }
+
+
+
   async ObtenerImpuestoItem(id_impuesto: number) {
     this.serviceApi = `/item/ImpuestoItem/?id_impuesto=${id_impuesto}`;
     let impuesto: Impuesto;
@@ -128,4 +161,7 @@ export class ItemService {
         })
       });
   }
+
+
+  
 }
