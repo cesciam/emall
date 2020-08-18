@@ -36,6 +36,12 @@ namespace Web_API.Controllers {
         }
 
         [HttpGet]
+        [Route("api/[controller]/cita/{id}")]
+        public Direccion GetByCita(int id) {
+            return this.direccionManagement.RetrieveByCitaId(id);
+        }
+
+        [HttpGet]
         [Route("api/[controller]/{id}")]
         public Direccion GetById(int id) {
             Direccion direccion = new Direccion();
