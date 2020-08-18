@@ -80,9 +80,14 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO_PR" };
+            var h = (Envio)entity;
+            operation.AddIntParam(DB_COL_ID, h.Id);
+            return operation;
         }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)

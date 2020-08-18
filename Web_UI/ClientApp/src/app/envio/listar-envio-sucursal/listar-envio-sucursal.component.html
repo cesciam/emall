@@ -28,7 +28,7 @@
                   <td>{{ envio.id }}</td>
                   <td>{{ envio.nombre_cliente }}</td>
                   <td>{{ estadoToString(envio.estado) }}</td>
-                  <td><button class="btn btn-primary" [routerLink]="['/envio-detalle', envio.id]"> Ver </button></td>
+                  <td><button class="btn btn-primary" [routerLink]="['/listar-envio-sucursal',id_sucursal,'envio-detalle', envio.id]"> Ver </button></td>
                 </tr>
               </tbody>
             </table>

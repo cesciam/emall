@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EnvioList } from 'src/app/models/envio-list.model';
 import { Item } from 'src/app/models/item';
+import { EnvioService } from 'src/app/services/envio.service';
+import { ActivatedRoute } from '@angular/router';
+import { Envio } from 'src/app/models/envio.model';
 
 @Component({
   selector: 'app-envio-detalle',
@@ -9,69 +12,50 @@ import { Item } from 'src/app/models/item';
 })
 export class EnvioDetalleComponent implements OnInit {
 
-  private envio: EnvioList
+
+  private envio: Envio
+  private envioList: EnvioList
   private sucursal: number
   private items: Item[]
-  constructor() { }
+  private id_envio: number;
+
+  private lat;
+  private lng;
+  public link: string
+  public link2: string
+
+  constructor(private service: EnvioService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.inicializar()
+    this.sucursal = parseInt(this.activatedRoute.snapshot.paramMap.get('id_sucursal'));
+    this.id_envio = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.obtenerDatosEnvio()
-    this.sucursal = 1
+  }
+
+  inicializar(){
+    this.envioList = new EnvioList
+    this.envio = new Envio
   }
 
   obtenerDatosEnvio() {
-    this.envio = {
-      id: 1,
-      id_cliente: 2,
-      nombre_cliente: 'cliente 1',
-      latitud: '0,0,0',
-      longitud: '0,0,0',
-      estado: 0,
-      id_empleado: 12,
-      nombre_empleado: 'empleado 1',
-      codigo: '123Dwe'
-    }
-    this.obtenerItems()
-  }
+    this.service.obtenerEnvioListPorId(this.id_envio).subscribe(
+      data => {
+        this.envioList = data;
+        this.lat = this.envioList.latitud.substr(0, 9);
+        this.lng = this.envioList.longitud.substr(0, 9);
 
-  obtenerItems() {
-    this.items = [
-      {
-        id: 1,
-        inventario: 0,
-        nombre: 'Cheeseburger',
-        descripcion: 'placeholder',
-        precio: 200,
-        id_sucursal: 1,
-        duracion: 23,
-        tipo: 'producto',
-        id_impuesto: 0,
-        id_foto: 'placeholder'
-      },
-      {
-        id: 2,
-        inventario: 0,
-        nombre: 'CocaCola',
-        descripcion: 'placeholder',
-        precio: 200,
-        id_sucursal: 1,
-        duracion: 23,
-        tipo: 'producto',
-        id_impuesto: 0,
-        id_foto: 'placeholder'
-      },{
-        id: 3,
-        inventario: 0,
-        nombre: 'Papas',
-        descripcion: 'placeholder',
-        precio: 200,
-        id_sucursal: 1,
-        duracion: 23,
-        tipo: 'producto',
-        id_impuesto: 0,
-        id_foto: 'placeholder'
-      },
-    ]
+        this.link = "https://maps.google.com/?q=" + this.lat + "," + this.lng
+
+        this.link2 = "https://maps.google.com/maps?q=" + this.lat + "," + this.lng + "&z=15&output=embed"
+      })
+
+    this.service.obtenerEnvioPorId(this.id_envio).subscribe(
+      data => {
+        this.envio = data;
+        this.items = this.envio.items;
+      })
   }
 
 }

@@ -12,7 +12,7 @@ export class ListarEnvioSucursalComponent implements OnInit {
 
   public envios: EnvioList[]
   public estado: string;
-  public id_sucursal
+  public id_sucursal :number;
 
   constructor(private service : EnvioService,
     private activatedRoute : ActivatedRoute) { }
@@ -38,5 +38,7 @@ export class ListarEnvioSucursalComponent implements OnInit {
       this.envios=data;
     })
   }
+
+  
 
 }

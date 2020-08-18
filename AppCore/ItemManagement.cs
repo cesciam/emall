@@ -77,6 +77,11 @@ namespace AppCore
             return crudItem.Retrieve<Item>(item);
         }
 
+        public List<Item> RetrieveByEnvio(int id)
+        {
+            return crudItem.RetrieveByEnvio<Item>(id);
+        }
+
         public void UpdateItem(Item item)
         {
             if (validarItem(item))

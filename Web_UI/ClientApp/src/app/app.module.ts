@@ -100,6 +100,7 @@ import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { EnvioService } from './services/envio.service';
+import { SafePipe } from './pipes/safe.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -195,7 +196,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarDireccionComponent,
     ListarDireccionComponent,
     EditarDireccionComponent, 
-    FiltroDireccionPipe,
+    FiltroDireccionPipe, SafePipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -264,7 +265,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
       { path: 'carrito-compras', component: CarritoComprasComponent },
       { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
-      { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'listar-envio-sucursal/:id_sucursal/envio-detalle/:id', component: EnvioDetalleComponent },
       { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },

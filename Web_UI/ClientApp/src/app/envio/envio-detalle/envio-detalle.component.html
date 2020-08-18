@@ -1,42 +1,57 @@
 <app-main-header></app-main-header>
 
-<body>
-    <div class="container container-fluid">
-        <br>
-        <div class="col-sm-auto d-flex justify-content-end">
-            <a [routerLink]="['/listar-envio-sucursal', sucursal]">Volver atras</a>
 
-        </div>
-        <div class="pt-3 px-4">
-            <h2>Envio código: {{envio.codigo}}</h2>
-            <div class="col-sm-auto d-flex justify-content-end">
-                <Button class="btn btn-primary">Aceptar envío</Button>
-            </div>
-            <hr>
-            <br>
-            <h3>Ítems</h3>
-            <div class="table-responsive">
-                <table class='table table-striped' aria-labelledby="tableLabel">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of items">
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.nombre }}</td>
-                            <td> 2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <hr>
-        
+<div class="container container-fluid">
+    <br>
+    <div class="col-sm-auto d-flex justify-content-end">
+        <a [routerLink]="['/listar-envio-sucursal', sucursal]">Volver atras</a>
 
     </div>
-</body>
+    <div class="pt-3 px-4">
+        <h2>Envio código: {{envioList.codigo}}</h2>
+        <div class="col-sm-auto d-flex justify-content-end">
+            <Button class="btn btn-primary" (click)="aceptarEnvio()">Aceptar envío</Button>
+        </div>
+        <hr>
+
+
+
+        <br>
+        <h3>Ítems</h3>
+        <div class="table-responsive">
+            <table class='table table-striped' aria-labelledby="tableLabel">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td> 2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Ubicación del cliente</h3>
+        <hr>
+
+        <div class="embed-responsive embed-responsive-4by3 w-75">
+            <iframe class="embed-responsive-item" [src]="link2|safe" width="300" height="200" frameborder="0"
+                style="border:0"></iframe>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<br><br>
 <app-footer></app-footer>

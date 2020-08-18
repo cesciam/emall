@@ -47,5 +47,19 @@ namespace Web_API.Controllers
             var hm = new EnvioManagement();
             return hm.RetrieveEnvioListBySucursal(sucursal);
         }
+
+        [HttpGet]
+        public Envio RetrieveById(int id)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveById(id);
+        }
+
+        [HttpGet]
+        public EnvioListViewModel RetrieveEnvioListByid(int id)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveEnvioListByid(id);
+        }
     }
 }

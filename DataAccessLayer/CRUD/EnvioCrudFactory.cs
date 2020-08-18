@@ -43,8 +43,20 @@ namespace DataAccessLayer.CRUD
 
         public override T Retrieve<T>(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var lstResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var objs = envioMapper.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+
+            return default(T);
         }
+
+        
+
 
         public override List<T> RetrieveAll<T>()
         {
