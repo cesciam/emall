@@ -30,18 +30,14 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
   constructor(private bitacora: BitacoraService,sucursalService: SucursalService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
-
-  constructor(
-    sucursalService: SucursalService, 
-    private activatedRoute: ActivatedRoute, 
-    private router: Router
-  ) {
+ {
     this.sucursalService = sucursalService;
-    this.sucursal = new Sucursal();
+      this.sucursal = new Sucursal();
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
   }
 
-    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
-
+   
 
   }
   ngAfterViewInit(): void {

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AppCore;
 using Entities;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
@@ -18,7 +20,8 @@ namespace TelegramChatBot
     {
         private static readonly TelegramBotClient Bot = new TelegramBotClient("1384676494:AAHLTrjqgxRNOV1gfKXcOxKZjbn_4oR6fWI");
         private static ComercioManagement comercios = new ComercioManagement();
-        private static SucursalManagement sucursales = new SucursalManagement(); 
+        private static SucursalManagement sucursales = new SucursalManagement();
+        private static ItemManagement items = new ItemManagement();
        // private static  ComercioController comercioController = new ComercioController();
         static void Main(string[] args)
         {
@@ -88,14 +91,18 @@ namespace TelegramChatBot
             }
         }
 
-        //SE MUESTRA LA INFROMACION QUE HA PEDIDO EL USUARIO
+        //SE MUESTRA LA INFORMACION QUE HA PEDIDO EL USUARIO
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)
         {
             //var message = messageEventArgs.Message;
             var callbackQuery = callbackQueryEventArgs.CallbackQuery;
 
-            switch (callbackQuery.Data)
+        
+
+
+            switch (callbackQuery.Data.Split(":")[0]) 
             {
+
                 case "comercios": //MUESTRA LA LISTA DE LOS COMERCIOS 
 
                     List<Comercio> listaComercios = new List<Comercio>();
@@ -122,7 +129,9 @@ namespace TelegramChatBot
                     {
                         var row = new[]
                         {
-                     InlineKeyboardButton.WithCallbackData(text: lista.Nombre,callbackData: "id:"+lista.Id)
+                     InlineKeyboardButton.WithCallbackData(text: lista.Nombre,callbackData: "sucursales:"+lista.Id)
+
+                       
                  };
                         Botcomercios[counter] = row;
                         counter++;
@@ -137,25 +146,112 @@ namespace TelegramChatBot
 
                     break;
 
-                case "id:lista.Id":
-
-                    string dato = "comercio:lista.Id"; 
-                    char[] sep = { ':'};
+                case "sucursales":
+                 /*   string dato = "id:number"; //falta
+                    char[] sep = { ':' };
                     Int32 count = 2;
                     String[] strlist = dato.Split(sep,
                     count, StringSplitOptions.None);
-
-                    var sucursal = new Sucursal { Id = Int32.Parse(strlist[2])};
+                    var id = strlist[2];
+*/
+                    var sucursal = new Sucursal { IdComercio = Int32.Parse(callbackQuery.Data.Split(":")[1]) };
 
                     List<Sucursal> listaSucursales = new List<Sucursal>();
-                    listaSucursales = sucursales.ObtenerTodoSucursal(sucursal); 
+
+                    listaSucursales = sucursales.ObtenerTodoSucursal(sucursal);
+
+                    var Botsucursales = new InlineKeyboardButton[listaSucursales.Count()][];
+                    int iterable= 0;
+                    foreach (var list in listaSucursales)
+                    {
+                        var row = new[]
+                        {
+                     InlineKeyboardButton.WithCallbackData(text: list.Nombre,callbackData: "opcionesSucursales:"+list.Id)
+
+                 };
+                        Botsucursales[iterable] = row;
+                        iterable++;
+
+                    }
+
+                    await Bot.SendTextMessageAsync(
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Lista de sucursales:",
+                       replyMarkup: new InlineKeyboardMarkup(Botsucursales));
                     break;
 
 
+                case "opcionesSucursales":
+
+                    var sucursalList = new InlineKeyboardMarkup(new[]
+                    {
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData(
+                            text:"Dirección",
+                            callbackData: "direccion: "+Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                       InlineKeyboardButton.WithCallbackData(
+                            text:"Servicios",
+                            callbackData: "servicios: "+ Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                    }
+                });
+                    await Bot.SendTextMessageAsync(
+                     chatId: callbackQuery.Message.Chat.Id,
+                     text: "Opciones: ",
+                     replyMarkup: sucursalList);
+
+
+                    break;
+
+                case "direccion":
+
+                    var sucursalDireccion = new Sucursal { Id = Int32.Parse(callbackQuery.Data.Split(":")[1]) };
+                   Sucursal direccion = sucursales.ObtenerSucursal(sucursalDireccion);
+
+                    await Bot.SendLocationAsync(
+                       chatId: callbackQuery.Message.Chat.Id,
+                       latitude: float.Parse(direccion.Latitud),
+                       longitude: float.Parse(direccion.Longitud)
+                       );
+
+                    break;
+
+
+                case "servicios":
+                    var Id = Int32.Parse(callbackQuery.Data.Split(":")[1]);
+
+                    List<Item> listItem = new List<Item>();
+
+                    listItem = items.RetrieveAllBySucursal(Id); 
+
+                    var BotItem = new InlineKeyboardButton[listItem.Count()][];
+                    int count1 = 0;
+                    foreach (var list in listItem)
+                    {
+                        //VALIDACION QUE SOLO SEAN SERVICIOS
+                            var row = new[]
+                            {
+                     InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "item:"+list.id)
+
+                 };
+                            BotItem[count1] = row;
+                            count1++;
+                        
+                       
+                    }
+
+                    await Bot.SendTextMessageAsync(
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Lista de servicios:",
+                       replyMarkup: new InlineKeyboardMarkup(BotItem));
+                    break;
+
+                case "citasServicio" :
+
+                    break;
+                    
             }
         }
-
-      
 
         private static void BotOnReceiveError(object sender, ReceiveErrorEventArgs receiveErrorEventArgs)
         {

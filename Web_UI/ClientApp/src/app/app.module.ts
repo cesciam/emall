@@ -193,7 +193,7 @@ const maskConfig: Partial<IConfig> = {
     VentasComponent,
     TransaccionesComponent,
     CitasComponent,
-    MetodosPagosComponent
+    MetodosPagosComponent,
     CarritoComprasComponent,
     ListarEnvioSucursalComponent,
     EnvioDetalleComponent,
