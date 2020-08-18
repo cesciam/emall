@@ -6,6 +6,7 @@ namespace Entities.ViewModels
 {
     public class CitaViewModel
     {
+        public int id { get; set; }
         public DateTime fecha { get; set; }
         public DateTime hora_inicio { get; set; }
         public DateTime hora_fin { get; set; }
