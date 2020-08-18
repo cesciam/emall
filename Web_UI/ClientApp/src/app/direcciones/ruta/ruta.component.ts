@@ -40,7 +40,6 @@ export class RutaComponent implements OnInit {
     let cita = this.route.snapshot.paramMap.get('id');
     
     if (cita) {
-      console.log('cita param' + cita);
       this.citaId = +cita;
       this.seleccionarCita(+cita);
     }
