@@ -19,9 +19,9 @@ namespace Web_API.Controllers
 
 
         [HttpPost]
-        public IActionResult registro(Cita cita)
+        public IActionResult RegistrarCitaServicio(Cita cita)
         {
-            if (mng.Create(cita) > 0)
+            if (mng.CreateCitaServicio(cita) > 0)
             {
                 return Ok();
             }

@@ -15,7 +15,7 @@ namespace AppCore
             crud = new CitaCrudFactory();
         }
 
-        public int Create(BaseEntity entity)
+        public int CreateCitaServicio(BaseEntity entity)
         {
             var errores = ComprobarErrores(entity);
 
@@ -28,7 +28,7 @@ namespace AppCore
             cita.id_empleado = crud.ObtenerEmpleadoDisponible(entity);
 
 
-            crud.Create(cita);
+            crud.CreateCitaServicio(cita);
 
             return 1;
         }

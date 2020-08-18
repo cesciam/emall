@@ -1,0 +1,55 @@
+<app-header>    </app-header>
+
+<div class="container">
+    <h1>Agendar cita</h1>
+    <table *ngIf="servicioSeleccionado" class="table table-striped table-sm text-center">
+        <thead>
+          <tr>
+            <th class="text-center">Item</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Descripci&oacute;n</th>
+            <th class="text-center">Duraci&oacute;n</th>
+            <th class="text-center">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img [src]="servicioSeleccionado.id_foto" style="width: 80px; height: 80px;" /></td>
+            <td>{{ servicioSeleccionado.nombre }}</td>
+            <td>{{ servicioSeleccionado.descripcion }}</td>
+            <td>{{ servicioSeleccionado.duracion }} minutos</td>
+            <td> ₡{{ servicioSeleccionado.precio | number:0}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form action="" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col">
+                <label for="date">Seleccione la fecha de la cita: </label>
+                <div class="form-group">
+                    <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                            name="dp" [(ngModel)]="datePicker" ngbDatepicker [minDate]="date" min-date="date" #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+                    </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Seleccione la hora: (Utilizar formato 24h)</label>
+                <ngb-timepicker name="time" [(ngModel)]="time" [spinners]="false" class="m-5"></ngb-timepicker>
+            </div>
+        </div>
+
+        <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#Modal">Agendar Cita</button>
+      </form>
+      
+
+</div>
+
+<app-footer></app-footer>

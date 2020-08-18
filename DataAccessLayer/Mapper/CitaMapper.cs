@@ -10,7 +10,6 @@ namespace DataAccessLayer.Mapper
     public class CitaMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         private const string DB_COL_ID = "ID";
-        private const string DB_COL_ID_ITEM = "ID_ITEM";
         private const string DB_COL_ID_CLIENTE = "ID_CLIENTE";
         private const string DB_COL_ID_EMPLEADO = "ID_EMPLEADO";
         private const string DB_COL_FECHA = "FECHA";
@@ -25,6 +24,9 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_COMERCIO = "COMERCIO";
         private const string DB_COL_EMPLEADO = "EMPLEADO";
         private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
+
+        // ID para traer empleado disponible x servicio
+        private const string DB_COL_ID_ITEM = "ID_ITEM";
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
@@ -106,6 +108,22 @@ namespace DataAccessLayer.Mapper
             return operacion;
         }
 
+        public SqlOperation GetCreateServiceStatement(BaseEntity entity)
+        {
+            var operacion = new SqlOperation { ProcedureName = "CREAR_CITA_SERVICIO" };
+            var c = (Cita)entity;
+
+            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
+            operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+
+            return operacion;
+        }
+
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operacion = new SqlOperation { ProcedureName = "ELIMINAR_CITA" };
@@ -185,6 +203,7 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
             return operacion;
         }
 
