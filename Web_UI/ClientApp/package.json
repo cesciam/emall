@@ -26,6 +26,7 @@
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@popperjs/core": "^2.4.4",
     "@types/googlemaps": "^3.39.13",
+    "angular2-qrscanner": "^1.0.7",
     "aspnet-prerendering": "^3.0.1",
     "chart.js": "^2.9.3",
     "cloudinary-angular": "^1.0.1",

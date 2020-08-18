@@ -101,6 +101,8 @@ import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
+import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
+import { NgQrScannerModule } from 'angular2-qrscanner';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -196,7 +198,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarDireccionComponent,
     ListarDireccionComponent,
     EditarDireccionComponent, 
-    FiltroDireccionPipe, SafePipe,
+    FiltroDireccionPipe, SafePipe, LectorQrComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -208,6 +210,7 @@ const maskConfig: Partial<IConfig> = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgQrScannerModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -270,6 +273,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
+      { path: 'lector-qr', component: LectorQrComponent },
     ])
   ],
   exports: [
