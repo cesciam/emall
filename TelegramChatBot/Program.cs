@@ -22,7 +22,7 @@ namespace TelegramChatBot
         private static ComercioManagement comercios = new ComercioManagement();
         private static SucursalManagement sucursales = new SucursalManagement();
         private static ItemManagement items = new ItemManagement();
-       // private static  ComercioController comercioController = new ComercioController();
+      
         static void Main(string[] args)
         {
             //Método que se ejecuta cuando se recibe un mensaje
@@ -107,22 +107,7 @@ namespace TelegramChatBot
 
                     List<Comercio> listaComercios = new List<Comercio>();
                     listaComercios = comercios.ObtenerTodoComercio();
-                    //var BotComercios = new InlineKeyboardButton[];
-
-                    /* foreach (Comercio lista in listaComercios)
-                     {
-
-                        var BotComercios = new InlineKeyboardMarkup(new[]
-                   {
-                      new []
-                      {
-                         InlineKeyboardButton.WithCallbackData(text:
-                             lista.Nombre, callbackData: "Id:"+ lista.Id),//lo que se manda al case
-
-                      }
-                      });
-                        
-                     }*/
+              
                     var Botcomercios = new InlineKeyboardButton[listaComercios.Count()][];
                     int counter = 0;
                     foreach (var lista in listaComercios)
@@ -147,13 +132,7 @@ namespace TelegramChatBot
                     break;
 
                 case "sucursales":
-                 /*   string dato = "id:number"; //falta
-                    char[] sep = { ':' };
-                    Int32 count = 2;
-                    String[] strlist = dato.Split(sep,
-                    count, StringSplitOptions.None);
-                    var id = strlist[2];
-*/
+         
                     var sucursal = new Sucursal { IdComercio = Int32.Parse(callbackQuery.Data.Split(":")[1]) };
 
                     List<Sucursal> listaSucursales = new List<Sucursal>();
