@@ -1,0 +1,65 @@
+
+.progressbar {
+  list-style-type: none;
+}
+
+.progressbar li {
+  float: left;
+  margin: 0 10px;
+  text-align: center;
+}
+
+.progressbar li.actual{
+  font-weight: bold;
+}
+
+.progressbar li.actual:before{
+  background-color: #000;
+}
+
+.progressbar li:before {
+  content: '';
+  width: 250px;
+  height: 5px;
+  display: block;
+  background-color: #6F6F6F;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.progressbar li.completed:before {
+  background-color: #7FAE41;
+  content: '';
+  width: 250px;
+  height: 5px;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.progressbar li.completed:after {
+  content: url(../../../assets/img/ok.png);
+  margin-left: 5px;
+}
+
+.progressbar li.completed {
+  color: #7FAE41;
+}
+
+.row {
+  margin-bottom: 30px;
+}
+
+.site-btn {
+  color: #fff;
+}
+
+.site-btn:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+#map {
+  height: 500px;
+  width: 100%;
+}
