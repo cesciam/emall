@@ -1,0 +1,111 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <br>
+      <ul class="progressbar">
+        <li [ngClass]=" {'completed' : seccion != 'citas', 
+                         'actual' : seccion === 'citas'}">
+          <a (click)="changeSection('citas')">Elije tu cita</a>
+        </li>
+        <li [ngClass]=" {'completed' : seccion == 'ruta', 
+                         'actual' : seccion === 'ubicacion'}">
+          <a (click)="changeSection('ubicacion')">Tu ubicacion</a>
+        </li>
+        <li [ngClass]=" {'completed' : seccion == 'ruta'}">
+          <a (click)="changeSection('ruta')">Tu ruta</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="citas" *ngIf="seccion == 'citas'">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h2>Elije tu cita</h2>
+        <br><br>
+
+        <div class="shoping__cart__table">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2" class="text-left">Producto</th>
+                <th>Comercio</th>
+                <th>Empleado</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cita of citas">
+                <td><img src="assets/img/logo/Logo_VerdeFondoTransparente.png" width="50" alt=""></td>
+                <td>
+                  <h5>Vegetable’s Package</h5>
+                </td>
+                <td>{{cita.nombre_comercio}}, {{cita.nombre_sucursal}}</td>
+                <td>{{cita.nombre_empleado}}</td>
+                <td class="shoping__cart__quantity">
+                  <div class="quantity">
+                    <div class="pro-qty">
+                      <button (click)="seleccionarCita(cita.id)" class="site-btn">
+                        Seleccionar
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="citas?.length == 0">
+                <td colspan="5">No hay citas activas</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ubicacion" *ngIf="seccion == 'ubicacion'">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h2>Elije tu ubicación</h2>
+        <br><br>
+
+        <div class="row p-3">
+          <div class="col-lg-3 col-md-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tu ubicación actual</h5>
+                <a (click)="seleccionarUbicacion(0)" class="site-btn">Seleccionar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3" *ngFor="let direccion of direcciones">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{direccion.Alias}}</h5>
+                <p class="card-text">
+                  {{ (direccion.Detalles.length > 60) ? (direccion.Detalles | slice:0:60) + '...' : (direccion.Detalles) }}
+                </p>
+                <a (click)="seleccionarUbicacion(direccion.Id)" class="site-btn">Seleccionar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ruta" [hidden]="seccion != 'ruta'">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h2>Tu ruta a seguir</h2>
+        <br><br>
+
+        <div #mapContainer id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

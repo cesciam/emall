@@ -36,8 +36,7 @@ namespace DataAccessLayer.Mapper
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
                 fecha = GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
-                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
-                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL)
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN)
             };
 
             return cita;
@@ -47,6 +46,7 @@ namespace DataAccessLayer.Mapper
         {
             var citaView = new CitaViewModel
             {
+                id = GetIntValue(row, DB_COL_ID), 
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
                 fecha = GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
