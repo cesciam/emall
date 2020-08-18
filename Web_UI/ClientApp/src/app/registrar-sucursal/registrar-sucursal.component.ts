@@ -30,8 +30,15 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
   constructor(private bitacora: BitacoraService,sucursalService: SucursalService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
+
+  constructor(
+    sucursalService: SucursalService, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router
+  ) {
     this.sucursalService = sucursalService;
     this.sucursal = new Sucursal();
+  }
 
     this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
 
@@ -51,7 +58,6 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
     let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.sucursal.idPersona = usuarioLogeado.usuario.Id;
-
   }
 
   mapa() {
@@ -79,7 +85,6 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
       me.sucursal.latitud = String(event.latLng.lat());
       me.sucursal.longitud = String(event.latLng.lng());
-
     });
 
     function placeMarker(location) {

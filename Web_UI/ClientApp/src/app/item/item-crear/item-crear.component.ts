@@ -211,7 +211,7 @@ export class ItemCrearComponent implements OnInit {
         this.service.crearItem(this.item)
           .subscribe(
             (reponse) => {
-              this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
+              
             },
             (error) => {
               this.error = "Errores en el registro";

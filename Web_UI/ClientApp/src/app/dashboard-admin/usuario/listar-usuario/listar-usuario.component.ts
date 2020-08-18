@@ -9,6 +9,7 @@ import { BitacoraService } from '../../../services/bitacora.service';
   templateUrl: './listar-usuario.component.html',
   styleUrls: ['./listar-usuario.component.css']
 })
+
 export class ListarUsuarioComponent implements OnInit {
   private usuarios: Usuario[];
   private submitted: boolean = false;

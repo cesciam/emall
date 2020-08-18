@@ -96,6 +96,13 @@ import { VentasComponent } from '../app/reportes/ventas/ventas.component';
 import { TransaccionesComponent } from './reportes/transacciones/transacciones.component';
 import { CitasComponent } from './reportes/citas/citas.component';
 import { MetodosPagosComponent } from './reportes/metodos-pagos/metodos-pagos.component';
+import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
+import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
+import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
+import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agregar-direccion.component';
+import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
+import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
+import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -178,7 +185,6 @@ const maskConfig: Partial<IConfig> = {
     AgregarHorarioComponent,
     FiltroHorarioPipe,
     AgregarHorarioSucursalComponent,
-    FiltroUsuarioPipe,
     CalificacionComponent, 
     FiltroUsuarioPipe,
     ListarBitacoraComponent, 
@@ -188,6 +194,16 @@ const maskConfig: Partial<IConfig> = {
     TransaccionesComponent,
     CitasComponent,
     MetodosPagosComponent
+    CarritoComprasComponent,
+    ListarEnvioSucursalComponent,
+    EnvioDetalleComponent,
+    ItemEmpleadoComponent, 
+    EnvioDetalleComponent, 
+    CalificacionComponent,
+    AgregarDireccionComponent,
+    ListarDireccionComponent,
+    EditarDireccionComponent, 
+    FiltroDireccionPipe,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -255,6 +271,12 @@ const maskConfig: Partial<IConfig> = {
       { path: 'agregar-horario-sucursal/:id_comercio', component: AgregarHorarioSucursalComponent },
       { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
       { path: 'carrito-compras', component: CarritoComprasComponent },
+      { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
+      { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
+      { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
+      { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
+      { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
     ])
   ],
   exports: [
@@ -279,4 +301,5 @@ const maskConfig: Partial<IConfig> = {
     AppComponent
   ]
 })
+
 export class AppModule { }

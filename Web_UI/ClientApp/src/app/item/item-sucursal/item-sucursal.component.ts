@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../../services/item.service';
 import { Item } from '../../models/item';
 import { Router } from "@angular/router";
+import { SucursalService } from '../../services/sucursal.service';
+import { Sucursal } from '../../models/Sucursal';
 
 @Component({
   selector: 'app-item-sucursal',
@@ -11,29 +13,30 @@ import { Router } from "@angular/router";
 })
 export class ItemSucursalComponent implements OnInit {
 
-
+  sucursal: Sucursal;
   sucursal_id: number;
   items_sucursal: Item[];
   private filtroItem = '';
   error: any;
 
-  constructor(private route: ActivatedRoute, private itemservice: ItemService, private router: Router) {
+  constructor(private route: ActivatedRoute, private itemservice: ItemService, private router: Router, private serviceSucursal: SucursalService) {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
     
   }
 
   ngOnInit() {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
-    
     this.llenarItems();
     
   }
 
-  llenarItems() {
+  async llenarItems() {
     this.itemservice.getItemSucursal(this.sucursal_id).subscribe(
       (data: Item[]) => this.items_sucursal = data,
       (err: any) => console.log(err)
     );
+
+    this.sucursal = await this.serviceSucursal.obtenerSucursalItem(this.sucursal_id);
   }
 
   
