@@ -27,8 +27,7 @@ namespace Web_API.Controllers
         [HttpPost]
         public IActionResult CrearEnvio(Envio envio)
         {
-            int codigoRandom = new Random().Next(100000000);
-            envio.Codigo = codigoRandom.ToString();
+            envio.Codigo = TokenGenerator.Generar(8);
 
             try
             {

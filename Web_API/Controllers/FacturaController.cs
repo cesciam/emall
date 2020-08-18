@@ -96,9 +96,10 @@ namespace Web_API.Controllers
                 this.emailService.Send(new EmailModel
                 {
                     To = cliente.Correo,
-                    Subject = "FACTURA",
-                    Message = "<p>Factura de " + comercio.Nombre + "</p>"
-                }, new Attachment(pdfStream, "Factura.pdf"));
+                    Subject = "Factura",
+                    Message = "<p>Factura de " + comercio.Nombre + "</p>",
+                    Attachment = new Attachment(pdfStream, "Factura.pdf")
+                });
 
                 return Ok();
             } catch (Exception e)

@@ -37,6 +37,11 @@ namespace Utils {
                 mailMessage.Subject = emailModel.Subject;
                 mailMessage.IsBodyHtml = true;
 
+                if (emailModel.Attachment != null)
+                {
+                    mailMessage.Attachments.Add(emailModel.Attachment);
+                }
+
                 SmtpClient client = new SmtpClient();
                 client.Host = this.host;
                 client.Port = this.port;
@@ -46,34 +51,6 @@ namespace Utils {
 
                 return true;
             } catch (Exception ex) {
-                return false;
-            }
-        }
-
-        public bool Send(EmailModel emailModel, Attachment attachment)
-        {
-            try
-            {
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(this.from);
-                mailMessage.BodyEncoding = Encoding.UTF8;
-                mailMessage.To.Add(emailModel.To);
-                mailMessage.Body = emailModel.Message;
-                mailMessage.Subject = emailModel.Subject;
-                mailMessage.IsBodyHtml = true;
-                mailMessage.Attachments.Add(attachment);
-
-                SmtpClient client = new SmtpClient();
-                client.Host = this.host;
-                client.Port = this.port;
-                client.Credentials = new System.Net.NetworkCredential(this.user, this.password);
-                client.EnableSsl = true;
-                client.SendAsync(mailMessage, "Email Async");
-
-                return true;
-            }
-            catch (Exception ex)
-            {
                 return false;
             }
         }
