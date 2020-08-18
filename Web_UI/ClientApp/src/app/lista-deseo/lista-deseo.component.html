@@ -3,7 +3,7 @@
 <div class="container">
 
   <div class="col-sm-auto d-flex justify-content-end">
-    <a [routerLink]="['/']">Volver atras</a>
+    <a [routerLink]="['/perfil-usuario']">Volver atras</a>
 
   </div>
 
@@ -35,21 +35,11 @@
                     <td class="shoping__cart__price">
                       ₡ {{ item.precio | number}}
                     </td>
-                    <!--<td class="shoping__cart__quantity">
-                      <div class="quantity">
-                        <div class="pro-qty">
-                          <input type="text" value="1">
-                        </div>
-                      </div>
-                    </td>-->
                     <td class="shoping__cart__total">
                       {{ item.tipo }}
                     </td>
-                    <td><button class="primary-btn" style="border: none" (click)="agregarItemCarrito()" data-toggle="modal" data-target="#Modal" [disabled]="agregarProductoCarrito"><i class="fas fa-shopping-cart"></i></button></td>
+                    <td><button class="primary-btn" style="border: none" [routerLink]="['/item-perfil', item.id]"><i class="fas fa-search"></i></button></td>
                     <td><button class="btn btn-danger" (click)="delete(item.id)"><i class="fas fa-trash-alt"></i></button></td>
-                    <!--<td class="shoping__cart__item__close">
-                      <span class="icon_close"></span>
-                    </td>-->
                   </tr>
                   
                 </tbody>
