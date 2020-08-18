@@ -22,7 +22,7 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
   private error: any;
 
   private usuarioLogueado: string;
-  public accion: string = "Creación sucursal";
+  public accion: string = "Creación Comercio";
 
   public id_usuario: number = Number.parseInt(this.usuarioLogueado);
  
