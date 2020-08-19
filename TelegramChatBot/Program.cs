@@ -210,7 +210,7 @@ namespace TelegramChatBot
                         //VALIDACION QUE SOLO SEAN SERVICIOS
                             var row = new[]
                             {
-                     InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "item:"+list.id)
+                     InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "itemOpciones:"+list.id)
 
                  };
                             BotItem[count1] = row;
@@ -225,9 +225,32 @@ namespace TelegramChatBot
                        replyMarkup: new InlineKeyboardMarkup(BotItem));
                     break;
 
-                case "citasServicio" :
+                case "itemOpciones":
+
+                    var opcionesItem = new InlineKeyboardMarkup(new[]
+                  {
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData(
+                            text:"Nueva Cita",
+                            callbackData: "citas: "+Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                       InlineKeyboardButton.WithCallbackData(
+                            text:"Lista de citas",
+                            callbackData: "servicios: "+ Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                    }
+                });
+                    await Bot.SendTextMessageAsync(
+                     chatId: callbackQuery.Message.Chat.Id,
+                     text: "Citas: ",
+                     replyMarkup: opcionesItem);
+
 
                     break;
+
+                case "listaCitas":
+
+                    break; 
+
                     
             }
         }
