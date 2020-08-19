@@ -1,4 +1,5 @@
 export class CitaList {
+    id: number;
     fecha: Date;
     hora_inicio: Date;
     hora_fin: Date;
