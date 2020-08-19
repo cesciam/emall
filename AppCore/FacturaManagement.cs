@@ -20,5 +20,9 @@ namespace AppCore
             return facturaCrudFactory.Create(factura, envio);
         }
 
+        public List<LineaFactura> RetrieveLineasxFactura(LineaFactura lineaFactura)
+        {
+            return facturaCrudFactory.RetrieveLineasxFactura<LineaFactura>(lineaFactura);
+        }
     }
 }

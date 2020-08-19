@@ -84,5 +84,23 @@ namespace DataAccessLayer.CRUD
         {
             throw new NotImplementedException();
         }
+
+        public List<T> RetrieveLineasxFactura<T>(BaseEntity entity)
+        {
+            var listLineas = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(lineaFacturaMapper.GetRetriveAllStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = lineaFacturaMapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    listLineas.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return listLineas;
+        }
     }
 }

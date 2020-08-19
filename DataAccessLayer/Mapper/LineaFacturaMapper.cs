@@ -24,7 +24,7 @@ namespace DataAccessLayer.Mapper
                 IdItem = GetIntValue(row, DB_COL_ID_ITEM),
                 NombreItem = GetStringValue(row, DB_COL_NOMBRE_ITEM),
                 CantidadItem = GetIntValue(row, DB_COL_CANTIDAD_ITEM),
-                PrecioItem = GetIntValue(row, DB_COL_PRECIO_ITEM),
+                PrecioItem = GetDecimalValue(row, DB_COL_PRECIO_ITEM),
                 Impuesto = GetDoubleValue(row, DB_COL_IMPUESTO),
                 IdFactura = GetIntValue(row, DB_COL_ID_FACTURA)
             };
@@ -69,6 +69,15 @@ namespace DataAccessLayer.Mapper
         {
             throw new NotImplementedException();
         }
+
+        public SqlOperation GetRetriveAllStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_LINEAXFACTURA" };
+            var lineaFactura = (LineaFactura)entity;
+            operation.AddIntParam(DB_COL_ID_FACTURA, lineaFactura.IdFactura);
+            return operation;
+        }
+
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {

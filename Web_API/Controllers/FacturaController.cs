@@ -11,6 +11,7 @@ using Utils.Email;
 using SelectPdf;
 using System.IO;
 using System.Net.Mail;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Web_API.Controllers
 {
@@ -80,10 +81,12 @@ namespace Web_API.Controllers
                 };
 
                 var facturaDB = facturaManagement.Create(factura, envio);
+                LineaFactura lineaFactura = new LineaFactura { IdFactura = facturaDB.Id };
+                List<LineaFactura> lineasFactura = facturaManagement.RetrieveLineasxFactura(lineaFactura);
 
                 HtmlToPdf htmlToPdf = new HtmlToPdf();
 
-                BaseEntity[] pagoContainer = { factura, transaccion };
+                Object[] pagoContainer = { factura, transaccion, lineasFactura };
 
                 PdfDocument pdfDocument = htmlToPdf.ConvertHtmlString(GetHtmlString(pagoContainer));
 
@@ -108,7 +111,7 @@ namespace Web_API.Controllers
             }
         }
 
-        public string GetHtmlString(BaseEntity[] pagoContainer)
+        public string GetHtmlString(Object[] pagoContainer)
         {
             Factura factura = (Factura)pagoContainer[0];
             Transaccion transaccion = (Transaccion)pagoContainer[1];
@@ -146,6 +149,7 @@ namespace Web_API.Controllers
                             "<p>Nombre de empleado: " + factura.NombreEmpleado + " " + factura.ApellidoEmpleado + "</p>" +
                             "<p>Cédula de cliente: " + factura.CedulaUsuario + "</p>" +
                             "<p>Nombre de cliente: " + factura.NombreUsuario + " " + factura.ApellidoUsuario + "</p>" +
+                            "<p>Items:</p>" + GetStringLineasFactura((List<LineaFactura>)pagoContainer[2]) +
                             "<p>Nombre de sucursal: " + factura.NombreSucursal + "</p>" +
                             "<p>Total: " + transaccion.Monto + "</p>" +
                         "</div>"+
@@ -154,6 +158,19 @@ namespace Web_API.Controllers
             "</html>";
 
             return html;
+        }
+
+        public string GetStringLineasFactura(List<LineaFactura> lineasFactura)
+        {
+            string lineas = "";
+
+            foreach(var linea in lineasFactura) {
+                lineas = lineas + @"<p>Item: " + linea.NombreItem + "</p>\n" +
+                    "<p>Cantidad: " + linea.CantidadItem + "</p>\n" +
+                    "<p>Precio: " + linea.PrecioItem + "</p>\n";
+            }
+
+            return lineas;
         }
     }
 }
