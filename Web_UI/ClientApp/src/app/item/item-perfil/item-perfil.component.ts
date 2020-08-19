@@ -8,6 +8,8 @@ import { Sucursal } from '../../models/Sucursal';
 import { ActivatedRoute } from '@angular/router';
 import { Comercio } from '../../models/Comercio';
 import { ComercioService } from '../../services/comercio.service';
+import { ListaDeseo } from '../../models/lista-deseo';
+import { ListaDeseoService } from '../../services/lista-deseo.service';
 
 @Component({
   selector: 'app-item-perfil',
@@ -24,9 +26,11 @@ export class ItemPerfilComponent implements OnInit {
   preciofinal = 0;
 
   agregarProductoCarrito = false;
+  id_usuario: number;
+  registrado = false;
 
 
-  constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router, private serviceSucursal: SucursalService, private serviceComercio: ComercioService,) {
+  constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router, private serviceSucursal: SucursalService, private serviceComercio: ComercioService, private serviceListaDeseo: ListaDeseoService) {
 
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
     this.item_seleccionado = new Item();
@@ -90,5 +94,33 @@ export class ItemPerfilComponent implements OnInit {
       
     }
   }
+
+  agregarListaDeseo() {
+
+    if (localStorage.getItem("usuario-logueado") === null) {
+      this.registrado = false;
+    } else {
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+      this.registrado = true;
+
+      let add_item: ListaDeseo;
+      add_item = new ListaDeseo();
+
+      add_item.id_usuario = this.id_usuario;
+      add_item.id_item = this.item_seleccionado.id;
+
+      this.serviceListaDeseo.crearLista(add_item)
+        .subscribe(
+          (reponse) => {
+
+          },
+          (error) => {
+            this.error = "Errores en el registro";
+            window.scroll(0, 0);
+          });
+    }
+
+  }
+
 
 }

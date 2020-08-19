@@ -36,5 +36,29 @@ namespace Web_API.Controllers
         {
             return mng.RetrieveUsuarioPorEstado();
         }
+
+        [HttpGet]
+        public List<Reporte> ventas()
+        {
+            return mng.RetrieveVentas(); 
+        }
+
+        [HttpGet]
+        public List<Reporte> transacciones()
+        {
+            return mng.RetrieveTransacciones();
+        }
+
+        [HttpGet]
+        public List<Reporte> citas()
+        {
+            return mng.RetrieveCitas();
+        }
+
+        [HttpGet]
+        public List<Reporte> metodosPago()
+        {
+            return mng.RetrieveMetodosPago();
+        }
     }
 }

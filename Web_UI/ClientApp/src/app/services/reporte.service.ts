@@ -34,4 +34,24 @@ export class ReporteService {
     this.serviceEndPoint = '/reporte/usuarioPorEstado';
     return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
+
+  getVentas(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/ventas';//cambiar
+    return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  getTransacciones(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/transacciones';//cambiar
+    return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  getCitas(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/citas';//cambiar
+    return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  getMetodosPago(): Observable<Reporte[]> {
+    this.serviceEndPoint = '/reporte/metodosPago';//cambiar
+    return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
+  }
 }

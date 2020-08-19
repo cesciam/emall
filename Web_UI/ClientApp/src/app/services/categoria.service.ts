@@ -33,7 +33,7 @@ export class CategoriaService {
 
   crearCategoria(categoria: Categoria) {
 
-    return this.http.post(this.BaseURL + "categoria/crearcategoria", categoria)
+    return this.http.post(this.BaseURL + "/categoria/crearcategoria", categoria)
       
   }
    

@@ -7,6 +7,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../config';
 import { Archivo } from '../models/Archivo';
 import { Router } from '@angular/router';
+import { BitacoraService } from '../services/bitacora.service';
 
 @Component({
   selector: 'app-registrar-comercio',
@@ -26,7 +27,12 @@ export class RegistrarComercioComponent implements OnInit {
   @Input() txtCategoria: string;
   private error: any;
 
-  constructor(comercioService: ComercioService, private cloudinary: Cloudinary, private router: Router) {
+  private usuarioLogueado: string;
+  public accion: string = "Creación Comercio";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+  constructor(private bitacora: BitacoraService,comercioService: ComercioService, private cloudinary: Cloudinary, private router: Router) {
     this.comercioService = comercioService;
     this.comercio = new Comercio();
     this.comercio.archivos = new Array();
@@ -36,6 +42,9 @@ export class RegistrarComercioComponent implements OnInit {
     this.imagenHacienda = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
     this.imagenSalud = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
     this.error = null;
+
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
   }
 
   llenarCategorias() {
@@ -93,6 +102,11 @@ export class RegistrarComercioComponent implements OnInit {
       .subscribe(
         (response) => {
           this.router.navigate(['/']);
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.error = error.error;
