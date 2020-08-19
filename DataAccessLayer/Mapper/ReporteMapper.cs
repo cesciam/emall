@@ -90,5 +90,33 @@ namespace DataAccessLayer.Mapper
 
             return operacion;
         }
+
+        public SqlOperation GetRetrieveVentasStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_VENTAS " };
+
+            return operacion;
+        }
+
+        public SqlOperation GetRetrieveTransaccionesStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_TRANSACCIONES" };
+
+            return operacion;
+        }
+
+        public SqlOperation GetRetrieveCitasStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_CITAS" };
+
+            return operacion;
+        }
+
+        public SqlOperation GetRetrieveMetodosPagoStatement()
+        {
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_REPORTE_METODOS_PAGO" };
+
+            return operacion;
+        }
     }
 }

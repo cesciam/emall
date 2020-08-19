@@ -1,17 +1,28 @@
 ﻿ using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using AppCore;
+using Entities;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Twilio.Rest.Preview.TrustedComms;
+using Web_API.Controllers;
 
 namespace TelegramChatBot
 {
     class Program
     {
         private static readonly TelegramBotClient Bot = new TelegramBotClient("1384676494:AAHLTrjqgxRNOV1gfKXcOxKZjbn_4oR6fWI");
-
+        private static ComercioManagement comercios = new ComercioManagement();
+        private static SucursalManagement sucursales = new SucursalManagement();
+        private static ItemManagement items = new ItemManagement();
+      
         static void Main(string[] args)
         {
             //Método que se ejecuta cuando se recibe un mensaje
@@ -39,7 +50,7 @@ namespace TelegramChatBot
             switch (message.Text.Split(' ').First())
             {
                 //Enviar un inline keyboard con callback
-                case "/parte1":
+                case "/comercios":
 
                     //Simula que el bot está escribiendo
                     await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
@@ -51,30 +62,10 @@ namespace TelegramChatBot
                     new []
                     {
                         InlineKeyboardButton.WithCallbackData(
-                            text:"Imagen",
-                            callbackData: "imagen"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Ubicación",
-                            callbackData: "ubicacion"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Ubicación + info",
-                            callbackData: "venue"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Contacto",
-                            callbackData: "contacto"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Animación",
-                            callbackData: "animation"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text: "Documento",
-                            callbackData: "document"),
-                    }
+                            text:"Comercios",
+                            callbackData: "comercios"),//lo que se manda al case
+                       
+                    } 
                 });
 
                     await Bot.SendTextMessageAsync(
@@ -82,52 +73,14 @@ namespace TelegramChatBot
                         "Elija una opción",
                         replyMarkup: keyboardEjemplo1);
                     break;
-
-                case "/parte2":
-
-                    var keyboardEjemplo2 = new InlineKeyboardMarkup(new[]
-                    {
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Keyboard",
-                            callbackData: "keyboard"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Reply",
-                            callbackData: "reply"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Reenviar",
-                            callbackData: "reenviar"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Force reply",
-                            callbackData: "forceReply"),
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Texto con formato",
-                            callbackData: "formato"),
-                        InlineKeyboardButton.WithCallbackData(
-                            text:"Video",
-                            callbackData: "video"),
-                    }
-                });
-
-                    await Bot.SendTextMessageAsync(
-                        message.Chat.Id,
-                        "Elija una opción",
-                        replyMarkup: keyboardEjemplo2);
-                    break;
+                
 
                 //Mensaje por default
                 default:
                     const string usage = @"
                 Comandos:
-                /parte1 - ejemplos parte 1
-                /parte2 - ejemplos parte 2";
+                /comercios - Se muestra la lista de comercios
+                /start - muestra el menú";
 
                     await Bot.SendTextMessageAsync(
                         message.Chat.Id,
@@ -138,119 +91,144 @@ namespace TelegramChatBot
             }
         }
 
+        //SE MUESTRA LA INFORMACION QUE HA PEDIDO EL USUARIO
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)
         {
+            //var message = messageEventArgs.Message;
             var callbackQuery = callbackQueryEventArgs.CallbackQuery;
 
-            switch (callbackQuery.Data)
+        
+
+
+            switch (callbackQuery.Data.Split(":")[0]) 
             {
-                case "keyboard":
-                    ReplyKeyboardMarkup tipoContacto = new[]
+
+                case "comercios": //MUESTRA LA LISTA DE LOS COMERCIOS 
+
+                    List<Comercio> listaComercios = new List<Comercio>();
+                    listaComercios = comercios.ObtenerTodoComercio();
+              
+                    var Botcomercios = new InlineKeyboardButton[listaComercios.Count()][];
+                    int counter = 0;
+                    foreach (var lista in listaComercios)
                     {
-                        new[] { "Opción 1", "Opción 2" },
-                        new[] { "Opción 3", "Opción 4" },
-                    };
+                        var row = new[]
+                        {
+                     InlineKeyboardButton.WithCallbackData(text: lista.Nombre,callbackData: "sucursales:"+lista.Id)
+
+                       
+                 };
+                        Botcomercios[counter] = row;
+                        counter++;
+                        
+                     }
 
                     await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "Keyboard personalizado",
-                        replyMarkup: tipoContacto);
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Lista de comercios:",
+                       replyMarkup: new InlineKeyboardMarkup(Botcomercios));
+
+
                     break;
 
-                case "ubicacion":
+                case "sucursales":
+         
+                    var sucursal = new Sucursal { IdComercio = Int32.Parse(callbackQuery.Data.Split(":")[1]) };
+
+                    List<Sucursal> listaSucursales = new List<Sucursal>();
+
+                    listaSucursales = sucursales.ObtenerTodoSucursal(sucursal);
+
+                    var Botsucursales = new InlineKeyboardButton[listaSucursales.Count()][];
+                    int iterable= 0;
+                    foreach (var list in listaSucursales)
+                    {
+                        var row = new[]
+                        {
+                     InlineKeyboardButton.WithCallbackData(text: list.Nombre,callbackData: "opcionesSucursales:"+list.Id)
+
+                 };
+                        Botsucursales[iterable] = row;
+                        iterable++;
+
+                    }
+
+                    await Bot.SendTextMessageAsync(
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Lista de sucursales:",
+                       replyMarkup: new InlineKeyboardMarkup(Botsucursales));
+                    break;
+
+
+                case "opcionesSucursales":
+
+                    var sucursalList = new InlineKeyboardMarkup(new[]
+                    {
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData(
+                            text:"Dirección",
+                            callbackData: "direccion: "+Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                       InlineKeyboardButton.WithCallbackData(
+                            text:"Servicios",
+                            callbackData: "servicios: "+ Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                    }
+                });
+                    await Bot.SendTextMessageAsync(
+                     chatId: callbackQuery.Message.Chat.Id,
+                     text: "Opciones: ",
+                     replyMarkup: sucursalList);
+
+
+                    break;
+
+                case "direccion":
+
+                    var sucursalDireccion = new Sucursal { Id = Int32.Parse(callbackQuery.Data.Split(":")[1]) };
+                   Sucursal direccion = sucursales.ObtenerSucursal(sucursalDireccion);
+
                     await Bot.SendLocationAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        latitude: 9.932551f,
-                        longitude: -84.031086f
-                        );
+                       chatId: callbackQuery.Message.Chat.Id,
+                       latitude: float.Parse(direccion.Latitud),
+                       longitude: float.Parse(direccion.Longitud)
+                       );
+
                     break;
 
-                case "venue":
-                    await Bot.SendVenueAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        latitude: 9.932551f,
-                        longitude: -84.031086f,
-                        title: "Cenfotec",
-                        address: "San José, Montes de Oca"
-                        );
-                    break;
 
-                case "imagen":
-                    await Bot.SendPhotoAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        photo: "https://www.google.co.cr/imgres?imgurl=https%3A%2F%2Fwww.pcactual.com%2Fmedio%2F2017%2F07%2F05%2Ftelegram_960x540_0aa1aeac.jpg&imgrefurl=https%3A%2F%2Fwww.pcactual.com%2Fnoticias%2Factualidad%2Fsoy-fan-telegram_13549&docid=UZhcuJ9275t8zM&tbnid=otB1G_5L3DD0sM%3A&vet=10ahUKEwjR0ouWotDiAhUiqlkKHdi6D8gQMwhLKAEwAQ..i&w=960&h=540&bih=722&biw=1536&q=telegram%20image&ved=0ahUKEwjR0ouWotDiAhUiqlkKHdi6D8gQMwhLKAEwAQ&iact=mrc&uact=8"
-                        );
-                    break;
+                case "servicios":
+                    var Id = Int32.Parse(callbackQuery.Data.Split(":")[1]);
 
-                case "animation":
-                    await Bot.SendAnimationAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        animation: "https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif?w=730&crop=1"
-                        );
-                    break;
+                    List<Item> listItem = new List<Item>();
 
-                case "video":
-                    await Bot.SendVideoAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        video: "https://res.cloudinary.com/dherrerap/video/upload/v1560039252/WhatsApp_Video_2019-06-08_at_6.10.54_PM.mp4"
-                        );
-                    break;
+                    listItem = items.RetrieveAllBySucursal(Id); 
 
-                case "document":
-                    await Bot.SendDocumentAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        document: "https://cenfotec.s3-us-west-2.amazonaws.com/prod/wpattchs/2013/04/web-tec-virtual.pdf"
-                        );
-                    break;
+                    var BotItem = new InlineKeyboardButton[listItem.Count()][];
+                    int count1 = 0;
+                    foreach (var list in listItem)
+                    {
+                        //VALIDACION QUE SOLO SEAN SERVICIOS
+                            var row = new[]
+                            {
+                     InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "item:"+list.id)
 
-                case "formato":
+                 };
+                            BotItem[count1] = row;
+                            count1++;
+                        
+                       
+                    }
+
                     await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "<b>bold</b>, <strong>bold</strong>",
-                        parseMode: ParseMode.Html
-                        );
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "<i>italic</i>, <em>italic</em>",
-                        parseMode: ParseMode.Html
-                        );
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "<a href='http://www.example.com/'>inline URL</a>",
-                        parseMode: ParseMode.Html
-                        );
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Lista de servicios:",
+                       replyMarkup: new InlineKeyboardMarkup(BotItem));
                     break;
 
-                case "reply":
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "ID: " + callbackQuery.Message.MessageId + " - " + callbackQuery.Message.Text,
-                        replyToMessageId: callbackQuery.Message.MessageId);
-                    break;
+                case "citasServicio" :
 
-                case "contacto":
-                    await Bot.SendContactAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        phoneNumber: "2222-2222",
-                        firstName: "Jane",
-                        lastName: "Doe"
-                        );
                     break;
-
-                case "forceReply":
-                    await Bot.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: "Forzar respuesta a este mensaje",
-                        replyMarkup: new ForceReplyMarkup());
-                    break;
-
-                case "reenviar":
-                    await Bot.ForwardMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        fromChatId: callbackQuery.Message.Chat.Id,
-                        messageId: callbackQuery.Message.MessageId
-                        );
-                    break;
+                    
             }
         }
 

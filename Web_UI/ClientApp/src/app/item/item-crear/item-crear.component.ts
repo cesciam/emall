@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { Sucursal } from '../../models/Sucursal';
 import { ActivatedRoute } from '@angular/router';
 import { Impuesto } from '../../models/impuesto.model';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-item-crear',
@@ -34,6 +35,11 @@ export class ItemCrearComponent implements OnInit {
   dura: number;
   precio: number;
 
+  private usuarioLogueado: string;
+  public accion: string = "Creación Item";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
 
 
   uploader: CloudinaryUploader;
@@ -41,12 +47,15 @@ export class ItemCrearComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private service: ItemService, private router: Router, private serviceImpuesto: ImpuestoService, private serviceSucursal: SucursalService) {
+  constructor(private bitacora: BitacoraService,private route: ActivatedRoute, private service: ItemService, private router: Router, private serviceImpuesto: ImpuestoService, private serviceSucursal: SucursalService) {
     this.comercio = parseInt(this.route.snapshot.params['id_comercio']);
     this.sucursalesSeleccionadas = new Array<number>();
     this.inventarios = new Array<number>();
     this.dura = 0;
     this.precio = 0;
+
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
 
 
     this.uploader = new CloudinaryUploader(new CloudinaryOptions({ cloudName: cloudinaryConfig.cloud_name, uploadPreset: cloudinaryConfig.upload_preset }));
@@ -166,7 +175,13 @@ export class ItemCrearComponent implements OnInit {
         this.service.crearItem(this.item)
           .subscribe(
             (reponse) => {
-              
+              this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
+
+              this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+                (error) => {
+                  this.error = error.error;
+                  window.scroll(0, 0);
+                });
             },
             (error) => {
               this.error = "Errores en el registro";

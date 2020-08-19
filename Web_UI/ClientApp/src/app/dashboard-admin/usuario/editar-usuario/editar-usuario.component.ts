@@ -9,6 +9,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../../../config';
 import { Archivo } from '../../../models/Archivo';
 import { Usuario } from '../../../models/usuario.model'
+import { BitacoraService } from '../../../services/bitacora.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -31,12 +32,19 @@ export class EditarUsuarioComponent implements OnInit {
   private isSendingData: boolean = false;
   private usuario: Usuario;
   private tituloAMostrar: string = 'Usuarios';
+  private usuarioLogueado: string;
+  public accion: string = "Edición usuario";
 
-  constructor(
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+
+  constructor(private bitacora: BitacoraService,
     private router: Router,
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
         cloudName: cloudinaryConfig.cloud_name,
@@ -202,6 +210,11 @@ export class EditarUsuarioComponent implements OnInit {
             window.scroll(0, 0);
             this.editComplete = true;
           }
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.isSendingData = false;

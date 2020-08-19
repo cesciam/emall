@@ -17,6 +17,32 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Lista Deseo -->
+<div class="modal fade" id="ModalDeseo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lista de Deseos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="registrado==true; else noRegistrado">
+        Has agregado el item a la lista de deseos.
+      </div>
+      <ng-template #noRegistrado>
+        <div class="modal-body">
+          Inicie sesion para agregar el item a la lista de deseos.
+        </div>
+      </ng-template>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-header></app-header>
 
 <div class="container" *ngIf="item_seleccionado && sucursal && impuesto && comercio">
@@ -46,10 +72,15 @@
             <p>
               {{item_seleccionado.descripcion}}
             </p>
-              <button class="primary-btn" style="border: none" (click)="agregarItemCarrito()" data-toggle="modal" data-target="#Modal" [disabled]="agregarProductoCarrito">Agregar a carrito</button>
+            <button class="primary-btn" style="border: none" (click)="agregarItemCarrito()" data-toggle="modal" data-target="#Modal" [disabled]="agregarProductoCarrito">Agregar a carrito</button>
+            <a class="heart-icon" (click)="agregarListaDeseo()" data-toggle="modal" data-target="#ModalDeseo"><span class="icon_folder-add_alt"></span></a>
             <ul>
-              <li *ngIf="item_seleccionado.tipo === 'Servicio'"><b>Duración</b> <span>{{item_seleccionado.duracion}}
-                  minutos</span></li>
+              <li *ngIf="item_seleccionado.tipo === 'Servicio'">
+                <b>Duración</b> <span>
+                  {{item_seleccionado.duracion}}
+                  minutos
+                </span>
+              </li>
               <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
               <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp> {{impuesto.Porcentaje}}%</samp></span></li>
               <li><b>Detalle sucursal</b> <span>{{sucursal.nombre}} - {{sucursal.detallesDireccion}}</span></li>

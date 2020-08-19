@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PromocionService } from 'src/app/services/promocion.service';
 import { Promocion } from 'src/app/models/promocion';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-listar-promocion',
@@ -11,7 +12,15 @@ export class ListarPromocionComponent implements OnInit {
   promociones: Promocion[];
   filtroPromociones = '';
 
-  constructor(private service: PromocionService) { }
+  private error: object = null;
+  private usuarioLogueado: string;
+  public accion: string = "Eliminación Promoción";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+  constructor(private bitacora: BitacoraService, private service: PromocionService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+  }
 
   ngOnInit() {
     this.service.obtenerPromociones()
@@ -27,6 +36,12 @@ export class ListarPromocionComponent implements OnInit {
       (data: void) => {
         let index: number = this.promociones.findIndex(promocion => promocion.id === id);
         this.promociones.splice(index, 1);
+
+        this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+          (error) => {
+            this.error = error.error;
+            window.scroll(0, 0);
+          });
       },
       (err: any) => console.log(err)
     );

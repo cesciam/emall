@@ -33,5 +33,25 @@ namespace AppCore
         {
             return crud.RetrieveUusuarioPorEstado<Reporte>();
         }
+
+        public List<Reporte> RetrieveVentas()
+        {
+            return crud.RetrieveVentas<Reporte>();
+        }
+
+        public List<Reporte> RetrieveTransacciones()
+        {
+            return crud.RetrieveTransacciones<Reporte>();
+        }
+
+        public List<Reporte> RetrieveCitas()
+        {
+            return crud.RetrieveCitas<Reporte>();
+        }
+
+        public List<Reporte> RetrieveMetodosPago()
+        {
+            return crud.RetrieveMetodosPago<Reporte>();
+        }
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PromocionService } from '../../services/promocion.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-registrar-promocion',
@@ -15,10 +16,17 @@ export class RegistrarPromocionComponent implements OnInit {
   private error: object = null;
   private registerComplete: boolean = false;
 
-  constructor(
+  private usuarioLogueado: string;
+  public accion: string = "Creación Promoción";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+  constructor(private bitacora: BitacoraService,
     private router: Router,
     private service: PromocionService
-  ) { }
+  ) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+   }
 
   ngOnInit() {
     this.promocionForm = new FormGroup({
@@ -46,6 +54,11 @@ export class RegistrarPromocionComponent implements OnInit {
           this.error = error.error;
           window.scroll(0, 0);
         }
-      );
+    );
+    this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
   }
 }
