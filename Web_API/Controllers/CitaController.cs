@@ -12,7 +12,7 @@ namespace Web_API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CitaController : ControllerBase
+    public class CitaController : ControllerBase    
     {
 
         private CitaManagement mng = new CitaManagement();

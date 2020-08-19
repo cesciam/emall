@@ -25,7 +25,15 @@ namespace AppCore
             }
 
             var cita = (Cita)entity;
-            cita.id_empleado = crud.ObtenerEmpleadoDisponible(entity);
+
+            int id_empleado = crud.ObtenerEmpleadoDisponible(entity);
+
+            if(id_empleado < 0)
+            {
+                return 0;
+            }
+
+            cita.id_empleado = id_empleado;
 
 
             crud.CreateCitaServicio(cita);
