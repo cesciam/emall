@@ -22,6 +22,9 @@ namespace TelegramChatBot
         private static ComercioManagement comercios = new ComercioManagement();
         private static SucursalManagement sucursales = new SucursalManagement();
         private static ItemManagement items = new ItemManagement();
+        private static UsuarioManagement user = new UsuarioManagement();
+        private static EmpleadoManagement empleado = new EmpleadoManagement();
+        private static UsuarioManagement usuarios = new UsuarioManagement(); 
       
         static void Main(string[] args)
         {
@@ -45,50 +48,58 @@ namespace TelegramChatBot
         {
             var message = messageEventArgs.Message;
 
-            if (message == null || message.Type != MessageType.Text) return;
+            //ese texto del bot 
+            //dentro del if se mete id del usaurio 
 
-            switch (message.Text.Split(' ').First())
-            {
-                //Enviar un inline keyboard con callback
-                case "/comercios":
 
-                    //Simula que el bot está escribiendo
-                    await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
+                if (message == null || message.Type != MessageType.Text) return;
 
-                    await Task.Delay(50);
 
-                    var keyboardEjemplo1 = new InlineKeyboardMarkup(new[]
-                    {
+                switch (message.Text.Split(' ').First())
+                {
+                    //Enviar un inline keyboard con callback
+                    case "/comercios":
+
+                        //Simula que el bot está escribiendo
+                        await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
+
+                        await Task.Delay(50);
+
+                        var keyboardEjemplo1 = new InlineKeyboardMarkup(new[]
+                        {
                     new []
                     {
                         InlineKeyboardButton.WithCallbackData(
                             text:"Comercios",
                             callbackData: "comercios"),//lo que se manda al case
                        
-                    } 
+                    }
                 });
 
-                    await Bot.SendTextMessageAsync(
-                        message.Chat.Id,
-                        "Elija una opción",
-                        replyMarkup: keyboardEjemplo1);
-                    break;
-                
+                        await Bot.SendTextMessageAsync(
+                            message.Chat.Id,
+                            "Elija una opción",
+                            replyMarkup: keyboardEjemplo1);
+                        break;
 
-                //Mensaje por default
-                default:
-                    const string usage = @"
+
+                    //Mensaje por default
+                    default:
+                        const string usage = @"
                 Comandos:
                 /comercios - Se muestra la lista de comercios
-                /start - muestra el menú";
+                /start - muestra el menú
+                /listaCitas - muestra sus citas correspondientes";
 
-                    await Bot.SendTextMessageAsync(
-                        message.Chat.Id,
-                        text: usage,
-                        replyMarkup: new ReplyKeyboardRemove());
+                        await Bot.SendTextMessageAsync(
+                            message.Chat.Id,
+                            text: usage,
+                            replyMarkup: new ReplyKeyboardRemove());
 
-                    break;
-            }
+                        break;
+                }
+
+            
         }
 
         //SE MUESTRA LA INFORMACION QUE HA PEDIDO EL USUARIO
@@ -96,9 +107,6 @@ namespace TelegramChatBot
         {
             //var message = messageEventArgs.Message;
             var callbackQuery = callbackQueryEventArgs.CallbackQuery;
-
-        
-
 
             switch (callbackQuery.Data.Split(":")[0]) 
             {
@@ -233,10 +241,8 @@ namespace TelegramChatBot
                     {
                         InlineKeyboardButton.WithCallbackData(
                             text:"Nueva Cita",
-                            callbackData: "citas: "+Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
-                       InlineKeyboardButton.WithCallbackData(
-                            text:"Lista de citas",
-                            callbackData: "servicios: "+ Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                            callbackData: "nuevaCita: "+Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case, el id del item 
+                       
                     }
                 });
                     await Bot.SendTextMessageAsync(
@@ -247,12 +253,58 @@ namespace TelegramChatBot
 
                     break;
 
-                case "listaCitas":
+                case "nuevaCita":
+
+
+
+                    var id_item = Int32.Parse(callbackQuery.Data.Split(":")[1]);
+
+                    List<EmpleadosXItem> empleados = new List<EmpleadosXItem>();
+
+                    empleados = items.obtenerEmpleadosItem(id_item);
+
+                    var BotEmpleado = new InlineKeyboardButton[empleados.Count()][];
+                    int count3 = 0;
+                    foreach (var list in empleados)
+                    {
+                        var nuevo_empleado = new Empleado { id = list.id_empleado };
+
+                        Empleado nombre_empleado = empleado.RetrieveById(nuevo_empleado);
+
+                        var usuario = new Usuario { Id = nombre_empleado.id_usuario };
+
+                        Usuario usuarioMostrar = usuarios.RetrieveById(usuario);
+
+                        //VALIDACION QUE SOLO SEAN SERVICIOS
+                        var row = new[]
+                        {
+                     InlineKeyboardButton.WithCallbackData(text: usuarioMostrar.Nombre,callbackData: "itemOpciones:"+ list.id_empleado)//mas el id del cliente
+
+                 };
+                        BotEmpleado[count3] = row;
+                        count3++;
+
+
+                    }
+
+                    await Bot.SendTextMessageAsync(
+                       chatId: callbackQuery.Message.Chat.Id,
+                       text: "Empleados disponibles:",
+                       replyMarkup: new InlineKeyboardMarkup(BotEmpleado));
+
+
+                    //forcereply
+
 
                     break; 
 
                     
             }
+        }
+
+        private static async Task registrarCitas()
+        {
+
         }
 
         private static void BotOnReceiveError(object sender, ReceiveErrorEventArgs receiveErrorEventArgs)
