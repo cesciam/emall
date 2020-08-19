@@ -104,6 +104,7 @@ import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
+import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -206,6 +207,7 @@ const maskConfig: Partial<IConfig> = {
     EditarDireccionComponent, 
     FiltroDireccionPipe, 
     RutaComponent,
+    ListaDeseoComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -281,6 +283,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
       { path: 'direcciones/ruta', component: RutaComponent },
       { path: 'direcciones/ruta/:id', component: RutaComponent },
+      { path: 'lista-deseo', component: ListaDeseoComponent },
     ])
   ],
   exports: [
