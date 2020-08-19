@@ -17,6 +17,8 @@ namespace Entities
         public int IdCliente { get; set; }
         [JsonPropertyName("items")]
         public Item[] Items { get; set; }
+        [JsonPropertyName("codigo")]
+        public string Codigo { get; set; }
 
         public Envio(){}
     }

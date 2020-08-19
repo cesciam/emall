@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Dao;
 using Entities;
+using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,7 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_ESTADO = "ESTADO";
         private const string DB_COL_ID_EMPLEADO = "ID_EMPLEADO";
         private const string DB_COL_ID_CLIENTE = "ID_CLIENTE";
+        private const string DB_COL_CODIGO = "CODIGO";
         private const string DB_COL_ID_ITEM = "ID_ITEM";
         private const string DB_COL_ID_ENVIO = "ID_ENVIO";
 
@@ -48,6 +50,7 @@ namespace DataAccessLayer.Mapper
             var operation = new SqlOperation { ProcedureName = "CREAR_ENVIO" };
             operation.AddIntParam(DB_COL_ESTADO, e.Estado);
             operation.AddIntParam(DB_COL_ID_CLIENTE, e.IdCliente);
+            operation.AddVarcharParam(DB_COL_CODIGO, e.Codigo);
 
             return operation;
         }
@@ -73,14 +76,32 @@ namespace DataAccessLayer.Mapper
             throw new NotImplementedException();
         }
 
+        public SqlOperation GetRetriveAllStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_ITEMXENVIO" };
+            var envio = (Envio)entity;
+
+            operation.AddIntParam(DB_COL_ID, envio.Id);
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO" };
+            var envio = (Envio)entity;
+
+            operation.AddIntParam(DB_COL_ID, envio.Id);
+            return operation;
         }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ENVIO_FINALIZADO" };
+            var envio = (Envio)entity;
+
+            operation.AddIntParam(DB_COL_ID, envio.Id);
+            return operation;
         }
     }
 }
