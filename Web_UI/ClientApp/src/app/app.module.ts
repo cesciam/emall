@@ -99,6 +99,7 @@ import { AgregarDireccionComponent } from './direcciones/agregar-direccion/agreg
 import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-direccion.component';
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
+import { RutaComponent } from './direcciones/ruta/ruta.component';
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
@@ -198,6 +199,8 @@ const maskConfig: Partial<IConfig> = {
     AgregarDireccionComponent,
     ListarDireccionComponent,
     EditarDireccionComponent, 
+    FiltroDireccionPipe, 
+    RutaComponent,
     FiltroDireccionPipe, SafePipe, LectorQrComponent,
   ],
   imports: [
@@ -273,6 +276,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
+      { path: 'direcciones/ruta', component: RutaComponent },
+      { path: 'direcciones/ruta/:id', component: RutaComponent },
       { path: 'lector-qr', component: LectorQrComponent },
     ])
   ],

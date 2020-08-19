@@ -11,12 +11,18 @@ namespace AppCore {
         private ProvinciaCrudFactory crudProvincia;
         private CantonCrudFactory crudCanton;
         private DistritoCrudFactory crudDistrito;
+        private CitaCrudFactory citaCrudFactory;
+        private SucursalCrudFactory sucursalCrudFactory;
+        private EmpleadoCrudFactory empleadoCrudFactory;
 
         public DireccionManagement() {
             this.crudDireccion = new DireccionCrudFactory();
             this.crudProvincia = new ProvinciaCrudFactory();
             this.crudCanton = new CantonCrudFactory();
             this.crudDistrito = new DistritoCrudFactory();
+            this.sucursalCrudFactory = new SucursalCrudFactory();
+            this.citaCrudFactory = new CitaCrudFactory();
+            this.empleadoCrudFactory = new EmpleadoCrudFactory();
         }
 
         public int Registrar(Direccion Direccion) {
@@ -29,6 +35,28 @@ namespace AppCore {
 
         public Direccion RetrieveById(Direccion Direccion) {
             return this.crudDireccion.Retrieve<Direccion>(Direccion);
+        }
+
+        public Direccion RetrieveByCitaId(int citaId) {
+            Cita cita = this.citaCrudFactory.Retrieve<Cita>(
+                new Cita() {
+                id = citaId
+            });
+
+            Empleado empleado =  this.empleadoCrudFactory.Retrieve<Empleado>(new Empleado() { 
+                id = cita.id_empleado
+            });
+
+            Sucursal sucursal = sucursalCrudFactory.Retrieve<Sucursal>(new Sucursal() { 
+                Id = empleado.id_sucursal
+            });
+
+            return new Direccion() {
+                Alias = sucursal.Nombre,
+                Detalles = sucursal.DetallesDireccion,
+                Latitud = sucursal.Latitud,
+                Longitud = sucursal.Longitud
+            };
         }
 
         public List<Direccion> RetrieveByUserId(int usuarioId) {
