@@ -92,6 +92,10 @@ import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
 import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { VentasComponent } from '../app/reportes/ventas/ventas.component';
+import { TransaccionesComponent } from './reportes/transacciones/transacciones.component';
+import { CitasComponent } from './reportes/citas/citas.component';
+import { MetodosPagosComponent } from './reportes/metodos-pagos/metodos-pagos.component';
 import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
 import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
 import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
@@ -100,6 +104,8 @@ import { ListarDireccionComponent } from './direcciones/listar-direccion/listar-
 import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-direccion.component';
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
+import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
+import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
@@ -191,6 +197,11 @@ const maskConfig: Partial<IConfig> = {
     ListarBitacoraComponent, 
     CalificacionComponent,
     CarritoComprasComponent,
+    VentasComponent,
+    TransaccionesComponent,
+    CitasComponent,
+    MetodosPagosComponent,
+    CarritoComprasComponent,
     ListarEnvioSucursalComponent,
     EnvioDetalleComponent,
     ItemEmpleadoComponent, 
@@ -201,6 +212,10 @@ const maskConfig: Partial<IConfig> = {
     EditarDireccionComponent, 
     FiltroDireccionPipe, 
     RutaComponent,
+    ListaDeseoComponent, 
+    RutaComponent,
+    CarritoComprasComponent,
+    RealizarCompraComponent
     SafePipe, 
     LectorQrComponent,
   ],
@@ -279,6 +294,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/editar-direccion/:id', component: EditarDireccionComponent },
       { path: 'direcciones/ruta', component: RutaComponent },
       { path: 'direcciones/ruta/:id', component: RutaComponent },
+      { path: 'lista-deseo', component: ListaDeseoComponent },
+      { path: 'realizar-pago', component: RealizarCompraComponent },
       { path: 'lector-qr', component: LectorQrComponent },
     ])
   ],

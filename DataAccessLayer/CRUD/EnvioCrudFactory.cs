@@ -43,15 +43,17 @@ namespace DataAccessLayer.CRUD
 
         public override T Retrieve<T>(BaseEntity entity)
         {
-            var lstResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveStatement(entity));
-            var dic = new Dictionary<string, object>();
-            if (lstResult.Count > 0)
-            {
-                dic = lstResult[0];
-                var objs = envioMapper.BuildObject(dic);
-                return (T)Convert.ChangeType(objs, typeof(T));
-            }
+            var envioResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveStatement(entity));
+            var dictionaryList = new Dictionary<string, object>();
 
+            if (envioResult.Count > 0)
+            {
+                dictionaryList = envioResult[0];
+                var envio = (Envio)envioMapper.BuildObject(dictionaryList);
+                envio.Items = GenerarItems(envio);
+
+                return (T)Convert.ChangeType(envio, typeof(T));
+            }
             return default(T);
         }
 
@@ -83,8 +85,24 @@ namespace DataAccessLayer.CRUD
 
         public override void Update(BaseEntity entity)
         {
-            var h = (Envio)entity;
-            dao.ExecuteProcedure(envioMapper.GetUpdateStatement(h));
+            dao.ExecuteProcedure(envioMapper.GetUpdateStatement(entity));
+        }
+
+        public Item[] GenerarItems(Envio envio)
+        {
+            var itemList = new List<Item>();
+
+            var itemResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveAllStatement(envio));
+            if (itemResult.Count > 0)
+            {
+                var items = itemMapper.BuildObjects(itemResult);
+                foreach (var e in items)
+                {
+                    itemList.Add((Item)Convert.ChangeType(e, typeof(Item)));
+                }
+            }
+
+            return itemList.ToArray();
         }
     }
 }

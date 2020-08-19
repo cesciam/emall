@@ -24,12 +24,12 @@ export class BitacoraService {
 
   public ObtenerTodoBitacora() :Observable<Bitacora[]>  {
     // let bitacora: Bitacora
-    return this.http.get<Bitacora[]>(this.BaseURL + 'bitacora/obtenertodobitacora')
+    return this.http.get<Bitacora[]>(this.BaseURL + '/bitacora/obtenertodobitacora')
       //.toPromise().then(res => this.bitacoras = res as Bitacora[])
   }
 
   public crearBitacora(bitacora: Bitacora) {
-    return this.http.post(this.BaseURL + "bitacora/crearbitacora", bitacora)
+    return this.http.post(this.BaseURL + "/bitacora/crearbitacora", bitacora)
 
   }
 

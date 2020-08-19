@@ -131,5 +131,15 @@ namespace AppCore
 
             return envioList;
         }
+
+        public Envio ObtenerEnvio(Envio envio)
+        {
+            return this.envioCrudFactory.Retrieve<Envio>(envio);
+        }
+
+        public void Update(Envio envio)
+        {
+            this.envioCrudFactory.Update(envio);
+        }
     }
 }

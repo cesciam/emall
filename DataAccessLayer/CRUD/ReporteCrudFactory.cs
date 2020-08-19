@@ -109,5 +109,70 @@ namespace DataAccessLayer.CRUD
             }
             return lstConfigs;
         }
+
+        public List<T> RetrieveVentas<T>()
+        {
+            var lstConfigs = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveVentasStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
+
+        public List<T> RetrieveTransacciones<T>()
+        {
+            var lstConfigs = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveTransaccionesStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
+
+        public List<T> RetrieveCitas<T>()
+        {
+            var lstConfigs = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveCitasStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
+
+        public List<T> RetrieveMetodosPago<T>()
+        {
+            var lstConfigs = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveMetodosPagoStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    lstConfigs.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lstConfigs;
+        }
+
     }
 }
