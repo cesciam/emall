@@ -105,6 +105,7 @@ import { EditarDireccionComponent } from './direcciones/editar-direccion/editar-
 import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
 import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
+import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
 import { CitaServicioComponent } from './cita-servicio/cita-servicio.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -209,6 +210,10 @@ const maskConfig: Partial<IConfig> = {
     EditarDireccionComponent, 
     FiltroDireccionPipe, 
     RutaComponent,
+    ListaDeseoComponent, 
+    RutaComponent,
+    CarritoComprasComponent,
+    RealizarCompraComponent
     ListaDeseoComponent,
     FiltroDireccionPipe, CitaServicioComponent,
   ],
@@ -288,6 +293,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/ruta', component: RutaComponent },
       { path: 'direcciones/ruta/:id', component: RutaComponent },
       { path: 'lista-deseo', component: ListaDeseoComponent },
+      { path: 'realizar-pago', component: RealizarCompraComponent },
       { path: 'cita-servicio/:id', component: CitaServicioComponent },
     ])
   ],
