@@ -88,6 +88,12 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(envioMapper.GetUpdateStatement(entity));
         }
 
+        public void UpdateTodo(BaseEntity entity)
+        {
+            var h = (Envio)entity;
+            dao.ExecuteProcedure(envioMapper.GetUpdateTodoStatement(h));
+        }
+
         public Item[] GenerarItems(Envio envio)
         {
             var itemList = new List<Item>();

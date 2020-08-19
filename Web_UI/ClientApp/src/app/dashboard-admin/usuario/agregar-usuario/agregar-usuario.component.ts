@@ -37,7 +37,7 @@ export class AgregarUsuarioComponent implements OnInit {
     private router: Router,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
-    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+    //this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
   
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({

@@ -37,7 +37,7 @@ export class DashboardComercioComponent implements OnInit {
   public id_usuario: number = Number.parseInt(this.usuarioLogueado);
 
   constructor(private bitacora: BitacoraService,comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
-    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+    //this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
     this.comercioService = comercioService;
     this.sucursalService = sucursalService;
     this.error = null;

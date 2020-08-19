@@ -32,6 +32,11 @@ namespace AppCore
             envioCrudFactory.Update(envio);
         }
 
+        public void UpdateTodo(Envio envio)
+        {
+            envioCrudFactory.UpdateTodo(envio);
+        }
+
         public Envio RetrieveById(int id)
         {
             var im = new ItemManagement();
@@ -137,9 +142,6 @@ namespace AppCore
             return this.envioCrudFactory.Retrieve<Envio>(envio);
         }
 
-        public void Update(Envio envio)
-        {
-            this.envioCrudFactory.Update(envio);
-        }
+       
     }
 }

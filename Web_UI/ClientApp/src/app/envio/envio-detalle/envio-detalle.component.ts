@@ -106,7 +106,9 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
           this.empleado = data;
         }
       )
-    } 
+    }else{
+      this.empleado.Id = null;
+    }
   }
 
   aceptarEnvio(){

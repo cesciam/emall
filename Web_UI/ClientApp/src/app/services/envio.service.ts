@@ -17,6 +17,11 @@ export class EnvioService {
     @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;}
 
+    obtenerEnvio(idEnvio: number) {
+      let endpointUrl = this.baseUrl + '/envio/ObtenerEnvio?id=' + idEnvio;
+  
+      return this.http.get<Envio>(endpointUrl);
+    }
 
     obtenerEnvioListPorSucursal(sucursal:number){
       let endpointUrl = this.baseUrl + '/Envio/RetrieveEnvioListBySucursal?sucursal='+sucursal;

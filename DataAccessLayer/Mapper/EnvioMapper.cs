@@ -93,14 +93,11 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
-        
-
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO" };
-            var envio = (Envio)entity;
-
-            operation.AddIntParam(DB_COL_ID, envio.Id);
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO_PR" };
+            var h = (Envio)entity;
+            operation.AddIntParam(DB_COL_ID, h.Id);
             return operation;
         }
 
@@ -110,6 +107,20 @@ namespace DataAccessLayer.Mapper
             var envio = (Envio)entity;
 
             operation.AddIntParam(DB_COL_ID, envio.Id);
+            return operation;
+        }
+
+        public SqlOperation GetUpdateTodoStatement(BaseEntity entity)
+        {
+            var e = (Envio)entity;
+
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ENVIO" };
+            operation.AddIntParam(DB_COL_ID, e.Id);
+            operation.AddIntParam(DB_COL_ESTADO, e.Estado);
+            operation.AddIntParam(DB_COL_ID_EMPLEADO, e.IdEmpleado);
+            operation.AddIntParam(DB_COL_ID_CLIENTE, e.IdCliente);
+            operation.AddVarcharParam(DB_COL_CODIGO, e.Codigo);
+
             return operation;
         }
     }

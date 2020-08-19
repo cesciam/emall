@@ -215,7 +215,7 @@ const maskConfig: Partial<IConfig> = {
     ListaDeseoComponent, 
     RutaComponent,
     CarritoComprasComponent,
-    RealizarCompraComponent
+    RealizarCompraComponent,
     SafePipe, 
     LectorQrComponent,
   ],

@@ -108,7 +108,7 @@ namespace Web_API.Controllers
             try
             {
                 var hm = new EnvioManagement();
-                hm.Update(c);
+                hm.UpdateTodo(c);
                 return Ok();
             }
             catch (Exception ex)
