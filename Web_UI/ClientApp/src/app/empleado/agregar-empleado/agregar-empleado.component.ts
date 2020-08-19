@@ -25,7 +25,7 @@ export class AgregarEmpleadoComponent implements OnInit {
   private roles: Rol[];
   private comercioId: number;
   private usuarioLogueado: string;
-  public accion: string = "Creación usuario";
+  public accion: string = "Creación empleado";
 
   public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
 
@@ -90,6 +90,12 @@ export class AgregarEmpleadoComponent implements OnInit {
       .subscribe(
         (response) => {
           this.isSendingData = false;
+
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.isSendingData = false;
@@ -101,11 +107,7 @@ export class AgregarEmpleadoComponent implements OnInit {
 
           window.scroll(0, 0);
 
-          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
-            (error) => {
-              this.error = error.error;
-              window.scroll(0, 0);
-            });
+          
         });
   }
 

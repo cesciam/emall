@@ -21,7 +21,7 @@ export class ImpuestoService {
     this.BaseURL = baseUrl;}
 
   public ObtenerTodoImpuesto() {
-    this.http.get(this.BaseURL + 'impuesto/obtenertodoimpuesto')
+    this.http.get(this.BaseURL + '/impuesto/obtenertodoimpuesto')
       .toPromise().then(res => this.impuestos = res as Impuesto[])
   }
 
@@ -32,22 +32,22 @@ export class ImpuestoService {
 }
 
   public ObtenerImpuesto(nombre: string) {
-    this.http.get(this.BaseURL + 'impuesto/obtenerimpuesto?nombre=' + nombre)
+    this.http.get(this.BaseURL + '/impuesto/obtenerimpuesto?nombre=' + nombre)
       .toPromise().then(res => this.formData = res as Impuesto)
     
   }
 
   public crearImpuesto(impuesto: Impuesto) {
-    return this.http.post(this.BaseURL + "impuesto/crearimpuesto", impuesto)
+    return this.http.post(this.BaseURL + "/impuesto/crearimpuesto", impuesto)
       
   }
 
   public modificarImpuesto(impuesto: Impuesto): Observable<any> {
-    return this.http.put(this.BaseURL + 'impuesto/modificarimpuesto/', impuesto)
+    return this.http.put(this.BaseURL + '/impuesto/modificarimpuesto/', impuesto)
   }
 
   public eliminarImpuesto(id: number) {
-    return this.http.delete(this.BaseURL + 'impuesto/eliminarimpuesto/?id=' + id)
+    return this.http.delete(this.BaseURL + '/impuesto/eliminarimpuesto/?id=' + id)
   }
 
   handleError(handleError: any): import("rxjs").OperatorFunction<Impuesto, any> {

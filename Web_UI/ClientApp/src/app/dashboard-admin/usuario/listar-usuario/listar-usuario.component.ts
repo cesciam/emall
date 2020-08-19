@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UsuarioService } from '../../../services/usuario.service';
 import { Usuario } from '../../../models/usuario.model';
+import { BitacoraService } from '../../../services/bitacora.service';
 
 @Component({
   selector: 'app-listar-usuario',
@@ -16,10 +17,15 @@ export class ListarUsuarioComponent implements OnInit {
   private filtroUsuarios = '';
   private usuarioAEliminar: number;
 
-  constructor(
+  private usuarioLogueado: string;
+  public accion: string = "Eliminación usuario";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+  constructor(private bitacora: BitacoraService,
     private usuarioService: UsuarioService,
     private router: Router
-  ) { }
+  ) { this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id; }
 
   ngOnInit() {
     this.obtenerUsuarios();
@@ -60,6 +66,12 @@ export class ListarUsuarioComponent implements OnInit {
         (response) => {
           this.obtenerUsuarios();
           this.submitted = false;
+
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.error = error.error;

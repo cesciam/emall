@@ -92,6 +92,10 @@ import { CalificacionComponent } from './calificacion/calificacion.component';
 import { ListarBitacoraComponent } from './bitacora/listar-bitacora/listar-bitacora.component';
 import { DatePipe } from '@angular/common';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { VentasComponent } from '../app/reportes/ventas/ventas.component';
+import { TransaccionesComponent } from './reportes/transacciones/transacciones.component';
+import { CitasComponent } from './reportes/citas/citas.component';
+import { MetodosPagosComponent } from './reportes/metodos-pagos/metodos-pagos.component';
 import { ListarEnvioSucursalComponent } from './envio/listar-envio-sucursal/listar-envio-sucursal.component';
 import { EnvioDetalleComponent } from './envio/envio-detalle/envio-detalle.component';
 import { ItemEmpleadoComponent } from './item/item-empleado/item-empleado.component';
@@ -186,6 +190,11 @@ const maskConfig: Partial<IConfig> = {
     FiltroUsuarioPipe,
     ListarBitacoraComponent, 
     CalificacionComponent,
+    CarritoComprasComponent,
+    VentasComponent,
+    TransaccionesComponent,
+    CitasComponent,
+    MetodosPagosComponent,
     CarritoComprasComponent,
     ListarEnvioSucursalComponent,
     EnvioDetalleComponent,
