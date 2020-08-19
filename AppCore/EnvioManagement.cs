@@ -27,6 +27,11 @@ namespace AppCore
             return envioCrudFactory.RetrieveBySucursal<Envio>(id_sucursal);
         }
 
+        public void Update(Envio envio)
+        {
+            envioCrudFactory.Update(envio);
+        }
+
         public Envio RetrieveById(int id)
         {
             var im = new ItemManagement();

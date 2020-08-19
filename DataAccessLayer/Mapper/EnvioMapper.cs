@@ -92,7 +92,16 @@ namespace DataAccessLayer.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var e = (Envio)entity;
+
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ENVIO" };
+            operation.AddIntParam(DB_COL_ID, e.Id);
+            operation.AddIntParam(DB_COL_ESTADO, e.Estado);
+            operation.AddIntParam(DB_COL_ID_EMPLEADO, e.IdEmpleado);
+            operation.AddIntParam(DB_COL_ID_CLIENTE, e.IdCliente);
+            //falta codigo
+
+            return operation;
         }
     }
 }

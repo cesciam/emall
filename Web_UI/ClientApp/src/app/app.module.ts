@@ -201,7 +201,8 @@ const maskConfig: Partial<IConfig> = {
     EditarDireccionComponent, 
     FiltroDireccionPipe, 
     RutaComponent,
-    FiltroDireccionPipe, SafePipe, LectorQrComponent,
+    SafePipe, 
+    LectorQrComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

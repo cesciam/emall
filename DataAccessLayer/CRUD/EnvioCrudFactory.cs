@@ -83,7 +83,8 @@ namespace DataAccessLayer.CRUD
 
         public override void Update(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var h = (Envio)entity;
+            dao.ExecuteProcedure(envioMapper.GetUpdateStatement(h));
         }
     }
 }

@@ -7,6 +7,7 @@ import { Envio } from 'src/app/models/envio.model';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { EmpleadoList } from 'src/app/models/empleado-list.model';
 import {QrScannerComponent} from 'angular2-qrscanner';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-envio-detalle',
@@ -71,6 +72,7 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
     this.sucursal = parseInt(this.activatedRoute.snapshot.paramMap.get('id_sucursal'));
     this.id_envio = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.obtenerDatosEnvio()
+    this.obtenerEmpleado()
   }
 
   inicializar(){
@@ -94,9 +96,26 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
       })
   }
 
+  obtenerEmpleado(){
+    let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
+    let usuarioLogueado: Usuario = usuarioLocal.usuario;
+
+    if (usuarioLogueado.Tipo == 4) {
+      this.empleadoService.getByIdUsuario(parseInt(usuarioLogueado.Id)).subscribe(
+        data=>{
+          this.empleado = data;
+        }
+      )
+    } 
+  }
+
   aceptarEnvio(){
     this.envioAceptado= true;
-
+    this.envio.estado= 1;
+    this.envio.idEmpleado = this.empleado.Id;
+    this.service.modificarEnvio(this.envio).subscribe(res=>{
+      this.obtenerDatosEnvio();
+    })
   }
 
   estadoToString(): string {

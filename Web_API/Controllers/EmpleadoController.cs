@@ -51,6 +51,12 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
+        public EmpleadoViewModel RetrieveDatosByIdUsuario(int id_usuario)
+        {
+           return em.RetrieveDatosById(id_usuario);
+        }
+
+        [HttpGet]
         public EmpleadoViewModel RetrieveByIdViewModel(int id)
         {
             var cuenta = new Empleado()

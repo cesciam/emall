@@ -61,5 +61,20 @@ namespace Web_API.Controllers
             var hm = new EnvioManagement();
             return hm.RetrieveEnvioListByid(id);
         }
+
+        [HttpPut]
+        public IActionResult Update(Envio c)
+        {
+            try
+            {
+                var hm = new EnvioManagement();
+                hm.Update(c);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }
