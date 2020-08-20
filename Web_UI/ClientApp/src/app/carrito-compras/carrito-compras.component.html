@@ -87,8 +87,8 @@
 
   </div>
 
-  <div class="container" *ngIf="tipoCarrito == 'Servicio'">
-    <form action="" (ngSubmit)="onSubmit()">
+  <div class="container" *ngIf="tipoCarrito == 'Servicio' || citaProducto">
+    <form action="" >
       <div class="row">
           <div class="col">
               <label for="date">Seleccione la fecha de la cita: </label>
@@ -117,12 +117,16 @@
   <div *ngIf="usuarioLogueado != null && carritoLocalStorage">
     <div style="text-align: right;">
       <h3>Total: ₡{{ total | number:0}}</h3>
-      <div *ngIf="tipoCarrito == 'Producto'">
+      <div *ngIf="tipoCarrito == 'Producto'  && !citaProducto">
         <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#Modal">Continuar</button>
       </div>
 
       <div *ngIf="tipoCarrito == 'Servicio'">
-        <button class="primary-btn" style="border: none;" (click)="agendarCita()">Agendar cita</button>
+        <button class="primary-btn" style="border: none;" (click)="agendarCitaServicio()">Agendar cita</button>
+      </div>
+
+      <div *ngIf="citaProducto">
+        <button class="primary-btn" style="border: none;" (click)="agendarCitaProductos()">Agendar cita</button>
       </div>
 
     </div>

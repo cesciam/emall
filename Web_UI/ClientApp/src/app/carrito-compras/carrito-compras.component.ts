@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ɵConsole } from '@angular/core';
 import { Item } from '../models/item';
 import { ItemService } from '../services/item.service';
 import { Impuesto } from '../models/impuesto.model';
@@ -25,6 +25,7 @@ export class CarritoComprasComponent implements OnInit {
   //  Variables para el registro de la cita
   servicioSeleccionado: Item;
   time = {hour: 0o0, minute: 0o0};
+  private usuarioLog: any = null;
 
   dateObj = new Date();
   date = {
@@ -33,6 +34,7 @@ export class CarritoComprasComponent implements OnInit {
     day: this.dateObj.getDate()
   };
   datePicker: any;
+  citaProducto: boolean = false;
 
   //
 
@@ -51,9 +53,10 @@ export class CarritoComprasComponent implements OnInit {
       this.serviceItem.getItemById(this.carritoLocalStorage[0].id)
       .subscribe(
         (data: Item) => this.servicioSeleccionado = data
-        
       );
     }
+
+    this.usuarioLog = JSON.parse(localStorage.getItem('usuario-logueado')).usuario;
   }
 
 
@@ -96,7 +99,7 @@ export class CarritoComprasComponent implements OnInit {
     if (this.txtLogistica == 'Recibirlo por envío') {
       this.enviarItems();
     } else {
-
+      this.citaProducto = true;
     }
   }
 
@@ -121,7 +124,7 @@ export class CarritoComprasComponent implements OnInit {
           window.scroll(0, 0);
         });
   }
-  agendarCita() {
+  agendarCitaServicio() {
     let list = this.calcularMinutos(this.servicioSeleccionado.duracion);
 
     let horas = this.time.hour + list[0];
@@ -147,19 +150,20 @@ export class CarritoComprasComponent implements OnInit {
       minStringTimePicker = this.time.minute.toString();
     }
 
-    var fechaCita = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day);
+    var fechaCita = this.getFechaHoy();
     var horaInicio = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+this.time.hour+':'+minStringTimePicker+':00');
     var horaFin = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+horas+':'+minString+':00');
   
     let cita: Cita = {
-      id_item: this.servicioSeleccionado.id,
-      id_cliente: this.usuarioLogueado.usuario.Id,
+      id_item: -1,
+      id_cliente: this.usuarioLog.Id,
       fecha: fechaCita,
       hora_inicio: horaInicio,
       hora_fin: horaFin,
       id: -1,
       id_empleado: -1,
-      id_sucursal: this.servicioSeleccionado.id_sucursal
+      id_sucursal: this.servicioSeleccionado.id_sucursal,
+      items: null
    };
 
     this.citaService.registrarCitaServicio(cita)
@@ -175,6 +179,75 @@ export class CarritoComprasComponent implements OnInit {
 
   }
 
+  agendarCitaProductos(): void {
+    let idProductos: number[] = new Array();
+
+    for (let i = 0; i < this.carritoLocalStorage.length ; i++) {
+      idProductos.push(this.carritoLocalStorage[i].id);
+    }
+
+    let horas = this.time.hour;
+    let minutos =  this.time.minute + 15;
+
+    while (minutos > 60) {
+      let newList = this.calcularMinutos(minutos);
+      horas += newList[0];
+      minutos += newList[1];
+    }
+
+    let minString: string;
+    let minStringTimePicker;
+    if (minutos < 10) {
+      minString = '0' + minutos;
+    } else {
+      minString = minutos.toString();
+    }
+
+    if (this.time.minute < 10) {
+      minStringTimePicker = '0' + this.time.minute;
+    } else {
+      minStringTimePicker = this.time.minute.toString();
+    }
+
+    if (minutos == 60) {
+      horas += 1;
+      minString = '00';
+    }
+
+    var fechaCita = this.getFechaHoy();
+    var horaInicio = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+this.time.hour+':'+minStringTimePicker+':00');
+    var horaFin = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+horas+':'+minString+':00');
+
+    let cita: Cita = {
+      id_item: -1,
+      id_cliente: this.usuarioLog.Id,
+      fecha: fechaCita,
+      hora_inicio: horaInicio,
+      hora_fin: horaFin,
+      id: -1,
+      id_empleado: -1,
+      id_sucursal: this.carritoLocalStorage[0].id_sucursal,
+      items: idProductos
+   };
+
+   console.log(cita);
+   
+
+   this.citaService.registrarCitaProducto(cita)
+   .subscribe((data: any) => {
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('tipoCarrito');
+    this.router.navigate(['perfil-usuario']);
+    console.log(data);
+  },
+  (error) => {
+    this.error = error.error;
+    window.scroll(0, 0);
+  });
+   
+
+  }
+
   calcularMinutos(min: number): number[] {
     let num = min;
     let hours = (num / 60);
@@ -184,6 +257,10 @@ export class CarritoComprasComponent implements OnInit {
     let horasMinutos: number[] =  [rhours, rminutes];
 
     return horasMinutos;
+  }
+
+  getFechaHoy() {
+    return new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day);
   }
 
 }

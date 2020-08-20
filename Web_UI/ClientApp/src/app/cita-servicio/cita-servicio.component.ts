@@ -76,7 +76,8 @@ export class CitaServicioComponent implements OnInit {
       hora_fin: horaFin,
       id: -1,
       id_empleado: -1,
-      id_sucursal: this.servicioSeleccionado.id_sucursal
+      id_sucursal: this.servicioSeleccionado.id_sucursal,
+      items: null
    };
    
    
