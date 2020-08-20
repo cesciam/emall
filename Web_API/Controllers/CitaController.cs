@@ -23,11 +23,26 @@ namespace Web_API.Controllers
         {
             if (mng.CreateCitaServicio(cita) > 0)
             {
-                return Ok();
+                return Ok(cita);
             }
             else
             {
                 return BadRequest(new { message = "Error general al registrar la cita. Vuelva a intertarlo en unos minutos." });
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult RegistrarCitaProducto(Cita cita)
+        {
+            
+            if (mng.CreateCitaProducto(cita) > 0)
+            {
+                return Ok();
+            }
+            else
+            {
+            return BadRequest(new { message = "Error general al registrar la cita. Vuelva a intertarlo en unos minutos." });
             }
 
         }

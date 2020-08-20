@@ -16,7 +16,7 @@ export class CitaServicioComponent implements OnInit {
   servicioSeleccionado: Item;
   time = {hour: 0o0, minute: 0o0};
   private usuarioLogueado: any = null;
-
+  private error: object = null;
 
   dateObj = new Date();
   date = {
@@ -76,17 +76,20 @@ export class CitaServicioComponent implements OnInit {
       hora_fin: horaFin,
       id: -1,
       id_empleado: -1,
-      id_sucursal: this.servicioSeleccionado.id_sucursal
+      id_sucursal: this.servicioSeleccionado.id_sucursal,
+      items: null
    };
    
    
 
     this.citaService.registrarCitaServicio(cita)
     .subscribe((data: any)=>{
-     console.log('Registrado con exitos');
+     
     },
-    (err: any) => console.log(err)
-    );
+    (error) => {
+      this.error = error.error;
+      window.scroll(0, 0);
+    });
 
   }
 

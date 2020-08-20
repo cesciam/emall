@@ -31,6 +31,30 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(sqlOperation);
         }
 
+        public T CreateCitaProducto<T>(BaseEntity entity)
+        {
+            var cita = (Cita)entity;
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetCreateProductStatement(entity));
+
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var objs = Convert.ToInt32(lstResult[0]["ID_CITA"]);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+
+            return default(T);
+        }
+
+        public void InsertItemCita(ItemXCita itemXCita)
+        {
+            var sqlOperation = mapper.GetInsertProductCitaStatement(itemXCita);
+
+            dao.ExecuteProcedure(sqlOperation);
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var sqlOperacion = mapper.GetDeleteStatement(entity);
@@ -104,6 +128,22 @@ namespace DataAccessLayer.CRUD
         {
             var lstResult = dao.ExecuteQueryProcedure(mapper.GetEmpleadoDisponibleStatament(entity));
             
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var id_empleado = mapper.BuildIdEmpleado(dic);
+                return id_empleado;
+            }
+
+            return -1;
+        }
+        
+
+        public int ObtenerEmpleadoDisponibleProd(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetEmpleadoDisponibleProdStatament(entity));
+
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {
