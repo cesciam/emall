@@ -82,6 +82,13 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
+        public List<EnvioListViewModel> RetrieveByUsuario(int id_usuario)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveEnvioListByUsuario(id_usuario);
+        }
+
+        [HttpGet]
         public List<EnvioListViewModel> RetrieveEnvioListBySucursal(int sucursal)
         {
             var hm = new EnvioManagement();
@@ -120,7 +127,9 @@ namespace Web_API.Controllers
                     To = usuario.Correo,
                     Subject = "Pedido en camino",
                     Message = "<h1>Su pedido va en camino</h1><br>" +
-                             "<p>Para confirmar su identidad, el colaborador le solicitará el siguiente código:</p>" +
+                             "<p>Para confirmar su identidad, el colaborador le solicitará el código QR que se encuentra en la aplicación," +
+                             "en la sección de pedidos. " +
+                             "Si tiene problemas ingresando, puede proveerle el siguiente código:</p>" +
                              "<p>"+c.Codigo+"</p>"
                 });
 

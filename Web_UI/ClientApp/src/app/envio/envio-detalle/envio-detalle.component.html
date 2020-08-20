@@ -90,6 +90,7 @@
     <div class="pt-3 px-4">
         <h2>Envio # {{envioList.id}}</h2>
         <h4>Estado: {{estadoToString()}}</h4>
+        <h4>Cliente: {{envioList.nombre_cliente}}</h4>
         <br>
         <div class="col-sm-auto d-flex justify-content-end" > 
             <Button class="btn  btn-primary" data-toggle="modal" data-target="#Modal" 
@@ -109,7 +110,7 @@
             <p>Pasos para finalizar el envío: </p>
             <ul>
                 <li>Diríjase a la ubicación del cliente.</li>
-                <li>Escanee el código de confirmación de la pantalla del cliente o
+                <li>Escanee el código QR de confirmación de la pantalla del cliente o
                     solicite el código al cliente e ingréselo manualmente.</li>
                 <li>Si la entrega es exitosa, presione Finalizar entrega.</li>
             </ul>
@@ -130,14 +131,14 @@
                     <tr>
                         <th>Id</th>
                         <th>Producto</th>
-                        <th>Cantidad</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of items">
                         <td>{{ item.id }}</td>
                         <td>{{ item.nombre }}</td>
-                        <td> 2</td>
+                        <td> </td>
                     </tr>
                 </tbody>
             </table>

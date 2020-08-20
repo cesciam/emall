@@ -141,10 +141,12 @@
                   <tbody>
                     <tr *ngFor="let pedido of pedidos">
                       <td>{{pedido.id}}</td>
-                      <td></td>
+                      <td>{{pedido.sucursal}}</td>
                       <td>{{estadoPedidoToString(pedido.estado)}}</td>
                       <td>
-                        <button class="btn btn-primary">Ver</button>
+                        <a [routerLink]="['envio-detalle/',pedido.id]">
+                          <button class="btn btn-primary" >Ver</button>
+                        </a>
                       </td>
                     </tr>
   

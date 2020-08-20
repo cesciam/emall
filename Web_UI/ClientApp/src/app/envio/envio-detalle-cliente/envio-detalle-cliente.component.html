@@ -1,0 +1,58 @@
+<app-header></app-header>
+
+<div class="container container-fluid">
+    <br>
+    <div class="col-sm-auto d-flex justify-content-end">
+        <a [routerLink]="['/perfil-usuario']">Volver atras</a>
+
+    </div>
+    <div class="pt-3 px-4">
+        <h2>Pedido # {{envio.id}}</h2>
+        <h4>Estado: {{estadoToString()}}</h4>
+        <h4>Sucursal: {{sucursal.nombre}}</h4>
+        <br>
+        <hr>
+        <div class="container">
+            <h4>Confirmación</h4>
+            <p>Pasos para finalizar el envío: </p>
+            <ul>
+                <li>Un colaborador de la sucursal llegará a su ubicación predeterminada</li>
+                <li>Le solicitará el código QR de confirmación mostrado abajo o el código
+                    de 8 dígitos para su ingreso manual.
+                </li>
+                <li>Si la entrega es exitosa, el enlace para realizar el pago llegará a su correo
+                    así como la factura.
+                </li>
+            </ul>
+            <br>
+            <div class="col-sm-auto d-flex justify-content-center">
+                
+            </div>
+            <hr>
+        </div>
+        <br>
+        <h3>Ítems</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm text-center">
+                <thead>
+                  <tr>
+                    <th class="text-center">Ítem</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of envio.items">
+                    <td><img [src]="item.id_foto" style="width: 80px; height: 80px;" /></td>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.descripcion }}</td>
+                    <td> ₡{{ item.precio | number:0}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <br>
+
+<app-footer></app-footer>

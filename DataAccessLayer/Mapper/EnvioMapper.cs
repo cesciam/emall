@@ -94,6 +94,13 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveByUsuarioStatement(int id_usuario)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO_USUARIO" };
+            operation.AddIntParam("ID_USUARIO", id_usuario);
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "OBTENER_ENVIO_PR" };
