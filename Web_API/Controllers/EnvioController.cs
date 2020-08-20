@@ -28,7 +28,7 @@ namespace Web_API.Controllers
         [HttpPost]
         public IActionResult CrearEnvio(Envio envio)
         {
-            envio.Codigo = TokenGenerator.Generar(8);
+            envio.Codigo = TokenGenerator.GenerarAlfanumerico(8);
 
             try
             {
