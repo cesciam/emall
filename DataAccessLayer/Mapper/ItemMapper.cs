@@ -70,6 +70,15 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetUpdateInventarioStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_INVENTARIO_ITEM" };
+            var item = (Item)entity;
+            operation.AddIntParam(DB_COL_ID, item.id);
+
+            return operation;
+        }
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "ELIMINAR_ITEM" };

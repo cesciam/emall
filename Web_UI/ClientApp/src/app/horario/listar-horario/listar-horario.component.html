@@ -1,0 +1,35 @@
+<app-main-header></app-main-header>
+  <br>
+  <div class="container-fluid container">
+    <main role="main">
+      <h1 class="display-4 text-center">Lista de horarios</h1>
+      <br>
+      <button type="button" class="btn btn-primary" [routerLink]="['/agregar-horario']">Nuevo horario</button>
+      <br>
+      <br>
+      <div class="table-responsive">
+        <input type="text" class="form-control" placeholder="Buscar" name="fitro" [(ngModel)]="filtro" />
+        <br>
+        <table class="table table-striped table-sm text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Fecha de creación</th>
+              <th class="text-center">Tipo</th>
+              <th class="text-center">Hora inicio</th>
+              <th class="text-center">Hora final</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tr *ngFor="let horario of horarios | filtroHorario: filtro">
+            <td>{{horario.fecha}}</td>
+            <td>{{horario.tipo_horario}}</td>
+            <td>{{horario.hora_inicio}}</td>
+            <td>{{horario.hora_fin}}</td>
+          </tr>
+        </table>
+        <br>
+      </div>
+    </main>
+  </div>
+  
+  <app-footer></app-footer>

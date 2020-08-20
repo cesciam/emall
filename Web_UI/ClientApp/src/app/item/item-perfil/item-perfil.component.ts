@@ -1,24 +1,15 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Item } from '../../models/item';
-import { getBaseUrl } from '../../../main';
 import { Impuesto } from '../../models/impuesto.model';
 import { ItemService } from '../../services/item.service';
 import { SucursalService } from '../../services/sucursal.service';
-import { ImpuestoService } from '../../services/impuesto.service';
-import { async } from '@angular/core/testing';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
-import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-import { Cloudinary } from '@cloudinary/angular-5.x';
-import cloudinaryConfig from '../../config';
-import { Archivo } from '../../models/Archivo';
 import { Router } from "@angular/router";
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Sucursal } from '../../models/Sucursal';
 import { ActivatedRoute } from '@angular/router';
-import { parse } from 'ts-node';
 import { Comercio } from '../../models/Comercio';
 import { ComercioService } from '../../services/comercio.service';
+import { ListaDeseo } from '../../models/lista-deseo';
+import { ListaDeseoService } from '../../services/lista-deseo.service';
 
 @Component({
   selector: 'app-item-perfil',
@@ -34,16 +25,22 @@ export class ItemPerfilComponent implements OnInit {
   error: any;
   preciofinal = 0;
 
+  agregarProductoCarrito = false;
+  id_usuario: number;
+  registrado = false;
 
-  constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router, private serviceSucursal: SucursalService, private serviceComercio: ComercioService,) {
+
+  constructor(private route: ActivatedRoute, private serviceItem: ItemService, private router: Router, private serviceSucursal: SucursalService, private serviceComercio: ComercioService, private serviceListaDeseo: ListaDeseoService) {
 
     let itemID: number = parseInt(this.route.snapshot.params['id_item']);
+    this.item_seleccionado = new Item();
+
 
     this.obtenerItem(itemID);
-    
   }
 
   ngOnInit() {
+    
   }
 
   async obtenerItem(itemId: number) {
@@ -58,9 +55,81 @@ export class ItemPerfilComponent implements OnInit {
       .subscribe(data => {
         this.comercio = data;
       });
-    console.log(this.comercio)
 
     this.preciofinal = this.item_seleccionado.precio + (this.item_seleccionado.precio / 100 * this.impuesto.Porcentaje);
+    this.validarTipoCarrito();
   }
+
+  agregarItemCarrito() {
+    if (localStorage.getItem("carrito") === null) {
+      var producto: Item[] = new Array();
+      producto[0] = this.item_seleccionado;
+      localStorage.setItem('carrito', JSON.stringify(producto));
+      localStorage.setItem('tipoCarrito', this.item_seleccionado.tipo);
+    } else {
+
+      if (this.item_seleccionado.tipo == localStorage.getItem('tipoCarrito')) {
+        var productos: Item[] = JSON.parse(localStorage.getItem('carrito'));
+        let i = productos.length;
+        productos[i] = this.item_seleccionado;
+        localStorage.setItem('carrito', JSON.stringify(productos));
+      } else {
+        this.error = 'No puede tener productos y servicios en su carrito de compra.';
+      }
+
+      
+    }
+  }
+
+  validarTipoCarrito() {
+    if (localStorage.getItem("tipoCarrito") != null) {
+
+      var productos: Item[] = JSON.parse(localStorage.getItem('carrito'));
+
+      if (localStorage.getItem("tipoCarrito") != this.item_seleccionado.tipo) {
+        this.agregarProductoCarrito = true;
+        this.error = 'No puede tener productos y servicios en su carrito de compra.';
+      } else if (productos[0].id_sucursal != this.item_seleccionado.id_sucursal) {
+        this.error = 'No puede tener items de diferentes sucursales.';
+        this.agregarProductoCarrito = true;
+      } else {
+        this.agregarProductoCarrito = false;
+      }
+
+      if ((localStorage.getItem("tipoCarrito") == 'Servicio') && productos.length >= 1) {
+        this.agregarProductoCarrito = true;
+        this.error = 'Solo puede tener un solo servicio en su carrito de compras.';
+      }
+
+    }
+  }
+
+  agregarListaDeseo() {
+
+    if (localStorage.getItem("usuario-logueado") === null) {
+      this.registrado = false;
+    } else {
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+      this.registrado = true;
+
+      let add_item: ListaDeseo;
+      add_item = new ListaDeseo();
+
+      add_item.id_usuario = this.id_usuario;
+      add_item.id_item = this.item_seleccionado.id;
+
+      this.serviceListaDeseo.crearLista(add_item)
+        .subscribe(
+          (reponse) => {
+
+          },
+          (error) => {
+            this.error = "Errores en el registro";
+            window.scroll(0, 0);
+          });
+    }
+
+  }
+
 
 }

@@ -2,6 +2,9 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '
 import { Sucursal } from '../models/Sucursal';
 import { SucursalService } from '../services/sucursal.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Horario } from '../models/horario.model';
+import { HorarioService } from 'src/app/services/horario.service';
+import { BitacoraService } from '../services/bitacora.service';
 
 @Component({
   selector: 'app-registrar-sucursal',
@@ -18,14 +21,28 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
   private lng = -84.0310371;
   private error: any;
 
-  constructor(sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private router: Router) {
+  private usuarioLogueado: string;
+  public accion: string = "Creación Comercio";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado);
+ 
+
+  constructor(private bitacora: BitacoraService,sucursalService: SucursalService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
+ {
     this.sucursalService = sucursalService;
-    this.sucursal = new Sucursal();
+      this.sucursal = new Sucursal();
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
+  }
+
+   
 
   }
   ngAfterViewInit(): void {
     this.mapa();
-    }
+  }
 
   ngOnInit() {
     this.inicializarSucursal();
@@ -37,8 +54,7 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
     let usuarioLogeado = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.sucursal.idPersona = usuarioLogeado.usuario.Id;
-
-    }
+  }
 
   mapa() {
     let me = this;
@@ -47,7 +63,7 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
       center: new google.maps.LatLng(this.lat, this.lng),
       zoom: 8,
       scrollwheel: true,
-  };
+    };
 
     let map = new google.maps.Map(this.gmap.nativeElement,
       mapProp);
@@ -62,10 +78,9 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
 
     google.maps.event.addListener(map, 'click', function (event) {
       placeMarker(event.latLng);
-      
+
       me.sucursal.latitud = String(event.latLng.lat());
       me.sucursal.longitud = String(event.latLng.lng());
-      
     });
 
     function placeMarker(location) {
@@ -74,17 +89,23 @@ export class RegistrarSucursalComponent implements OnInit, AfterViewInit {
     }
   }
 
+  
+
   registrarSucursal() {
     this.sucursalService.registrarSucursal(this.sucursal)
       .subscribe(
         (response) => {
           this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.sucursal.idComercio } });
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.error = error.error;
           window.scroll(0, 0);
         });
   }
-
 
 }

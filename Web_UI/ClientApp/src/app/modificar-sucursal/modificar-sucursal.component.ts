@@ -37,7 +37,7 @@ export class ModificarSucursalComponent implements OnInit, AfterViewInit {
     this.sucursalService.obtenerSucursal(idSucursal)
       .subscribe(data => {
         this.sucursalSeleccionada = data;
-        console.log(this.sucursalSeleccionada);
+        
         this.lat = this.sucursalSeleccionada.latitud;
         this.lng = this.sucursalSeleccionada.longitud;
         this.mapa();
@@ -69,7 +69,6 @@ export class ModificarSucursalComponent implements OnInit, AfterViewInit {
 
       me.sucursalSeleccionada.latitud = String(event.latLng.lat());
       me.sucursalSeleccionada.longitud = String(event.latLng.lng());
-
     });
 
     function placeMarker(location) {

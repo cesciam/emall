@@ -5,7 +5,7 @@
   <div class="pt-3 px-4">
 
     <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-      <h1 class="h2">Items de sucursal</h1>
+      <h1 class="h2">Ítems de sucursal</h1>
     </div>
     <div class="mb-4 col">
       <input type="text" class="form-control" placeholder="Buscar" name="filtroItem" [(ngModel)]="filtroItem" />
@@ -24,8 +24,7 @@
         <div class="product__item__pic set-bg img-container" data-setbg="item.id_foto">
           <img [src]="item.id_foto" alt="Foto">
           <ul class="product__item__pic__hover">
-            <!--<li><a href="#"><i class="fa fa-heart"></i></a></li>
-            <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+            
             <li><a [routerLink]="['/item-perfil', item.id]"><i class="fa fa-shopping-cart"></i></a></li>
           </ul>
         </div>

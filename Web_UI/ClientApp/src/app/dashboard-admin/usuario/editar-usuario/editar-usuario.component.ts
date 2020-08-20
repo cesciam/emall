@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -9,6 +9,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../../../config';
 import { Archivo } from '../../../models/Archivo';
 import { Usuario } from '../../../models/usuario.model'
+import { BitacoraService } from '../../../services/bitacora.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -30,13 +31,20 @@ export class EditarUsuarioComponent implements OnInit {
   private foto: Archivo;
   private isSendingData: boolean = false;
   private usuario: Usuario;
-  private tituloAMostrar: string;
+  private tituloAMostrar: string = 'Usuarios';
+  private usuarioLogueado: string;
+  public accion: string = "Edición usuario";
 
-  constructor(
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+
+
+  constructor(private bitacora: BitacoraService,
     private router: Router,
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
         cloudName: cloudinaryConfig.cloud_name,
@@ -60,31 +68,32 @@ export class EditarUsuarioComponent implements OnInit {
       validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
     });
 
-    this.obtenerDatosUsuario().then(() => {
-      let esCedulaValida = /^\d+$/.test(this.usuario.Cedula);
+    this.obtenerDatosUsuario()
+      .then(() => {
+        let esCedulaValida = /^\d+$/.test(this.usuario.Cedula);
 
-      if (esCedulaValida)
-        this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
-        
-      this.usuarioForm.controls['Nombre'].setValue(this.usuario.Nombre);
-      this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
-      this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
-      this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
-      this.usuarioForm.controls['Tipo'].setValue(this.usuario.Tipo);
+        if (esCedulaValida)
+          this.usuarioForm.controls['Cedula'].setValue(this.usuario.Cedula);
+          
+        this.usuarioForm.controls['Nombre'].setValue(this.usuario.Nombre);
+        this.usuarioForm.controls['Apellido'].setValue(this.usuario.Apellido);
+        this.usuarioForm.controls['Correo'].setValue(this.usuario.Correo);
+        this.usuarioForm.controls['Telefono'].setValue(this.usuario.Telefono);
+        this.usuarioForm.controls['Tipo'].setValue(this.usuario.Tipo);
 
-      if (this.integrarCon == null) {
-        this.tituloAMostrar = 'Usuarios';
-      } else if (this.integrarCon == 'pagina') {
+        if (this.integrarCon == null) {
+          this.tituloAMostrar = 'Usuarios';
+        } else if (this.integrarCon == 'pagina') {
+            this.tituloAMostrar = this.titulo;
+        } else {
+          this.tituloAMostrar = 'Usuarios';
+        }
+
+        if (this.titulo != '' || this.titulo != null)
           this.tituloAMostrar = this.titulo;
-      } else {
-        this.tituloAMostrar = 'Usuarios';
-      }
-
-      if (this.titulo != '' || this.titulo != null)
-        this.tituloAMostrar = this.titulo;
-      else
-      this.tituloAMostrar = null;
-    });
+        else
+          this.tituloAMostrar = 'Usuarios';
+      });
   }
 
   obtenerDatosUsuario() {
@@ -201,6 +210,11 @@ export class EditarUsuarioComponent implements OnInit {
             window.scroll(0, 0);
             this.editComplete = true;
           }
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });
         },
         (error) => {
           this.isSendingData = false;

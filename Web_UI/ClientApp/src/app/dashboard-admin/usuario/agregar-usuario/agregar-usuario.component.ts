@@ -9,6 +9,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import cloudinaryConfig from '../../../config';
 import { RegistroUsuario } from '../../../models/registro-usuario.model';
 import { Archivo } from '../../../models/Archivo';
+import { BitacoraService } from '../../../services/bitacora.service';
 
 @Component({
   selector: 'app-agregar-usuario',
@@ -27,11 +28,17 @@ export class AgregarUsuarioComponent implements OnInit {
   private imgUrl: any;
   private foto: Archivo;
   private isSendingData: boolean = false;
+  private usuarioLogueado: string;
+  public accion: string = "Creación usuario";
+
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
       
-  constructor(
+  constructor(private bitacora: BitacoraService,
     private router: Router,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
+    //this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+  
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
         cloudName: cloudinaryConfig.cloud_name,
@@ -50,13 +57,13 @@ export class AgregarUsuarioComponent implements OnInit {
       ContrasenaConfirmar: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       Telefono: new FormControl('', [Validators.required]),
       Tipo: new FormControl(this.integrarCon == 'pagina' ? '2' : '', [Validators.required]),
-      Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpe?g|bmp|png|webp|tiff|eps)$/igm)])
+      Foto: new FormControl('', [Validators.pattern(/.*\.(gif|jpeg|jpg|bmp|png|webp|tiff|eps)$/igm)])
     }, {
         validators: equalValueValidator('Contrasena', 'ContrasenaConfirmar')
     });
   }
 
-  validarFoto(files) {
+  validarFoto(files: any) {
     this.imgUrl = '';
 
     if (!this.usuarioForm.controls['Foto'].errors) {
@@ -68,7 +75,7 @@ export class AgregarUsuarioComponent implements OnInit {
 
       reader.onload = (_event) => {
         this.imgUrl = reader.result;
-      }
+      };
     }
   }
 
@@ -124,6 +131,11 @@ export class AgregarUsuarioComponent implements OnInit {
             window.scroll(0, 0);
             this.registerComplete = true;
           }
+         /* this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+            (error) => {
+              this.error = error.error;
+              window.scroll(0, 0);
+            });*/
         },
         (error) => {
           this.isSendingData = false;

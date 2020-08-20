@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmpleadoList } from '../../models/empleado-list.model';
 import { ActivatedRoute } from '@angular/router';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-listar-empleado',
@@ -14,12 +15,19 @@ export class ListarEmpleadoComponent implements OnInit {
   private empleados: EmpleadoList[];
   private comercioId: number;
   private filtro = '';
+  private error: object = null;
   id_empleado: number;
+  private usuarioLogueado: string;
+  public accion: string = "Eliminación usuario";
 
-  constructor(
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado);
+
+  constructor(private bitacora: BitacoraService,
     private service: EmpleadoService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+
   }
 
   ngOnInit(): void {
@@ -41,6 +49,12 @@ export class ListarEmpleadoComponent implements OnInit {
       this.service.fillList()
     });
 
+    this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
+
   }
 
   onUpdate(id: number) {
@@ -50,5 +64,4 @@ export class ListarEmpleadoComponent implements OnInit {
   empleadoToDelete(id:number){
     this.id_empleado=id;
   }
-
 }

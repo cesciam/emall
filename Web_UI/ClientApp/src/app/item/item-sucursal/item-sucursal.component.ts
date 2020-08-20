@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../../services/item.service';
 import { Item } from '../../models/item';
 import { Router } from "@angular/router";
+import { SucursalService } from '../../services/sucursal.service';
+import { Sucursal } from '../../models/Sucursal';
 
 @Component({
   selector: 'app-item-sucursal',
@@ -11,42 +13,33 @@ import { Router } from "@angular/router";
 })
 export class ItemSucursalComponent implements OnInit {
 
-
+  sucursal: Sucursal;
   sucursal_id: number;
   items_sucursal: Item[];
   private filtroItem = '';
   error: any;
 
-  constructor(private route: ActivatedRoute, private itemservice: ItemService, private router: Router) {
+  constructor(private route: ActivatedRoute, private itemservice: ItemService, private router: Router, private serviceSucursal: SucursalService) {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
-    //this.sucursal_id = 1;
+    
   }
 
   ngOnInit() {
     this.sucursal_id = parseInt(this.route.snapshot.params['id_sucursal']);
-    //this.sucursal_id = 1;
     this.llenarItems();
     
   }
 
-  llenarItems() {
+  async llenarItems() {
     this.itemservice.getItemSucursal(this.sucursal_id).subscribe(
       (data: Item[]) => this.items_sucursal = data,
       (err: any) => console.log(err)
     );
+
+    this.sucursal = await this.serviceSucursal.obtenerSucursalItem(this.sucursal_id);
   }
 
-  //delete(id: number): void {
-  //  this.itemservice.deleteItem(id)
-  //    .subscribe(
-  //      (data: void) => {
-  //        let index: number = this.items_sucursal.findIndex(item => item.id === id);
-  //        this.items_sucursal.splice(index, 1);
-  //      },
-  //      (err: any) => console.log(err)
-  //    );
-  //  //window.location.reload();
-  //}
+  
 
   delete(id: number): void {
     this.itemservice.deleteItem(id)
@@ -58,13 +51,7 @@ export class ItemSucursalComponent implements OnInit {
           window.scroll(0, 0);
         });
 
-      //(
-      //  (data: void) => {
-      //    let index: number = this.items_sucursal.findIndex(item => item.id === id);
-      //    this.items_sucursal.splice(index, 1);
-      //  },
-      //  (err: any) => console.log(err)
-      //);
+     
   }
 
 

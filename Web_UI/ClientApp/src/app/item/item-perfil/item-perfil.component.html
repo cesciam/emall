@@ -1,11 +1,55 @@
-<app-header></app-header>
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Carrito de compras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Has agregado el item al carrito de compras.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal Lista Deseo -->
+<div class="modal fade" id="ModalDeseo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lista de Deseos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="registrado==true; else noRegistrado">
+        Has agregado el item a la lista de deseos.
+      </div>
+      <ng-template #noRegistrado>
+        <div class="modal-body">
+          Inicie sesion para agregar el item a la lista de deseos.
+        </div>
+      </ng-template>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-header></app-header>
 
 <div class="container" *ngIf="item_seleccionado && sucursal && impuesto && comercio">
 
-
-
-
+  <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
+    <strong>{{error}}</strong>
+  </div>
 
   <section class="product-details spad">
     <div class="container">
@@ -15,78 +59,37 @@
             <div class="product__details__pic__item">
               <img class="product__details__pic__item--large" [src]="item_seleccionado.id_foto" alt="Foto">
             </div>
-            <!--<div class="product__details__pic__slider owl-carousel">
-              <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                   src="img/product/details/thumb-1.jpg" alt="">
-              <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                   src="img/product/details/thumb-2.jpg" alt="">
-              <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                   src="img/product/details/thumb-3.jpg" alt="">
-              <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                   src="img/product/details/thumb-4.jpg" alt="">
-            </div>-->
           </div>
         </div>
         <div class="col-lg-6 col-md-6">
           <div class="product__details__text">
             <h3>{{item_seleccionado.nombre}}</h3>
+            <p><app-calificacion item="{{item_seleccionado.id}}"></app-calificacion></p>
             <div class="product__details__rating">
               <i class="">{{comercio.nombre}}</i>
-              <!--<i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>-->
             </div>
-            <div class="product__details__price">₡{{preciofinal}} ii</div>
+            <div class="product__details__price">₡{{preciofinal | number}} ii</div>
             <p>
               {{item_seleccionado.descripcion}}
             </p>
-            <!--<div class="product__details__quantity">
-              <div class="quantity">
-                <div class="pro-qty">
-                  <input type="text" value="1">
-                </div>
-              </div>
-            </div>-->
-            <a [routerLink]="['/']" class="primary-btn">AGREGAR</a>
-            <a [routerLink]="['/']" class="heart-icon"><span class="icon_cart_alt"></span></a>
+            <button class="primary-btn" style="border: none" (click)="agregarItemCarrito()" data-toggle="modal" data-target="#Modal" [disabled]="agregarProductoCarrito">Agregar a carrito</button>
+            <a class="heart-icon" (click)="agregarListaDeseo()" data-toggle="modal" data-target="#ModalDeseo"><span class="icon_folder-add_alt"></span></a>
             <ul>
-              <li *ngIf="item_seleccionado.tipo === 'Servicio'" ><b>Duracion</b> <span>{{item_seleccionado.duracion}} minutos</span></li>
+              <li *ngIf="item_seleccionado.tipo === 'Servicio'">
+                <b>Duración</b> <span>
+                  {{item_seleccionado.duracion}}
+                  minutos
+                </span>
+              </li>
               <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
-              <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp>  {{impuesto.Porcentaje}}%</samp></span></li>
+              <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp> {{impuesto.Porcentaje}}%</samp></span></li>
               <li><b>Detalle sucursal</b> <span>{{sucursal.nombre}} - {{sucursal.detallesDireccion}}</span></li>
-              <!--<li>
-    <b>Share on</b>
-    <div class="share">
-      <a href="#"><i class="fa fa-facebook"></i></a>
-      <a href="#"><i class="fa fa-twitter"></i></a>
-      <a href="#"><i class="fa fa-instagram"></i></a>
-      <a href="#"><i class="fa fa-pinterest"></i></a>
-    </div>
-  </li>-->
             </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-
-
-
-
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-      <app-footer></app-footer>
-
+<app-footer></app-footer>

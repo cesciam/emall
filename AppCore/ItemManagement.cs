@@ -2,16 +2,20 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security;
 
 namespace AppCore
 {
     public class ItemManagement
     {
         private ItemCrudFactory crudItem;
+        private EmpleadoXItemCrudFactory crudEmpleadoXItem;
 
         public ItemManagement()
         {
             crudItem = new ItemCrudFactory();
+            crudEmpleadoXItem = new EmpleadoXItemCrudFactory();
         }
 
         public Boolean validarItem(Item item)
@@ -24,7 +28,7 @@ namespace AppCore
                     status = false;
                 } 
             }
-            else if (item.precio <= 0 || item.inventario <= 0 || item.duracion <= 0)
+            else if (item.precio <= 0 || item.duracion <= 0)
             {
                 status = false;
             }
@@ -46,6 +50,21 @@ namespace AppCore
             {
                 throw new Exception("Valores numericos deben ser positivos");
             }
+        }
+
+        public void AsociarItemEmpleado(EmpleadosXItem tmp_empleado)
+        {
+
+            DeleteEmpleadosItem(tmp_empleado.id_item);
+            for (int i = 0; i < tmp_empleado.empleados.Length; i++)
+            {
+                var asociar = new EmpleadosXItem();
+                asociar.id_item = tmp_empleado.id_item;
+                asociar.id_empleado = tmp_empleado.empleados[i];
+                crudEmpleadoXItem.Create(asociar);
+                System.Threading.Thread.Sleep(1000);
+            }
+
         }
 
         public List<Item> RetrieveAllItem()
@@ -107,6 +126,26 @@ namespace AppCore
         public Impuesto ImpuestoItem(Impuesto impuesto)
         {
             return crudItem.ImpuestoItem<Impuesto>(impuesto);
+        }
+
+        public List<EmpleadosXItem> obtenerEmpleadosItem(int id_item)
+        {
+            return crudEmpleadoXItem.RetrieveAllByItem<EmpleadosXItem>(id_item);
+        }
+
+        public void DeleteEmpleadosItem(int id_item)
+        {
+            var empleados = new EmpleadosXItem();
+            empleados.id_item = id_item;
+            crudEmpleadoXItem.DeleteEmpleadosItem(empleados);
+        }
+
+        public void DeleteEmpleadoActual(int id_item, int id_empleado)
+        {
+            var empleados = new EmpleadosXItem();
+            empleados.id_item = id_item;
+            empleados.id_empleado = id_empleado;
+            crudEmpleadoXItem.Delete(empleados);
         }
 
     }

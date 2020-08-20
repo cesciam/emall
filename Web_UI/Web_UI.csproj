@@ -29,12 +29,16 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\helpers\equal-value.validator.ts" />
+    <None Remove="ClientApp\src\app\models\bitacora.model.ts" />
     <None Remove="ClientApp\src\app\models\categoria.model.ts" />
     <None Remove="ClientApp\src\app\models\empleado-list.model.ts" />
+    <None Remove="ClientApp\src\app\models\envio.model.ts" />
     <None Remove="ClientApp\src\app\models\impuesto.model.ts" />
     <None Remove="ClientApp\src\app\models\login-usuario.model.ts" />
+    <None Remove="ClientApp\src\app\models\pago.model.ts" />
     <None Remove="ClientApp\src\app\models\registro-usuario.model.ts" />
     <None Remove="ClientApp\src\app\models\sesion-usuario.model.ts" />
+    <None Remove="ClientApp\src\app\models\transaccion.model.ts" />
     <None Remove="ClientApp\src\app\models\usuario.model.ts" />
     <None Remove="ClientApp\src\app\pipes\filter-categoria.pipe.ts" />
     <None Remove="ClientApp\src\app\pipes\filter-impuesto.pipe.ts" />
@@ -51,11 +55,15 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\helpers\equal-value.validator.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\bitacora.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\empleado-list.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\envio.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\impuesto.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\login-usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\pago.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\registro-usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\sesion-usuario.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\transaccion.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\usuario.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\pipes\filter-categoria.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\pipes\filter-impuesto.pipe.ts" />
@@ -72,6 +80,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\bitacora\" />
     <Folder Include="ClientApp\src\assets\css\landing-emall\" />
   </ItemGroup>
 
