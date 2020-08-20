@@ -24,5 +24,10 @@ namespace AppCore
         {
             return facturaCrudFactory.RetrieveLineasxFactura<LineaFactura>(lineaFactura);
         }
+
+        public List<Factura> RetrieveFacturasxUsuario(Factura factura)
+        {
+            return facturaCrudFactory.RetrieveAll<Factura>(factura);
+        }
     }
 }
