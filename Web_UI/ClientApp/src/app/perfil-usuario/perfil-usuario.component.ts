@@ -7,6 +7,8 @@ import { CitaService } from '../services/cita.service';
 import { CitaList } from '../models/CitaList';
 import { EnvioService } from '../services/envio.service';
 import { EnvioList } from '../models/envio-list.model';
+import { MultaService } from '../services/multa.service';
+import { Multa } from '../models/multa';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -25,7 +27,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
   constructor(private comercioService: ComercioService,
      private citaService: CitaService,
-     private enviosService: EnvioService) {
+    private enviosService: EnvioService,
+    private multaService: MultaService) {
     this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
   }
 
@@ -99,6 +102,29 @@ export class PerfilUsuarioComponent implements OnInit {
     comercio.idAdmin = parseInt(usuario.Id);
     this.comercioService.ObtenerComerciosAdmin(comercio)
       .subscribe(data => this.comercios = data);
+  }
+
+  cancelarCita(cita: CitaList) {
+    console.log(cita)
+
+    let multa: Multa;
+    multa = new Multa();
+
+    multa.id_usuario = 
+    multa.id_item = 0;
+    multa.id_comercio = cita.id_comercio;
+    multa.id_sucursal
+
+    this.multaService.crearMulta(add_item)
+      .subscribe(
+        (reponse) => {
+
+        },
+        (error) => {
+          this.error = "Errores en el registro";
+          window.scroll(0, 0);
+        });
+
   }
 
 }
