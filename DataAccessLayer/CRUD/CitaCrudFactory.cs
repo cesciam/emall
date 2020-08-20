@@ -24,6 +24,13 @@ namespace DataAccessLayer.CRUD
             dao.ExecuteProcedure(sqlOperation);
         }
 
+        public  void CreateCitaServicio(BaseEntity entity)
+        {
+            var cita = (Cita)entity;
+            var sqlOperation = mapper.GetCreateServiceStatement(cita);
+            dao.ExecuteProcedure(sqlOperation);
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var sqlOperacion = mapper.GetDeleteStatement(entity);

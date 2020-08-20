@@ -106,6 +106,8 @@ import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
 import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
+import { CitaServicioComponent } from './cita-servicio/cita-servicio.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
@@ -216,6 +218,9 @@ const maskConfig: Partial<IConfig> = {
     RutaComponent,
     CarritoComprasComponent,
     RealizarCompraComponent,
+    ListaDeseoComponent,
+    FiltroDireccionPipe, CitaServicioComponent,
+    RealizarCompraComponent,
     SafePipe, 
     LectorQrComponent, 
   ],
@@ -229,6 +234,7 @@ const maskConfig: Partial<IConfig> = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     NgQrScannerModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
@@ -296,6 +302,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/ruta/:id', component: RutaComponent },
       { path: 'lista-deseo', component: ListaDeseoComponent },
       { path: 'realizar-pago', component: RealizarCompraComponent },
+      { path: 'cita-servicio/:id', component: CitaServicioComponent },
       { path: 'lector-qr', component: LectorQrComponent },
     ])
   ],

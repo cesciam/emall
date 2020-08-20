@@ -131,11 +131,11 @@ export class AgregarUsuarioComponent implements OnInit {
             window.scroll(0, 0);
             this.registerComplete = true;
           }
-          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+         /* this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
             (error) => {
               this.error = error.error;
               window.scroll(0, 0);
-            });
+            });*/
         },
         (error) => {
           this.isSendingData = false;

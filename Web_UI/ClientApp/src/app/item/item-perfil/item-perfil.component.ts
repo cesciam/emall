@@ -55,7 +55,6 @@ export class ItemPerfilComponent implements OnInit {
       .subscribe(data => {
         this.comercio = data;
       });
-    console.log(this.comercio)
 
     this.preciofinal = this.item_seleccionado.precio + (this.item_seleccionado.precio / 100 * this.impuesto.Porcentaje);
     this.validarTipoCarrito();
@@ -85,13 +84,23 @@ export class ItemPerfilComponent implements OnInit {
   validarTipoCarrito() {
     if (localStorage.getItem("tipoCarrito") != null) {
 
+      var productos: Item[] = JSON.parse(localStorage.getItem('carrito'));
+
       if (localStorage.getItem("tipoCarrito") != this.item_seleccionado.tipo) {
         this.agregarProductoCarrito = true;
         this.error = 'No puede tener productos y servicios en su carrito de compra.';
+      } else if (productos[0].id_sucursal != this.item_seleccionado.id_sucursal) {
+        this.error = 'No puede tener items de diferentes sucursales.';
+        this.agregarProductoCarrito = true;
       } else {
         this.agregarProductoCarrito = false;
       }
-      
+
+      if ((localStorage.getItem("tipoCarrito") == 'Servicio') && productos.length >= 1) {
+        this.agregarProductoCarrito = true;
+        this.error = 'Solo puede tener un solo servicio en su carrito de compras.';
+      }
+
     }
   }
 
