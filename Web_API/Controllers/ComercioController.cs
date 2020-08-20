@@ -21,10 +21,7 @@ namespace Web_API.Controllers
             this.emailService = emailService;
         }
 
-        public ComercioController()
-        {
-        }
-
+   
         [HttpPost]
         public IActionResult CrearComercio(Comercio comercio)
         {
