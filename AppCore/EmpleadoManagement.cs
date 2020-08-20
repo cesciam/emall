@@ -49,6 +49,12 @@ namespace AppCore
             };
             return empleadoVm;
         }
+
+        public EmpleadoViewModel RetrieveDatosById(int id_usuario)
+        {
+             return crud.RetrieveDatosById<EmpleadoViewModel>(id_usuario);
+        }
+
         public void Update(Empleado e)
         {
             crud.Update(e);

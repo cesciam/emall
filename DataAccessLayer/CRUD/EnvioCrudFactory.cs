@@ -57,14 +57,41 @@ namespace DataAccessLayer.CRUD
             return default(T);
         }
 
+        
+
+
         public override List<T> RetrieveAll<T>()
         {
             throw new NotImplementedException();
         }
 
+        public List<T> RetrieveBySucursal<T>(int id_sucursal)
+        {
+            var list = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveBySucursalStatement(id_sucursal));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = envioMapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    list.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return list;
+        }
+
         public override void Update(BaseEntity entity)
         {
             dao.ExecuteProcedure(envioMapper.GetUpdateStatement(entity));
+        }
+
+        public void UpdateTodo(BaseEntity entity)
+        {
+            var h = (Envio)entity;
+            dao.ExecuteProcedure(envioMapper.GetUpdateTodoStatement(h));
         }
 
         public Item[] GenerarItems(Envio envio)

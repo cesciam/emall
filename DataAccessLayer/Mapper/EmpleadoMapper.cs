@@ -42,6 +42,15 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveDatosByIdStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_DATOS_EMPLEADO_ID_PR" };
+            var usuario = (Usuario)entity;
+            operation.AddIntParam("ID_USUARIO", usuario.Id);
+
+            return operation;
+        }
+
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {
             var lstResults = new List<BaseEntity>();

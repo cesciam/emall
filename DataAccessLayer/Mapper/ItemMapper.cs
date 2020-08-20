@@ -51,6 +51,13 @@ namespace DataAccessLayer.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveByEnvioStatement(int id_envio)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_ITEMS_ENVIO" };
+            operation.AddIntParam("ID_ENVIO", id_envio);
+            return operation;
+        }
+
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "MODIFICAR_ITEM" };

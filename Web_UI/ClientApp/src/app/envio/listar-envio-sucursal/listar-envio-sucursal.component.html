@@ -19,9 +19,6 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre de cliente</th>
-                  <th>Provincia</th>
-                  <th>Cantón</th>
-                  <th>Distrito</th>
                   <th>Estado</th>
                   <th></th>
                 </tr>
@@ -30,11 +27,8 @@
                 <tr *ngFor="let envio of envios">
                   <td>{{ envio.id }}</td>
                   <td>{{ envio.nombre_cliente }}</td>
-                  <td>{{ envio.provincia }}</td>
-                  <td>{{ envio.canton }}</td>
-                  <td>{{ envio.distrito }}</td>
                   <td>{{ estadoToString(envio.estado) }}</td>
-                  <td><button class="btn btn-primary" [routerLink]="['/envio-detalle', envio.id]"> Ver </button></td>
+                  <td><button class="btn btn-primary" [routerLink]="['/listar-envio-sucursal',id_sucursal,'envio-detalle', envio.id]"> Ver </button></td>
                 </tr>
               </tbody>
             </table>

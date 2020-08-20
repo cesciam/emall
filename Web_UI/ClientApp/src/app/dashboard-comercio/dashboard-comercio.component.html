@@ -91,6 +91,7 @@
             </div>
           </a>
         </div>
+        
 
       </div>
 
@@ -112,6 +113,11 @@
               <td>
                 <a [routerLink]="['/item-sucursal', sucursal.id]">
                   <button type="button" class="btn btn-primary" *ngIf="permisoProductos">Items de sucursal</button>
+                </a>
+              </td>
+              <td>
+                <a [routerLink]="['/listar-envio-sucursal', sucursal.id]">
+                  <button type="button" class="btn btn-primary" *ngIf="permisoEnvios">Envíos</button>
                 </a>
               </td>
               <td>

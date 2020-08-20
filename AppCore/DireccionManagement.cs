@@ -63,6 +63,11 @@ namespace AppCore {
             return this.crudDireccion.RetrieveByUsuario<Direccion>(usuarioId);
         }
 
+        public Direccion RetrieveActivaByUserId(int usuarioId)
+        {
+            return this.crudDireccion.RetrieveActivaByUsuario<Direccion>(usuarioId);
+        }
+
         public void Update(Direccion Direccion) {
             this.crudDireccion.Update(Direccion);
         }
