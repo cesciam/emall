@@ -28,7 +28,7 @@ namespace TelegramChatBot
         private static UsuarioManagement usuarios = new UsuarioManagement();
         private static CitaManagement citas = new CitaManagement();
 
-       static string[] datosCitas = new string[6]; 
+       static string[] datosCitas = new string[7]; 
         static void Main(string[] args)
         {
             //Método que se ejecuta cuando se recibe un mensaje
@@ -54,9 +54,11 @@ namespace TelegramChatBot
 
             if(message.ReplyToMessage != null && message.ReplyToMessage.Text.Equals("Ingrese la fecha, la hora de inicio, la hora de fin de la cita"))
             {
+                try
+                {
                     int id = Int32.Parse(datosCitas[2]);
                     int item = Int32.Parse(datosCitas[1]);
-                    int sucursal = Int32.Parse(datosCitas[3]); 
+                    int sucursal = Int32.Parse(datosCitas[3]);
                     DateTime fecha = DateTime.Parse(message.Text.Split(",")[0]);
                     string hora_inicio = message.Text.Split(",")[1];
                     string hora_fin = message.Text.Split(",")[2];
@@ -98,45 +100,54 @@ namespace TelegramChatBot
                             message.Chat.Id,
                             "¡La cita ha sido registrada exitosamente!",
                             replyMarkup: keyboardAprobado);
+
+                        return;
                 }
-              
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); }
 
             }
 
             if(message.ReplyToMessage != null && message.ReplyToMessage.Text.Equals("Debe iniciar sesión antes de sacar un cita, ingrese su correo electrónico y contraseña separados por una coma"))
             {
-             
-                var correo = message.Text.Split(",")[0];  
-                var contrasenna = message.Text.Split(",")[1];
-                Usuario usuario_valido = LogIn(correo, contrasenna); 
-
-                if(usuario_valido.Id !=0)
+                try
                 {
-                    var keyboardCitas = new InlineKeyboardMarkup(new[]
-                         {
+
+
+                    int item = Int32.Parse(datosCitas[1]);
+                    int sucursal = Int32.Parse(datosCitas[3]);
+                    var correo = message.Text.Split(",")[0];
+                    var contrasenna = message.Text.Split(",")[1];
+                    Usuario usuario_valido = LogIn(correo, contrasenna);
+
+                    if (usuario_valido.Id != 0)
+                    {
+                        var keyboardCitas = new InlineKeyboardMarkup(new[]
+                             {
                     new []
                     {
                         InlineKeyboardButton.WithCallbackData(
-                            text:"Continuar con el registro",
-                            callbackData: "comercios:"+ usuario_valido.Id),//lo que se manda al case
+                            text:"Continuar con el registro de la cita",
+                            callbackData: "nuevaCita:"+ usuario_valido.Id+":"+item+":"+sucursal),//lo que se manda al case
                        
                     }
                 });
 
-                    await Bot.SendTextMessageAsync(
-                            message.Chat.Id,
-                            "Elija una opción",
-                            replyMarkup: keyboardCitas);
+                        await Bot.SendTextMessageAsync(
+                                message.Chat.Id,
+                                "Elija una opción",
+                                replyMarkup: keyboardCitas);
 
-                    return;
-                }
-                else
-                {
+                        return;
+                    }
+                    else
+                    {
 
-                    await Bot.SendTextMessageAsync(
-                      message.Chat.Id,
-                     "Debe registrarse primero dentro de la plataforma");
-                }
+                        await Bot.SendTextMessageAsync(
+                          message.Chat.Id,
+                         "Debe registrarse primero dentro de la plataforma");
+                    }
+                }catch(Exception e) { Console.WriteLine(e.Message); }
             }
 
                 if (message == null || message.Type != MessageType.Text) return;
@@ -309,16 +320,36 @@ namespace TelegramChatBot
                     int count1 = 0;
                     foreach (var list in listItem)
                     {
-                        //VALIDACION QUE SOLO SEAN SERVICIOS
+
+                        if (list.tipo.Equals("Servicio"))
+                        {
                             var row = new[]
-                            {
+                           {
                      InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "itemOpciones:"+usuario_2+":"+list.id+":"+id_sucursal)
 
                  };
                             BotItem[count1] = row;
                             count1++;
-                        
-                       
+                        }
+                        else
+                        {
+                            var sucursalError = new InlineKeyboardMarkup(new[]
+                    {
+                    new []
+                    {
+                       InlineKeyboardButton.WithCallbackData(
+                            text:"Comercios",
+                            callbackData: "comercios: "+usuario_2),//lo que se manda al case
+                    }
+                });
+                            await Bot.SendTextMessageAsync(
+                             chatId: callbackQuery.Message.Chat.Id,
+                             text: "No se encontraron servicios, ingrese a un nuevo comercio: ",
+                             replyMarkup: sucursalError);
+
+                            return;
+                        }
+
                     }
 
                     await Bot.SendTextMessageAsync(
@@ -349,6 +380,12 @@ namespace TelegramChatBot
 
                 case "nuevaCita":
 
+                    var id_item = Int32.Parse(callbackQuery.Data.Split(":")[2]);
+                    var idSucursal = Int32.Parse(callbackQuery.Data.Split(":")[3]);
+
+                    datosCitas[1] = id_item.ToString();
+                    datosCitas[3] = idSucursal.ToString();
+
                     int id_usuario = Int32.Parse(callbackQuery.Data.Split(":")[1]);//id del usuario pos 1
 
 
@@ -362,10 +399,6 @@ namespace TelegramChatBot
                     else
                     {
                    
-
-                            var id_item = Int32.Parse(callbackQuery.Data.Split(":")[2]);
-                            var idSucursal = Int32.Parse(callbackQuery.Data.Split(":")[3]);
-
                             List<EmpleadosXItem> empleados = new List<EmpleadosXItem>();
 
                             empleados = items.obtenerEmpleadosItem(id_item);
@@ -392,9 +425,9 @@ namespace TelegramChatBot
                                 count3++;
 
                                 datosCitas[0] = list.id_empleado.ToString();
-                                datosCitas[1] = id_item.ToString();
+                                
                                 datosCitas[2] = id_usuario.ToString();
-                                datosCitas[3] = idSucursal.ToString();
+                                
 
                             }
 
@@ -444,7 +477,8 @@ namespace TelegramChatBot
                 id_empleado = Int32.Parse(datosCitas[0]),
                 fecha = DateTime.Parse(datosCitas[4]),
                 hora_inicio = DateTime.Parse(datosCitas[5]),
-                hora_fin = DateTime.Parse(datosCitas[6])
+                hora_fin = DateTime.Parse(datosCitas[6]),
+                id_sucursal = Int32.Parse(datosCitas[3])
             };
 
             if(citas.CreateCitaServicio(cita) ==0)
