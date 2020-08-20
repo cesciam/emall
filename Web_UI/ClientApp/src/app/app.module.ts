@@ -112,7 +112,8 @@ import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
-import { EnvioDetalleClienteComponent } from './envio/envio-detalle-cliente/envio-detalle-cliente.component';;
+import { EnvioDetalleClienteComponent } from './envio/envio-detalle-cliente/envio-detalle-cliente.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -237,6 +238,7 @@ const maskConfig: Partial<IConfig> = {
     ReactiveFormsModule,
     NgbModule,
     NgQrScannerModule,
+    QRCodeModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },

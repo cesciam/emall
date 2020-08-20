@@ -6,6 +6,8 @@ import { EnvioList } from 'src/app/models/envio-list.model';
 import { Envio } from 'src/app/models/envio.model';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { Sucursal } from 'src/app/models/Sucursal';
+import { Impuesto } from 'src/app/models/impuesto.model';
+import { ItemService } from 'src/app/services/item.service';
 
 @Component({
   selector: 'app-envio-detalle-cliente',
@@ -18,10 +20,14 @@ export class EnvioDetalleClienteComponent implements OnInit {
   private envioList: EnvioList;
   private envio: Envio;
   private sucursal: Sucursal;
+  private total: number = 0;
 
   constructor(private service : EnvioService,
     private activatedRoute: ActivatedRoute,
-    private serviceSucursal: SucursalService) { }
+    private serviceSucursal: SucursalService,
+    private serviceItem: ItemService,) { 
+      
+    }
 
   ngOnInit() {
     this.id_envio = parseInt(this.activatedRoute.snapshot.paramMap.get('id_envio'));
@@ -44,9 +50,18 @@ export class EnvioDetalleClienteComponent implements OnInit {
     this.service.obtenerEnvioPorId(this.id_envio).subscribe(
       data=>{
         this.envio=data;
+        this.calcularTotal()
         this.obtenerSucursal()
       }
     )
+  }
+
+  async calcularTotal(){
+    this.envio.items.forEach(async element => {
+      let impuesto: Impuesto = await this.serviceItem.ObtenerImpuestoItem(element.id_impuesto);
+      element.precio = element.precio + (element.precio / 100 * impuesto.Porcentaje);
+        this.total = this.total + element.precio;
+    });
   }
 
   obtenerSucursal(){

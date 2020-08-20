@@ -71,7 +71,7 @@ export class PerfilUsuarioComponent implements OnInit {
   obtenerPedidos(id:number){
     this.enviosService.obtenerEnvioListPorUsuario(id).subscribe(
       data=>{
-        this.pedidos=data;
+        this.pedidos = data;
       }
     )
   }
