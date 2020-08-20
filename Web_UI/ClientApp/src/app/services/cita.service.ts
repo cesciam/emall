@@ -41,4 +41,14 @@ export class CitaService {
       })
     });
   }
+
+  registrarCitaProducto(cita: Cita): Observable<void> {
+    this.serviceEndPoint = '/cita/RegistrarCitaProducto';
+
+    return this.http.post<void>(this.baseURL + this.serviceEndPoint, cita, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
+  }
 }
