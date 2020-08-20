@@ -23,7 +23,10 @@ export class PerfilUsuarioComponent implements OnInit {
   private image: string;
 
   private citas: CitaList[];
-  private pedidos : EnvioList[];
+  private pedidos: EnvioList[];
+
+  private error: any;
+  private id_usuario: number;
 
   constructor(private comercioService: ComercioService,
      private citaService: CitaService,
@@ -35,6 +38,7 @@ export class PerfilUsuarioComponent implements OnInit {
   ngOnInit() {
     let usuarioBuscar: any = JSON.parse(localStorage.getItem('usuario-logueado'));
     let usuarioActivado: Usuario = usuarioBuscar.usuario;
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
 
     if (this.usuarioLogueado['usuario'].Foto != null) {
       this.image = this.usuarioLogueado['usuario'].Foto.enlace;
@@ -105,17 +109,18 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   cancelarCita(cita: CitaList) {
-    console.log(cita)
+    
 
     let multa: Multa;
     multa = new Multa();
 
-    multa.id_usuario = 
+    multa.id_usuario = this.id_usuario;
     multa.id_item = 0;
     multa.id_comercio = cita.id_comercio;
-    multa.id_sucursal
-
-    this.multaService.crearMulta(add_item)
+    multa.id_sucursal = cita.id_sucursal;
+    multa.fecha = cita.fecha;
+    console.log(multa)
+    this.multaService.crearMulta(multa)
       .subscribe(
         (reponse) => {
 
