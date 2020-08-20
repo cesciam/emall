@@ -54,11 +54,52 @@ namespace TelegramChatBot
 
             if(message.ReplyToMessage != null && message.ReplyToMessage.Text.Equals("Ingrese la fecha, la hora de inicio, la hora de fin de la cita"))
             {
-                DateTime fecha = DateTime.Parse(message.Text.Split(",")[0]);
-                string hora_inicio = message.Text.Split(",")[1];
-                string hora_fin = message.Text.Split(",")[2];
+                    int id = Int32.Parse(datosCitas[2]);
+                    int item = Int32.Parse(datosCitas[1]);
+                    int sucursal = Int32.Parse(datosCitas[3]); 
+                    DateTime fecha = DateTime.Parse(message.Text.Split(",")[0]);
+                    string hora_inicio = message.Text.Split(",")[1];
+                    string hora_fin = message.Text.Split(",")[2];
 
-                RegistroCitas(fecha, hora_inicio, hora_fin); 
+                    int aprobado = RegistroCitas(fecha, hora_inicio, hora_fin);
+                
+                if(aprobado == 0)
+                {
+                    var keyboardCitas = new InlineKeyboardMarkup(new[]
+                         {
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData(
+                            text:"Modificar cita",
+                            callbackData: "nuevaCita:"+ id+":"+item+":"+sucursal),//lo que se manda al case
+                       
+                    }
+                });
+
+                    await Bot.SendTextMessageAsync(
+                            message.Chat.Id,
+                            "La hora elegida o el empleado no se encuentran disponibles",
+                            replyMarkup: keyboardCitas);
+                }
+                else
+                {
+                    var keyboardAprobado = new InlineKeyboardMarkup(new[]
+                         {
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData(
+                            text:"Comercios",
+                            callbackData: "comercios:"+ id),//lo que se manda al case
+                       
+                    }
+                });
+
+                    await Bot.SendTextMessageAsync(
+                            message.Chat.Id,
+                            "¡La cita ha sido registrada exitosamente!",
+                            replyMarkup: keyboardAprobado);
+                }
+              
 
             }
 
@@ -202,7 +243,7 @@ namespace TelegramChatBot
                     {
                         var row = new[]
                         {
-                     InlineKeyboardButton.WithCallbackData(text: list.Nombre,callbackData: "opcionesSucursales:"+list.Id+ ":"+ usuario_1+":"+list.Id)
+                     InlineKeyboardButton.WithCallbackData(text: list.Nombre,callbackData: "opcionesSucursales:"+usuario_1+ ":"+ list.Id)
 
                  };
                         Botsucursales[iterable] = row;
@@ -225,10 +266,10 @@ namespace TelegramChatBot
                     {
                         InlineKeyboardButton.WithCallbackData(
                             text:"Dirección",
-                            callbackData: "direccion: "+Int32.Parse(callbackQuery.Data.Split(":")[1])),//lo que se manda al case
+                            callbackData: "direccion: "+Int32.Parse(callbackQuery.Data.Split(":")[2])),//lo que se manda al case
                        InlineKeyboardButton.WithCallbackData(
                             text:"Servicios",
-                            callbackData: "servicios: "+ Int32.Parse(callbackQuery.Data.Split(":")[1])+":"+Int32.Parse(callbackQuery.Data.Split(":")[2])+":"+Int32.Parse(callbackQuery.Data.Split(":")[3])),//lo que se manda al case
+                            callbackData: "servicios: "+ Int32.Parse(callbackQuery.Data.Split(":")[1])+":"+Int32.Parse(callbackQuery.Data.Split(":")[2])),//lo que se manda al case
                     }
                 });
                     await Bot.SendTextMessageAsync(
@@ -256,13 +297,13 @@ namespace TelegramChatBot
                 case "servicios":
 
                   
-                    var Id = Int32.Parse(callbackQuery.Data.Split(":")[1]);
-                    var usuario_2 = Int32.Parse(callbackQuery.Data.Split(":")[2]);
-                    var id_sucursal = Int32.Parse(callbackQuery.Data.Split(":")[3]);
+                    //var Id = Int32.Parse(callbackQuery.Data.Split(":")[1]);
+                    var usuario_2 = Int32.Parse(callbackQuery.Data.Split(":")[1]);
+                    var id_sucursal = Int32.Parse(callbackQuery.Data.Split(":")[2]);
 
                     List<Item> listItem = new List<Item>();
 
-                    listItem = items.RetrieveAllBySucursal(Id); 
+                    listItem = items.RetrieveAllBySucursal(id_sucursal); 
 
                     var BotItem = new InlineKeyboardButton[listItem.Count()][];
                     int count1 = 0;
@@ -271,7 +312,7 @@ namespace TelegramChatBot
                         //VALIDACION QUE SOLO SEAN SERVICIOS
                             var row = new[]
                             {
-                     InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "itemOpciones:"+list.id+":"+usuario_2+":"+id_sucursal)
+                     InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "itemOpciones:"+usuario_2+":"+list.id+":"+id_sucursal)
 
                  };
                             BotItem[count1] = row;
@@ -308,7 +349,8 @@ namespace TelegramChatBot
 
                 case "nuevaCita":
 
-                    int id_usuario = Int32.Parse(callbackQuery.Data.Split(":")[2]);//id del usuario 
+                    int id_usuario = Int32.Parse(callbackQuery.Data.Split(":")[1]);//id del usuario pos 1
+
 
                     if (id_usuario == 0)
                     {
@@ -319,48 +361,48 @@ namespace TelegramChatBot
                     }
                     else
                     {
+                   
 
-                        var id_item = Int32.Parse(callbackQuery.Data.Split(":")[1]);
-                        var idSucursal = Int32.Parse(callbackQuery.Data.Split(":")[3]);
+                            var id_item = Int32.Parse(callbackQuery.Data.Split(":")[2]);
+                            var idSucursal = Int32.Parse(callbackQuery.Data.Split(":")[3]);
 
-                        List<EmpleadosXItem> empleados = new List<EmpleadosXItem>();
+                            List<EmpleadosXItem> empleados = new List<EmpleadosXItem>();
 
-                        empleados = items.obtenerEmpleadosItem(id_item);
+                            empleados = items.obtenerEmpleadosItem(id_item);
 
-                        var BotEmpleado = new InlineKeyboardButton[empleados.Count()][];
-                        int count3 = 0;
-                        foreach (var list in empleados)
-                        {
-                            var nuevo_empleado = new Empleado { id = list.id_empleado };
-
-                            Empleado nombre_empleado = empleado.RetrieveById(nuevo_empleado);
-
-                            var usuario_empleado = new Usuario { Id = nombre_empleado.id_usuario };
-
-                            Usuario usuarioMostrar = usuarios.RetrieveById(usuario_empleado);
-
-                            //VALIDACION QUE SOLO SEAN SERVICIOS
-                            var row = new[]
+                            var BotEmpleado = new InlineKeyboardButton[empleados.Count()][];
+                            int count3 = 0;
+                            foreach (var list in empleados)
                             {
+                                var nuevo_empleado = new Empleado { id = list.id_empleado };
+
+                                Empleado nombre_empleado = empleado.RetrieveById(nuevo_empleado);
+
+                                var usuario_empleado = new Usuario { Id = nombre_empleado.id_usuario };
+
+                                Usuario usuarioMostrar = usuarios.RetrieveById(usuario_empleado);
+
+                                //VALIDACION QUE SOLO SEAN SERVICIOS
+                                var row = new[]
+                                {
                      InlineKeyboardButton.WithCallbackData(text: usuarioMostrar.Nombre,callbackData: "datosCita:"+ list.id_empleado + ":"+id_item +":" +id_usuario+":" +idSucursal)//mas el id del cliente ,mas el item 
 
                  };
-                            BotEmpleado[count3] = row;
-                            count3++;
+                                BotEmpleado[count3] = row;
+                                count3++;
 
-                            datosCitas[0] =  list.id_empleado.ToString();
-                            datosCitas[1] = id_item.ToString();
-                            datosCitas[2] = id_usuario.ToString();
-                            datosCitas[3] = idSucursal.ToString(); 
+                                datosCitas[0] = list.id_empleado.ToString();
+                                datosCitas[1] = id_item.ToString();
+                                datosCitas[2] = id_usuario.ToString();
+                                datosCitas[3] = idSucursal.ToString();
 
-                      
-                        }
+                            }
 
-                        await Bot.SendTextMessageAsync(
-                           chatId: callbackQuery.Message.Chat.Id,
-                           text: "Empleados disponibles:",
-                           replyMarkup: new InlineKeyboardMarkup(BotEmpleado));
-
+                            await Bot.SendTextMessageAsync(
+                               chatId: callbackQuery.Message.Chat.Id,
+                               text: "Empleados disponibles:",
+                               replyMarkup: new InlineKeyboardMarkup(BotEmpleado));
+                        
                     }
 
                     break;
@@ -389,15 +431,30 @@ namespace TelegramChatBot
             return null;
         }
 
-        private static void RegistroCitas(DateTime fecha, string hora_inicio, string hora_fin)
+        private static int RegistroCitas(DateTime fecha, string hora_inicio, string hora_fin)
         {
             datosCitas[4] = fecha.ToString();
             datosCitas[5] = hora_inicio;
             datosCitas[6] = hora_fin;
 
-            var cita = new Cita { 
-           
+            var cita = new Cita
+            {
+                id_item = Int32.Parse(datosCitas[1]),
+                id_cliente = Int32.Parse(datosCitas[2]),
+                id_empleado = Int32.Parse(datosCitas[0]),
+                fecha = DateTime.Parse(datosCitas[4]),
+                hora_inicio = DateTime.Parse(datosCitas[5]),
+                hora_fin = DateTime.Parse(datosCitas[6])
             };
+
+            if(citas.CreateCitaServicio(cita) ==0)
+            {
+                return 0; 
+            }
+            else
+            {
+                return 1; 
+            }
 
 
         }
