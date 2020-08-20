@@ -22,24 +22,24 @@
               </h5>
             </div>
 
-            <div class="col" *ngIf="usuarioLogueado.usuario.Tipo != 4">
-              <a [routerLink]="['/registrar-comercio']"> <button class="profile-edit-btn">Registrar comercio</button>
+            <div class="md-auto" *ngIf="usuarioLogueado.usuario.Tipo != 4">
+              <a [routerLink]="['/registrar-comercio']"> <button class="btn btn-outline-secondary btn-sm">Registrar comercio</button>
               </a>
             </div>
-
-            <div class="col">
-              <button class="profile-edit-btn" (click)="changeSection('edit-profile')">Editar perfil</button>
+            &nbsp;
+            <div class="md-auto">
+              <button class="btn btn-outline-secondary btn-sm" (click)="changeSection('edit-profile')">Editar perfil</button>
             </div>
-
-            <div class="col">
-              <a [routerLink]="['/direcciones/listar-direccion']"> <button class="profile-edit-btn">Mis direcciones</button></a>
+            &nbsp;
+            <div class="md-auto">
+              <a [routerLink]="['/direcciones/listar-direccion']"> <button class="btn btn-outline-secondary btn-sm">Mis direcciones</button></a>
             </div>
-
-            <div class="col">
-              <a [routerLink]="['/lista-deseo']"> <button class="profile-edit-btn">Lista de Deseo</button></a>
+            &nbsp;
+            <div class="md-auto">
+              <a [routerLink]="['/lista-deseo']"> <button class="btn btn-outline-secondary btn-sm">Lista de Deseo</button></a>
             </div>
           </div>
-
+          <br>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -48,6 +48,10 @@
             <li class="nav-item">
               <a class="nav-link" id="cita-tab" data-toggle="tab" href="#cita" role="tab" aria-controls="cita"
                 aria-selected="false">Citas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pedidos-tab" data-toggle="tab" href="#pedidos" role="tab" aria-controls="pedidos"
+                aria-selected="false">Pedidos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
@@ -122,6 +126,33 @@
               </div>
             </div>
 
+            <!-- pedidos -->
+            <div class="tab-pane fade" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
+              <div *ngIf="pedidos; else noDisponiblePedidos">
+                <table class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Id</th>
+                      <th class="text-center">Sucursal</th>
+                      <th class="text-center">Estado</th>
+                      <th class="text-center"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let pedido of pedidos">
+                      <td>{{pedido.id}}</td>
+                      <td></td>
+                      <td>{{estadoPedidoToString(pedido.estado)}}</td>
+                      <td>
+                        <button class="btn btn-primary">Ver</button>
+                      </td>
+                    </tr>
+  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <!--Inicio del timeline-->
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
@@ -176,5 +207,12 @@
 
     <p>Sin citas registradas</p>
   
+
+</ng-template>
+
+<ng-template #noDisponiblePedidos>
+
+  <p>Sin pedidos registradas</p>
+
 
 </ng-template>
