@@ -111,6 +111,12 @@ namespace Web_API.Controllers
             }
         }
 
+        public List<Factura> ObtenerFacturasxUsuario(int IdUsuario)
+        {
+            var factura = new Factura { IdUsuario = IdUsuario };
+            return facturaManagement.RetrieveFacturasxUsuario(factura);
+        }
+
         public string GetHtmlString(Object[] pagoContainer)
         {
             Factura factura = (Factura)pagoContainer[0];
@@ -151,7 +157,7 @@ namespace Web_API.Controllers
                             "<p>Nombre de cliente: " + factura.NombreUsuario + " " + factura.ApellidoUsuario + "</p>" +
                             "<p>Items:</p>" + GetStringLineasFactura((List<LineaFactura>)pagoContainer[2]) +
                             "<p>Nombre de sucursal: " + factura.NombreSucursal + "</p>" +
-                            "<p>Total: " + transaccion.Monto + "</p>" +
+                            "<p>Total: ₡" + transaccion.Monto + "</p>" +
                         "</div>"+
                     "</div>" +
                 "</body>" +

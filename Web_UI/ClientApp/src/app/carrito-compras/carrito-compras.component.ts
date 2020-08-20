@@ -4,6 +4,7 @@ import { ItemService } from '../services/item.service';
 import { Impuesto } from '../models/impuesto.model';
 import { CarritoComprasService } from '../services/carrito-compras.service';
 import { Envio } from '../models/envio.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -19,7 +20,7 @@ export class CarritoComprasComponent implements OnInit {
   usuarioLogueado: object = null;
   error: any;
 
-  constructor(private serviceItem: ItemService, private carritoComprasService: CarritoComprasService) {
+  constructor(private serviceItem: ItemService, private carritoComprasService: CarritoComprasService, private router: Router) {
     this.tipoCarrito = localStorage.getItem('tipoCarrito');
   }
 
@@ -83,12 +84,19 @@ export class CarritoComprasComponent implements OnInit {
     this.carritoComprasService.registrarEnvio(envio)
       .subscribe(
         (response) => {
-          
+          localStorage.removeItem('carrito');
+          localStorage.removeItem('tipoCarrito');
+          this.carritoLocalStorage = null;
+          this.router.navigate(['/']);
         },
         (error) => {
           this.error = 'Algo salió mal al registar su envío. Inténtelo más tarde.';
           window.scroll(0, 0);
         });
+  }
+
+  agendarCita() {
+
   }
 
 }

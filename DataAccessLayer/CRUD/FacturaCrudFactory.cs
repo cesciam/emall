@@ -80,6 +80,34 @@ namespace DataAccessLayer.CRUD
             throw new NotImplementedException();
         }
 
+        public List<T> RetrieveAll<T>(BaseEntity entity)
+        {
+            var listaFacturas = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(facturaMapper.GetRetriveAllStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = facturaMapper.BuildObjects(lstResult);
+                foreach (var c in objs)
+                {
+                    listaFacturas.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            var lineaFactura = new LineaFactura();
+            foreach (var f in listaFacturas)
+            {
+                var factura = (Factura)Convert.ChangeType(f, typeof(Factura));
+                lineaFactura.IdFactura = factura.Id;
+                factura.LineasFactura = RetrieveLineasxFactura<LineaFactura>(lineaFactura).ToArray();
+
+            }
+
+
+            return listaFacturas;
+        }
+
         public override void Update(BaseEntity entity)
         {
             throw new NotImplementedException();

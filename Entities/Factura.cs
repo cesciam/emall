@@ -50,5 +50,7 @@ namespace Entities
         public string NombrePromocion { get; set; }
         [JsonPropertyName("porcentaje")]
         public double Porcentaje { get; set; }
+        [JsonPropertyName("lineas")]
+        public LineaFactura[] LineasFactura { get; set; }
     }
 }

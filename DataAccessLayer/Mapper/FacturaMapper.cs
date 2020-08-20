@@ -110,6 +110,14 @@ namespace DataAccessLayer.Mapper
             throw new NotImplementedException();
         }
 
+        public SqlOperation GetRetriveAllStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_TODO_FACTURASXUSUARIO" };
+            var factura = (Factura)entity;
+            operation.AddIntParam(DB_COL_ID_USUARIO, factura.IdUsuario);
+            return operation;
+        }
+
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
             throw new NotImplementedException();
