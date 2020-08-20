@@ -24,7 +24,8 @@ namespace DataAccessLayer.Mapper
                 Id = GetIntValue(row, DB_COL_ID),
                 Estado = GetIntValue(row, DB_COL_ESTADO),
                 IdEmpleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
-                IdCliente = GetIntValue(row, DB_COL_ID_CLIENTE)
+                IdCliente = GetIntValue(row, DB_COL_ID_CLIENTE),
+                Codigo = GetStringValue(row, DB_COL_CODIGO)
             };
 
             return envio;
@@ -114,7 +115,7 @@ namespace DataAccessLayer.Mapper
         {
             var e = (Envio)entity;
 
-            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ENVIO" };
+            var operation = new SqlOperation { ProcedureName = "MODIFICAR_ENVIO_PR" };
             operation.AddIntParam(DB_COL_ID, e.Id);
             operation.AddIntParam(DB_COL_ESTADO, e.Estado);
             operation.AddIntParam(DB_COL_ID_EMPLEADO, e.IdEmpleado);

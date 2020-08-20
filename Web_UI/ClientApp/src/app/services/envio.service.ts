@@ -39,8 +39,22 @@ export class EnvioService {
       return this.http.get<EnvioList>(endpointUrl)
     }
 
+    obtenerEnvioListPorUsuario(id:number){
+      let endpointUrl = this.baseUrl + '/Envio/RetrieveEnvioListByUsuario?id='+id;
+      return this.http.get<EnvioList[]>(endpointUrl)
+    }
+
     modificarEnvio(envio:Envio){
       return this.http.put(this.baseUrl+'/Envio/Update', envio)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+    }
+
+    envioExitoso(envio:Envio){
+      return this.http.put(this.baseUrl+'/Envio/EnvioExitoso', envio)
       .pipe(
         catchError((error) => {
           return throwError(error);

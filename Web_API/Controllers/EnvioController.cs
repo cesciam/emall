@@ -109,6 +109,21 @@ namespace Web_API.Controllers
             {
                 var hm = new EnvioManagement();
                 hm.UpdateTodo(c);
+
+                var enviolist = this.envioManagement.RetrieveEnvioListByid(c.Id);
+                Usuario usuario = new Usuario { Id = c.IdCliente };
+
+                usuario = new UsuarioManagement().RetrieveById(usuario);
+
+                this.emailService.Send(new EmailModel
+                {
+                    To = usuario.Correo,
+                    Subject = "Pedido en camino",
+                    Message = "<h1>Su pedido va en camino</h1><br>" +
+                             "<p>Para confirmar su identidad, el colaborador le solicitará el siguiente código:</p>" +
+                             "<p>"+c.Codigo+"</p>"
+                });
+
                 return Ok();
             }
             catch (Exception ex)

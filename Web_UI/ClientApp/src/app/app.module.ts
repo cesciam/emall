@@ -109,7 +109,7 @@ import { RealizarCompraComponent } from './realizar-compra/realizar-compra.compo
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
-import { NgQrScannerModule } from 'angular2-qrscanner';
+import { NgQrScannerModule } from 'angular2-qrscanner';;
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -217,7 +217,7 @@ const maskConfig: Partial<IConfig> = {
     CarritoComprasComponent,
     RealizarCompraComponent,
     SafePipe, 
-    LectorQrComponent,
+    LectorQrComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),

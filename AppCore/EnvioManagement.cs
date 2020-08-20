@@ -85,7 +85,7 @@ namespace AppCore
                     envioList.nombre_cliente = cliente.Nombre +" "+ cliente.Apellido;
                     
                     envioList.estado = envio.Estado;
-                    envioList.codigo = "falta backend";
+                    envioList.codigo = envio.Codigo;
 
                     lstEnviosList.Add(envioList);
                 }
@@ -103,7 +103,6 @@ namespace AppCore
             var um = new UsuarioManagement();
             var em = new EmpleadoManagement();
             var envioList = new EnvioListViewModel();
-            var lstEnviosList = new List<EnvioListViewModel>();
             if (envio!= null)
             {
                     var direccion = dm.RetrieveActivaByUserId(envio.IdCliente);
@@ -128,9 +127,8 @@ namespace AppCore
                     envioList.nombre_cliente = cliente.Nombre + " " + cliente.Apellido;
 
                     envioList.estado = envio.Estado;
-                    envioList.codigo = "falta backend";
+                    envioList.codigo = envio.Codigo;
 
-                    lstEnviosList.Add(envioList);
                 
             }
 

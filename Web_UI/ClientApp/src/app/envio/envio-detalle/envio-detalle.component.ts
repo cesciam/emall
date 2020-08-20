@@ -22,16 +22,21 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
   private sucursal: number
   private items: Item[]
   private id_envio: number;
-
   private lat;
   private lng;
   public link2: string
 
+  public usuarioEsEmpleado: boolean;
   public envioAceptado: boolean;
+  public codigoConfirmado : boolean;
+  public botonAceptar: boolean;
+
   public empleado : EmpleadoList;
-  public codigoIngresado: string;
+  public codigoIngresado: string = ""
   public error: boolean;
   public errorMessage: string;
+  public alerta:boolean;
+  public mensajeAlerta: string;
 
   constructor(private service: EnvioService,
     private activatedRoute: ActivatedRoute,
@@ -63,7 +68,8 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
   });
 
   this.qrScannerComponent.capturedQr.subscribe(result => {
-      console.log(result);
+    this.verificarResultadoQr(result)
+    console.log(result);
   });
   }
 
@@ -78,6 +84,7 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
   inicializar(){
     this.envioList = new EnvioList
     this.envio = new Envio
+    this.empleado = new EmpleadoList;
   }
 
   obtenerDatosEnvio() {
@@ -93,8 +100,20 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
       data => {
         this.envio = data;
         this.items = this.envio.items;
+        this.validacionBotones();
       })
+      
   }
+
+  validacionBotones(){
+    if(this.envio.estado==1){
+      this.envioAceptado = true;
+      this.botonAceptar = false;
+    }else{
+      this.botonAceptar = true;
+    }
+  }
+
 
   obtenerEmpleado(){
     let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
@@ -104,19 +123,29 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
       this.empleadoService.getByIdUsuario(parseInt(usuarioLogueado.Id)).subscribe(
         data=>{
           this.empleado = data;
+          this.usuarioEsEmpleado= true;
         }
       )
     }else{
-      this.empleado.Id = null;
+      this.usuarioEsEmpleado=false;
+    }
+  }
+
+  verificarResultadoQr(resultado:string){
+    if(resultado.match(this.envio.codigo)){
+      //envio verificado
+      //cerrar modal
+    }else{
+      //error Qr no matchea
     }
   }
 
   aceptarEnvio(){
-    this.envioAceptado= true;
     this.envio.estado= 1;
     this.envio.idEmpleado = this.empleado.Id;
     this.service.modificarEnvio(this.envio).subscribe(res=>{
       this.obtenerDatosEnvio();
+      console.log("se modificO")
     })
   }
 
@@ -131,13 +160,24 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
     }
   }
 
+  botonConfirmar:boolean = true;
+
   confirmacionManual(){
-    if(this.codigoIngresado.match(this.envioList.codigo)){
-      console.log("confimado hostia")
+    if(this.codigoIngresado.match(this.envio.codigo)){
+      this.error=false;
+      this.codigoConfirmado = true;
+      this.botonConfirmar = false;
+      this.alerta = true;
+      this.mensajeAlerta = "Identidad confirmada"
+      this.envioAceptado = false;
     }else{
-      this.errorMessage="Código incorrecto"
+      this.errorMessage="El código "+this.codigoIngresado+" es incorrecto"
       this.error=true;
     }
+  }
+
+  finalizarEnvio(){
+    this.service.envioExitoso(this.envio).subscribe()
   }
 
 }
