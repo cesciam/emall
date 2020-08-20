@@ -106,6 +106,8 @@ import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
 import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
+import { CitaServicioComponent } from './cita-servicio/cita-servicio.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -211,7 +213,9 @@ const maskConfig: Partial<IConfig> = {
     ListaDeseoComponent, 
     RutaComponent,
     CarritoComprasComponent,
-    RealizarCompraComponent
+    RealizarCompraComponent,
+    ListaDeseoComponent,
+    FiltroDireccionPipe, CitaServicioComponent,
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -223,6 +227,7 @@ const maskConfig: Partial<IConfig> = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -289,6 +294,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/ruta/:id', component: RutaComponent },
       { path: 'lista-deseo', component: ListaDeseoComponent },
       { path: 'realizar-pago', component: RealizarCompraComponent },
+      { path: 'cita-servicio/:id', component: CitaServicioComponent },
     ])
   ],
   exports: [

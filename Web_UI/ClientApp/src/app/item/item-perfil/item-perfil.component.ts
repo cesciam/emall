@@ -55,7 +55,6 @@ export class ItemPerfilComponent implements OnInit {
       .subscribe(data => {
         this.comercio = data;
       });
-    console.log(this.comercio)
 
     this.preciofinal = this.item_seleccionado.precio + (this.item_seleccionado.precio / 100 * this.impuesto.Porcentaje);
     this.validarTipoCarrito();
