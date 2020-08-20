@@ -6,4 +6,5 @@ export class Cita{
     fecha: Date;
     hora_inicio: Date;
     hora_fin: Date;
+    id_sucursal: number;
 }

@@ -37,6 +37,11 @@ namespace Utils {
                 mailMessage.Subject = emailModel.Subject;
                 mailMessage.IsBodyHtml = true;
 
+                if (emailModel.Attachment != null)
+                {
+                    mailMessage.Attachments.Add(emailModel.Attachment);
+                }
+
                 SmtpClient client = new SmtpClient();
                 client.Host = this.host;
                 client.Port = this.port;

@@ -43,7 +43,18 @@ namespace DataAccessLayer.CRUD
 
         public override T Retrieve<T>(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var envioResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveStatement(entity));
+            var dictionaryList = new Dictionary<string, object>();
+
+            if (envioResult.Count > 0)
+            {
+                dictionaryList = envioResult[0];
+                var envio = (Envio)envioMapper.BuildObject(dictionaryList);
+                envio.Items = GenerarItems(envio);
+
+                return (T)Convert.ChangeType(envio, typeof(T));
+            }
+            return default(T);
         }
 
         public override List<T> RetrieveAll<T>()
@@ -53,7 +64,24 @@ namespace DataAccessLayer.CRUD
 
         public override void Update(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            dao.ExecuteProcedure(envioMapper.GetUpdateStatement(entity));
+        }
+
+        public Item[] GenerarItems(Envio envio)
+        {
+            var itemList = new List<Item>();
+
+            var itemResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveAllStatement(envio));
+            if (itemResult.Count > 0)
+            {
+                var items = itemMapper.BuildObjects(itemResult);
+                foreach (var e in items)
+                {
+                    itemList.Add((Item)Convert.ChangeType(e, typeof(Item)));
+                }
+            }
+
+            return itemList.ToArray();
         }
     }
 }

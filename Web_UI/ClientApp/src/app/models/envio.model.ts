@@ -6,4 +6,5 @@ export class Envio {
   idEmpleado: number;
   idCliente: number;
   items: Item[];
+  codigo: string;
 }

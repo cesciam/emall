@@ -12,16 +12,16 @@ namespace Web_API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CitaController : ControllerBase
+    public class CitaController : ControllerBase    
     {
 
         private CitaManagement mng = new CitaManagement();
 
 
         [HttpPost]
-        public IActionResult registro(Cita cita)
+        public IActionResult RegistrarCitaServicio(Cita cita)
         {
-            if (mng.Create(cita) > 0)
+            if (mng.CreateCitaServicio(cita) > 0)
             {
                 return Ok();
             }
