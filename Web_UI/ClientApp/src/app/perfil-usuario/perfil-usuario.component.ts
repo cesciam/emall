@@ -118,7 +118,6 @@ export class PerfilUsuarioComponent implements OnInit {
     multa.id_comercio = cita.id_comercio;
     multa.id_sucursal = cita.id_sucursal;
     multa.fecha = cita.fecha;
-    console.log(multa)
     this.multaService.crearMulta(multa)
       .subscribe(
         (reponse) => {

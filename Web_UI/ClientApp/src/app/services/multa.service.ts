@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError as observableThrowError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Multa } from '../models/multa';
+import { Configuracion } from '../models/configuracion';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,14 @@ export class MultaService {
       .post<void>(this.appUrl + this.serviceApi, multa, this.httpOptions)
       .pipe(catchError(this.errorHandler)
       );
+  }
+
+  async obtenerConfig(codigo: string) {
+    let config: Configuracion;
+    this.serviceApi = `/configuracion/Retrieves/?codigo=${codigo}`;
+
+    config = await this.http.get<Configuracion>(this.appUrl + this.serviceApi).toPromise();
+    return config;
   }
 
 }

@@ -118,18 +118,33 @@
     <div style="text-align: right;">
       <h3>Total: ₡{{ total | number:0}}</h3>
       <div *ngIf="tipoCarrito == 'Producto'  && !citaProducto">
-        <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#Modal">Continuar</button>
+        <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#Modal" [disabled]="multa">Continuar</button>
       </div>
 
       <div *ngIf="tipoCarrito == 'Servicio'">
-        <button class="primary-btn" style="border: none;" (click)="agendarCitaServicio()">Agendar cita</button>
+        <button class="primary-btn" style="border: none;" (click)="agendarCitaServicio()" [disabled]="multa">Agendar cita</button>
       </div>
 
       <div *ngIf="citaProducto">
         <button class="primary-btn" style="border: none;" (click)="agendarCitaProductos()">Agendar cita</button>
       </div>
 
+
+
     </div>
+    <div class="row justify-content-center mt-2" *ngIf="multa">
+      <div class="col-7">
+        <h2 class="alert-danger mb-3" style="text-align: center;">Politica de cancelacion</h2>
+      </div>
+      <div class="col-7">
+        <p class="justify-content-center" style="text-align: center">Has excedido el limite de cancelaciones permitidas. Agradecemos pagar la multa y continuar disfrutando de nuestros servicios.</p>
+        <div>
+          <button class="btn btn-primary btn-lg btn-block primary-btn" style="border: none;">Pagar Multa</button>
+        </div>
+      </div>
+
+    </div>
+    
   </div>
 </div>
 
