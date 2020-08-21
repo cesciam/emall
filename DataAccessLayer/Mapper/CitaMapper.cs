@@ -24,6 +24,7 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_COMERCIO = "COMERCIO";
         private const string DB_COL_EMPLEADO = "EMPLEADO";
         private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
+        private const string DB_COL_CLIENTE= "CLIENTE";
 
         // ID para traer empleado disponible x servicio
         private const string DB_COL_ID_ITEM = "ID_ITEM";
@@ -66,20 +67,35 @@ namespace DataAccessLayer.Mapper
             return citaView;
         }
 
-        public CitaViewModel BuildViewEmpleado(Dictionary<string, object> row)
+        public CitaEmpleViewModel BuildViewEmpleado(Dictionary<string, object> row)
         {
-            var citaView = new CitaViewModel
+            var citaView = new CitaEmpleViewModel
             {
                 id = GetIntValue(row, DB_COL_ID),
-                id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
                 fecha = GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
                 hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
-                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL),
-                id_comercio = GetIntValue(row, DB_COL_ID_COMERCIO),
-                nombre_comercio = GetStringValue(row, DB_COL_COMERCIO),
+                nombre_cliente = GetStringValue(row, DB_COL_CLIENTE),
+                id_cliente =GetIntValue(row, DB_COL_ID_CLIENTE)
+                
+            };
+
+            return citaView;
+        }
+
+        public CitaComerModelView BuildViewComercio(Dictionary<string, object> row)
+        {
+            var citaView = new CitaComerModelView
+            {
+                id = GetIntValue(row, DB_COL_ID),
+                fecha = GetDateValue(row, DB_COL_FECHA),
+                hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                nombre_cliente = GetStringValue(row, DB_COL_CLIENTE),
+                id_cliente = GetIntValue(row, DB_COL_ID_CLIENTE),
                 nombre_empleado = GetStringValue(row, DB_COL_EMPLEADO),
-                nombre_sucursal = GetStringValue(row, DB_COL_SUCURSAL)
+                id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO)
+
             };
 
             return citaView;

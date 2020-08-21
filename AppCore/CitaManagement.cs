@@ -80,18 +80,31 @@ namespace AppCore
         public List<CitaViewModel> RetrieveCitasCliente(BaseEntity entity)
         {
             return crud.ObtenerCitasCliente<CitaViewModel>(entity);
-
         }
 
+        public List<CitaEmpleViewModel> RetrieveCitasEmpleado(BaseEntity entity)
+        {
+            return crud.ObtenerCitasEmpleado<CitaEmpleViewModel>(entity);
+        }
+
+        public List<CitaComerModelView> RetrieveCitasComercio(BaseEntity entity)
+        {
+            return crud.ObtenerCitasComercio<CitaComerModelView>(entity);
+        }
+
+        public List<CitaComerModelView> RetrieveCitasSucursal(BaseEntity entity)
+        {
+            return crud.ObtenerCitasSucursal<CitaComerModelView>(entity);
+        }
 
         public Cita Retrieve(BaseEntity entity)
         {
             return crud.Retrieve<Cita>(entity);
         }
 
-        public List<Configuracion> RetrieveAll()
+        public List<Cita> RetrieveAll()
         {
-            return crud.RetrieveAll<Configuracion>();
+            return crud.RetrieveAll<Cita>();
         }
 
         public void Delete(BaseEntity entity)
