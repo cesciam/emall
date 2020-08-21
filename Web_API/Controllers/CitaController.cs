@@ -59,5 +59,38 @@ namespace Web_API.Controllers
            return mng.RetrieveCitasCliente(cita);
         }
 
+        [HttpGet]
+        public List<CitaEmpleViewModel> CitaPorEmpleado(int id, DateTime fecha)
+        {
+            var cita = new Cita
+            {
+                id_empleado = id,
+                fecha = fecha
+            };
+            return mng.RetrieveCitasEmpleado(cita);
+        }
+
+        [HttpGet]
+        public List<CitaComerModelView> CitaPorComercio(int id, DateTime fecha)
+        {
+            var cita = new Cita
+            {
+                id_comercio = id,
+                fecha = fecha
+            };
+            return mng.RetrieveCitasComercio(cita);
+        }
+
+        [HttpGet]
+        public List<CitaComerModelView> CitaPorSucursal(int id, DateTime fecha)
+        {
+            var cita = new Cita
+            {
+                id_sucursal = id,
+                fecha = fecha
+            };
+            return mng.RetrieveCitasSucursal(cita);
+        }
+
     }
 }
