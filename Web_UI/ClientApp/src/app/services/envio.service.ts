@@ -40,7 +40,7 @@ export class EnvioService {
     }
 
     obtenerEnvioListPorUsuario(id:number){
-      let endpointUrl = this.baseUrl + '/Envio/RetrieveEnvioListByUsuario?id='+id;
+      let endpointUrl = this.baseUrl + '/Envio/RetrieveByUsuario?id_usuario='+id;
       return this.http.get<EnvioList[]>(endpointUrl)
     }
 

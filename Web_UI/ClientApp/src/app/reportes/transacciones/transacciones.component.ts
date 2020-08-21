@@ -20,7 +20,7 @@ export class TransaccionesComponent implements OnInit {
   constructor(private service: ReporteService) { }
 
   ngOnInit() {
-    this.service.getUsuarioEstado()
+    this.service.getTransacciones()
       .subscribe(
         (data: Reporte[]) => {
           for (const report of data) {

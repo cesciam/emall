@@ -1,3 +1,26 @@
+<!-- Modal Finalizar-->
+<div class="modal fade" id="ModalFinalizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¡Buen trabajo!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Gracias por marcar el envío como exitoso.
+                Al presionar finalizar, le haremos llegar al cliente el enlace para el pago.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal Aceptar-->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -9,8 +32,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                El envío ha sido aceptado exitósamente y el cliente ha sido notificado.
-                Por favor proceda a llevar el paquete a su destino.
+                Al aceptar el envío, queda responsable de llevar el paquete a la ubicación del cliente.
+                Esta acción es irreversible.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal"
@@ -31,10 +54,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container w-50">
+                <div class="container w-50" *ngIf="scannerVisible">
                     <qr-scanner [debug]="false" [canvasWidth]="1080" [canvasHeight]="720" [stopAfterScan]="true"
                         [updateTime]="500">
                     </qr-scanner>
+                </div>
+                <div *ngIf="errorQr" class="alert alert-danger" role="alert">
+                    {{stringErrorQr}}
+                </div>
+                <div *ngIf="mensajeQr" class="alert alert-success" role="alert">
+                    {{stringMensajeQr}}
                 </div>
             </div>
             <div class="modal-footer">
@@ -71,8 +100,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="confirmacionManual()" 
-                [disabled]="!botonConfirmar">Confirmar</button>
+                <button type="button" class="btn btn-primary" (click)="confirmacionManual()"
+                    [disabled]="!botonConfirmar">Confirmar</button>
             </div>
         </div>
     </div>
@@ -90,26 +119,26 @@
     <div class="pt-3 px-4">
         <h2>Envio # {{envioList.id}}</h2>
         <h4>Estado: {{estadoToString()}}</h4>
+        <h4>Cliente: {{envioList.nombre_cliente}}</h4>
         <br>
-        <div class="col-sm-auto d-flex justify-content-end" > 
-            <Button class="btn  btn-primary" data-toggle="modal" data-target="#Modal" 
-            *ngIf="botonAceptar">Aceptar envío</Button>
-        </div>
         <div class="col-sm-auto d-flex justify-content-end">
-            <Button 
-                *ngIf="codigoConfirmado"
-                class="btn btn-block btn-success" 
-                data-toggle="modal" 
-                data-target="#Modal"
-                (click)="finalizarEnvio()">Envío exitoso</Button>
+            <Button class="btn  btn-primary" data-toggle="modal" data-target="#Modal" *ngIf="botonAceptar">Aceptar
+                envío</Button>
         </div>
+        <div class="col-sm-auto d-flex justify-content-end" *ngIf="codigoConfirmado">
+            <Button class="btn btn-block btn-success" (click)="finalizarEnvio()">Envío exitoso</Button>
+            <div *ngIf="finalizarError" class="alert alert-danger" role="alert">
+                {{mensajeErrorFinalizar}}
+            </div>
+        </div>
+
         <hr>
         <div class="container" *ngIf="envioAceptado">
             <h4>Confirmación</h4>
             <p>Pasos para finalizar el envío: </p>
             <ul>
                 <li>Diríjase a la ubicación del cliente.</li>
-                <li>Escanee el código de confirmación de la pantalla del cliente o
+                <li>Escanee el código QR de confirmación de la pantalla del cliente o
                     solicite el código al cliente e ingréselo manualmente.</li>
                 <li>Si la entrega es exitosa, presione Finalizar entrega.</li>
             </ul>
@@ -130,14 +159,14 @@
                     <tr>
                         <th>Id</th>
                         <th>Producto</th>
-                        <th>Cantidad</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of items">
                         <td>{{ item.id }}</td>
                         <td>{{ item.nombre }}</td>
-                        <td> 2</td>
+                        <td> </td>
                     </tr>
                 </tbody>
             </table>

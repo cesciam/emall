@@ -13,6 +13,7 @@ namespace Entities.ViewModels
         public string longitud { get; set; }
         public int id_empleado { get; set; }
         public string nombre_empleado { get; set; }
+        public string sucursal { get; set; }
         public string codigo { get; set; }
         public int estado { get; set; }
     }

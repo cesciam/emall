@@ -36,22 +36,22 @@ export class ReporteService {
   }
 
   getVentas(): Observable<Reporte[]> {
-    this.serviceEndPoint = '/reporte/ventas';//cambiar
+    this.serviceEndPoint = '/reporte/ventas';
     return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
 
   getTransacciones(): Observable<Reporte[]> {
-    this.serviceEndPoint = '/reporte/transacciones';//cambiar
+    this.serviceEndPoint = '/reporte/transacciones';
     return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
 
   getCitas(): Observable<Reporte[]> {
-    this.serviceEndPoint = '/reporte/citas';//cambiar
+    this.serviceEndPoint = '/reporte/citas';
     return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
 
   getMetodosPago(): Observable<Reporte[]> {
-    this.serviceEndPoint = '/reporte/metodosPago';//cambiar
+    this.serviceEndPoint = '/reporte/metodosPago';
     return this.http.get<Reporte[]>(this.baseURL + this.serviceEndPoint);
   }
 }
