@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cita } from '../models/Cita';
 import { CitaList } from '../models/CitaList';
+import { CitaListEmp } from '../models/CitaListEmp';
+import { CitaListCom } from '../models/CitaListCom';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +25,23 @@ export class CitaService {
   }
 
   obtenerCitasPorCliente(idUsuario: number): Observable<CitaList[]>{
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getDate();
-    var year = dateObj.getUTCFullYear();
-    var date= year + "/" + month + "/" + day;
-
-    this.serviceEndPoint = `/cita/CitaPorUsuario?id=${idUsuario}&fecha=${date}`;
+    this.serviceEndPoint = `/cita/CitaPorUsuario?id=${idUsuario}&fecha=${this.getDateToday()}`;
     return this.http.get<CitaList[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  obtenerCitasPorEmpleado(id: number): Observable<CitaListEmp[]> {
+    this.serviceEndPoint = `/cita/CitaPorEmpleado?id=${id}&fecha=${this.getDateToday()}`;
+    return this.http.get<CitaListEmp[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  obtenerCitasPorComercio(id: number): Observable<CitaListCom[]> {
+    this.serviceEndPoint = `/cita/CitaPorComercio?id=${id}&fecha=${this.getDateToday()}`;
+    return this.http.get<CitaListCom[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  obtenerCitasPorSucursal(id: number): Observable<CitaListCom[]> {
+    this.serviceEndPoint = `/cita/CitaPorSucursal?id=${id}&fecha=${this.getDateToday()}`;
+    return this.http.get<CitaListCom[]>(this.baseURL + this.serviceEndPoint);
   }
 
   registrarCitaServicio(cita: Cita): Observable<void> {
@@ -50,5 +61,13 @@ export class CitaService {
         'Content-type': 'application/json'
       })
     });
+  }
+
+  getDateToday(): string {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getDate();
+    var year = dateObj.getUTCFullYear();
+    return year + "/" + month + "/" + day;
   }
 }

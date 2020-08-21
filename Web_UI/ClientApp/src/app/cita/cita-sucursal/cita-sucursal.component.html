@@ -1,0 +1,44 @@
+<app-main-header></app-main-header>
+
+<div class="container">
+    <div class="row m-3">
+        <div class="col-xl">
+            <h2>Citas de la sucursal</h2>
+        </div>
+        <div class="col">
+            <!-- <button class="btn btn-primary" (click)="citasEmpleado()">Ver mis citas</button> -->
+        </div>
+    </div>
+    <div *ngIf="citas; else noDisponible">
+        <table class="table table-striped text-center">
+        <thead>
+            <tr>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Hora inicio</th>
+            <th class="text-center">Hora Fin</th>
+            <th class="text-center">Cliente</th>
+            <th class="text-center" *ngIf="!misCitas">Empleado asignado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cita of citas">
+            <td>{{cita.fecha_s}}</td>
+            <td>{{cita.hora_i}}</td>
+            <td>{{cita.hora_f}}</td>
+            <td>{{cita.nombre_cliente}}</td>
+            <td>{{cita.nombre_empleado}}</td>
+            <td>
+                <button class="btn btn-secondary">Ver detalles</button>
+            </td>
+            </tr>
+
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+<ng-template #noDisponible>
+    <p>Sin citas registradas</p>
+</ng-template>

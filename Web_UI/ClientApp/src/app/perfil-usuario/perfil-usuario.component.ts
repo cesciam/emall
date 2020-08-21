@@ -63,6 +63,7 @@ export class PerfilUsuarioComponent implements OnInit {
           data[i].fecha_s = date;
         }
         this.citas = data;
+        
       }
     );
     this.obtenerPedidos();

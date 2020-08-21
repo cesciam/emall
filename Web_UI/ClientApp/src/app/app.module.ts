@@ -111,7 +111,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
-import { NgQrScannerModule } from 'angular2-qrscanner';;
+import { NgQrScannerModule } from 'angular2-qrscanner';
+import { CitaEmpleadoComponent } from './cita/cita-empleado/cita-empleado.component';
+import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';;
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -222,7 +224,7 @@ const maskConfig: Partial<IConfig> = {
     FiltroDireccionPipe, CitaServicioComponent,
     RealizarCompraComponent,
     SafePipe, 
-    LectorQrComponent, 
+    LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -304,6 +306,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'realizar-pago', component: RealizarCompraComponent },
       { path: 'cita-servicio/:id', component: CitaServicioComponent },
       { path: 'lector-qr', component: LectorQrComponent },
+      { path: 'dashboard-comercio/citas/:id', component: CitaEmpleadoComponent },
+      { path: 'dashboard-comercio/citas-sucursal/:id', component: CitaSucursalComponent },
     ])
   ],
   exports: [

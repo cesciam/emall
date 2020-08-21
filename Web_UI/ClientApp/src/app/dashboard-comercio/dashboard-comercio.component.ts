@@ -113,6 +113,8 @@ export class DashboardComercioComponent implements OnInit {
     let comercio = new Comercio();
     comercio.id = idComercio;
 
+    console.log("Hola");
+    
     this.comercioService.obtenerComercio(comercio)
       .subscribe(data => {
         this.comercioSeleccionado = data

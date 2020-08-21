@@ -299,7 +299,7 @@ namespace DataAccessLayer.Mapper
             var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_EMPLEADO" };
 
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
-            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+            operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
 
             return operacion;
         }
