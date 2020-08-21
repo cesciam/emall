@@ -74,6 +74,35 @@ namespace DataAccessLayer.CRUD
             return lstEmpleados;
         }
 
+        public T RetrieveDatosById<T>(int id_usuario)
+        {
+            var usuario = new Usuario { Id = id_usuario };
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveDatosByIdStatement(usuario));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var empleadoViewModel = new EmpleadoViewModel
+                {
+                    Id = Convert.ToInt32(dic["ID"]),
+                    IdUsuario = Convert.ToInt32(dic["ID_USUARIO"]),
+                    Cedula = dic["CEDULA"].ToString(),
+                    UsuarioNombre = dic["NOMBRE"].ToString(),
+                    Apellido = dic["APELLIDO"].ToString(),
+                    Correo = dic["CORREO"].ToString(),
+                    Telefono = dic["TELEFONO"].ToString(),
+                    IdRol = Convert.ToInt32(dic["ID_ROL"]),
+                    IdSucursal = Convert.ToInt32(dic["ID_SUCURSAL"])
+                };
+                
+                var objs = mapper.BuildObject(dic);
+                return (T)Convert.ChangeType(empleadoViewModel, typeof(T));
+            }
+
+            return default(T);
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var empleado = (Empleado)entity;

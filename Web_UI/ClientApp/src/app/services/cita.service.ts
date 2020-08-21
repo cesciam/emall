@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cita } from '../models/Cita';
 import { CitaList } from '../models/CitaList';
@@ -31,5 +31,24 @@ export class CitaService {
 
     this.serviceEndPoint = `/cita/CitaPorUsuario?id=${idUsuario}&fecha=${date}`;
     return this.http.get<CitaList[]>(this.baseURL + this.serviceEndPoint);
+  }
+
+  registrarCitaServicio(cita: Cita): Observable<void> {
+    this.serviceEndPoint = '/cita/RegistrarCitaServicio';
+    return this.http.post<void>(this.baseURL + this.serviceEndPoint, cita, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
+  }
+
+  registrarCitaProducto(cita: Cita): Observable<void> {
+    this.serviceEndPoint = '/cita/RegistrarCitaProducto';
+
+    return this.http.post<void>(this.baseURL + this.serviceEndPoint, cita, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
   }
 }

@@ -12,22 +12,37 @@ namespace Web_API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CitaController : ControllerBase
+    public class CitaController : ControllerBase    
     {
 
         private CitaManagement mng = new CitaManagement();
 
 
         [HttpPost]
-        public IActionResult registro(Cita cita)
+        public IActionResult RegistrarCitaServicio(Cita cita)
         {
-            if (mng.Create(cita) > 0)
+            if (mng.CreateCitaServicio(cita) > 0)
+            {
+                return Ok(cita);
+            }
+            else
+            {
+                return BadRequest(new { message = "Error general al registrar la cita. Vuelva a intertarlo en unos minutos." });
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult RegistrarCitaProducto(Cita cita)
+        {
+            
+            if (mng.CreateCitaProducto(cita) > 0)
             {
                 return Ok();
             }
             else
             {
-                return BadRequest(new { message = "Error general al registrar la cita. Vuelva a intertarlo en unos minutos." });
+            return BadRequest(new { message = "Error general al registrar la cita. Vuelva a intertarlo en unos minutos." });
             }
 
         }

@@ -15,7 +15,7 @@ namespace AppCore
             crud = new CitaCrudFactory();
         }
 
-        public int Create(BaseEntity entity)
+        public int CreateCitaServicio(BaseEntity entity)
         {
             var errores = ComprobarErrores(entity);
 
@@ -25,10 +25,54 @@ namespace AppCore
             }
 
             var cita = (Cita)entity;
-            cita.id_empleado = crud.ObtenerEmpleadoDisponible(entity);
+
+            int id_empleado = crud.ObtenerEmpleadoDisponible(entity);
+
+            if(id_empleado < 0)
+            {
+                return 0;
+            }
+
+            cita.id_empleado = id_empleado;
 
 
-            crud.Create(cita);
+            crud.CreateCitaServicio(cita);
+
+            return 1;
+        }
+
+        public int CreateCitaProducto(BaseEntity entity)
+        {
+            var errores = ComprobarErrores(entity);
+
+            if (errores != null)
+            {
+                return 0;
+            }
+
+            var cita = (Cita)entity;
+
+            int id_empleado = crud.ObtenerEmpleadoDisponibleProd(entity);
+
+            if (id_empleado < 0)
+            {
+                return 0;
+            }
+
+            cita.id_empleado = id_empleado;
+
+
+            int id_cita = crud.CreateCitaProducto<int>(cita);
+
+            for(int i = 0; i < cita.items.Length; i++)
+            {
+                var itemXCita = new ItemXCita
+                {
+                    id_cita = id_cita,
+                    id_item = cita.items[i]
+                };
+                crud.InsertItemCita(itemXCita);
+            }
 
             return 1;
         }
@@ -78,10 +122,23 @@ namespace AppCore
 
             if (crud.VerificarCita(entity))
             {
-                if (crud.ObtenerEmpleadoDisponible(entity) < 0)
+                var cita = (Cita)entity;
+                if(cita.id_item < 0)
                 {
-                    errorResult.details.Add("No hay empleados disponibles en este horario");
+                    if (crud.ObtenerEmpleadoDisponibleProd(entity) < 0)
+                    {
+                        errorResult.details.Add("No hay empleados disponibles en este horario");
+                    }
                 }
+                else
+                {
+                    if (crud.ObtenerEmpleadoDisponible(entity) < 0)
+                    {
+                        errorResult.details.Add("No hay empleados disponibles en este horario");
+                    }
+                }
+
+                
             }
 
             if(errorResult.details.Count == 0)

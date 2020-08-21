@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Utils;
 using Utils.Email;
+using Entities.ViewModels;
 
 namespace Web_API.Controllers
 {
@@ -71,6 +72,64 @@ namespace Web_API.Controllers
             Envio envio = new Envio { Id = id };
 
             return this.envioManagement.ObtenerEnvio(envio);
+        }
+
+        [HttpGet]
+        public List<Envio> RetrieveBySucursal(int sucursal)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveBySucursal(sucursal);
+        }
+
+        [HttpGet]
+        public List<EnvioListViewModel> RetrieveEnvioListBySucursal(int sucursal)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveEnvioListBySucursal(sucursal);
+        }
+
+        [HttpGet]
+        public Envio RetrieveById(int id)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveById(id);
+        }
+
+        [HttpGet]
+        public EnvioListViewModel RetrieveEnvioListByid(int id)
+        {
+            var hm = new EnvioManagement();
+            return hm.RetrieveEnvioListByid(id);
+        }
+
+        [HttpPut]
+        public IActionResult Update(Envio c)
+        {
+            try
+            {
+                var hm = new EnvioManagement();
+                hm.UpdateTodo(c);
+
+                var enviolist = this.envioManagement.RetrieveEnvioListByid(c.Id);
+                Usuario usuario = new Usuario { Id = c.IdCliente };
+
+                usuario = new UsuarioManagement().RetrieveById(usuario);
+
+                this.emailService.Send(new EmailModel
+                {
+                    To = usuario.Correo,
+                    Subject = "Pedido en camino",
+                    Message = "<h1>Su pedido va en camino</h1><br>" +
+                             "<p>Para confirmar su identidad, el colaborador le solicitará el siguiente código:</p>" +
+                             "<p>"+c.Codigo+"</p>"
+                });
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
     }
 }

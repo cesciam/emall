@@ -15,5 +15,6 @@ namespace Entities
         public DateTime hora_fin { get; set; }
 
         public int id_sucursal { get; set; }
+        public int[] items { get; set; }
     }
 }

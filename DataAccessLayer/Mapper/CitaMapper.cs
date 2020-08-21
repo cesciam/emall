@@ -10,7 +10,6 @@ namespace DataAccessLayer.Mapper
     public class CitaMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         private const string DB_COL_ID = "ID";
-        private const string DB_COL_ID_ITEM = "ID_ITEM";
         private const string DB_COL_ID_CLIENTE = "ID_CLIENTE";
         private const string DB_COL_ID_EMPLEADO = "ID_EMPLEADO";
         private const string DB_COL_FECHA = "FECHA";
@@ -25,6 +24,12 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_COMERCIO = "COMERCIO";
         private const string DB_COL_EMPLEADO = "EMPLEADO";
         private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
+
+        // ID para traer empleado disponible x servicio
+        private const string DB_COL_ID_ITEM = "ID_ITEM";
+
+        //Para insertar en la tabla de item por cita
+        private const string DB_COL_ID_CITA = "ID_CITA";
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
@@ -106,6 +111,45 @@ namespace DataAccessLayer.Mapper
             return operacion;
         }
 
+        public SqlOperation GetCreateServiceStatement(BaseEntity entity)
+        {
+            var operacion = new SqlOperation { ProcedureName = "CREAR_CITA_SERVICIO" };
+            var c = (Cita)entity;
+
+            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+            operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+
+            return operacion;
+        }
+
+        public SqlOperation GetCreateProductStatement(BaseEntity entity)
+        {
+            var operacion = new SqlOperation { ProcedureName = "CREAR_CITA_PRODUCTO" };
+            var c = (Cita)entity;
+
+            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+            operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+
+            return operacion;
+        }
+
+        public SqlOperation GetInsertProductCitaStatement(ItemXCita itemXCita)
+        {
+            var operacion = new SqlOperation { ProcedureName = "INSERTAR_ITEM_CITA" };
+
+            operacion.AddIntParam(DB_COL_ID_ITEM, itemXCita.id_item);
+            operacion.AddIntParam(DB_COL_ID_CITA, itemXCita.id_cita);
+
+            return operacion;
+        }
+
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operacion = new SqlOperation { ProcedureName = "ELIMINAR_CITA" };
@@ -185,6 +229,20 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
+            return operacion;
+        }
+
+        public SqlOperation GetEmpleadoDisponibleProdStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_EMPLEADO_DISPONIBLE_PROD" };
+
+            operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
+            operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
             return operacion;
         }
 
