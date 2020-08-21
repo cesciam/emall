@@ -94,6 +94,28 @@ namespace AppCore
             return lstEnviosList;
         }
 
+        public List<EnvioListViewModel> RetrieveEnvioListByUsuario(int id_usuario)
+        {
+            var envios = envioCrudFactory.RetrieveByUsuario<EnvioListViewModel>(id_usuario);
+
+            var um = new UsuarioManagement();
+            var em = new EmpleadoManagement();
+
+            var lstEnviosList = new List<EnvioListViewModel>();
+            if (envios.Count > 0)
+            {
+                foreach (var envio in envios)
+                {
+                    var usuario = new Usuario { Id = envio.id_cliente };
+                    var cliente = um.RetrieveById(usuario);
+                    envio.nombre_cliente = cliente.Nombre + " " + cliente.Apellido;
+                    lstEnviosList.Add(envio);
+                }
+            }
+
+            return lstEnviosList;
+        }
+
         public EnvioListViewModel RetrieveEnvioListByid(int id)
         {
             var e = new Envio { Id = id };
@@ -128,7 +150,6 @@ namespace AppCore
 
                     envioList.estado = envio.Estado;
                     envioList.codigo = envio.Codigo;
-
                 
             }
 

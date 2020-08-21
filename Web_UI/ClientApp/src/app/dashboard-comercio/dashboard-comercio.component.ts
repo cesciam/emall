@@ -33,7 +33,8 @@ export class DashboardComercioComponent implements OnInit {
   private permisoEnvios: boolean;
   private usuarioLogueado: string;
   public accion: string = "Eliminación sucursal";
-
+  public usuarioLocal : any;
+  public isAdmin :boolean;
   public id_usuario: number = Number.parseInt(this.usuarioLogueado);
 
   constructor(private bitacora: BitacoraService,comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
@@ -44,15 +45,18 @@ export class DashboardComercioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLocal = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.llenarComercio();
     this.validarEmpleado();
 
   }
 
   validarEmpleado(){
-    let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
-    let usuarioLogueado: Usuario = usuarioLocal.usuario;
-
+    
+    let usuarioLogueado: Usuario = this.usuarioLocal.usuario;
+    if(usuarioLogueado.Tipo==1){
+      this.isAdmin=true;
+    }
     let vistas : Vista[];
 
     if (usuarioLogueado.Tipo == 4) {

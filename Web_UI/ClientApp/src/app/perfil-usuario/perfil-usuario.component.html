@@ -139,12 +139,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let pedido of pedidos">
-                      <td>{{pedido.id}}</td>
-                      <td></td>
-                      <td>{{estadoPedidoToString(pedido.estado)}}</td>
-                      <td>
-                        <button class="btn btn-primary">Ver</button>
+                    <tr *ngFor="let pedido of pedidos" >
+                      <td *ngIf="pedido.estado!=2">{{pedido.id}}</td>
+                      <td *ngIf="pedido.estado!=2">{{pedido.sucursal}}</td>
+                      <td *ngIf="pedido.estado!=2">{{estadoPedidoToString(pedido.estado)}}</td>
+                      <td *ngIf="pedido.estado!=2">
+                        <a [routerLink]="['envio-detalle/',pedido.id]">
+                          <button class="btn btn-primary" >Ver</button>
+                        </a>
                       </td>
                     </tr>
   

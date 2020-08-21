@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Dao;
 using DataAccessLayer.Mapper;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
@@ -77,6 +78,32 @@ namespace DataAccessLayer.CRUD
                 foreach (var c in objs)
                 {
                     list.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return list;
+        }
+
+        public List<T> RetrieveByUsuario<T>(int id_usuario)
+        {
+            var list = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(envioMapper.GetRetriveByUsuarioStatement(id_usuario));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                foreach (var c in lstResult)
+                {
+                    var envio = new EnvioListViewModel
+                    {
+                        id = Convert.ToInt32(c["ID"]),
+                        estado= Convert.ToInt32(c["ESTADO"]),
+                        //id_empleado= Convert.ToInt32(c["ID_EMPLEADO"]),
+                        id_cliente=Convert.ToInt32(c["ID_CLIENTE"]),
+                        sucursal= c["SUCURSAL"].ToString(),
+                        codigo= c["CODIGO"].ToString()
+                    };
+                    list.Add((T)Convert.ChangeType(envio, typeof(T)));
                 }
             }
 
