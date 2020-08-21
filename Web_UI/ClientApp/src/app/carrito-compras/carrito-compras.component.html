@@ -12,7 +12,7 @@
         <div class="form-horizontal">
           <div class="form-group">
             <div class="col-md-12">
-              <p>Seleccione la opción correspondiente si desea recoger el producto o recibirlo por envío</p>
+              <p>Seleccione la opción correspondiente si desea recoger el producto o recibirlo por envío.</p>
               <p>Al seleccionar la opción de recibir por envío, se usará su dirección predeterminada.</p>
               <select class="user-form selectpicker show-tick form-control" data-live-search="true" id="tipoLogistica" name="logistica" [(ngModel)]="txtLogistica" #tipoLogistica="ngModel" required>
                 <option disabled selected>-- Seleccione una opción --</option>
@@ -36,7 +36,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
         <div *ngIf="(tipoLogistica.valid); else noValido">
-          <button type="button" class="primary-btn" data-dismiss="modal" (click)="pagar()">Pagar</button>
+          <button type="button" class="primary-btn" data-dismiss="modal" (click)="pagar()">Continuar</button>
         </div>
 
         <ng-template #noValido>

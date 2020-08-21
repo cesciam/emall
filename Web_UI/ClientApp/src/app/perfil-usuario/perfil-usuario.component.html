@@ -23,7 +23,8 @@
             </div>
 
             <div class="col" *ngIf="usuarioLogueado.usuario.Tipo != 4">
-              <a [routerLink]="['/registrar-comercio']"> <button class="profile-edit-btn">Registrar comercio</button>
+              <a [routerLink]="['/registrar-comercio']">
+                <button class="profile-edit-btn">Registrar comercio</button>
               </a>
             </div>
 
@@ -37,6 +38,10 @@
 
             <div class="col">
               <a [routerLink]="['/lista-deseo']"> <button class="profile-edit-btn">Lista de Deseo</button></a>
+            </div>
+
+            <div class="col">
+              <a [routerLink]="['/listar-compras']"> <button class="profile-edit-btn">Mis compras</button></a>
             </div>
           </div>
 

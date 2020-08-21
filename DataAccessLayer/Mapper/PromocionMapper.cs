@@ -114,6 +114,15 @@ namespace DataAccessLayer.Mapper
             return operacion;
         }
 
+        public SqlOperation GetRetrieveByCodigo(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_PROMOCIONXCODIGO" };
+            var p = (Promocion)entity;
+
+            operation.AddVarcharParam(DB_COL_CODIGO, p.codigo);
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllByAppStament() 
         {
             var operacion = new SqlOperation { ProcedureName = "OBTENER_TODO_PROMOCION_APP" };            

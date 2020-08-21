@@ -11,6 +11,8 @@ namespace Entities
         public Envio Envio { get; set; }
         [JsonPropertyName("transaccion")]
         public Transaccion Transaccion { get; set; }
+        [JsonPropertyName("promocion")]
+        public Promocion Promocion { get; set; }
         public Pago() { }
     }
 }
