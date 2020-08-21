@@ -31,14 +31,13 @@ export class AgregarUsuarioComponent implements OnInit {
   private usuarioLogueado: string;
   public accion: string = "Creación usuario";
 
-  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+  public id_usuario: 0; 
       
   constructor(private bitacora: BitacoraService,
     private router: Router,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
-    //this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
-  
+   
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
         cloudName: cloudinaryConfig.cloud_name,
@@ -131,11 +130,11 @@ export class AgregarUsuarioComponent implements OnInit {
             window.scroll(0, 0);
             this.registerComplete = true;
           }
-         /* this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+          this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
             (error) => {
               this.error = error.error;
               window.scroll(0, 0);
-            });*/
+            });
         },
         (error) => {
           this.isSendingData = false;
