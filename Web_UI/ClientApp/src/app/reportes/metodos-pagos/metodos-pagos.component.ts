@@ -20,7 +20,7 @@ export class MetodosPagosComponent implements OnInit {
   constructor(private service: ReporteService) { }
 
   ngOnInit() {
-    this.service.getUsuarioEstado()
+    this.service.getMetodosPago()
       .subscribe(
         (data: Reporte[]) => {
           for (const report of data) {

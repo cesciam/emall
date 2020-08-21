@@ -72,14 +72,13 @@ export class PerfilUsuarioComponent implements OnInit {
         this.citas = data;
       }
     );
-    this.obtenerPedidos();
+    this.obtenerPedidos(parseInt(this.usuarioLogueado['usuario'].Id));
   }
 
-  obtenerPedidos(){
-    //TODO: backend
-    this.enviosService.obtenerEnvioListPorUsuario(parseInt(this.usuarioLogueado.Id)).subscribe(
-      res=>{
-        this.pedidos=res;
+  obtenerPedidos(id:number){
+    this.enviosService.obtenerEnvioListPorUsuario(id).subscribe(
+      data=>{
+        this.pedidos = data;
       }
     )
   }

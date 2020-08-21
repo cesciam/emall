@@ -6,7 +6,7 @@
  
         <div class="pt-3 px-4">
           <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Envíos</h1>
+            <h1 class="h2">Envíos en curso</h1>
           </div>
       
       
@@ -25,10 +25,13 @@
               </thead>
               <tbody>
                 <tr *ngFor="let envio of envios">
-                  <td>{{ envio.id }}</td>
-                  <td>{{ envio.nombre_cliente }}</td>
-                  <td>{{ estadoToString(envio.estado) }}</td>
-                  <td><button class="btn btn-primary" [routerLink]="['/listar-envio-sucursal',id_sucursal,'envio-detalle', envio.id]"> Ver </button></td>
+                  <td >{{ envio.id }}</td>
+                  <td >{{ envio.nombre_cliente }}</td>
+                  <td >{{ estadoToString(envio.estado) }}</td>
+                  <td ><button *ngIf="envio.estado!=2" 
+                    class="btn btn-primary" 
+                    [routerLink]="['/listar-envio-sucursal',id_sucursal,'envio-detalle', envio.id]"> 
+                    <i class="fas fa-shipping-fast"></i>&nbsp;Seguimiento</button></td>
                 </tr>
               </tbody>
             </table>
