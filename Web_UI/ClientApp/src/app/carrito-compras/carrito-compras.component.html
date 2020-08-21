@@ -132,14 +132,14 @@
 
 
     </div>
-    <div class="row justify-content-center mt-2" *ngIf="multa">
+    <div class="row justify-content-center mt-4 mb-3" *ngIf="multa">
       <div class="col-7">
-        <h2 class="alert-danger mb-3" style="text-align: center;">Politica de cancelacion</h2>
+        <h2 class="alert-danger mb-3" style="text-align: center;">Política de cancelación</h2>
       </div>
       <div class="col-7">
-        <p class="justify-content-center" style="text-align: center">Has excedido el limite de cancelaciones permitidas. Agradecemos pagar la multa y continuar disfrutando de nuestros servicios.</p>
+        <p class="justify-content-center" style="text-align: center">Has superado el límite de cancelaciones permitidas. Agradecemos pagar la multa y seguir disfrutando de nuestra aplicación.</p>
         <div>
-          <button class="btn btn-primary btn-lg btn-block primary-btn" style="border: none;">Pagar Multa</button>
+          <button class="btn btn-primary btn-lg btn-block primary-btn mb-3" style="border: none;" [routerLink]="['/realizar-pago']" [queryParams]="{usuario: id_usuario}">Pagar Multa</button>
         </div>
       </div>
 

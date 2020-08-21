@@ -54,7 +54,21 @@ namespace AppCore
 
         public List<Multa> ObtenerMultasUsuario(int id_usuario)
         {
-            return crudMulta.RetrieveAllByUser<Multa>(id_usuario);
+            var multas = crudMulta.RetrieveAllByUser<Multa>(id_usuario);
+
+            for(int i = 0; i < multas.Count; i++)
+            {
+                multas[i].comercio = new Comercio();
+                multas[i].comercio.Id = multas[i].id_comercio;
+                multas[i].comercio = crudComercio.Retrieve<Comercio>(multas[i].comercio);
+
+                multas[i].sucursal = new Sucursal();
+                multas[i].sucursal.Id = multas[i].id_sucursal;
+                multas[i].sucursal = crudSucursal.Retrieve<Sucursal>(multas[i].sucursal);
+
+            }
+
+            return multas;
         }
 
         public void DeleteMulta(Multa multa)

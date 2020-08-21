@@ -114,7 +114,7 @@ export class PerfilUsuarioComponent implements OnInit {
     multa = new Multa();
 
     multa.id_usuario = this.id_usuario;
-    multa.id_item = 0;
+    multa.id_item = cita.id_empleado;
     multa.id_comercio = cita.id_comercio;
     multa.id_sucursal = cita.id_sucursal;
     multa.fecha = cita.fecha;
