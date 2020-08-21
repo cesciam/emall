@@ -70,4 +70,9 @@ export class CitaService {
     var year = dateObj.getUTCFullYear();
     return year + "/" + month + "/" + day;
   }
+
+  obtenerCita(id: number): Observable<Cita>{
+    this.serviceEndPoint = `/cita/ObtenerCita?id=${id}`;
+    return this.http.get<Cita>(this.baseURL + this.serviceEndPoint);
+  }
 }

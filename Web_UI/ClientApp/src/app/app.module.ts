@@ -106,14 +106,14 @@ import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
 import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
-import { CitaServicioComponent } from './cita-servicio/cita-servicio.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnvioService } from './services/envio.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
 import { CitaEmpleadoComponent } from './cita/cita-empleado/cita-empleado.component';
-import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';;
+import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';
+import { CitaDetallesComponent } from './cita/cita-detalles/cita-detalles.component';;
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -221,10 +221,10 @@ const maskConfig: Partial<IConfig> = {
     CarritoComprasComponent,
     RealizarCompraComponent,
     ListaDeseoComponent,
-    FiltroDireccionPipe, CitaServicioComponent,
+    FiltroDireccionPipe, 
     RealizarCompraComponent,
     SafePipe, 
-    LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, 
+    LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, CitaDetallesComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -304,10 +304,10 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/ruta/:id', component: RutaComponent },
       { path: 'lista-deseo', component: ListaDeseoComponent },
       { path: 'realizar-pago', component: RealizarCompraComponent },
-      { path: 'cita-servicio/:id', component: CitaServicioComponent },
       { path: 'lector-qr', component: LectorQrComponent },
       { path: 'dashboard-comercio/citas/:id', component: CitaEmpleadoComponent },
       { path: 'dashboard-comercio/citas-sucursal/:id', component: CitaSucursalComponent },
+      { path: 'cita-detalles/:id', component: CitaDetallesComponent },
     ])
   ],
   exports: [

@@ -23,7 +23,7 @@ namespace Web_API.Controllers
         {
             if (mng.CreateCitaServicio(cita) > 0)
             {
-                cita.hora_inicio.ToLocalTime();
+                //cita.hora_inicio.ToLocalTime();
                 return Ok();
             }
             else
@@ -92,5 +92,14 @@ namespace Web_API.Controllers
             return mng.RetrieveCitasSucursal(cita);
         }
 
+        [HttpGet]
+        public Cita ObtenerCita(int id)
+        {
+            var cita = new Cita
+            {
+                id = id
+            };
+            return mng.Retrieve(cita);
+        }
     }
 }

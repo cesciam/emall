@@ -62,8 +62,7 @@ export class PerfilUsuarioComponent implements OnInit {
           var date=  day + "/" +month + "/" + year;
           data[i].fecha_s = date;
         }
-        this.citas = data;
-        
+        this.citas = data;        
       }
     );
     this.obtenerPedidos();

@@ -13,6 +13,7 @@ namespace Entities
         public DateTime fecha { get; set; }
         public DateTime hora_inicio { get; set; }
         public DateTime hora_fin { get; set; }
+        public string codigo { get; set; }
 
         public int id_sucursal { get; set; }
         public int id_comercio { get; set; }

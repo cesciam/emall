@@ -163,7 +163,8 @@ export class CarritoComprasComponent implements OnInit {
       id: -1,
       id_empleado: -1,
       id_sucursal: this.servicioSeleccionado.id_sucursal,
-      items: null
+      items: null,
+      codigo: null
    };
 
     this.citaService.registrarCitaServicio(cita)
@@ -227,7 +228,8 @@ export class CarritoComprasComponent implements OnInit {
       id: -1,
       id_empleado: -1,
       id_sucursal: this.carritoLocalStorage[0].id_sucursal,
-      items: idProductos
+      items: idProductos,
+      codigo:null
    };
 
    console.log(cita);

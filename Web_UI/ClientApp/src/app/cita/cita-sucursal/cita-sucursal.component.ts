@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CitaService } from 'src/app/services/cita.service';
 import { ActivatedRoute } from '@angular/router';
 import { CitaListCom } from 'src/app/models/CitaListCom';
+import { CitaListEmp } from 'src/app/models/CitaListEmp';
 
 @Component({
   selector: 'app-cita-sucursal',
@@ -48,4 +49,15 @@ export class CitaSucursalComponent implements OnInit {
     return data;
   }
 
+  citasEmpleado(): void {
+    this.misCitas=true;
+    let id =JSON.parse (localStorage.getItem('usuario-logueado')).usuario.Id;
+    this.service.obtenerCitasPorEmpleado(id)
+    .subscribe(
+      (data: CitaListEmp[]) => {
+        data = this.convertirHoras(data);
+        this.citas = data;
+      }
+    );
+  }
 }

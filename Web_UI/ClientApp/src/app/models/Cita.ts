@@ -8,4 +8,5 @@ export class Cita{
     hora_fin: Date;
     id_sucursal: number;
     items: number[];
+    codigo: string;
 }

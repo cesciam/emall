@@ -15,6 +15,7 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_FECHA = "FECHA";
         private const string DB_COL_HORA_INICIO = "HORA_INICIO";
         private const string DB_COL_HORA_FIN = "HORA_FIN";
+        private const string DB_COL_CODIGO = "CODIGO";
 
         //Parametro que se utiliza solamente para validar que la cita esté dentro del horario de la sucursal
         private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
@@ -37,12 +38,12 @@ namespace DataAccessLayer.Mapper
             var cita = new Cita
             {
                 id = GetIntValue(row, DB_COL_ID),
-                id_item = GetIntValue(row, DB_COL_ID_ITEM),
                 id_cliente = GetIntValue(row, DB_COL_ID_CLIENTE),
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
                 fecha = GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
-                hora_fin = GetDateValue(row, DB_COL_HORA_FIN)
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                codigo = GetStringValue(row, DB_COL_CODIGO)
             };
 
             return cita;
@@ -157,6 +158,7 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
 
             return operacion;
         }
@@ -171,6 +173,7 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
 
             return operacion;
         }
