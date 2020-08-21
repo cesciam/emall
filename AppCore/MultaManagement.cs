@@ -19,12 +19,9 @@ namespace AppCore
         public MultaManagement()
         {
             crudMulta = new MultaCrudFactory();
-            crudItem = new ItemCrudFactory();
-            crudUsuario = new UsuarioCrudFactory();
             crudComercio = new ComercioCrudFactory();
             crudSucursal = new SucursalCrudFactory();
             crudConfig = new ConfiguracionCrudFactory();
-            crudCita = new CitaCrudFactory();
         }
 
 
