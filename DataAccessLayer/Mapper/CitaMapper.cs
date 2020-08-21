@@ -66,6 +66,25 @@ namespace DataAccessLayer.Mapper
             return citaView;
         }
 
+        public CitaViewModel BuildViewEmpleado(Dictionary<string, object> row)
+        {
+            var citaView = new CitaViewModel
+            {
+                id = GetIntValue(row, DB_COL_ID),
+                id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
+                fecha = GetDateValue(row, DB_COL_FECHA),
+                hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                id_sucursal = GetIntValue(row, DB_COL_ID_SUCURSAL),
+                id_comercio = GetIntValue(row, DB_COL_ID_COMERCIO),
+                nombre_comercio = GetStringValue(row, DB_COL_COMERCIO),
+                nombre_empleado = GetStringValue(row, DB_COL_EMPLEADO),
+                nombre_sucursal = GetStringValue(row, DB_COL_SUCURSAL)
+            };
+
+            return citaView;
+        }
+
         public BaseEntity BuildValidacion(Dictionary<string, object> row)
         {
             var cita = new Cita
@@ -116,6 +135,7 @@ namespace DataAccessLayer.Mapper
             var operacion = new SqlOperation { ProcedureName = "CREAR_CITA_SERVICIO" };
             var c = (Cita)entity;
 
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
             operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
             operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
@@ -257,6 +277,37 @@ namespace DataAccessLayer.Mapper
             return operacion;
         }
 
+        public SqlOperation GetCitasEmpleadoStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_EMPLEADO" };
 
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
+
+            return operacion;
+        }
+
+        public SqlOperation GetCitasComercioStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_COMERCIO" };
+
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_COMERCIO, c.id_comercio);
+
+            return operacion;
+        }
+
+        public SqlOperation GetCitasSucursalStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_SUCURSAL" };
+
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
+
+            return operacion;
+        }
     }
 }

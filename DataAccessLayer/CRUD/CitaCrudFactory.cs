@@ -171,5 +171,21 @@ namespace DataAccessLayer.CRUD
             return lstCita;
         }
 
+        public List<T> ObtenerCitasEmpleado<T>(BaseEntity entity)
+        {
+            var lstCita = new List<T>();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetCitasEmpleadoStatament(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                foreach (var row in lstResult)
+                {
+                    var obj = mapper.BuildViewEmpleado(row);
+                    lstCita.Add((T)Convert.ChangeType(obj, typeof(T)));
+                }
+            }
+            return lstCita;
+        }
+
     }
 }

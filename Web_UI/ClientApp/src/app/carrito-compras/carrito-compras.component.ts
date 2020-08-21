@@ -155,7 +155,7 @@ export class CarritoComprasComponent implements OnInit {
     var horaFin = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+horas+':'+minString+':00');
   
     let cita: Cita = {
-      id_item: -1,
+      id_item: this.carritoLocalStorage[0].id,
       id_cliente: this.usuarioLog.Id,
       fecha: fechaCita,
       hora_inicio: horaInicio,
