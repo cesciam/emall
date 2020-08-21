@@ -114,6 +114,7 @@ import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
 import { EnvioDetalleClienteComponent } from './envio/envio-detalle-cliente/envio-detalle-cliente.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { FiltroEnvioPipe } from './pipes/filtro-envio.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -224,7 +225,9 @@ const maskConfig: Partial<IConfig> = {
     CitaServicioComponent,
     RealizarCompraComponent,
     SafePipe, 
-    LectorQrComponent, EnvioDetalleClienteComponent, 
+    LectorQrComponent, 
+    EnvioDetalleClienteComponent, 
+    FiltroEnvioPipe, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
