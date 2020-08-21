@@ -444,7 +444,7 @@ namespace TelegramChatBot
 
                     await Bot.SendTextMessageAsync(
                             chatId: callbackQuery.Message.Chat.Id,
-                            text: "Ingrese la fecha, la hora de inicio, la hora de fin de la cita",
+                            text: "Ingrese la fecha, la hora de inicio, la hora de fin de la cita. Ejemplo: 2020-08-24,17:00:00,18:00:00",
                             replyMarkup: new ForceReplyMarkup());
 
                     break; 
