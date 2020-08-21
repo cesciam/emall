@@ -121,7 +121,7 @@
                       <td>{{cita.nombre_comercio}} {{cita.nombre_sucursal}}</td>
                       <td>{{cita.nombre_empleado}}</td>
                       <td>
-                        <button class="btn btn-danger">Cancelar cita</button>
+                        <button class="btn btn-outline-danger btn-sm">Cancelar cita</button>
                       </td>
                     </tr>
   
@@ -143,12 +143,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let pedido of pedidos">
-                      <td>{{pedido.id}}</td>
-                      <td></td>
-                      <td>{{estadoPedidoToString(pedido.estado)}}</td>
-                      <td>
-                        <button class="btn btn-primary">Ver</button>
+                    <tr *ngFor="let pedido of pedidos" >
+                      <td *ngIf="pedido.estado!=2">{{pedido.id}}</td>
+                      <td *ngIf="pedido.estado!=2">{{pedido.sucursal}}</td>
+                      <td *ngIf="pedido.estado!=2">{{estadoPedidoToString(pedido.estado)}}</td>
+                      <td *ngIf="pedido.estado!=2">
+                        <a [routerLink]="['envio-detalle/',pedido.id]">
+                          <button class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></button>
+                        </a>
                       </td>
                     </tr>
   
@@ -177,11 +179,11 @@
                     <td>{{ comercio.categorias[0] }}</td>
                     <td>
                       <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: comercio.id}">
-                        <button type="button" class="btn btn-primary">Seleccionar</button>
+                        <button type="button" class="btn btn-outline-info btn-sm">Seleccionar</button>
                       </a>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-danger" (click)="eliminarComercio(comercio)">X</button>
+                      <button type="button" class="btn btn-outline-danger btn-sm" (click)="eliminarComercio(comercio)">X</button>
                     </td>
                   </tr>
 

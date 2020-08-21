@@ -20,8 +20,10 @@
 
 <app-main-header></app-main-header>
 <br>
-<a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">
-  &nbsp; &nbsp;&nbsp;Volver al comercio</a>
+<div class="col-sm-auto d-flex justify-content-end">
+  <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">Volver atras</a>
+
+</div>
 <br>
 <h3 class="text-center">Horarios comerciales</h3>
 <br>

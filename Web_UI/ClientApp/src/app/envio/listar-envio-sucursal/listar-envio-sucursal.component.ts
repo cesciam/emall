@@ -13,6 +13,7 @@ export class ListarEnvioSucursalComponent implements OnInit {
   public envios: EnvioList[]
   public estado: string;
   public id_sucursal :number;
+  private filtro = '';
 
   constructor(private service : EnvioService,
     private activatedRoute : ActivatedRoute) { }

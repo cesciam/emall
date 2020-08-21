@@ -116,6 +116,7 @@ namespace DataAccessLayer.Mapper
             var operacion = new SqlOperation { ProcedureName = "CREAR_CITA_SERVICIO" };
             var c = (Cita)entity;
 
+            operacion.AddIntParam(DB_COL_ID_ITEM, c.id_item);
             operacion.AddIntParam(DB_COL_ID_CLIENTE, c.id_cliente);
             operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);

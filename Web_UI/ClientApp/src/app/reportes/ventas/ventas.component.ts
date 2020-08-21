@@ -20,7 +20,7 @@ export class VentasComponent implements OnInit {
   constructor(private service: ReporteService) { }
 
   ngOnInit() {
-    this.service.getUsuarioEstado()
+    this.service.getVentas()
       .subscribe(
         (data: Reporte[]) => {
           for (const report of data) {

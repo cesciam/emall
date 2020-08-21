@@ -35,7 +35,7 @@ export class EditarUsuarioComponent implements OnInit {
   private usuarioLogueado: string;
   public accion: string = "Edición usuario";
 
-  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+  public id_usuario: number = 0;
 
 
   constructor(private bitacora: BitacoraService,
