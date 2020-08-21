@@ -10,13 +10,15 @@ import { Cita } from 'src/app/models/Cita';
 })
 export class CitaDetallesComponent implements OnInit {
 
+  cita: Cita;
   constructor(private route: ActivatedRoute, private service: CitaService) { }
 
   ngOnInit() {
     let idCita = this.route.snapshot.params['id'];
     this.service.obtenerCita(idCita)
     .subscribe(
-      (data: Cita) => {console.log(data);
+      (data: Cita) => {
+        this.cita = data;
       }
     );
   }
