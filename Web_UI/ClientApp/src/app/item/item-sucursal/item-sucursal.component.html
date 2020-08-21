@@ -1,4 +1,5 @@
 <app-main-header></app-main-header>
+<br>
 <div class="container" *ngIf="sucursal_id && sucursal">
   <div class="col-sm-auto d-flex justify-content-end">
     <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: sucursal.idComercio}">Volver atras</a>
@@ -41,8 +42,8 @@
             <!--<td>{{ item.id_impuesto }}</td>-->
 
             <td *ngIf="item.tipo=='Servicio'; else noEmpleado"><button class="btn btn-primary" [routerLink]="['/item-empleado', item.id, sucursal_id]"> Empleados </button></td>
-            <td><button class="btn btn-primary" [routerLink]="['/item-editar', item.id]"> Editar </button></td>
-            <td><button class="btn btn-danger" (click)="delete(item.id)"><i class="fas fa-trash-alt"></i></button></td>
+            <td><button class="btn btn-outline-info btn-sm" [routerLink]="['/item-editar', item.id]"><i class="fas fa-edit"></i></button></td>
+            <td><button class="btn btn-outline-danger btn-sm" (click)="delete(item.id)"><i class="fas fa-trash-alt"></i></button></td>
           </tr>
         </tbody>
       </table>
