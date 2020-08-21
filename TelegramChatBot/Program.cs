@@ -52,7 +52,7 @@ namespace TelegramChatBot
             var message = messageEventArgs.Message;
 
 
-            if(message.ReplyToMessage != null && message.ReplyToMessage.Text.Equals("Ingrese la fecha, la hora de inicio, la hora de fin de la cita"))
+            if(message.ReplyToMessage != null && message.ReplyToMessage.Text.Equals("Ingrese la fecha, la hora de inicio, la hora de fin de la cita. Ejemplo: 2020-08-24,17:00:00,18:00:00"))
             {
                 try
                 {
@@ -82,6 +82,8 @@ namespace TelegramChatBot
                             message.Chat.Id,
                             "La hora elegida o el empleado no se encuentran disponibles",
                             replyMarkup: keyboardCitas);
+
+                        return;
                 }
                 else
                 {
@@ -316,13 +318,14 @@ namespace TelegramChatBot
 
                     listItem = items.RetrieveAllBySucursal(id_sucursal); 
 
-                    var BotItem = new InlineKeyboardButton[listItem.Count()][];
-                    int count1 = 0;
+                    
                     foreach (var list in listItem)
                     {
 
                         if (list.tipo.Equals("Servicio"))
                         {
+                            var BotItem = new InlineKeyboardButton[listItem.Count()][];
+                            int count1 = 0;
                             var row = new[]
                            {
                      InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "itemOpciones:"+usuario_2+":"+list.id+":"+id_sucursal)
@@ -330,6 +333,13 @@ namespace TelegramChatBot
                  };
                             BotItem[count1] = row;
                             count1++;
+
+                            await Bot.SendTextMessageAsync(
+                      chatId: callbackQuery.Message.Chat.Id,
+                      text: "Lista de servicios:",
+                      replyMarkup: new InlineKeyboardMarkup(BotItem));
+
+                            return;
                         }
                         else
                         {
@@ -352,10 +362,7 @@ namespace TelegramChatBot
 
                     }
 
-                    await Bot.SendTextMessageAsync(
-                       chatId: callbackQuery.Message.Chat.Id,
-                       text: "Lista de servicios:",
-                       replyMarkup: new InlineKeyboardMarkup(BotItem));
+                   
                     break;
 
                 case "itemOpciones":
