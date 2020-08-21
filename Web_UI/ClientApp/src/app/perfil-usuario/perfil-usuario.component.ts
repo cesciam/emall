@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Comercio } from '../models/Comercio';
 import { CitaService } from '../services/cita.service';
 import { CitaList } from '../models/CitaList';
+import { EnvioService } from '../services/envio.service';
+import { EnvioList } from '../models/envio-list.model';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -19,8 +21,11 @@ export class PerfilUsuarioComponent implements OnInit {
   private image: string;
 
   private citas: CitaList[];
+  private pedidos : EnvioList[];
 
-  constructor(private comercioService: ComercioService, private citaService: CitaService) {
+  constructor(private comercioService: ComercioService,
+     private citaService: CitaService,
+     private enviosService: EnvioService) {
     this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
   }
 
@@ -60,6 +65,27 @@ export class PerfilUsuarioComponent implements OnInit {
         this.citas = data;
       }
     );
+    this.obtenerPedidos();
+  }
+
+  obtenerPedidos(){
+    //TODO: backend
+    this.enviosService.obtenerEnvioListPorUsuario(parseInt(this.usuarioLogueado.Id)).subscribe(
+      res=>{
+        this.pedidos=res;
+      }
+    )
+  }
+
+  estadoPedidoToString(estado:number):string{
+    switch (estado) {
+      case 0:
+        return "pendiente";
+      case 1:
+        return "en camino";
+      case 2:
+        return "entregado"
+    }
   }
 
   changeSection(section: string): void {

@@ -86,16 +86,6 @@ export class AgregarRolComponent implements OnInit {
           window.scroll(0, 0);
         });
     }
-    // vistasSeleccionadasOrdenadas.forEach(element => {
-    //   console.log(element)
-    //   let vistaxrol = new VistaXRol;
-    //   vistaxrol = {
-    //     id: 0,
-    //     id_vista: element,
-    //     id_rol: 0
-    //   }
-    //   this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
-    // });
 
   }
 

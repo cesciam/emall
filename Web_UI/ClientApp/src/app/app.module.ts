@@ -108,6 +108,10 @@ import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
 import { CitaServicioComponent } from './cita-servicio/cita-servicio.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EnvioService } from './services/envio.service';
+import { SafePipe } from './pipes/safe.pipe';
+import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
+import { NgQrScannerModule } from 'angular2-qrscanner';;
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -216,6 +220,9 @@ const maskConfig: Partial<IConfig> = {
     RealizarCompraComponent,
     ListaDeseoComponent,
     FiltroDireccionPipe, CitaServicioComponent,
+    RealizarCompraComponent,
+    SafePipe, 
+    LectorQrComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -228,6 +235,7 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    NgQrScannerModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -285,7 +293,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
       { path: 'carrito-compras', component: CarritoComprasComponent },
       { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
-      { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'listar-envio-sucursal/:id_sucursal/envio-detalle/:id', component: EnvioDetalleComponent },
       { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
@@ -295,6 +303,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'lista-deseo', component: ListaDeseoComponent },
       { path: 'realizar-pago', component: RealizarCompraComponent },
       { path: 'cita-servicio/:id', component: CitaServicioComponent },
+      { path: 'lector-qr', component: LectorQrComponent },
     ])
   ],
   exports: [
@@ -314,6 +323,7 @@ const maskConfig: Partial<IConfig> = {
     VistaXRolService,
     ItemService,
     DatePipe,
+    EnvioService,
   ],
   bootstrap: [
     AppComponent
