@@ -13,9 +13,6 @@ namespace AppCore
 
         private MultaCrudFactory crudMulta;
         private ConfiguracionCrudFactory crudConfig;
-        private CitaCrudFactory crudCita;
-        private ItemCrudFactory crudItem;
-        private UsuarioCrudFactory crudUsuario;
         private ComercioCrudFactory crudComercio;
         private SucursalCrudFactory crudSucursal;
 
@@ -43,10 +40,6 @@ namespace AppCore
             int diferencia = (multa.fecha - hoy).Days;
             if (diferencia < validarmulta.valor)
             {
-                //var cita = new Cita();
-                //cita.id = multa.id_item;
-                //cita = crudCita.Retrieve<Cita>(cita);
-                //multa.id_item = cita.id_item;
                 crudMulta.Create(multa);
             }
 
