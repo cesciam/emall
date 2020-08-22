@@ -45,6 +45,11 @@ export class CitaService {
     return this.http.get<CitaListCom[]>(this.baseURL + this.serviceEndPoint);
   }
 
+  eliminarCita(id:number): Observable<void> {
+    this.serviceEndPoint = `/cita/CancelarCita?id=${id}`;
+    return this.http.delete<void>(this.baseURL + this.serviceEndPoint);
+  }
+
   registrarCitaServicio(cita: Cita): Observable<void> {
     this.serviceEndPoint = '/cita/RegistrarCitaServicio';
     return this.http.post<void>(this.baseURL + this.serviceEndPoint, cita, {
@@ -77,7 +82,7 @@ export class CitaService {
     return this.http.get<Cita>(this.baseURL + this.serviceEndPoint);
   }
 
-  obtenerItemsCita(id:number): Observable<Item[]> {
+  obtenerItemsCita(id: number): Observable<Item[]> {
     this.serviceEndPoint = `/item/itemsPorCita?id=${id}`;
     return this.http.get<Item[]>(this.baseURL + this.serviceEndPoint);
   }

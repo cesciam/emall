@@ -107,27 +107,5 @@ export class PerfilUsuarioComponent implements OnInit {
       .subscribe(data => this.comercios = data);
   }
 
-  cancelarCita(cita: CitaList) {
-    
-
-    let multa: Multa;
-    multa = new Multa();
-
-    multa.id_usuario = this.id_usuario;
-    multa.id_item = cita.id_empleado;
-    multa.id_comercio = cita.id_comercio;
-    multa.id_sucursal = cita.id_sucursal;
-    multa.fecha = cita.fecha;
-    this.multaService.crearMulta(multa)
-      .subscribe(
-        (reponse) => {
-
-        },
-        (error) => {
-          this.error = "Errores en el registro";
-          window.scroll(0, 0);
-        });
-
-  }
 
 }
