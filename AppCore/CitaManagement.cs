@@ -34,7 +34,7 @@ namespace AppCore
             }
 
             cita.id_empleado = id_empleado;
-            cita.codigo = Utils.TokenGenerator.Generar(8);
+            cita.codigo = Utils.TokenGenerator.GenerarAlfanumerico(8);
 
             crud.CreateCitaServicio(cita);
 
@@ -60,7 +60,7 @@ namespace AppCore
             }
 
             cita.id_empleado = id_empleado;
-            cita.codigo = Utils.TokenGenerator.Generar(8);
+            cita.codigo = Utils.TokenGenerator.GenerarAlfanumerico(8);
 
             int id_cita = crud.CreateCitaProducto<int>(cita);
 

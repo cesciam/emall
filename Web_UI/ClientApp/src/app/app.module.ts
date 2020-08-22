@@ -117,6 +117,7 @@ import { FiltroEnvioPipe } from './pipes/filtro-envio.pipe';
 import { CitaEmpleadoComponent } from './cita/cita-empleado/cita-empleado.component';
 import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';
 import { CitaDetallesComponent } from './cita/cita-detalles/cita-detalles.component';
+import { CitaDetallesEmpleadoComponent } from './cita/cita-detalles-empleado/cita-detalles-empleado.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -230,7 +231,7 @@ const maskConfig: Partial<IConfig> = {
     LectorQrComponent, 
     EnvioDetalleClienteComponent, 
     FiltroEnvioPipe, 
-    LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, CitaDetallesComponent, 
+    LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, CitaDetallesComponent, CitaDetallesEmpleadoComponent, 
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -316,6 +317,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-comercio/citas/:id', component: CitaEmpleadoComponent },
       { path: 'dashboard-comercio/citas-sucursal/:id', component: CitaSucursalComponent },
       { path: 'perfil-usuario/cita-detalles/:id', component: CitaDetallesComponent },
+      { path: 'dashboard-comercio/cita-detalles/:id', component: CitaDetallesEmpleadoComponent },
     ])
   ],
   exports: [

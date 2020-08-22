@@ -10,7 +10,7 @@
         </div>
     </div>
     <div *ngIf="citas; else noDisponible">
-        <table class="table table-striped text-center">
+        <table class="table table-striped table-sm text-center">
         <thead>
             <tr>
             <th class="text-center">Fecha</th>
@@ -27,8 +27,8 @@
             <td>{{cita.hora_f}}</td>
             <td>{{cita.nombre_cliente}}</td>
             <td>{{cita.nombre_empleado}}</td>
-            <td>
-                <button class="btn btn-secondary">Ver detalles</button>
+            <td *ngIf="misCitas">
+                <button class="btn btn-outline-secondary btn-sm" [routerLink]="['/dashboard-comercio/cita-detalles', cita.id]">Ver detalles</button>
             </td>
             </tr>
 

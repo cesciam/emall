@@ -83,7 +83,6 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
   verificarResultadoQr(resultado: string) {
     
     if (resultado.match(this.envio.codigo)) {
-      console.log("confirmado hostia")
       this.errorQr = false;
       this.codigoConfirmado = true;
       this.botonConfirmar = false;

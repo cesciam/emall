@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <div class="container">
+  <h2>Codigo de confirmacion: {{cita.codigo}}</h2>
     <div class="row">
         <div class="col-lg-8">
             <div *ngIf="items">
@@ -39,16 +40,4 @@
 </div>
 
 <app-footer></app-footer>
-
-<div class="container">
-    <div class="container w-50">
-        <qr-scanner 
-        [debug]="false" 
-        [canvasWidth]="1080" 
-        [canvasHeight]="720" 
-        [stopAfterScan]="true" 
-        [updateTime]="500">
-        </qr-scanner>
-    </div>
-</div>
 
