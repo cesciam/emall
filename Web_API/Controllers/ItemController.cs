@@ -202,6 +202,15 @@ namespace WebAPI.Controllers
 
         }
 
+        [HttpGet]
+        public List<Item> itemsPorCita(int id)
+        {
+            var cm = new ItemManagement();
+
+            return cm.RetrieveByCita(id);
+
+        }
+
 
     }
 }

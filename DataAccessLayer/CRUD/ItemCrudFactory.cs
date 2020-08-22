@@ -59,6 +59,24 @@ namespace DataAccessLayer.Crud
             return lista;
         }
 
+        public List<T> RetrieveByCita<T>(int id_cita)
+        {
+            var lista = new List<T>();
+
+            var resultados = dao.ExecuteQueryProcedure(mapper.GetRetriveByCitaStatement(id_cita));
+            var dic = new Dictionary<string, object>();
+            if (resultados.Count > 0)
+            {
+                var objs = mapper.BuildObjects(resultados);
+
+                foreach (var c in objs)
+                {
+                    lista.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+            return lista;
+        }
+
         public override List<T> RetrieveAll<T>()
         {
             var lista = new List<T>();

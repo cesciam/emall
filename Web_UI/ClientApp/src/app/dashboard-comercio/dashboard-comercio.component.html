@@ -80,7 +80,14 @@
           <a [routerLink]="['/agregar-horario-sucursal', comercioSeleccionado.id]">
             <div class="card bg-secondary text-white mb-4">
               <div class="card-body">Horarios comerciales</div>
+            </div>
+          </a>
+        </div>
 
+        <div class="col-xl-3 col-md-6">
+          <a [routerLink]="['/dashboard-comercio/citas/', comercioSeleccionado.id]">
+            <div class="card bg-secondary text-white mb-4">
+              <div class="card-body">Citas</div>
             </div>
           </a>
         </div>
@@ -113,6 +120,11 @@
               <td>
                 <a [routerLink]="['/listar-envio-sucursal', sucursal.id]">
                   <button type="button" class="btn btn-outline-secondary btn-sm" *ngIf="permisoEnvios">Envíos</button>
+                </a>
+              </td>
+              <td>
+                <a [routerLink]="['/dashboard-comercio/citas-sucursal', sucursal.id]">
+                  <button type="button" class="btn btn-outline-secondary btn-sm">Citas</button>
                 </a>
               </td>
               <td>

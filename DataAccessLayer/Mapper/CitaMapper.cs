@@ -15,6 +15,7 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_FECHA = "FECHA";
         private const string DB_COL_HORA_INICIO = "HORA_INICIO";
         private const string DB_COL_HORA_FIN = "HORA_FIN";
+        private const string DB_COL_CODIGO = "CODIGO";
 
         //Parametro que se utiliza solamente para validar que la cita esté dentro del horario de la sucursal
         private const string DB_COL_ID_SUCURSAL = "ID_SUCURSAL";
@@ -24,6 +25,7 @@ namespace DataAccessLayer.Mapper
         private const string DB_COL_COMERCIO = "COMERCIO";
         private const string DB_COL_EMPLEADO = "EMPLEADO";
         private const string DB_COL_ID_COMERCIO = "ID_COMERCIO";
+        private const string DB_COL_CLIENTE= "CLIENTE";
 
         // ID para traer empleado disponible x servicio
         private const string DB_COL_ID_ITEM = "ID_ITEM";
@@ -36,12 +38,12 @@ namespace DataAccessLayer.Mapper
             var cita = new Cita
             {
                 id = GetIntValue(row, DB_COL_ID),
-                id_item = GetIntValue(row, DB_COL_ID_ITEM),
                 id_cliente = GetIntValue(row, DB_COL_ID_CLIENTE),
                 id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO),
                 fecha = GetDateValue(row, DB_COL_FECHA),
                 hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
-                hora_fin = GetDateValue(row, DB_COL_HORA_FIN)
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                codigo = GetStringValue(row, DB_COL_CODIGO)
             };
 
             return cita;
@@ -61,6 +63,40 @@ namespace DataAccessLayer.Mapper
                 nombre_comercio = GetStringValue(row, DB_COL_COMERCIO),
                 nombre_empleado= GetStringValue(row, DB_COL_EMPLEADO),
                 nombre_sucursal = GetStringValue(row, DB_COL_SUCURSAL)
+            };
+
+            return citaView;
+        }
+
+        public CitaEmpleViewModel BuildViewEmpleado(Dictionary<string, object> row)
+        {
+            var citaView = new CitaEmpleViewModel
+            {
+                id = GetIntValue(row, DB_COL_ID),
+                fecha = GetDateValue(row, DB_COL_FECHA),
+                hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                nombre_cliente = GetStringValue(row, DB_COL_CLIENTE),
+                id_cliente =GetIntValue(row, DB_COL_ID_CLIENTE)
+                
+            };
+
+            return citaView;
+        }
+
+        public CitaComerModelView BuildViewComercio(Dictionary<string, object> row)
+        {
+            var citaView = new CitaComerModelView
+            {
+                id = GetIntValue(row, DB_COL_ID),
+                fecha = GetDateValue(row, DB_COL_FECHA),
+                hora_inicio = GetDateValue(row, DB_COL_HORA_INICIO),
+                hora_fin = GetDateValue(row, DB_COL_HORA_FIN),
+                nombre_cliente = GetStringValue(row, DB_COL_CLIENTE),
+                id_cliente = GetIntValue(row, DB_COL_ID_CLIENTE),
+                nombre_empleado = GetStringValue(row, DB_COL_EMPLEADO),
+                id_empleado = GetIntValue(row, DB_COL_ID_EMPLEADO)
+
             };
 
             return citaView;
@@ -122,6 +158,7 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
 
             return operacion;
         }
@@ -136,6 +173,7 @@ namespace DataAccessLayer.Mapper
             operacion.AddDateParam(DB_COL_FECHA, c.fecha);
             operacion.AddDateParam(DB_COL_HORA_INICIO, c.hora_inicio);
             operacion.AddDateParam(DB_COL_HORA_FIN, c.hora_fin);
+            operacion.AddVarcharParam(DB_COL_CODIGO, c.codigo);
 
             return operacion;
         }
@@ -258,6 +296,37 @@ namespace DataAccessLayer.Mapper
             return operacion;
         }
 
+        public SqlOperation GetCitasEmpleadoStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_EMPLEADO" };
 
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_EMPLEADO, c.id_empleado);
+
+            return operacion;
+        }
+
+        public SqlOperation GetCitasComercioStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_COMERCIO" };
+
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_COMERCIO, c.id_comercio);
+
+            return operacion;
+        }
+
+        public SqlOperation GetCitasSucursalStatament(BaseEntity entity)
+        {
+            var c = (Cita)entity;
+            var operacion = new SqlOperation { ProcedureName = "OBTENER_CITA_SUCURSAL" };
+
+            operacion.AddDateParam(DB_COL_FECHA, c.fecha);
+            operacion.AddIntParam(DB_COL_ID_SUCURSAL, c.id_sucursal);
+
+            return operacion;
+        }
     }
 }

@@ -184,7 +184,7 @@ export class CarritoComprasComponent implements OnInit {
     var horaFin = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+horas+':'+minString+':00');
   
     let cita: Cita = {
-      id_item: -1,
+      id_item: this.carritoLocalStorage[0].id,
       id_cliente: this.usuarioLog.Id,
       fecha: fechaCita,
       hora_inicio: horaInicio,
@@ -192,7 +192,10 @@ export class CarritoComprasComponent implements OnInit {
       id: -1,
       id_empleado: -1,
       id_sucursal: this.servicioSeleccionado.id_sucursal,
-      items: null
+      items: null,
+      codigo: null,
+      hora_inicio_string: this.time.hour+':'+minStringTimePicker+':00',
+      hora_fin_string: horas+':'+minString+':00'
    };
 
     this.citaService.registrarCitaServicio(cita)
@@ -256,12 +259,12 @@ export class CarritoComprasComponent implements OnInit {
       id: -1,
       id_empleado: -1,
       id_sucursal: this.carritoLocalStorage[0].id_sucursal,
-      items: idProductos
+      items: idProductos,
+      codigo:null,
+      hora_fin_string: horas+':'+minString+':00',
+      hora_inicio_string: this.time.hour+':'+minStringTimePicker+':00'
    };
-
-   console.log(cita);
    
-
    this.citaService.registrarCitaProducto(cita)
    .subscribe((data: any) => {
     localStorage.removeItem('carrito');

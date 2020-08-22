@@ -116,7 +116,7 @@ export class DashboardComercioComponent implements OnInit {
     let idComercio: number = this.activatedRoute.snapshot.queryParams['comercio'];
     let comercio = new Comercio();
     comercio.id = idComercio;
-
+    
     this.comercioService.obtenerComercio(comercio)
       .subscribe(data => {
         this.comercioSeleccionado = data

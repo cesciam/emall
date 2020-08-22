@@ -142,7 +142,7 @@
                       <td>{{cita.nombre_comercio}} {{cita.nombre_sucursal}}</td>
                       <td>{{cita.nombre_empleado}}</td>
                       <td>
-                        <button class="btn btn-outline-danger btn-sm" (click)="cancelarCita(cita)" data-toggle="modal" data-target="#ModalCancelarCita">Cancelar cita</button>
+                        <button class="btn btn-outline-danger btn-sm" [routerLink]="['cita-detalles', cita.id]"  >Detalles</button>
                       </td>
                     </tr>
   
@@ -231,15 +231,9 @@
 <app-footer></app-footer>
 
 <ng-template #noDisponible>
-
     <p>Sin citas registradas</p>
-  
-
 </ng-template>
 
 <ng-template #noDisponiblePedidos>
-
   <p>Sin pedidos registradas</p>
-
-
 </ng-template>
