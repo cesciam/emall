@@ -7,6 +7,9 @@ import { Envio } from '../models/envio.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CitaService } from '../services/cita.service';
 import { Cita } from '../models/Cita';
+import { MultaService } from '../services/multa.service';
+import { Multa } from '../models/multa';
+import { Configuracion } from '../models/configuracion';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -15,6 +18,8 @@ import { Cita } from '../models/Cita';
 })
 export class CarritoComprasComponent implements OnInit {
 
+  private id_usuario: number;
+  private multa: boolean = false;
   private carritoLocalStorage: Item[];
   private tipoCarrito: string;
   private total: number = 0;
@@ -41,14 +46,38 @@ export class CarritoComprasComponent implements OnInit {
   constructor(private serviceItem: ItemService,
     private carritoComprasService: CarritoComprasService,
     private router: Router, private route: ActivatedRoute,
-    private citaService: CitaService) {
+    private citaService: CitaService,
+    private multaService: MultaService) {
     this.tipoCarrito = localStorage.getItem('tipoCarrito');
   }
 
+  async validarMulta() {
+
+    if (this.usuarioLogueado != null) {
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+      let multas: Array<Multa>;
+      multas = new Array<Multa>();
+
+      multas = await this.multaService.ObtenerMultasUsuario(this.id_usuario);
+
+      let cantidad_permitida: Configuracion;
+      cantidad_permitida = new Configuracion();
+      cantidad_permitida = await this.multaService.obtenerConfig("cita_cancelada");
+
+      if (multas.length >= cantidad_permitida.valor) {
+        this.multa = true;
+      }
+
+    }
+    console.log(this.multa)
+
+  }
+
   ngOnInit() {
+    
     this.llenarCarrito();
     this.validarUsuarioLogueado();
-
+    this.validarMulta();
     if (this.tipoCarrito == 'Servicio') {
       this.serviceItem.getItemById(this.carritoLocalStorage[0].id)
       .subscribe(

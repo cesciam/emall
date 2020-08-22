@@ -118,6 +118,8 @@ import { CitaEmpleadoComponent } from './cita/cita-empleado/cita-empleado.compon
 import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';
 import { CitaDetallesComponent } from './cita/cita-detalles/cita-detalles.component';
 import { CitaDetallesEmpleadoComponent } from './cita/cita-detalles-empleado/cita-detalles-empleado.component';
+import { ListarComprasComponent } from './listar-compras/listar-compras.component';
+import { FilterCompraPipe } from './pipes/filter-compra.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -232,6 +234,8 @@ const maskConfig: Partial<IConfig> = {
     EnvioDetalleClienteComponent, 
     FiltroEnvioPipe, 
     LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, CitaDetallesComponent, CitaDetallesEmpleadoComponent, 
+    ListarComprasComponent,
+    FilterCompraPipe
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -314,6 +318,8 @@ const maskConfig: Partial<IConfig> = {
       { path: 'realizar-pago', component: RealizarCompraComponent },
       { path: 'lector-qr', component: LectorQrComponent },
       { path: 'perfil-usuario/envio-detalle/:id_envio', component: EnvioDetalleClienteComponent },
+      
+      { path: 'listar-compras', component: ListarComprasComponent },
       { path: 'dashboard-comercio/citas/:id', component: CitaEmpleadoComponent },
       { path: 'dashboard-comercio/citas-sucursal/:id', component: CitaSucursalComponent },
       { path: 'perfil-usuario/cita-detalles/:id', component: CitaDetallesComponent },

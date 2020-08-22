@@ -43,6 +43,8 @@ namespace Web_API.Controllers
         {
             Envio envio = pago.Envio;
             Transaccion transaccion = pago.Transaccion;
+            Promocion promocion = pago.Promocion;
+
             transaccion.CodigoTransaccion = new Random().Next(100000000).ToString();
             try
             {
@@ -73,12 +75,18 @@ namespace Web_API.Controllers
                     ApellidoUsuario = cliente.Apellido,
                     TelefonoUsuario = cliente.Telefono,
                     CorreoUsuario = cliente.Correo,
-                    //Todo: Direcciones
                     NombreSucursal = sucursalEmpleado.Nombre,
                     CedulaJuridica = comercio.CedulaJuridica,
                     //Todo: Promociones
                     IdTransaccion = idTransaccion
                 };
+
+                if (promocion != null)
+                {
+                    factura.IdPromocion = promocion.id;
+                    factura.NombrePromocion = promocion.nombre;
+                    factura.Porcentaje = promocion.porcentaje;
+                }
 
                 var facturaDB = facturaManagement.Create(factura, envio);
                 LineaFactura lineaFactura = new LineaFactura { IdFactura = facturaDB.Id };
@@ -111,9 +119,9 @@ namespace Web_API.Controllers
             }
         }
 
-        public List<Factura> ObtenerFacturasxUsuario(int IdUsuario)
+        public List<Factura> ObtenerFacturasxUsuario(int idUsuario)
         {
-            var factura = new Factura { IdUsuario = IdUsuario };
+            var factura = new Factura { IdUsuario = idUsuario };
             return facturaManagement.RetrieveFacturasxUsuario(factura);
         }
 
@@ -121,6 +129,15 @@ namespace Web_API.Controllers
         {
             Factura factura = (Factura)pagoContainer[0];
             Transaccion transaccion = (Transaccion)pagoContainer[1];
+
+            string promocion = "Sin promoción";
+            string porcentaje = "Sin promoción";
+
+            if (factura.IdPromocion > 0)
+            {
+                promocion = factura.NombrePromocion;
+                porcentaje = factura.Porcentaje.ToString();
+            }
 
             string html = @"<!DOCTYPE html>
             <html lang='en'>
@@ -130,6 +147,7 @@ namespace Web_API.Controllers
                     <title>FACTURA</title>
                     <style>
                         header {
+                            width: 70%;
                             margin: auto;
                         }
                         header h1 {
@@ -141,13 +159,18 @@ namespace Web_API.Controllers
                         html{
                             font-family: Arial, Helvetica, sans-serif;
                         }
+
+                        .main-section {
+                             width: 70%;
+                             margin: auto;
+                        }
                     </style>
                 </head>
                 <body>
                     <header>
                         <h1>Factura de comercio</h1>
                     </header>
-                    <div>
+                    <div class='main-section'>
                         <h2>Detalle de factura</h2>
         
                         <div class='detalleFactura'>
@@ -157,6 +180,8 @@ namespace Web_API.Controllers
                             "<p>Nombre de cliente: " + factura.NombreUsuario + " " + factura.ApellidoUsuario + "</p>" +
                             "<p>Items:</p>" + GetStringLineasFactura((List<LineaFactura>)pagoContainer[2]) +
                             "<p>Nombre de sucursal: " + factura.NombreSucursal + "</p>" +
+                            "<p>Promoción: " + promocion + "</p>" +
+                            "<p>Porcentaje de promoción: " + porcentaje + "</p>" +
                             "<p>Total: ₡" + transaccion.Monto + "</p>" +
                         "</div>"+
                     "</div>" +

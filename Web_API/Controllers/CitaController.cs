@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AppCore;
@@ -21,6 +22,12 @@ namespace Web_API.Controllers
         [HttpPost]
         public IActionResult RegistrarCitaServicio(Cita cita)
         {
+            var hora_inicio = DateTime.Parse(cita.hora_inicio_string);
+            var hora_fin = DateTime.Parse(cita.hora_fin_string);
+
+            cita.hora_inicio = hora_inicio;
+            cita.hora_fin = hora_fin;
+
             if (mng.CreateCitaServicio(cita) > 0)
             {
                 return Ok();

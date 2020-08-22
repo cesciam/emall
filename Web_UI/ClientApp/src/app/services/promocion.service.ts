@@ -48,4 +48,10 @@ export class PromocionService {
     });
   }
 
+  obtenerPromocionByCodigo(codigo: string) {
+    let endpointUrl = this.baseURL + '/promocion/RetrieveByCodigo?codigo=' + codigo;
+
+    return this.http.get<Promocion>(endpointUrl);
+  }
+
 }

@@ -18,5 +18,7 @@ namespace Entities
         public int id_sucursal { get; set; }
         public int id_comercio { get; set; }
         public int[] items { get; set; }
+        public string hora_inicio_string { get; set; }
+        public string hora_fin_string { get; set; }
     }
 }
