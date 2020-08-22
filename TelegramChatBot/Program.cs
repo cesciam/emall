@@ -122,7 +122,7 @@ namespace TelegramChatBot
                     var contrasenna = message.Text.Split(",")[1];
                     Usuario usuario_valido = LogIn(correo, contrasenna);
 
-                    if (usuario_valido.Id != 0)
+                    if (usuario_valido != null)
                     {
                         var keyboardCitas = new InlineKeyboardMarkup(new[]
                              {
