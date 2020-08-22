@@ -164,7 +164,9 @@ export class CarritoComprasComponent implements OnInit {
       id_empleado: -1,
       id_sucursal: this.servicioSeleccionado.id_sucursal,
       items: null,
-      codigo: null
+      codigo: null,
+      hora_inicio_string: this.time.hour+':'+minStringTimePicker+':00',
+      hora_fin_string: horas+':'+minString+':00'
    };
 
     this.citaService.registrarCitaServicio(cita)
@@ -229,12 +231,11 @@ export class CarritoComprasComponent implements OnInit {
       id_empleado: -1,
       id_sucursal: this.carritoLocalStorage[0].id_sucursal,
       items: idProductos,
-      codigo:null
+      codigo:null,
+      hora_fin_string: horas+':'+minString+':00',
+      hora_inicio_string: this.time.hour+':'+minStringTimePicker+':00'
    };
-
-   console.log(cita);
    
-
    this.citaService.registrarCitaProducto(cita)
    .subscribe((data: any) => {
     localStorage.removeItem('carrito');
