@@ -37,7 +37,10 @@ export class RealizarCompraComponent implements OnInit {
   private valor_multa: number;
 
 
-  constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private serviceMulta: MultaService, private promocionService: PromocionService) { }
+  constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private serviceMulta: MultaService, private promocionService: PromocionService) {
+    this.id_usuario = parseInt(this.route.snapshot.queryParams['usuario']);
+    this.idEnvio = parseInt(this.route.snapshot.queryParams['pago']);
+  }
 
   private txtPago: string;
   private txtCodigo: string;
@@ -45,47 +48,67 @@ export class RealizarCompraComponent implements OnInit {
   private errorPromo: any;
   private promoAplicada: any;
 
-  async validarMulta() {
-    this.id_usuario = parseInt(this.route.snapshot.queryParams['usuario']);
-    this.id_usuario_log = JSON.parse(localStorage.getItem('usuario-logueado'));
-
-    if (this.id_usuario != null && this.id_usuario_log != null) {
-      this.multas = new Array<Multa>();
-      this.multas = await this.serviceMulta.ObtenerMultasUsuario(this.id_usuario);
-      this.multa = true;
-      console.log(this.id_usuario)
-      console.log(this.multas)
-    }
-  }
-
   async pagarMulta() {
+    this.multas = new Array<Multa>();
+    this.multas = await this.serviceMulta.ObtenerMultasUsuario(this.id_usuario);
+    this.multa = true;
+
     this.envio = new Envio;
     this.envio.id = 0;
     this.envio.estado = 2;
     this.envio.idEmpleado = this.multas[0].id_item;
     this.envio.idCliente = this.id_usuario;
     this.envio.codigo = "pago_multa";
+
+
+
+    console.log(this.multas)
+
+
     let valor_multa: Configuracion;
     valor_multa = new Configuracion();
     valor_multa = await this.serviceMulta.obtenerConfig("valor_multa");
     this.valor_multa = valor_multa.valor;
     this.total = (this.valor_multa * this.multas.length)
 
+    let items: Array<Item>;
+    items = new Array<Item>();
+
+    let item: Item;
+    item = new Item();
+    item.id = 0;
+    item.nombre = "Pago Multa";
+    item.id_impuesto = 1;
+    item.precio = this.total;
+
+    items.push(item);
+
+    this.envio.items = items;
+  }
+
+
+  deleteMultas(): void {
+    this.serviceMulta.deleteMulta(this.id_usuario)
+      .subscribe
+      (
+        (reponse) =>
+          window.location.href = "http://localhost:4000/carrito-compras",
+        (error) => {
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
   }
 
 
   async ngOnInit() {
-    
-
-    await this.validarMulta();
-
-    if (this.multa) {
-      this.pagarMulta();
+    if (this.id_usuario > 0) {
+      await this.pagarMulta();
     } else {
       this.obtenerItemsEnvio();
     }
 
-    
+
+
     this.paypalInit();
   }
 
@@ -131,7 +154,11 @@ export class RealizarCompraComponent implements OnInit {
 
           this.compraService.realizarPago(this.envio, transaccion, this.promocion).subscribe(
             (response) => {
-              this.router.navigate(['/']);
+              if (this.multa) {
+                this.deleteMultas();
+              } else {
+                window.location.href = "http://localhost:4000/";
+              }
             },
             (error) => {
               this.error = error.error;
@@ -156,7 +183,11 @@ export class RealizarCompraComponent implements OnInit {
 
     this.compraService.realizarPago(this.envio, transaccion, this.promocion).subscribe(
       (response) => {
-        this.router.navigate(['/']);
+        if (this.multa) {
+          this.deleteMultas();
+        } else {
+          window.location.href = "http://localhost:4000/";
+        }
       },
       (error) => {
         this.error = error.error;

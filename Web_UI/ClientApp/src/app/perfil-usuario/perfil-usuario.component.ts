@@ -119,7 +119,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
     multa.id_usuario = this.id_usuario;
     multa.id_item = cita.id_empleado;
-    // multa.id_comercio = cita.id_comercio;
+    multa.id_comercio = cita.id_comercio;
     multa.id_sucursal = cita.id_sucursal;
     multa.fecha = cita.fecha;
     this.multaService.crearMulta(multa)
@@ -130,7 +130,7 @@ export class PerfilUsuarioComponent implements OnInit {
           window.scroll(0, 0);
         });
 
-        this.router.navigate(['']);
+        //this.router.navigate(['']);
   }
 
 

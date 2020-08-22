@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Crud;
 using DataAccessLayer.CRUD;
 using Entities;
+using Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
@@ -15,6 +16,7 @@ namespace AppCore
         private ConfiguracionCrudFactory crudConfig;
         private ComercioCrudFactory crudComercio;
         private SucursalCrudFactory crudSucursal;
+        private EmpleadoCrudFactory crudEmpleado;
 
         public MultaManagement()
         {
@@ -22,6 +24,7 @@ namespace AppCore
             crudComercio = new ComercioCrudFactory();
             crudSucursal = new SucursalCrudFactory();
             crudConfig = new ConfiguracionCrudFactory();
+            crudEmpleado = new EmpleadoCrudFactory();
         }
 
 
@@ -37,6 +40,12 @@ namespace AppCore
             int diferencia = (multa.fecha - hoy).Days;
             if (diferencia < validarmulta.valor)
             {
+
+                var tmp = new List<EmpleadoViewModel>();
+
+                tmp = crudEmpleado.RetrieveAllDatosByComercioId<EmpleadoViewModel>(multa.id_comercio);
+                multa.id_item = tmp[0].Id;
+
                 crudMulta.Create(multa);
             }
 
@@ -46,7 +55,7 @@ namespace AppCore
         {
             var multas = crudMulta.RetrieveAllByUser<Multa>(id_usuario);
 
-            for(int i = 0; i < multas.Count; i++)
+            for (int i = 0; i < multas.Count; i++)
             {
                 multas[i].comercio = new Comercio();
                 multas[i].comercio.Id = multas[i].id_comercio;
