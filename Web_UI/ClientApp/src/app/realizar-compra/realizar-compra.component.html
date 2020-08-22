@@ -113,7 +113,7 @@
       <li *ngFor="let detail of error.details">{{detail}}</li>
     </ul>-->
   </div>
-  <div *ngIf="(multa && envio && valor_multa); else noMulta">
+  <!--<div *ngIf="(multa && envio && valor_multa); else noMulta">
 
     <div class="table-responsive">
       <h2>Multas</h2>
@@ -145,11 +145,43 @@
       <h3>Total: ₡{{ total | number:0}}</h3>
     </div>
 
-  </div>
-  
+  </div>-->
 
-  <ng-template #noMulta>
-    <div>
+
+
+
+
+
+
+  <div>
+    <div class="table-responsive" *ngIf="(multa); else noMulta">
+      <h2>Multa</h2>
+
+      <div>
+        <table class="table table-striped table-sm text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Fecha de Cita</th>
+              <th class="text-center">Comercio</th>
+              <th class="text-center">Sucursal</th>
+              <th class="text-center">Valor multa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let multa of multas">
+              <td>{{ multa.fecha | date }}</td>
+              <td>{{ multa.comercio.nombre }}</td>
+              <td>{{ multa.sucursal.nombre }}</td>
+              <td> ₡ {{ valor_multa | number:0}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <ng-template #noMulta>
+
       <div class="table-responsive" *ngIf="envio">
         <h2>Productos</h2>
 
@@ -174,23 +206,29 @@
           </table>
         </div>
 
+      </div>
 
-  <div style="text-align: right;" *ngIf="promocion">
-    <h3>Promoción: {{ promocion.nombre }}</h3>
-    <h4>Descuento: {{ promocion.porcentaje }}%</h4>
-  </div>
-  <div style="text-align: right;">
-    <div *ngIf="promocion == null">
-      <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#ModalPromocion">Ingresar código de promoción</button>
+    </ng-template>
+
+
+
+    <div style="text-align: right;" *ngIf="promocion">
+      <h3>Promoción: {{ promocion.nombre }}</h3>
+      <h4>Descuento: {{ promocion.porcentaje }}%</h4>
     </div>
-    <h3>Total: ₡{{ total | number:0}}</h3>
-  </div>
+    <div style="text-align: right;">
+      <div *ngIf="promocion == null">
+        <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#ModalPromocion">Ingresar código de promoción</button>
+      </div>
+      <h3>Total: ₡{{ total | number:0}}</h3>
+    </div>
 
-  <div #paypal id="paypal"></div>
-  <hr />
-  <div class="d-flex justify-content-center" style="margin-bottom: 2%">
-    <button class="primary-btn" style="border: none; height: 5%; width: 20%; font-size: 20px" data-toggle="modal" data-target="#Modal">SINPE Móvil</button>
-  </div>
+    <div #paypal id="paypal"></div>
+    <hr />
+    <div class="d-flex justify-content-center" style="margin-bottom: 2%">
+      <button class="primary-btn" style="border: none; height: 5%; width: 20%; font-size: 20px" data-toggle="modal" data-target="#Modal">SINPE Móvil</button>
+    </div>
 
+  </div>
 </div>
-<app-footer></app-footer>
+  <app-footer></app-footer>
