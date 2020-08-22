@@ -29,11 +29,11 @@
         </button>
       </div>
       <div class="modal-body" *ngIf="registrado==true; else noRegistrado">
-        Has agregado el item a la lista de deseos.
+        Has agregado el ítem a la lista de deseos.
       </div>
       <ng-template #noRegistrado>
         <div class="modal-body">
-          Inicie sesion para agregar el item a la lista de deseos.
+          Inicie sesión para agregar el ítem a la lista de deseos.
         </div>
       </ng-template>
       <div class="modal-footer">
@@ -76,12 +76,9 @@
             <a class="heart-icon" (click)="agregarListaDeseo()" data-toggle="modal" data-target="#ModalDeseo"><span class="icon_folder-add_alt"></span></a>
             <ul>
               <li *ngIf="item_seleccionado.tipo === 'Servicio'">
-                <b>Duración</b> <span>
-                  {{item_seleccionado.duracion}}
-                  minutos
-                </span>
+                <b>Duración</b> <span>{{item_seleccionado.duracion}} minutos</span>
               </li>
-              <li><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
+              <li *ngIf="item_seleccionado.tipo === 'Producto'"><b>Disponibilidad</b> <span>{{item_seleccionado.inventario}} unidades</span></li>
               <li><b>Impuesto</b> <span>{{impuesto.Nombre}} <samp> {{impuesto.Porcentaje}}%</samp></span></li>
               <li><b>Detalle sucursal</b> <span>{{sucursal.nombre}} - {{sucursal.detallesDireccion}}</span></li>
             </ul>

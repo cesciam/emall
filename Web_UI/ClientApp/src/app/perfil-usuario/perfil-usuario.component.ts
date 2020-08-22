@@ -9,6 +9,7 @@ import { EnvioService } from '../services/envio.service';
 import { EnvioList } from '../models/envio-list.model';
 import { MultaService } from '../services/multa.service';
 import { Multa } from '../models/multa';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -31,7 +32,8 @@ export class PerfilUsuarioComponent implements OnInit {
   constructor(private comercioService: ComercioService,
      private citaService: CitaService,
     private enviosService: EnvioService,
-    private multaService: MultaService) {
+    private multaService: MultaService,
+    private router: Router) {
     this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
   }
 
@@ -109,6 +111,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
   cancelarCita(cita: CitaList) {
     
+    this.citaService.eliminarCita(cita.id)
+    .subscribe((Response)=>{});
 
     let multa: Multa;
     multa = new Multa();
@@ -121,13 +125,13 @@ export class PerfilUsuarioComponent implements OnInit {
     this.multaService.crearMulta(multa)
       .subscribe(
         (reponse) => {
-
         },
         (error) => {
-          this.error = "Errores en el registro";
           window.scroll(0, 0);
         });
 
+        //this.router.navigate(['']);
   }
+
 
 }
