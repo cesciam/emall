@@ -107,5 +107,16 @@ namespace Web_API.Controllers
             };
             return mng.Retrieve(cita);
         }
+
+        [HttpDelete]
+
+        public void CancelarCita(int id)
+        {
+            var cita = new Cita
+            {
+                id = id
+            };
+            mng.Delete(cita);
+        }
     }
 }

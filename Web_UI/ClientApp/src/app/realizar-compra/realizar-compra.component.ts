@@ -37,7 +37,7 @@ export class RealizarCompraComponent implements OnInit {
   private valor_multa: number;
 
 
-  constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private serviceMulta: MultaService) { }
+  constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private serviceMulta: MultaService, private promocionService: PromocionService) { }
 
   private txtPago: string;
   private txtCodigo: string;
@@ -65,10 +65,6 @@ export class RealizarCompraComponent implements OnInit {
     this.envio.idEmpleado = this.multas[0].id_item;
     this.envio.idCliente = this.id_usuario;
     this.envio.codigo = "pago_multa";
-
-    console.log(this.envio)
-
-
     let valor_multa: Configuracion;
     valor_multa = new Configuracion();
     valor_multa = await this.serviceMulta.obtenerConfig("valor_multa");
