@@ -316,16 +316,16 @@ namespace TelegramChatBot
 
                     List<Item> listItem = new List<Item>();
 
-                    listItem = items.RetrieveAllBySucursal(id_sucursal); 
+                    listItem = items.RetrieveAllBySucursal(id_sucursal);
 
-                    
+                    var BotItem = new InlineKeyboardButton[listItem.Count()][];
+                    int count1 = 0;
                     foreach (var list in listItem)
                     {
 
                         if (list.tipo.Equals("Servicio"))
                         {
-                            var BotItem = new InlineKeyboardButton[listItem.Count()][];
-                            int count1 = 0;
+
                             var row = new[]
                            {
                      InlineKeyboardButton.WithCallbackData(text: list.nombre,callbackData: "itemOpciones:"+usuario_2+":"+list.id+":"+id_sucursal)
@@ -334,14 +334,8 @@ namespace TelegramChatBot
                             BotItem[count1] = row;
                             count1++;
 
-                            await Bot.SendTextMessageAsync(
-                      chatId: callbackQuery.Message.Chat.Id,
-                      text: "Lista de servicios:",
-                      replyMarkup: new InlineKeyboardMarkup(BotItem));
-
-                            return;
                         }
-                        else
+                        else if(listItem.Count().Equals(0))
                         {
                             var sucursalError = new InlineKeyboardMarkup(new[]
                     {
@@ -358,11 +352,24 @@ namespace TelegramChatBot
                              replyMarkup: sucursalError);
 
                             return;
+                        }else if (list.tipo.Equals("Producto"))
+                        {
+                            var row = new[]
+                          {
+                     InlineKeyboardButton.WithCallbackData(text: list.nombre+"/No puede sacar citas de productos",callbackData: "comercios: "+usuario_2)
+
+                 };
+                            BotItem[count1] = row;
+                            count1++;
                         }
 
                     }
+                    await Bot.SendTextMessageAsync(
+                    chatId: callbackQuery.Message.Chat.Id,
+                    text: "Lista de servicios:",
+                    replyMarkup: new InlineKeyboardMarkup(BotItem));
+                     
 
-                   
                     break;
 
                 case "itemOpciones":
@@ -422,7 +429,7 @@ namespace TelegramChatBot
 
                                 Usuario usuarioMostrar = usuarios.RetrieveById(usuario_empleado);
 
-                                //VALIDACION QUE SOLO SEAN SERVICIOS
+                                
                                 var row = new[]
                                 {
                      InlineKeyboardButton.WithCallbackData(text: usuarioMostrar.Nombre,callbackData: "datosCita:"+ list.id_empleado + ":"+id_item +":" +id_usuario+":" +idSucursal)//mas el id del cliente ,mas el item 
