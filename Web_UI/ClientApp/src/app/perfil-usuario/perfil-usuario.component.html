@@ -142,7 +142,10 @@
                       <td>{{cita.nombre_comercio}} {{cita.nombre_sucursal}}</td>
                       <td>{{cita.nombre_empleado}}</td>
                       <td>
-                        <button class="btn btn-outline-danger btn-sm" [routerLink]="['cita-detalles', cita.id]"  >Detalles</button>
+                        <button class="btn btn-outline-secondary btn-sm" [routerLink]="['cita-detalles', cita.id]"  >Detalles</button>
+                      </td>
+                      <td>
+                        <button class="btn btn-outline-danger btn-sm" (click)="cancelarCita(cita)"  >Cancelar</button>
                       </td>
                     </tr>
   

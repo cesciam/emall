@@ -40,27 +40,5 @@ export class CitaDetallesComponent implements OnInit {
     );
   }
 
-  cancelarCita(cita:Cita) {
-    let idCita = this.route.snapshot.params['id'];
-    this.service.eliminarCita(idCita)
-    .subscribe((Response)=>{});
-
-    let multa: Multa;
-    multa = new Multa();
-
-    multa.id_usuario = this.id_usuario;
-    multa.id_item = cita.id_empleado;
-    // multa.id_comercio = cita.id_comercio;
-    multa.id_sucursal = cita.id_sucursal;
-    multa.fecha = cita.fecha;
-    this.multaService.crearMulta(multa)
-      .subscribe(
-        (reponse) => {
-        },
-        (error) => {
-          window.scroll(0, 0);
-        });
-
-        this.router.navigate(['/perfil-usuario']);
-  }
+  
 }
