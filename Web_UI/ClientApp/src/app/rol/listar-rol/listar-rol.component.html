@@ -23,9 +23,14 @@
 <br>
 <div class="container-fluid container">
   <main role="main">
+    <div class="col-sm-auto d-flex justify-content-end">
+      <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">Volver atras</a>
+
+    </div>
     <h1 class="display-4 text-center">Lista de roles</h1>
     <br>
-    <button type="button" class="btn btn-primary" [routerLink]="['/agregar-rol', service.id_comercio]">Nuevo rol + </button>
+    <button type="button" class="btn btn-primary" [routerLink]="['/agregar-rol', service.id_comercio]">Nuevo rol +
+    </button>
     <br>
     <br>
     <div class="table-responsive">
@@ -44,8 +49,10 @@
           <td>{{rol.id}}</td>
           <td>{{rol.nombre}}</td>
           <td>{{rol.descripcion}}</td>
-          <td><button (click)="onUpdate(rol.id)" class="btn btn-primary">Editar</button></td>
-          <td><button class="btn btn-danger" data-toggle="modal" data-target="#Modal"
+          <td><button (click)="onUpdate(rol.id)" class="btn btn-outline-info btn-sm">
+              <i class="fas fa-edit"></i>
+            </button></td>
+          <td><button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#Modal"
               (click)="rolToDelete(rol.id)"><i class="fas fa-trash-alt"></i></button></td>
         </tr>
       </table>

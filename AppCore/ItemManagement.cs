@@ -81,6 +81,10 @@ namespace AppCore
         {
             return crudItem.RetrieveByEnvio<Item>(id);
         }
+        public List<Item> RetrieveByCita(int id)
+        {
+            return crudItem.RetrieveByCita<Item>(id);
+        }
 
         public void UpdateItem(Item item)
         {

@@ -32,9 +32,9 @@
                 <li *ngIf="usuarioLogueado?.usuario?.Tipo==1">
                   <a [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
                 </li>
-                <li *ngIf="usuarioLogueado?.usuario?.Tipo==3">
+                <!-- <li *ngIf="usuarioLogueado?.usuario?.Tipo==3">
                   <a [routerLink]="['/perfil-admin-comercio']">Administrar Comercios</a>
-                </li>
+                </li> -->
                 <li *ngIf="usuarioLogueado?.usuario?.Tipo==4">
                   <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">Comercio</a>
                 </li>

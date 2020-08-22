@@ -7,6 +7,9 @@ import { CitaService } from '../services/cita.service';
 import { CitaList } from '../models/CitaList';
 import { EnvioService } from '../services/envio.service';
 import { EnvioList } from '../models/envio-list.model';
+import { MultaService } from '../services/multa.service';
+import { Multa } from '../models/multa';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -21,17 +24,23 @@ export class PerfilUsuarioComponent implements OnInit {
   private image: string;
 
   private citas: CitaList[];
-  private pedidos : EnvioList[];
+  private pedidos: EnvioList[];
+
+  private error: any;
+  private id_usuario: number;
 
   constructor(private comercioService: ComercioService,
      private citaService: CitaService,
-     private enviosService: EnvioService) {
+    private enviosService: EnvioService,
+    private multaService: MultaService,
+    private router: Router) {
     this.usuarioLogueado = JSON.parse(localStorage.getItem('usuario-logueado'));
   }
 
   ngOnInit() {
     let usuarioBuscar: any = JSON.parse(localStorage.getItem('usuario-logueado'));
     let usuarioActivado: Usuario = usuarioBuscar.usuario;
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
 
     if (this.usuarioLogueado['usuario'].Foto != null) {
       this.image = this.usuarioLogueado['usuario'].Foto.enlace;
@@ -65,14 +74,13 @@ export class PerfilUsuarioComponent implements OnInit {
         this.citas = data;
       }
     );
-    this.obtenerPedidos();
+    this.obtenerPedidos(parseInt(this.usuarioLogueado['usuario'].Id));
   }
 
-  obtenerPedidos(){
-    //TODO: backend
-    this.enviosService.obtenerEnvioListPorUsuario(parseInt(this.usuarioLogueado.Id)).subscribe(
-      res=>{
-        this.pedidos=res;
+  obtenerPedidos(id:number){
+    this.enviosService.obtenerEnvioListPorUsuario(id).subscribe(
+      data=>{
+        this.pedidos = data;
       }
     )
   }
@@ -100,5 +108,30 @@ export class PerfilUsuarioComponent implements OnInit {
     this.comercioService.ObtenerComerciosAdmin(comercio)
       .subscribe(data => this.comercios = data);
   }
+
+  cancelarCita(cita: CitaList) {
+    
+    this.citaService.eliminarCita(cita.id)
+    .subscribe((Response)=>{});
+
+    let multa: Multa;
+    multa = new Multa();
+
+    multa.id_usuario = this.id_usuario;
+    multa.id_item = cita.id_empleado;
+    // multa.id_comercio = cita.id_comercio;
+    multa.id_sucursal = cita.id_sucursal;
+    multa.fecha = cita.fecha;
+    this.multaService.crearMulta(multa)
+      .subscribe(
+        (reponse) => {
+        },
+        (error) => {
+          window.scroll(0, 0);
+        });
+
+        this.router.navigate(['']);
+  }
+
 
 }

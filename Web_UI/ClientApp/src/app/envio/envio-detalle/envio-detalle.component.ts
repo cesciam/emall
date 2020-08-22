@@ -2,11 +2,11 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { EnvioList } from 'src/app/models/envio-list.model';
 import { Item } from 'src/app/models/item';
 import { EnvioService } from 'src/app/services/envio.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { Envio } from 'src/app/models/envio.model';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { EmpleadoList } from 'src/app/models/empleado-list.model';
-import {QrScannerComponent} from 'angular2-qrscanner';
+import { QrScannerComponent } from 'angular2-qrscanner';
 import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
@@ -15,7 +15,7 @@ import { Usuario } from 'src/app/models/usuario.model';
   styleUrls: ['./envio-detalle.component.css']
 })
 export class EnvioDetalleComponent implements OnInit, AfterViewInit {
-  @ViewChild(QrScannerComponent, {static : false}) qrScannerComponent: QrScannerComponent ;
+  @ViewChild(QrScannerComponent, { static: false }) qrScannerComponent: QrScannerComponent;
 
   private envio: Envio
   private envioList: EnvioList
@@ -28,49 +28,74 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
 
   public usuarioEsEmpleado: boolean;
   public envioAceptado: boolean;
-  public codigoConfirmado : boolean;
+  public codigoConfirmado: boolean;
   public botonAceptar: boolean;
 
-  public empleado : EmpleadoList;
+  public empleado: EmpleadoList;
   public codigoIngresado: string = ""
   public error: boolean;
   public errorMessage: string;
-  public alerta:boolean;
+  public alerta: boolean;
   public mensajeAlerta: string;
 
   constructor(private service: EnvioService,
     private activatedRoute: ActivatedRoute,
-    private empleadoService : EmpleadoService) { }
+    private empleadoService: EmpleadoService,
+    private router: Router) { }
 
   ngAfterViewInit(): void {
     this.qrScannerComponent.getMediaDevices().then(devices => {
       console.log(devices);
       const videoDevices: MediaDeviceInfo[] = [];
       for (const device of devices) {
-          if (device.kind.toString() === 'videoinput') {
-              videoDevices.push(device);
-          }
+        if (device.kind.toString() === 'videoinput') {
+          videoDevices.push(device);
+        }
       }
-      if (videoDevices.length > 0){
-          let choosenDev;
-          for (const dev of videoDevices){
-              if (dev.label.includes('front')){
-                  choosenDev = dev;
-                  break;
-              }
+      if (videoDevices.length > 0) {
+        let choosenDev;
+        for (const dev of videoDevices) {
+          if (dev.label.includes('front')) {
+            choosenDev = dev;
+            break;
           }
-          if (choosenDev) {
-              this.qrScannerComponent.chooseCamera.next(choosenDev);
-          } else {
-              this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
-          }
+        }
+        if (choosenDev) {
+          this.qrScannerComponent.chooseCamera.next(choosenDev);
+        } else {
+          this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
+        }
       }
-  });
+    });
 
-  this.qrScannerComponent.capturedQr.subscribe(result => {
-    this.verificarResultadoQr(result)
-    console.log(result);
-  });
+    this.qrScannerComponent.capturedQr.subscribe(result => {
+      this.verificarResultadoQr(result)
+      console.log(result);
+    });
+  }
+
+  errorQr:boolean;
+  mensajeQr:boolean
+  stringErrorQr: string=""
+  stringMensajeQr:string=""
+  scannerVisible : boolean=true;
+
+  verificarResultadoQr(resultado: string) {
+    
+    if (resultado.match(this.envio.codigo)) {
+      this.errorQr = false;
+      this.codigoConfirmado = true;
+      this.botonConfirmar = false;
+      this.mensajeQr = true;
+      this.stringMensajeQr = "Identidad confirmada"
+      this.envioAceptado = false;
+      this.scannerVisible=false;
+    } else {
+      console.log("no es")
+      this.scannerVisible=false;
+      this.errorQr=true;
+      this.stringErrorQr="El código no coincide o no es legible."
+    }
   }
 
   ngOnInit() {
@@ -81,7 +106,7 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
     this.obtenerEmpleado()
   }
 
-  inicializar(){
+  inicializar() {
     this.envioList = new EnvioList
     this.envio = new Envio
     this.empleado = new EmpleadoList;
@@ -102,50 +127,40 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
         this.items = this.envio.items;
         this.validacionBotones();
       })
-      
+
   }
 
-  validacionBotones(){
-    if(this.envio.estado==1){
+  validacionBotones() {
+    if (this.envio.estado == 1) {
       this.envioAceptado = true;
       this.botonAceptar = false;
-    }else{
+    } else {
       this.botonAceptar = true;
     }
   }
 
 
-  obtenerEmpleado(){
+  obtenerEmpleado() {
     let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
     let usuarioLogueado: Usuario = usuarioLocal.usuario;
 
     if (usuarioLogueado.Tipo == 4) {
       this.empleadoService.getByIdUsuario(parseInt(usuarioLogueado.Id)).subscribe(
-        data=>{
+        data => {
           this.empleado = data;
-          this.usuarioEsEmpleado= true;
+          this.usuarioEsEmpleado = true;
         }
       )
-    }else{
-      this.usuarioEsEmpleado=false;
+    } else {
+      this.usuarioEsEmpleado = false;
     }
   }
 
-  verificarResultadoQr(resultado:string){
-    if(resultado.match(this.envio.codigo)){
-      //envio verificado
-      //cerrar modal
-    }else{
-      //error Qr no matchea
-    }
-  }
-
-  aceptarEnvio(){
-    this.envio.estado= 1;
+  aceptarEnvio() {
+    this.envio.estado = 1;
     this.envio.idEmpleado = this.empleado.Id;
-    this.service.modificarEnvio(this.envio).subscribe(res=>{
+    this.service.modificarEnvio(this.envio).subscribe(res => {
       this.obtenerDatosEnvio();
-      console.log("se modificO")
     })
   }
 
@@ -160,24 +175,32 @@ export class EnvioDetalleComponent implements OnInit, AfterViewInit {
     }
   }
 
-  botonConfirmar:boolean = true;
+  botonConfirmar: boolean = true;
 
-  confirmacionManual(){
-    if(this.codigoIngresado.match(this.envio.codigo)){
-      this.error=false;
+  confirmacionManual() {
+    if (this.codigoIngresado.match(this.envio.codigo)) {
+      this.error = false;
       this.codigoConfirmado = true;
       this.botonConfirmar = false;
       this.alerta = true;
       this.mensajeAlerta = "Identidad confirmada"
       this.envioAceptado = false;
-    }else{
-      this.errorMessage="El código "+this.codigoIngresado+" es incorrecto"
-      this.error=true;
+    } else {
+      this.errorMessage = "El código " + this.codigoIngresado + " es incorrecto"
+      this.error = true;
     }
   }
 
-  finalizarEnvio(){
-    this.service.envioExitoso(this.envio).subscribe()
+  finalizarError: boolean;
+  mensajeErrorFinalizar: string = ""
+  finalizarEnvio() {
+    this.service.envioExitoso(this.envio).subscribe((response) => {
+      this.router.navigate(['/listar-envio-sucursal/'+this.sucursal])
+    },
+      (error) => {
+        this.finalizarError = true;
+        this.mensajeErrorFinalizar = "Error al finalizar la transacción. Por favor intente más tarde."
+      });
   }
 
 }

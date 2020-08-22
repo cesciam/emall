@@ -12,7 +12,7 @@
           <div class="col-lg-10 col-md-10">
             <h1>{{tituloAMostrar}}</h1>
             <p *ngIf="integrarCon == null">Editar los datos del usuario</p>
-            <p *ngIf="integrarCon == 'pagina'">Completa el siguiente formulario con sus datos personales</p>
+            <p *ngIf="integrarCon == 'pagina'">Complete el siguiente formulario con sus datos personales</p>
           </div>
           <div class="col-lg-2 col-md-2" *ngIf="integrarCon == null">
             <a [routerLink]="['../../listar-usuario']">Volver atrás</a>

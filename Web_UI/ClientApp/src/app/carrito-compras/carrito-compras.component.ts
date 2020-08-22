@@ -7,6 +7,9 @@ import { Envio } from '../models/envio.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CitaService } from '../services/cita.service';
 import { Cita } from '../models/Cita';
+import { MultaService } from '../services/multa.service';
+import { Multa } from '../models/multa';
+import { Configuracion } from '../models/configuracion';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -15,6 +18,8 @@ import { Cita } from '../models/Cita';
 })
 export class CarritoComprasComponent implements OnInit {
 
+  private id_usuario: number;
+  private multa: boolean = false;
   private carritoLocalStorage: Item[];
   private tipoCarrito: string;
   private total: number = 0;
@@ -41,14 +46,38 @@ export class CarritoComprasComponent implements OnInit {
   constructor(private serviceItem: ItemService,
     private carritoComprasService: CarritoComprasService,
     private router: Router, private route: ActivatedRoute,
-    private citaService: CitaService) {
+    private citaService: CitaService,
+    private multaService: MultaService) {
     this.tipoCarrito = localStorage.getItem('tipoCarrito');
   }
 
+  async validarMulta() {
+
+    if (this.usuarioLogueado != null) {
+      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+      let multas: Array<Multa>;
+      multas = new Array<Multa>();
+
+      multas = await this.multaService.ObtenerMultasUsuario(this.id_usuario);
+
+      let cantidad_permitida: Configuracion;
+      cantidad_permitida = new Configuracion();
+      cantidad_permitida = await this.multaService.obtenerConfig("cita_cancelada");
+
+      if (multas.length >= cantidad_permitida.valor) {
+        this.multa = true;
+      }
+
+    }
+    console.log(this.multa)
+
+  }
+
   ngOnInit() {
+    
     this.llenarCarrito();
     this.validarUsuarioLogueado();
-
+    this.validarMulta();
     if (this.tipoCarrito == 'Servicio') {
       this.serviceItem.getItemById(this.carritoLocalStorage[0].id)
       .subscribe(
@@ -155,7 +184,7 @@ export class CarritoComprasComponent implements OnInit {
     var horaFin = new Date(this.datePicker.year+'-'+this.datePicker.month+'-'+this.datePicker.day +' '+horas+':'+minString+':00');
   
     let cita: Cita = {
-      id_item: -1,
+      id_item: this.carritoLocalStorage[0].id,
       id_cliente: this.usuarioLog.Id,
       fecha: fechaCita,
       hora_inicio: horaInicio,
@@ -163,7 +192,10 @@ export class CarritoComprasComponent implements OnInit {
       id: -1,
       id_empleado: -1,
       id_sucursal: this.servicioSeleccionado.id_sucursal,
-      items: null
+      items: null,
+      codigo: null,
+      hora_inicio_string: this.time.hour+':'+minStringTimePicker+':00',
+      hora_fin_string: horas+':'+minString+':00'
    };
 
     this.citaService.registrarCitaServicio(cita)
@@ -227,12 +259,12 @@ export class CarritoComprasComponent implements OnInit {
       id: -1,
       id_empleado: -1,
       id_sucursal: this.carritoLocalStorage[0].id_sucursal,
-      items: idProductos
+      items: idProductos,
+      codigo:null,
+      hora_fin_string: horas+':'+minString+':00',
+      hora_inicio_string: this.time.hour+':'+minStringTimePicker+':00'
    };
-
-   console.log(cita);
    
-
    this.citaService.registrarCitaProducto(cita)
    .subscribe((data: any) => {
     localStorage.removeItem('carrito');

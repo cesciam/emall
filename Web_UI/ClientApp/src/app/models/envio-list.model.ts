@@ -6,6 +6,7 @@ export class EnvioList {
         longitud:string
         id_empleado:number
         nombre_empleado: string
+        sucursal:string
         codigo: string
         estado: number
 }

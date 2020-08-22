@@ -25,6 +25,11 @@ namespace AppCore
             return crud.Retrieve<Promocion>(entity);
         }
 
+        public Promocion RetrieveByCodigo(BaseEntity entity)
+        {
+            return crud.RetrieveByCodigo<Promocion>(entity);
+        }
+
         public List<Promocion> RetrieveAll()
         {
             return crud.RetrieveAll<Promocion>();

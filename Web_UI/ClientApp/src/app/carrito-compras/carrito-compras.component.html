@@ -12,7 +12,7 @@
         <div class="form-horizontal">
           <div class="form-group">
             <div class="col-md-12">
-              <p>Seleccione la opción correspondiente si desea recoger el producto o recibirlo por envío</p>
+              <p>Seleccione la opción correspondiente si desea recoger el producto o recibirlo por envío.</p>
               <p>Al seleccionar la opción de recibir por envío, se usará su dirección predeterminada.</p>
               <select class="user-form selectpicker show-tick form-control" data-live-search="true" id="tipoLogistica" name="logistica" [(ngModel)]="txtLogistica" #tipoLogistica="ngModel" required>
                 <option disabled selected>-- Seleccione una opción --</option>
@@ -36,7 +36,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
         <div *ngIf="(tipoLogistica.valid); else noValido">
-          <button type="button" class="primary-btn" data-dismiss="modal" (click)="pagar()">Pagar</button>
+          <button type="button" class="primary-btn" data-dismiss="modal" (click)="pagar()">Continuar</button>
         </div>
 
         <ng-template #noValido>
@@ -76,7 +76,7 @@
             <td>{{ item.descripcion }}</td>
             <td> ₡{{ item.precio | number:0}}</td>
             <td>
-              <button type="button" class="btn btn-danger" (click)="eliminarItem(item)"><i class="fas fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="eliminarItem(item)"><i class="fas fa-trash-alt"></i></button>
             </td>
           </tr>
         </tbody>
@@ -118,21 +118,36 @@
     <div style="text-align: right;">
       <h3>Total: ₡{{ total | number:0}}</h3>
       <div *ngIf="tipoCarrito == 'Producto'  && !citaProducto">
-        <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#Modal">Continuar</button>
+        <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#Modal" [disabled]="multa">Continuar</button>
       </div>
 
       <div *ngIf="tipoCarrito == 'Servicio'">
-        <button class="primary-btn" style="border: none;" (click)="agendarCitaServicio()">Agendar cita</button>
+        <button class="primary-btn" style="border: none;" (click)="agendarCitaServicio()" [disabled]="multa">Agendar cita</button>
       </div>
 
       <div *ngIf="citaProducto">
         <button class="primary-btn" style="border: none;" (click)="agendarCitaProductos()">Agendar cita</button>
       </div>
 
+
+
     </div>
+    <div class="row justify-content-center mt-4 mb-3" *ngIf="multa">
+      <div class="col-7">
+        <h2 class="alert-danger mb-3" style="text-align: center;">Política de cancelación</h2>
+      </div>
+      <div class="col-7">
+        <p class="justify-content-center" style="text-align: center">Has superado el límite de cancelaciones permitidas. Agradecemos pagar la multa y seguir disfrutando de nuestra aplicación.</p>
+        <div>
+          <button class="btn btn-primary btn-lg btn-block primary-btn mb-3" style="border: none;" [routerLink]="['/realizar-pago']" [queryParams]="{usuario: id_usuario}">Pagar Multa</button>
+        </div>
+      </div>
+
+    </div>
+    
   </div>
 </div>
-
+<br>
 <app-footer></app-footer>
 
 <ng-template #carritoVacio >
