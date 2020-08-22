@@ -106,8 +106,20 @@ import { FiltroDireccionPipe } from './pipes/filtro-direccion.pipe';
 import { RutaComponent } from './direcciones/ruta/ruta.component';
 import { ListaDeseoComponent } from './lista-deseo/lista-deseo.component';
 import { RealizarCompraComponent } from './realizar-compra/realizar-compra.component';
-import { CitaServicioComponent } from './cita-servicio/cita-servicio.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EnvioService } from './services/envio.service';
+import { SafePipe } from './pipes/safe.pipe';
+import { LectorQrComponent } from './envio/lector-qr/lector-qr.component';
+import { NgQrScannerModule } from 'angular2-qrscanner';
+import { EnvioDetalleClienteComponent } from './envio/envio-detalle-cliente/envio-detalle-cliente.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { FiltroEnvioPipe } from './pipes/filtro-envio.pipe';
+import { CitaEmpleadoComponent } from './cita/cita-empleado/cita-empleado.component';
+import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';
+import { CitaDetallesComponent } from './cita/cita-detalles/cita-detalles.component';
+import { CitaDetallesEmpleadoComponent } from './cita/cita-detalles-empleado/cita-detalles-empleado.component';
+import { ListarComprasComponent } from './listar-compras/listar-compras.component';
+import { FilterCompraPipe } from './pipes/filter-compra.pipe';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -213,9 +225,17 @@ const maskConfig: Partial<IConfig> = {
     ListaDeseoComponent, 
     RutaComponent,
     CarritoComprasComponent,
-    RealizarCompraComponent,
     ListaDeseoComponent,
-    FiltroDireccionPipe, CitaServicioComponent,
+    FiltroDireccionPipe,
+    FiltroDireccionPipe, 
+    RealizarCompraComponent,
+    SafePipe, 
+    LectorQrComponent, 
+    EnvioDetalleClienteComponent, 
+    FiltroEnvioPipe, 
+    LectorQrComponent, CitaEmpleadoComponent, CitaSucursalComponent, CitaDetallesComponent, CitaDetallesEmpleadoComponent, 
+    ListarComprasComponent,
+    FilterCompraPipe
   ],
   imports: [
     CloudinaryModule.forRoot({ Cloudinary }, cloudinaryConfiguration),
@@ -228,6 +248,8 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    NgQrScannerModule,
+    QRCodeModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyAdxnSzcqddE8WFixFcWcXYO3mhMKV0Aus' }),
     RouterModule.forRoot([
       { path: '', component: HomePageComponent, pathMatch: 'full' },
@@ -285,7 +307,7 @@ const maskConfig: Partial<IConfig> = {
       { path: 'dashboard-admin/bitacora', component: ListarBitacoraComponent},
       { path: 'carrito-compras', component: CarritoComprasComponent },
       { path: 'listar-envio-sucursal/:id_sucursal', component: ListarEnvioSucursalComponent },
-      { path: 'envio-detalle/:id', component: EnvioDetalleComponent },
+      { path: 'listar-envio-sucursal/:id_sucursal/envio-detalle/:id', component: EnvioDetalleComponent },
       { path: 'item-empleado/:id_item/:id_sucursal', component: ItemEmpleadoComponent },
       { path: 'direcciones/listar-direccion', component: ListarDireccionComponent },
       { path: 'direcciones/agregar-direccion', component: AgregarDireccionComponent },
@@ -294,7 +316,14 @@ const maskConfig: Partial<IConfig> = {
       { path: 'direcciones/ruta/:id', component: RutaComponent },
       { path: 'lista-deseo', component: ListaDeseoComponent },
       { path: 'realizar-pago', component: RealizarCompraComponent },
-      { path: 'cita-servicio/:id', component: CitaServicioComponent },
+      { path: 'lector-qr', component: LectorQrComponent },
+      { path: 'perfil-usuario/envio-detalle/:id_envio', component: EnvioDetalleClienteComponent },
+      
+      { path: 'listar-compras', component: ListarComprasComponent },
+      { path: 'dashboard-comercio/citas/:id', component: CitaEmpleadoComponent },
+      { path: 'dashboard-comercio/citas-sucursal/:id', component: CitaSucursalComponent },
+      { path: 'perfil-usuario/cita-detalles/:id', component: CitaDetallesComponent },
+      { path: 'dashboard-comercio/cita-detalles/:id', component: CitaDetallesEmpleadoComponent },
     ])
   ],
   exports: [
@@ -314,6 +343,7 @@ const maskConfig: Partial<IConfig> = {
     VistaXRolService,
     ItemService,
     DatePipe,
+    EnvioService,
   ],
   bootstrap: [
     AppComponent

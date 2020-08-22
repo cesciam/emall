@@ -175,12 +175,11 @@ export class ItemCrearComponent implements OnInit {
         this.service.crearItem(this.item)
           .subscribe(
             (reponse) => {
-              this.router.navigate(['dashboard-comercio'], { queryParams: { comercio: this.comercio } });
+              
 
               this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
                 (error) => {
-                  this.error = error.error;
-                  window.scroll(0, 0);
+                  
                 });
             },
             (error) => {

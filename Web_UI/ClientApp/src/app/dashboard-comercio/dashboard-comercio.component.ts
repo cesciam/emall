@@ -30,28 +30,33 @@ export class DashboardComercioComponent implements OnInit {
   private permisoArchivos: boolean;
   private permisoEditarComercio: boolean;
   private permisoHorario: boolean;
+  private permisoEnvios: boolean;
   private usuarioLogueado: string;
   public accion: string = "Eliminación sucursal";
-
+  public usuarioLocal : any;
+  public isAdmin :boolean;
   public id_usuario: number = Number.parseInt(this.usuarioLogueado);
 
   constructor(private bitacora: BitacoraService,comercioService: ComercioService, sucursalService: SucursalService, private activatedRoute: ActivatedRoute, private vistaService: VistaService) {
-    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+    //this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
     this.comercioService = comercioService;
     this.sucursalService = sucursalService;
     this.error = null;
   }
 
   ngOnInit() {
+    this.usuarioLocal = JSON.parse(localStorage.getItem('usuario-logueado'));
     this.llenarComercio();
     this.validarEmpleado();
 
   }
 
   validarEmpleado(){
-    let usuarioLocal: any = JSON.parse(localStorage.getItem('usuario-logueado'));
-    let usuarioLogueado: Usuario = usuarioLocal.usuario;
-
+    
+    let usuarioLogueado: Usuario = this.usuarioLocal.usuario;
+    if(usuarioLogueado.Tipo==1){
+      this.isAdmin=true;
+    }
     let vistas : Vista[];
 
     if (usuarioLogueado.Tipo == 4) {
@@ -69,6 +74,7 @@ export class DashboardComercioComponent implements OnInit {
       this.permisoArchivos = true;
       this.permisoEditarComercio = true;
       this.permisoHorario = true;
+      this.permisoEnvios = true;
     }
   }
 
@@ -97,7 +103,10 @@ export class DashboardComercioComponent implements OnInit {
             this.permisoEditarComercio = true;
           break;
           case "horarios":
-            this.permisoEditarComercio = true;
+            this.permisoHorario = true;
+          break;
+          case "envios":
+            this.permisoEnvios = true;
           break;
         };
     }
@@ -107,7 +116,7 @@ export class DashboardComercioComponent implements OnInit {
     let idComercio: number = this.activatedRoute.snapshot.queryParams['comercio'];
     let comercio = new Comercio();
     comercio.id = idComercio;
-
+    
     this.comercioService.obtenerComercio(comercio)
       .subscribe(data => {
         this.comercioSeleccionado = data

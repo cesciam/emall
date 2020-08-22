@@ -86,10 +86,6 @@ namespace DataAccessLayer.Mapper
             operation.AddVarcharParam(DB_COL_APELLIDO_USUARIO, factura.ApellidoUsuario);
             operation.AddVarcharParam(DB_COL_TELEFONO_USUARIO, factura.TelefonoUsuario);
             operation.AddVarcharParam(DB_COL_CORREO_USUARIO, factura.CorreoUsuario);
-            //operation.AddVarcharParam(DB_COL_NOMBRE_PROVINCIA, factura.NombreProvincia);
-            //operation.AddVarcharParam(DB_COL_NOMBRE_CANTON, factura.NombreCanton);
-            //operation.AddVarcharParam(DB_COL_NOMBRE_DISTRITO, factura.NombreDistrito);
-            //operation.AddVarcharParam(DB_COL_DETALLES_DIRECCION, factura.DetallesDireccion);
             operation.AddVarcharParam(DB_COL_NOMBRE_SUCURSAL, factura.NombreSucursal);
             operation.AddVarcharParam(DB_COL_CEDULA_JURIDICA, factura.CedulaJuridica);
             operation.AddIntParam(DB_COL_ID_TRANSACCION, factura.IdTransaccion);

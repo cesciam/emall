@@ -1,42 +1,192 @@
+<!-- Modal Finalizar-->
+<div class="modal fade" id="ModalFinalizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¡Buen trabajo!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Gracias por marcar el envío como exitoso.
+                Al presionar finalizar, le haremos llegar al cliente el enlace para el pago.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Aceptar-->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Envío aceptado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Al aceptar el envío, queda responsable de llevar el paquete a la ubicación del cliente.
+                Esta acción es irreversible.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal"
+                    (click)="aceptarEnvio()">Entendido</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal QR-->
+<div class="modal fade" id="ModalQR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación por código QR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container w-50" *ngIf="scannerVisible">
+                    <qr-scanner [debug]="false" [canvasWidth]="1080" [canvasHeight]="720" [stopAfterScan]="true"
+                        [updateTime]="500">
+                    </qr-scanner>
+                </div>
+                <div *ngIf="errorQr" class="alert alert-danger" role="alert">
+                    {{stringErrorQr}}
+                </div>
+                <div *ngIf="mensajeQr" class="alert alert-success" role="alert">
+                    {{stringMensajeQr}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal código manual-->
+<div class="modal fade" id="ModalCodigoManual" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación manual</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label">Código de confirmación:</label>
+                        <input type="text" class="form-control" id="codigoIngresado" [(ngModel)]="codigoIngresado"
+                            name="codigoIngresado">
+                    </div>
+                </form>
+                <div *ngIf="error" class="alert alert-danger" role="alert">
+                    {{errorMessage}}
+                </div>
+                <div *ngIf="alerta" class="alert alert-success" role="alert">
+                    {{mensajeAlerta}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="confirmacionManual()"
+                    [disabled]="!botonConfirmar">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <app-main-header></app-main-header>
 
-<body>
-    <div class="container container-fluid">
-        <br>
-        <div class="col-sm-auto d-flex justify-content-end">
-            <a [routerLink]="['/listar-envio-sucursal', sucursal]">Volver atras</a>
 
-        </div>
-        <div class="pt-3 px-4">
-            <h2>Envio código: {{envio.codigo}}</h2>
-            <div class="col-sm-auto d-flex justify-content-end">
-                <Button class="btn btn-primary">Aceptar envío</Button>
-            </div>
-            <hr>
-            <br>
-            <h3>Ítems</h3>
-            <div class="table-responsive">
-                <table class='table table-striped' aria-labelledby="tableLabel">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of items">
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.nombre }}</td>
-                            <td> 2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <hr>
-        
+<div class="container container-fluid">
+    <br>
+    <div class="col-sm-auto d-flex justify-content-end">
+        <a [routerLink]="['/listar-envio-sucursal', sucursal]">Volver atras</a>
 
     </div>
-</body>
+    <div class="pt-3 px-4">
+        <h2>Envio # {{envioList.id}}</h2>
+        <h4>Estado: {{estadoToString()}}</h4>
+        <h4>Cliente: {{envioList.nombre_cliente}}</h4>
+        <br>
+        <div class="col-sm-auto d-flex justify-content-end">
+            <Button class="btn  btn-primary" data-toggle="modal" data-target="#Modal" *ngIf="botonAceptar">Aceptar
+                envío</Button>
+        </div>
+        <div class="col-sm-auto d-flex justify-content-end" *ngIf="codigoConfirmado">
+            <Button class="btn btn-block btn-success" (click)="finalizarEnvio()">Envío exitoso</Button>
+            <div *ngIf="finalizarError" class="alert alert-danger" role="alert">
+                {{mensajeErrorFinalizar}}
+            </div>
+        </div>
+
+        <hr>
+        <div class="container" *ngIf="envioAceptado">
+            <h4>Confirmación</h4>
+            <p>Pasos para finalizar el envío: </p>
+            <ul>
+                <li>Diríjase a la ubicación del cliente.</li>
+                <li>Escanee el código QR de confirmación de la pantalla del cliente o
+                    solicite el código al cliente e ingréselo manualmente.</li>
+                <li>Si la entrega es exitosa, presione Finalizar entrega.</li>
+            </ul>
+            <br>
+            <div class="col-sm-auto d-flex justify-content-center">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#ModalQR">Escanear código QR</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-primary" data-toggle="modal" data-target="#ModalCodigoManual">Ingresar código
+                    manualmente</button>
+            </div>
+            <hr>
+        </div>
+        <br>
+        <h3>Ítems</h3>
+        <div class="table-responsive">
+            <table class='table table-striped' aria-labelledby="tableLabel">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Producto</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <h3>Ubicación del cliente</h3>
+        <hr>
+
+        <div class="embed-responsive embed-responsive-4by3 w-75">
+            <iframe class="embed-responsive-item" [src]="link2|safe" width="300" height="200" frameborder="0"
+                style="border:0"></iframe>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<br><br>
 <app-footer></app-footer>

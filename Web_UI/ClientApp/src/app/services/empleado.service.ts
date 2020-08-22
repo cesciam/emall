@@ -49,16 +49,15 @@ export class EmpleadoService {
   getById(id: number) {
      let endpointUrl = this.baseUrl + '/Empleado/RetrieveById?id=' + id;
      return this.http.get<Empleado>(endpointUrl);
-
-    //return this.http.get(this.baseUrl + '/Empleado/RetrieveById?id=' + id)
-    //.toPromise().then(res => this.formData = res as Empleado)
   }
+
+  getByIdUsuario(id: number) {
+    let endpointUrl = this.baseUrl + '/Empleado/RetrieveDatosByIdUsuario?id_usuario=' + id;
+    return this.http.get<EmpleadoList>(endpointUrl);
+ }
 
   getByIdVM(id: number) {
     let endpointUrl = this.baseUrl + '/Empleado/RetrieveByIdViewModel?id=' + id;
     return this.http.get<EmpleadoList>(endpointUrl);
-
-   //return this.http.get(this.baseUrl + '/Empleado/RetrieveById?id=' + id)
-   //.toPromise().then(res => this.formData = res as Empleado)
  }
 }

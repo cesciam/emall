@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Mis compras</h1>
+  <div class="table-responsive">
+    <input type="text" class="form-control" placeholder="Buscar" name="filterCompra" [(ngModel)]="filterCompra" />
+    <table class="table table-striped table-sm text-center">
+      <thead>
+        <tr>
+          <th class="text-center">Número de transacción</th>
+          <th class="text-center">Fecha de compra</th>
+          <th class="text-center">Productos</th>
+          <th class="text-center">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factura of facturas | filterCompra:filterCompra">
+          <td>{{ factura.idTransaccion }}</td>
+          <td>{{ factura.fecha | date:'MM/dd/yyyy' }}</td>
+          <td>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ver productos
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" *ngFor="let linea of factura.lineas">
+                <label class="dropdown-item">{{ linea.nombreItem }} ₡{{ linea.precioItem }}</label>
+              </div>
+            </div>
+          </td>
+          <td>₡{{ obtenerTotal(factura) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

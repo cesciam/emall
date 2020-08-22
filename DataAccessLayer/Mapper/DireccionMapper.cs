@@ -92,6 +92,15 @@ namespace DataAccessLayer.Mapper {
             return operation;
         }
 
+        public SqlOperation GetRetriveActivaByUsuarioStatement(int usuarioId)
+        {
+            var operation = new SqlOperation { ProcedureName = "OBTENER_DIRECCION_ACTIVA" };
+
+            operation.AddIntParam(DB_ID_USUARIO, usuarioId);
+
+            return operation;
+        }
+
         public SqlOperation MakeDefault(int id, int usuarioId) {
             var operation = new SqlOperation { ProcedureName = "PREDETERMINADA_DIRECCION" };
 

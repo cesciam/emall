@@ -6,6 +6,7 @@ import { VistaXRolService } from 'src/app/services/vista-xrol.service';
 import { Vista } from 'src/app/models/vista.model';
 import { VistaXRol } from 'src/app/models/vista-xrol.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-agregar-rol',
@@ -15,13 +16,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AgregarRolComponent implements OnInit {
 
   vistasSeleccionadas: Array<number>;
+  private usuarioLogueado: string;
+  public accion: string = "Creación rol";
+  private error: object = null;
+  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
 
   constructor(private service: RolService,
     private serviceVista: VistaService,
     private serviceVistaXRol: VistaXRolService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
-
+    private activatedRoute: ActivatedRoute,
+    private bitacora: BitacoraService) {
+    this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
   }
 
   ngOnInit() {
@@ -73,18 +79,13 @@ export class AgregarRolComponent implements OnInit {
          id_rol: 0
        }
        
-       this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
+      this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
+      this.bitacora.llenarBitacora(this.accion, this.id_usuario).subscribe(
+        (error) => {
+          this.error = error.error;
+          window.scroll(0, 0);
+        });
     }
-    // vistasSeleccionadasOrdenadas.forEach(element => {
-    //   console.log(element)
-    //   let vistaxrol = new VistaXRol;
-    //   vistaxrol = {
-    //     id: 0,
-    //     id_vista: element,
-    //     id_rol: 0
-    //   }
-    //   this.serviceVistaXRol.postVistaXRol(vistaxrol).subscribe();
-    // });
 
   }
 

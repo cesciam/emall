@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams  } from '@angular/common/http';
 import { Envio } from '../models/envio.model';
-import { Transaccion } from '../models/transaccion.model'
+import { Transaccion } from '../models/transaccion.model';
+import { Promocion } from '../models/promocion'
 import { Pago } from '../models/pago.model';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -20,12 +21,14 @@ export class RealizarCompraService {
     this.BASE_URL = baseUrl;
   }
 
-  realizarPago(envio: Envio, transaccion: Transaccion) {
+  realizarPago(envio: Envio, transaccion: Transaccion, promocion: Promocion) {
     let endpoint = this.BASE_URL + '/factura/CrearFactura';
 
-   let pago : Pago = new Pago();
-  pago.envio = envio;
-  pago.transaccion = transaccion;
+    let pago : Pago = new Pago();
+    pago.envio = envio;
+    pago.transaccion = transaccion;
+    pago.promocion = promocion;
+
 
     return this.http.post(endpoint, pago)
       .pipe(

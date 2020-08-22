@@ -35,7 +35,7 @@ export class EditarUsuarioComponent implements OnInit {
   private usuarioLogueado: string;
   public accion: string = "Edición usuario";
 
-  public id_usuario: number = Number.parseInt(this.usuarioLogueado); 
+  public id_usuario: number = 0;
 
 
   constructor(private bitacora: BitacoraService,
@@ -43,7 +43,7 @@ export class EditarUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private cloudinary: Cloudinary) {
-      this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
+      //this.id_usuario = JSON.parse(localStorage.getItem('usuario-logueado')).usuario.Id;
 
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
