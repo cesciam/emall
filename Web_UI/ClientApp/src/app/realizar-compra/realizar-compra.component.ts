@@ -7,6 +7,9 @@ import { Transaccion } from '../models/transaccion.model';
 import { ItemService } from '../services/item.service';
 import { Impuesto } from '../models/impuesto.model';
 import { RealizarCompraService } from '../services/realizar-compra.service';
+import { MultaService } from '../services/multa.service';
+import { Multa } from '../models/multa';
+import { Configuracion } from '../models/configuracion';
 import { PromocionService } from '../services/promocion.service';
 import { Promocion } from '../models/promocion';
 
@@ -27,16 +30,66 @@ export class RealizarCompraComponent implements OnInit {
   private total: number = 0;
   private precioDolar: number = 595.10;
   private error: any;
+  private id_usuario: number;
+  private id_usuario_log: number;
+  private multa: boolean = false;
+  private multas: Multa[];
+  private valor_multa: number;
+
+
+  constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private serviceMulta: MultaService) { }
+
   private txtPago: string;
   private txtCodigo: string;
   private promocion: Promocion = null;
   private errorPromo: any;
   private promoAplicada: any;
 
-  constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private promocionService: PromocionService) { }
+  async validarMulta() {
+    this.id_usuario = parseInt(this.route.snapshot.queryParams['usuario']);
+    this.id_usuario_log = JSON.parse(localStorage.getItem('usuario-logueado'));
 
-  ngOnInit() {
-    this.obtenerItemsEnvio();
+    if (this.id_usuario != null && this.id_usuario_log != null) {
+      this.multas = new Array<Multa>();
+      this.multas = await this.serviceMulta.ObtenerMultasUsuario(this.id_usuario);
+      this.multa = true;
+      console.log(this.id_usuario)
+      console.log(this.multas)
+    }
+  }
+
+  async pagarMulta() {
+    this.envio = new Envio;
+    this.envio.id = 0;
+    this.envio.estado = 2;
+    this.envio.idEmpleado = this.multas[0].id_item;
+    this.envio.idCliente = this.id_usuario;
+    this.envio.codigo = "pago_multa";
+
+    console.log(this.envio)
+
+
+    let valor_multa: Configuracion;
+    valor_multa = new Configuracion();
+    valor_multa = await this.serviceMulta.obtenerConfig("valor_multa");
+    this.valor_multa = valor_multa.valor;
+    this.total = (this.valor_multa * this.multas.length)
+
+  }
+
+
+  async ngOnInit() {
+    
+
+    await this.validarMulta();
+
+    if (this.multa) {
+      this.pagarMulta();
+    } else {
+      this.obtenerItemsEnvio();
+    }
+
+    
     this.paypalInit();
   }
 
