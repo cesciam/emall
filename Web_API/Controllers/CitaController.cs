@@ -23,7 +23,6 @@ namespace Web_API.Controllers
         {
             if (mng.CreateCitaServicio(cita) > 0)
             {
-                //cita.hora_inicio.ToLocalTime();
                 return Ok();
             }
             else

@@ -114,10 +114,9 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
 import { EnvioDetalleClienteComponent } from './envio/envio-detalle-cliente/envio-detalle-cliente.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { FiltroEnvioPipe } from './pipes/filtro-envio.pipe';
-import { NgQrScannerModule } from 'angular2-qrscanner';
 import { CitaEmpleadoComponent } from './cita/cita-empleado/cita-empleado.component';
 import { CitaSucursalComponent } from './cita/cita-sucursal/cita-sucursal.component';
-import { CitaDetallesComponent } from './cita/cita-detalles/cita-detalles.component';;
+import { CitaDetallesComponent } from './cita/cita-detalles/cita-detalles.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -225,7 +224,6 @@ const maskConfig: Partial<IConfig> = {
     CarritoComprasComponent,
     ListaDeseoComponent,
     FiltroDireccionPipe,
-    CitaServicioComponent,
     FiltroDireccionPipe, 
     RealizarCompraComponent,
     SafePipe, 
@@ -315,10 +313,9 @@ const maskConfig: Partial<IConfig> = {
       { path: 'realizar-pago', component: RealizarCompraComponent },
       { path: 'lector-qr', component: LectorQrComponent },
       { path: 'perfil-usuario/envio-detalle/:id_envio', component: EnvioDetalleClienteComponent },
-      
       { path: 'dashboard-comercio/citas/:id', component: CitaEmpleadoComponent },
       { path: 'dashboard-comercio/citas-sucursal/:id', component: CitaSucursalComponent },
-      { path: 'cita-detalles/:id', component: CitaDetallesComponent },
+      { path: 'perfil-usuario/cita-detalles/:id', component: CitaDetallesComponent },
     ])
   ],
   exports: [

@@ -5,6 +5,7 @@ import { Cita } from '../models/Cita';
 import { CitaList } from '../models/CitaList';
 import { CitaListEmp } from '../models/CitaListEmp';
 import { CitaListCom } from '../models/CitaListCom';
+import { Item } from '../models/item';
 
 @Injectable({
   providedIn: 'root'
@@ -74,5 +75,10 @@ export class CitaService {
   obtenerCita(id: number): Observable<Cita>{
     this.serviceEndPoint = `/cita/ObtenerCita?id=${id}`;
     return this.http.get<Cita>(this.baseURL + this.serviceEndPoint);
+  }
+
+  obtenerItemsCita(id:number): Observable<Item[]> {
+    this.serviceEndPoint = `/item/itemsPorCita?id=${id}`;
+    return this.http.get<Item[]>(this.baseURL + this.serviceEndPoint);
   }
 }
