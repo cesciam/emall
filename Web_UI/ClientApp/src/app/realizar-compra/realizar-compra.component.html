@@ -1,3 +1,110 @@
+<!-- Modal SINPE-->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pago con SINPE móvil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="addExperience" class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-md-12">
+              <p>Ingrese el comprobante de pago de SINPE Móvil.</p>
+              <label for="pago">Comprobante</label>
+              <input id="pago" name="pago" class="form-control"
+                     [(ngModel)]="txtPago" minlength="8" #pago="ngModel" type="text" required>
+
+              <div *ngIf="pago.invalid && (pago.dirty || pago.touched)"
+                   class="alert alert-danger">
+
+                <div *ngIf="pago.errors.required">
+                  El comprobante es requerido.
+                </div>
+
+                <div *ngIf="pago.errors.minlength">
+                  El comprobante debe tener al menos 8 dígitos.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+        <div *ngIf="(pago.valid); else noValido">
+          <button type="button" class="primary-btn" data-dismiss="modal" (click)="pagoSinpe()">Pagar</button>
+        </div>
+
+        <ng-template #noValido>
+          <button type="button" class="primary-btn" data-dismiss="modal" disabled>Pagar</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal promoción-->
+<div class="modal fade" id="ModalPromocion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Promoción</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="addExperience" class="modal-body">
+        <div class="form-horizontal">
+          <div *ngIf="errorPromo" class="alert alert-danger col-lg-12" role="alert">
+            <strong>{{errorPromo}}</strong>
+          </div>
+
+          <div *ngIf="promoAplicada" class="alert alert-success col-lg-12" role="alert">
+            <strong>{{promoAplicada}}</strong>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+              <p>Ingrese el código de promoción.</p>
+              <label for="codigo">Código</label>
+              <input id="codigo" name="codigo" class="form-control"
+                     [(ngModel)]="txtCodigo" minlength="4" #codigo="ngModel" type="text" required>
+
+              <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)"
+                   class="alert alert-danger">
+
+                <div *ngIf="codigo.errors.required">
+                  El código de promoción es requerido.
+                </div>
+
+                <div *ngIf="codigo.errors.minlength">
+                  El código debe tener al menos 4 dígitos.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+        <div *ngIf="(codigo.valid); else noValido">
+          <button type="button" class="primary-btn" (click)="obtenerPromocion()">Aplicar promoción</button>
+        </div>
+
+        <ng-template #noValido>
+          <button type="button" class="primary-btn" data-dismiss="modal" disabled>Aplicar promoción</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-header></app-header>
 <div class="container">
   <div *ngIf="error" class="alert alert-danger col-lg-12" role="alert">
@@ -67,16 +174,23 @@
           </table>
         </div>
 
-      </div>
-      <div style="text-align: right;">
-        <h3>Total: ₡{{ total | number:0}}</h3>
-      </div>
 
+  <div style="text-align: right;" *ngIf="promocion">
+    <h3>Promoción: {{ promocion.nombre }}</h3>
+    <h4>Descuento: {{ promocion.porcentaje }}%</h4>
+  </div>
+  <div style="text-align: right;">
+    <div *ngIf="promocion == null">
+      <button class="primary-btn" style="border: none;" data-toggle="modal" data-target="#ModalPromocion">Ingresar código de promoción</button>
     </div>
-    
-  </ng-template>
-
-
+    <h3>Total: ₡{{ total | number:0}}</h3>
+  </div>
 
   <div #paypal id="paypal"></div>
-  <app-footer></app-footer>
+  <hr />
+  <div class="d-flex justify-content-center" style="margin-bottom: 2%">
+    <button class="primary-btn" style="border: none; height: 5%; width: 20%; font-size: 20px" data-toggle="modal" data-target="#Modal">SINPE Móvil</button>
+  </div>
+
+</div>
+<app-footer></app-footer>

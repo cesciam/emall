@@ -10,6 +10,8 @@ import { RealizarCompraService } from '../services/realizar-compra.service';
 import { MultaService } from '../services/multa.service';
 import { Multa } from '../models/multa';
 import { Configuracion } from '../models/configuracion';
+import { PromocionService } from '../services/promocion.service';
+import { Promocion } from '../models/promocion';
 
 declare var paypal;
 
@@ -37,6 +39,11 @@ export class RealizarCompraComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private envioService: EnvioService, private serviceItem: ItemService, private compraService: RealizarCompraService, private router: Router, private serviceMulta: MultaService) { }
 
+  private txtPago: string;
+  private txtCodigo: string;
+  private promocion: Promocion = null;
+  private errorPromo: any;
+  private promoAplicada: any;
 
   async validarMulta() {
     this.id_usuario = parseInt(this.route.snapshot.queryParams['usuario']);
@@ -126,7 +133,7 @@ export class RealizarCompraComponent implements OnInit {
           transaccion.tipoPago = 'Paypal';
           transaccion.monto = this.total;
 
-          this.compraService.realizarPago(this.envio, transaccion).subscribe(
+          this.compraService.realizarPago(this.envio, transaccion, this.promocion).subscribe(
             (response) => {
               this.router.navigate(['/']);
             },
@@ -144,6 +151,39 @@ export class RealizarCompraComponent implements OnInit {
 
   currencyConvertor(): string {
     return (this.total / this.precioDolar).toFixed(2).toString();
+  }
+
+  pagoSinpe() {
+    let transaccion: Transaccion = new Transaccion();
+    transaccion.tipoPago = 'Sinpe móvil';
+    transaccion.monto = this.total;
+
+    this.compraService.realizarPago(this.envio, transaccion, this.promocion).subscribe(
+      (response) => {
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        this.error = error.error;
+        window.scroll(0, 0);
+      });
+  }
+
+  obtenerPromocion() {
+    this.promocionService.obtenerPromocionByCodigo(this.txtCodigo)
+      .subscribe(data => {
+        this.promocion = data;
+        if (this.promocion == null) {
+          this.errorPromo = 'La promoción no existe o ha expirado.';
+        } else {
+          this.errorPromo = null;
+          this.promoAplicada = 'La promoción ' + this.promocion.nombre + ' ha sido aplicada';
+          this.aplicarDescuento();
+        }
+      });
+  }
+
+  aplicarDescuento() {
+    this.total = this.total - (this.total * (this.promocion.porcentaje / 100));
   }
 
 

@@ -42,6 +42,13 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
+        public Promocion RetrieveByCodigo(string codigo)
+        {
+            var promocion = new Promocion { codigo = codigo };
+            return mng.RetrieveByCodigo(promocion);
+        }
+
+        [HttpGet]
         public List<Promocion> RetrieveAll()
         {
             return mng.RetrieveAll();
